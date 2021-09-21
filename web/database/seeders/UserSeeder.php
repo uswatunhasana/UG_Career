@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $array=[[
@@ -35,9 +30,9 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]];
-    foreach($array as $key => $row){
-        DB::table('users')->insert($row);
-    }
+        foreach($array as $key => $row){
+            DB::table('users')->insert($row);
+        }
     
     
     }
