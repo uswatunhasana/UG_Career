@@ -33,7 +33,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="../components/panels.html">
+										<a href="{{ route('provinsi.index') }}">
 											<span class="sub-item">Data Provinsi</span>
 										</a>
 									</li>
