@@ -30,7 +30,7 @@ class CreateDatawebsTable extends Migration
                 'no_telp' => '087878787878',
                 'email' => 'career@gunadarma.ac.id',
                 'alamat' => 'Kampus D, Jl. Margonda Raya 100 - Depok',
-                'jam_pelayanan' => 'Senin - Jumat, 10.00-15.00'
+                'jam_pelayanan' => 'Senin - Jumat, 10.00-15.00',
             )
         );
     }
