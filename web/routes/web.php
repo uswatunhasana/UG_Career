@@ -4,17 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProvinsiController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('dashboard');
 });
@@ -31,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
         ]);
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index'=>'provinsi.index',
+            'destroy' => 'provinsi.destroy',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
