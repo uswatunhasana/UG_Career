@@ -97,7 +97,7 @@
 											<tfoot>
 												<tr>
 												<th width="30px">No</th>
-													<th>Aksi</th>
+													<th>Nama Provinsi</th>
 												</tr>
 											</tfoot>
 											<tbody>
