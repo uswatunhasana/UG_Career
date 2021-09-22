@@ -98,9 +98,9 @@
 													<td>{{ $provinsi->nama_provinsi }}</td>
 													<td>
 													<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-													<button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id_provinsi }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
+													<button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
 													</button>
-													<form id="delete-form-{{ $provinsi->id_provinsi }}" action="{{ route('provinsi.destroy', $provinsi->id_provinsi) }}" method="POST" style="display: none;">
+													<form id="delete-form-{{ $provinsi->id }}" action="{{ route('provinsi.destroy', $provinsi->id) }}" method="POST" style="display: none;">
 														@csrf
 														@method('DELETE')
 													</form>
