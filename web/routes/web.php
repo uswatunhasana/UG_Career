@@ -24,9 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
-    	/*
-    		Route Khusus untuk role prodi
-    	*/
+
         Route::resource('editor', AdminController::class);
     });
 });
