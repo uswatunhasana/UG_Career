@@ -37,41 +37,55 @@
 								</div>
 								<div class="card-body">
 									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														New</span> 
-														<span class="fw-light">
-															Row
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<form>
+
+                                    <!-- Modal Tambah -->
+                                    <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addRowModalLabel">Tambah Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                 <form>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama kabkota</b></h4></label>
-																	<input id="addkabkota" type="text" name="namakabkota" class="form-control" placeholder="nama kabkota">
+																	<label><h4><b>Nama Provinsi</b></h4></label>
+                                                                    <option disabled selected>-- Daftar Provinsi --</option>
+                                                                    @foreach($provinsis as $provinsi)
+                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
+                                                                    @endforeach
 																</div>
 															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama Kab/Kota</b></h4></label>
+																	<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" placeholder="nama kabupaten/kota">
+																</div>
 															</div>
 														</div>
-													</form>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Kode Kab/Kota</b></h4></label>
+																	<input id="addkdkabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
+																</div>
+															</div>
+														</div>
 												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
-												</div>
-											</div>
-										</div>
-									</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
