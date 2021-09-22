@@ -17,7 +17,7 @@ class CreateHasilMhssTable extends Migration
             $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan
-            $table->unsignedInteger('id')->nullable();
+            $table->unsignedInteger('id_pertanyaan')->nullable();
             $table->foreign('id_pertanyaan')
                 ->on('pertanyaans')
                 ->references('id')
