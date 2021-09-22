@@ -1,8 +1,8 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data berita')
+@section('title', 'Berita')
 @section('content',)               
                 <div class="page-header">
-						<h4 class="page-title">Data berita</h4>
+						<h4 class="page-title">Berita</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="{{ route('administrator.dashboard') }}">
@@ -13,13 +13,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Data Referensi</a>
-							</li>
-							<li class="separator">
-								<i class="flaticon-right-arrow"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Data berita</a>
+								<a href="#">Berita</a>
 							</li>
 						</ul>
 					</div>
@@ -28,10 +22,10 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Cominggsoon</h4>
+										<!-- <h4 class="card-title">Cominggsoon</h4> -->
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
-											Tambah Data berita
+											Tambah Berita
 										</button>
 									</div>
 								</div>
@@ -57,8 +51,20 @@
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama berita</b></h4></label>
-																	<input id="addberita" type="text" name="namaberita" class="form-control" placeholder="nama berita">
+																	<label><h4><b>Jenis Berita</b></h4></label>
+																	<input id="addberita" type="text" name="jenisberita" class="form-control" placeholder="Jenis Berita">
+																</div>
+																<div class="form-group form-group-default">
+																	<label><h4><b>Judul Berita</b></h4></label>
+																	<input id="addberita" type="text" name="judulberita" class="form-control" placeholder="Judul Berita">
+																</div>
+																<div class="form-group form-group-default">
+																	<label><h4><b>Isi Berita</b></h4></label>
+																	<input id="addberita" type="text" name="isiberita" class="form-control" placeholder="Isi berita">
+																</div>
+																<div class="form-group form-group-default">
+																	<label><h4><b>Foto</b></h4></label>
+																	<input id="addberita" type="file" name="foto" class="form-control" placeholder="Foto">
 																</div>
 															</div>
 															</div>
@@ -97,6 +103,7 @@
 													<td>{{ $berita->isi_berita }}</td>
 													<td>{{ $berita->foto }}</td>
 													<td>
+													<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $berita->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 													<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 													<button class="btn btn-sm btn-danger" type="button" id="{{ $berita->id }}" onclick="deleteberita(this.id)"> <i class="fa fa-trash"></i>
 													</button>
@@ -113,8 +120,58 @@
 							</div>
 						</div>
 					</div>
+
+
+<!-- MODAL VIEW DETAILS -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="detailModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><b>Detail Berita</b></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<table class="table table-borderless">
+							<tbody>
+								<tr>
+									<td>Jenis Berita</td>
+									<td id="jenis_berita-dd">: </td>
+								</tr>
+								<tr>
+									<td>Judul Berita</td>
+									<td id="judul_berita-dd">: </td>
+								</tr>
+								<tr>
+									<td>Isi Berita</td>
+									<td id="isi_berita-dd">: </td>
+								</tr>
+								<tr>
+									<td>Foto</td>
+									<td id="foto-dd">: </td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL VIEW DETAILS -->					
 @endsection
 @section('customjs')
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>CKEDITOR.replace( 'isiberita' );</script>
 <script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
@@ -167,5 +224,33 @@
       } 
   
 	</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			$.ajax({
+				url: "{{ route('berita.show') }}",
+				method: "GET",
+				data: {
+					id: id
+				},
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					data['created_at'] = (moment(data['created_at'], 'YYYY-MM-DD', true).isValid()) ? moment(data['created_at']).format('DD-MM-YYYY') : '';
+					data['updated_at'] = (moment(data['updated_at'], 'YYYY-MM-DD', true).isValid()) ? moment(data['updated_at']).format('DD-MM-YYYY') : '';
+			
+					$('#jenis_berita-dd').text(': ' + data['jenis_berita']);
+					$('#judul_berita-dd').text(': ' + data['judul_berita']);
+					$('#isi_berita-dd').text(': ' + data['isi_berita']);
+					$('#foto-dd').text(': ' + data['foto']);
+					
+				}
+			});
+		});
+	});
+</script>
+
 
 @endsection
