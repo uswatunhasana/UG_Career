@@ -26,60 +26,14 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title">Cominggsoon</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-											<i class="fa fa-plus"></i>
-											Tambah Data Provinsi
-										</button>
-									</div>
-								</div>
 								<div class="card-body">
-									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														New</span> 
-														<span class="fw-light">
-															Row
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<form>
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<input id="addProvinsi" type="text" name="namaprovinsi" class="form-control" placeholder="nama provinsi">
-																</div>
-															</div>
-															</div>
-														</div>
-													</form>
-												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead class="thead-light">
 												<tr>
 													<th width="30px">No</th>
-													<th>Nama Provinsi</th>
-													<th>Aksi</th>
+													<th align="center">Nama Provinsi</th>
+													<th align="center">Aksi</th>
 												</tr>
 											</thead>
 											<!-- <tfoot>
@@ -98,12 +52,12 @@
 													<td>{{ $provinsi->nama_provinsi }}</td>
 													<td>
 													<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-													<button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
+													<!-- <button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
 													</button>
 													<form id="delete-form-{{ $provinsi->id }}" action="{{ route('provinsi.destroy', $provinsi->id) }}" method="POST" style="display: none;">
 														@csrf
 														@method('DELETE')
-													</form>
+													</form> -->
 												</tr>
 												@endforeach
 											</tbody>

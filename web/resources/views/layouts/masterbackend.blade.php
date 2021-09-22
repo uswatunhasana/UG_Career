@@ -35,6 +35,7 @@
 		<div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
+					@include('sweetalert::alert')	
                     @yield('content')
 				</div>
 			</div>	
