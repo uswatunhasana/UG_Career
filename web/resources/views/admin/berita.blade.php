@@ -30,9 +30,10 @@
 									</div>
 								</div>
 								<div class="card-body">
+									
 									<!-- Modal -->
 									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
+										<div class="modal-dialog modal-xl" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
 													<h5 class="modal-title">
@@ -104,7 +105,7 @@
 													<td>{{ $berita->foto }}</td>
 													<td>
 													<button type="button" id="detail" class="btn btn-sm btn-primary detail" 
-													data-target="#detailModal-{{ $berita->id }}" data-tooltip="tooltip" data-toggle="modal" 
+													data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" 
 													data-jenis="{{ $berita->jenis_berita }}" 
 													data-judul="{{ $berita->judul_berita }}" 
 													data-isi="{{ $berita->isi_berita }}" 
@@ -203,6 +204,20 @@
 			});
 		});
 
+		$(document).ready(function() {
+		$(document).on('click', '#detail', function() {
+			var jenis_berita = $(this).data('jenis_berita');
+			var judul_berita = $(this).data('judul_berita');
+			var isi_berita = $(this).data('isi_berita');
+			var foto = $(this).data('foto');
+			
+			$('#jenis_berita-dd').text(': ' + jenis_berita);
+			$('#judul_berita-dd').text(': ' + judul_berita);
+			$('#isi_berita-dd').text(': ' + isi_berita);
+			$('#foto-dd').text(': ' + foto);
+		})
+	});
+
     function deleteberita(id) {
         Swal.fire({
             title: 'Yakin Ingin Hapus Data ini?',
@@ -233,32 +248,7 @@
   
 	</script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(document).on('click', '#detail', function() {
-			var id = $(this).data('id');
-			$.ajax({
-				url: "{{ route('berita.show') }}",
-				method: "GET",
-				data: {
-					id: id
-				},
-				dataType: 'json',
-				success: function(datas) {
-					var data = datas[0];
-					data['created_at'] = (moment(data['created_at'], 'YYYY-MM-DD', true).isValid()) ? moment(data['created_at']).format('DD-MM-YYYY') : '';
-					data['updated_at'] = (moment(data['updated_at'], 'YYYY-MM-DD', true).isValid()) ? moment(data['updated_at']).format('DD-MM-YYYY') : '';
-			
-					$('#jenis_berita-dd').text(': ' + data['jenis_berita']);
-					$('#judul_berita-dd').text(': ' + data['judul_berita']);
-					$('#isi_berita-dd').text(': ' + data['isi_berita']);
-					$('#foto-dd').text(': ' + data['foto']);
-					
-				}
-			});
-		});
-	});
-</script>
+
 
 
 @endsection
