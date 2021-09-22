@@ -2,7 +2,7 @@
 @section('title', 'Data kabkota')
 @section('content',)               
                 <div class="page-header">
-						<h4 class="page-title">Data kabkota</h4>
+						<h4 class="page-title">Data Kabupaten/Kota</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="{{ route('administrator.dashboard') }}">
@@ -28,7 +28,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Comingsoon</h4>
+										<h4 class="card-title"></h4>
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
 											Tambah Data Kab/Kota
@@ -86,11 +86,11 @@
                                                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                                                 </div>
 													</form>
-                                                <!-- </div> -->
                                             </div>
                                         </div>
                                     </div>
 
+                                <!-- Tabel Data -->
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead class="thead-light">
@@ -129,6 +129,69 @@
 							</div>
 						</div>
 					</div>
+
+                                    <!-- Tambah Edit Modal -->
+                                    @foreach ($kabkotas as $kabkota)
+                                    <div class="modal fade" id="editModal-{{ $kabkota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <form role="form" action="{{ route('kabkota.update', $kabkota->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama Provinsi</b></h4></label>
+																	<select class="form-control" name="id_provinsi" required="required">
+                                                                        <option disabled selected>-- Daftar Provinsi --</option>
+                                                                        @foreach ($provinsis as $provinsi)
+                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
+                                                                        @endforeach
+                                                                        @foreach($provinsis as $provinsi)
+                                                                        <option 
+                                                                        @if($kabkota->id_provinsi ==  $provinsi->id)
+                                                                            selected="selected" 
+                                                                        @endif
+                                                                        value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
+                                                                        @endforeach
+                                                                    </select>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama Kab/Kota</b></h4></label>
+																	<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" value="{{ $kabkota->nama_kabkota }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Kode Kab/Kota</b></h4></label>
+																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" value="{{ $kabkota->kd_kabkota }}">
+																</div>
+															</div>
+														</div>
+												</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                    <button type="submit" class="btn btn-primary">Ubah Data</button>
+                                                </div>
+													</form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+
 @endsection
 @section('customjs')
 <script >
@@ -154,8 +217,8 @@
 			});
 		});
 
-    function deletekabkota(id) {
-        Swal.fire({
+        function deletekabkota(id) {
+        swal({
             title: 'Yakin Ingin Hapus Data ini?',
             text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
             type: 'warning',
@@ -172,16 +235,15 @@
             if (result.value) {
                 event.preventDefault();
                 document.getElementById('delete-form-'+id).submit();
-                Swal.fire(
+                swal(
                   'Deleted!',
                   'Your file has been deleted.',
                   'success')
             } else (
                 result.dismiss === swal.DismissReason.cancel
             ) 
-        });
+        })
       } 
-  
 	</script>
 
 @endsection
