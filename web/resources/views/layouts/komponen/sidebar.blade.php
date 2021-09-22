@@ -82,7 +82,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a href="../widgets.html">
+							<a href="{{ route('berita.index') }}">
 								<i class="far fa-newspaper"></i>
 								<p>Berita</p>
 							</a>
