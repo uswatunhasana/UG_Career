@@ -14,7 +14,7 @@ class CreateSekjursTable extends Migration
     public function up()
     {
         Schema::create('sekjurs', function (Blueprint $table) {
-            $table->increments('id_sekjur');
+            $table->increments('id');
             $table->string('nama_sekjur',30);
             $table->string('jabatan',25);
             $table->string('fakultas',100);
