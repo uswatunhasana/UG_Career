@@ -36,12 +36,6 @@
 													<th align="center">Aksi</th>
 												</tr>
 											</thead>
-											<!-- <tfoot>
-												<tr>
-												<th width="30px">No</th>
-												<th>Nama Provinsi</th>
-												</tr>
-											</tfoot> -->
 											<tbody>
 												@php
 													$no = 1;
@@ -52,12 +46,6 @@
 													<td>{{ $provinsi->nama_provinsi }}</td>
 													<td>
 													<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-													<!-- <button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
-													</button>
-													<form id="delete-form-{{ $provinsi->id }}" action="{{ route('provinsi.destroy', $provinsi->id) }}" method="POST" style="display: none;">
-														@csrf
-														@method('DELETE')
-													</form> -->
 												</tr>
 												@endforeach
 											</tbody>
@@ -67,6 +55,40 @@
 							</div>
 						</div>
 					</div>
+
+					                <!-- Tambah Edit Modal -->
+									@foreach ($provinsis as $provinsi)
+                                    <div class="modal fade" id="editModal-{{ $provinsi->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <form role="form" action="{{ route('provinsi.update', $provinsi->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama provinsi</b></h4></label>
+																	<input id="addprovinsi" type="text" name="nama_provinsi" class="form-control" value="{{ $provinsi->nama_provinsi }}">
+																</div>
+															</div>
+														</div>
+												</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                    <button type="submit" class="btn btn-primary">Ubah Data</button>
+                                                </div>
+													</form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
 @endsection
 @section('customjs')
 <script >

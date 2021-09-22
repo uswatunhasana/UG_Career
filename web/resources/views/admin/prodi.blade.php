@@ -52,34 +52,34 @@
                                                     @csrf
                                                     @method('POST')
 														<div class="row">
-															<div class="col-sm-12">
+															<div class="col-md-6 pr-0">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<select class="form-control" name="id_provinsi" required="required">
-                                                                        <option disabled selected>-- Daftar Provinsi --</option>
-                                                                        @foreach ($provinsis as $provinsi)
-                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                        @endforeach
-                                                                    </select>
+																	<label><h4><b>Jenjang</b></h4></label>
+																	<select class="form-control" name="jenjang" required="required">
+																		<option disabled selected>-- Daftar Jenjang --</option>
+																		<option value="D3">D3</option>
+																		<option value="S1">S1</option>
+																		<option value="S2">S2</option>
+																		<option value="S3">S3</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Kode Prodi</b></h4></label>
+																	<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" placeholder="kode prodi (maks: 5 angka) ">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Kab/Kota</b></h4></label>
-																	<input id="addprodi" type="text" name="nama_prodi" class="form-control" placeholder="nama kabupaten/kota">
+																	<label><h4><b>Nama Prodi</b></h4></label>
+																	<input id="addprodi" type="text" name="nama_prodi" class="form-control" placeholder="nama prodi ">
 																</div>
 															</div>
 														</div>
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" placeholder="kode kabupaten/kota">
-																</div>
-															</div>
-														</div>
+
 												</div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -96,9 +96,8 @@
 											<thead class="thead-light">
 												<tr>
 													<th width="30px">No</th>
-													<th>Nama Provinsi </th>
-													<th>Nama Kab/Kota</th>
-													<th>Kode Kab/Kota</th>
+													<th>Kode Prodi</th>
+													<th>Nama Prodi</th>
 													<th>Aksi</th>
 												</tr>
 											</thead>
@@ -110,7 +109,7 @@
 												<tr>
 													<td>{{$no++ }}</td>
 													<td>{{ $prodi->kd_prodi }}</td>
-                                                    <td>{{ $prodi->nama_prodi }}</td>
+                                                    <td>{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</td>
 													<td>
 													<button data-toggle="modal" data-target="#editModal-{{ $prodi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 													<button class="btn btn-sm btn-danger" type="button" id="{{ $prodi->id }}" onclick="deleteprodi(this.id)"> <i class="fa fa-trash"></i>
@@ -145,38 +144,31 @@
                                                     @csrf
                                                     @method('PUT')
 														<div class="row">
-															<div class="col-sm-12">
+															<div class="col-md-6 pr-0">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<select class="form-control" name="id_provinsi" required="required">
-                                                                        <option disabled selected>-- Daftar Provinsi --</option>
-                                                                        @foreach ($provinsis as $provinsi)
-                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                        @endforeach
-                                                                        @foreach($provinsis as $provinsi)
-                                                                        <option 
-                                                                        @if($prodi->id_provinsi ==  $provinsi->id)
-                                                                            selected="selected" 
-                                                                        @endif
-                                                                        value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                        @endforeach
+																	<label><h4><b>Jenjang</b></h4></label>
+																	<select class="form-control" name="jenjang"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
+                                                                    <!-- <option disabled selected>-- Jenis prodi --</option> -->
+                                                                    <option value="D3" {{ $prodi->jenjang === 'D3' ? 'selected' : '' }} >D3</option>
+                                                                    <option value="S1" {{ $prodi->jenjang === 'S1' ? 'selected' : '' }} >S1</option>
+                                                                    <option value="S2" {{ $prodi->jenjang === 'S2' ? 'selected' : '' }} >S2</option>
+                                                                    <option value="S3" {{ $prodi->jenjang === 'S3' ? 'selected' : '' }} >S3</option>
                                                                     </select>
 																</div>
 															</div>
-														</div>
-														<div class="row">
-															<div class="col-sm-12">
+													
+															<div class="col-md-6">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Kab/Kota</b></h4></label>
-																	<input id="addprodi" type="text" name="nama_prodi" class="form-control" value="{{ $prodi->nama_prodi }}">
+																	<label><h4><b>Kode Prodi</b></h4></label>
+																	<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" value="{{ $prodi->kd_prodi }}">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" value="{{ $prodi->kd_prodi }}">
+																	<label><h4><b>Nama Prodi</b></h4></label>
+																	<input id="addprodi" type="text" name="nama_prodi" class="form-control" value="{{ $prodi->nama_prodi }}">
 																</div>
 															</div>
 														</div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KabkotaController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ProdiController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -26,6 +27,18 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'store' => 'kabkota.store',
             'destroy' => 'kabkota.destroy',
             'update' => 'kabkota.update',
+        ]);
+        Route::resource('/perusahaan', PerusahaanController::class)->names([
+            'index'=>'perusahaan.index',
+            'store' => 'perusahaan.store',
+            'destroy' => 'perusahaan.destroy',
+            'update' => 'perusahaan.update',
+        ]);
+        Route::resource('/prodi', ProdiController::class)->names([
+            'index'=>'prodi.index',
+            'store' => 'prodi.store',
+            'destroy' => 'prodi.destroy',
+            'update' => 'prodi.update',
         ]);
         Route::resource('/berita', BeritaController::class)->names([
             'index'=>'berita.index',

@@ -52,7 +52,7 @@
                                                     @csrf
                                                     @method('POST')
 														<div class="row">
-															<div class="col-sm-12">
+															<div class="col-md-6 pr-0">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Provinsi</b></h4></label>
 																	<select class="form-control" name="id_provinsi" required="required">
@@ -63,20 +63,18 @@
                                                                     </select>
 																</div>
 															</div>
-														</div>
-														<div class="row">
-															<div class="col-sm-12">
+															<div class="col-md-6">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Kab/Kota</b></h4></label>
-																	<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" placeholder="nama kabupaten/kota">
+																	<label><h4><b>Kode Kab/Kota</b></h4></label>
+																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
+																	<label><h4><b>Nama Kab/Kota</b></h4></label>
+																	<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" placeholder="nama kabupaten/kota">
 																</div>
 															</div>
 														</div>
@@ -146,7 +144,7 @@
                                                     @csrf
                                                     @method('PUT')
 														<div class="row">
-															<div class="col-sm-12">
+															<div class="col-md-6 pr-0">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Provinsi</b></h4></label>
 																	<select class="form-control" name="id_provinsi" required="required">
@@ -164,6 +162,12 @@
                                                                     </select>
 																</div>
 															</div>
+															<div class="col-md-6">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Kode Kab/Kota</b></h4></label>
+																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" value="{{ $kabkota->kd_kabkota }}">
+																</div>
+															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
@@ -173,14 +177,7 @@
 																</div>
 															</div>
 														</div>
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" value="{{ $kabkota->kd_kabkota }}">
-																</div>
-															</div>
-														</div>
+														
 												</div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>

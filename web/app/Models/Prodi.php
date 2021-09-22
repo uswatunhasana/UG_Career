@@ -10,6 +10,7 @@ class Prodi extends Model
     use HasFactory;
     protected $fillable = [
         'kd_prodi',
+        'jenjang',
         'nama_prodi',
     ];
 }

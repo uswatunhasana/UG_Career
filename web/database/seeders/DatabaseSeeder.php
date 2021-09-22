@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             KabkotaSeeder::class
         ]);
         $this->call([
-            BeritaSeeder::class
+            ProdiSeeder::class
         ]);
 
     }

@@ -43,7 +43,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="../components/sweetalert.html">
+										<a href="{{ route('prodi.index') }}">
 											<span class="sub-item">Data Prodi</span>
 										</a>
 									</li>
