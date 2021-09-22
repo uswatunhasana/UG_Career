@@ -16,7 +16,7 @@ class CreateBeritasTable extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('jenis_berita',['pengumuman','Lowongan Kerja','Internship']);
-            $table->text('judul berita');
+            $table->text('judul_berita');
             $table->text('konten');
             $table->binary('foto');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateBeritasTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('beritas_');
+        Schema::dropIfExists('beritas');
     }
 }
