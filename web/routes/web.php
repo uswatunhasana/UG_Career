@@ -24,6 +24,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/kabkota', KabkotaController::class)->names([
             'index'=>'kabkota.index',
+            'store' => 'kabkota.store',
             'destroy' => 'kabkota.destroy',
         ]);
         Route::resource('/berita', BeritaController::class)->names([
