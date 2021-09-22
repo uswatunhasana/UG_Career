@@ -2,7 +2,7 @@
 @section('title', 'Data prodi')
 @section('content',)               
                 <div class="page-header">
-						<h4 class="page-title">Data Kabupaten/Kota</h4>
+						<h4 class="page-title">Data Prodi</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Data prodi</a>
+								<a href="#">Data Prodi</a>
 							</li>
 						</ul>
 					</div>
@@ -31,7 +31,7 @@
 										<h4 class="card-title"></h4>
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
-											Tambah Data Kab/Kota
+											Tambah Data Prodi
 										</button>
 									</div>
 								</div>
