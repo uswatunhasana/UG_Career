@@ -14,7 +14,22 @@ class CreateHasilPerusahaansTable extends Migration
     public function up()
     {
         Schema::create('hasil_perusahaans', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_hasilperusahaan');
+            $table->integer('jawaban');
+            //relasi pertanyaan
+            $table->unsignedInteger('id_pertanyaan')->nullable();
+            $table->foreign('id_pertanyaan')
+                ->on('pertanyaans')
+                ->references('id_pertanyaan')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            //relasi user
+            $table->unsignedInteger('id_user')->nullable();
+            $table->foreign('id_user')
+                ->on('users')
+                ->references('id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
