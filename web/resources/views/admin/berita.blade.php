@@ -103,7 +103,15 @@
 													<td>{{ $berita->isi_berita }}</td>
 													<td>{{ $berita->foto }}</td>
 													<td>
-													<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $berita->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+													<button type="button" id="detail" class="btn btn-sm btn-primary detail" 
+													data-target="#detailModal-{{ $berita->id }}" data-tooltip="tooltip" data-toggle="modal" 
+													data-jenis="{{ $berita->jenis_berita }}" 
+													data-judul="{{ $berita->judul_berita }}" 
+													data-isi="{{ $berita->isi_berita }}" 
+													data-foto="{{ $berita->foto }}" 
+													data-placement="bottom" title="Detail">
+													<i class="fa fa-eye"></i></button>
+													
 													<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 													<button class="btn btn-sm btn-danger" type="button" id="{{ $berita->id }}" onclick="deleteberita(this.id)"> <i class="fa fa-trash"></i>
 													</button>
