@@ -14,7 +14,7 @@ class CreateHasilMhssTable extends Migration
     public function up()
     {
         Schema::create('hasil_mhss', function (Blueprint $table) {
-            $table->increments('id_hasilmhs');
+            $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan
             $table->unsignedInteger('id')->nullable();
