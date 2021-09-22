@@ -36,52 +36,31 @@
 									</div>
 								</div>
 								<div class="card-body">
-<<<<<<< Updated upstream
-									<!-- Modal -->
-
-                                    <!-- Modal Tambah -->
-=======
 
                                     <!-- Tambah Data Modal -->
->>>>>>> Stashed changes
                                     <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-<<<<<<< Updated upstream
-                                                    <h5 class="modal-title" id="addRowModalLabel">Tambah Data</h5>
-=======
                                                     <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
->>>>>>> Stashed changes
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-<<<<<<< Updated upstream
-                                                 <form>
-=======
                                                 <form role="form" action="{{ route('kabkota.store') }}" method="POST">
                                                     @csrf
                                                     @method('POST')
->>>>>>> Stashed changes
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Provinsi</b></h4></label>
-<<<<<<< Updated upstream
-                                                                    <option disabled selected>-- Daftar Provinsi --</option>
-                                                                    @foreach($provinsis as $provinsi)
-                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                    @endforeach
-=======
 																	<select class="form-control" name="id_provinsi" required="required">
                                                                         <option disabled selected>-- Daftar Provinsi --</option>
                                                                         @foreach ($provinsis as $provinsi)
                                                                         <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
                                                                         @endforeach
                                                                     </select>
->>>>>>> Stashed changes
 																</div>
 															</div>
 														</div>
@@ -97,28 +76,17 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-<<<<<<< Updated upstream
-																	<input id="addkdkabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
-=======
 																	<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
->>>>>>> Stashed changes
 																</div>
 															</div>
 														</div>
 												</div>
                                                 <div class="modal-footer">
-<<<<<<< Updated upstream
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                </form>
-=======
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                                                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                                                 </div>
 													</form>
                                                 <!-- </div> -->
->>>>>>> Stashed changes
                                             </div>
                                         </div>
                                     </div>
