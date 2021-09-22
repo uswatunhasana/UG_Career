@@ -30,6 +30,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/berita', BeritaController::class)->names([
             'index'=>'berita.index',
             'destroy' => 'berita.destroy',
+            'show' => 'berita.show',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
