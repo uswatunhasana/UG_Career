@@ -31,6 +31,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'index'=>'berita.index',
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
+            'store' => 'berita.store'
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
