@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Berita;
 // use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BeritaController extends Controller
 {
@@ -42,21 +44,6 @@ class BeritaController extends Controller
     
     public function show(Request $request)
     {
-        // $data = $this->db->select('*')
-        //     ->from('beritas')
-        //     ->where('beritas.id', $this->input->post('id'))
-        //     ->get()
-        //     ->result_array();
-
-        // echo json_encode($data);
-
-        $id = $req->get('id');
-
-        $data = Berita::where('beritas.id','=',$id) 
-        ->select('beritas.*')
-        ->get();
-
-        return json_encode($data);
 
     }
 

@@ -51,13 +51,13 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Jenis Berita</b></h4></label>
-																	<select class="form-control" name="jenisberita" required="required">
-																		<option disabled selected>-- Jenis Produk --</option>
-																		<option value="aksessoris">Aksessoris</option>
-																		<option value="sparepart">Sparepart</option>
-																		<option value="service">Service</option>
+																	<select class="form-control" name="jenis_berita" required="required">
+																		<option disabled selected>-- Jenis Berita --</option>
+																		<option value="pengumuman">Pengumuman</option>
+																		<option value="lowongan kerja">Lowongan Kerja</option>
+																		<option value="internship">Internship</option>
 																	</select>
-																	<input id="addberita" type="text" name="jenisberita" class="form-control" placeholder="Jenis Berita">
+																	<!-- <input id="addberita" type="text" name="jenisberita" class="form-control" placeholder="Jenis Berita"> -->
 																</div>
 															</div>
 														</div>
@@ -65,7 +65,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Judul Berita</b></h4></label>
-																	<input id="addberita" type="text" name="judulberita" class="form-control" placeholder="Judul Berita">
+																	<input id="addberita" type="text" name="judul_berita" class="form-control" placeholder="Judul Berita">
 																</div>
 															</div>
 														</div>
@@ -73,7 +73,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Isi Berita</b></h4></label>
-																	<input id="addberita" type="text" name="isiberita" class="form-control" placeholder="Isi berita">
+																	<input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi berita">
 																</div>
 															</div>
 														</div>
