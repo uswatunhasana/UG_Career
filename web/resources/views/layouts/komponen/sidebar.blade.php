@@ -38,7 +38,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="../components/notifications.html">
+										<a href="{{ route('kabkota.index') }}">
 											<span class="sub-item">Data Kabupaten/Kota</span>
 										</a>
 									</li>

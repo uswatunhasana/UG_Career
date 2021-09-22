@@ -1,8 +1,8 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data Provinsi')
+@section('title', 'Data kabkota')
 @section('content',)               
                 <div class="page-header">
-						<h4 class="page-title">Data Provinsi</h4>
+						<h4 class="page-title">Data kabkota</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Data Provinsi</a>
+								<a href="#">Data kabkota</a>
 							</li>
 						</ul>
 					</div>
@@ -31,7 +31,7 @@
 										<h4 class="card-title">Cominggsoon</h4>
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
-											Tambah Data Provinsi
+											Tambah Data kabkota
 										</button>
 									</div>
 								</div>
@@ -57,8 +57,8 @@
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<input id="addProvinsi" type="text" name="namaprovinsi" class="form-control" placeholder="nama provinsi">
+																	<label><h4><b>Nama kabkota</b></h4></label>
+																	<input id="addkabkota" type="text" name="namakabkota" class="form-control" placeholder="nama kabkota">
 																</div>
 															</div>
 															</div>
@@ -78,31 +78,27 @@
 											<thead class="thead-light">
 												<tr>
 													<th width="30px">No</th>
-													<th>Nama Provinsi</th>
+													<th>Nama Provinsi </th>
 													<th>Nama Kab/Kota</th>
 													<th>Kode Kab/Kota</th>
 													<th>Aksi</th>
 												</tr>
 											</thead>
-											<!-- <tfoot>
-												<tr>
-												<th width="30px">No</th>
-												<th>Nama Provinsi</th>
-												</tr>
-											</tfoot> -->
 											<tbody>
 												@php
 													$no = 1;
 												@endphp
-												@foreach($provinsis as $provinsi)
+												@foreach($kabkotas as $kabkota)
 												<tr>
 													<td>{{$no++ }}</td>
-													<td>{{ $provinsi->nama_provinsi }}</td>
+													<td>{{ $kabkota->provinsi->nama_provinsi }}</td>
+													<td>{{ $kabkota->nama_kabkota }}</td>
+													<td>{{ $kabkota->kd_kabkota }}</td>
 													<td>
-													<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-													<button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id_provinsi }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
+													<button data-toggle="modal" data-target="#editModal-{{ $kabkota->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+													<button class="btn btn-sm btn-danger" type="button" id="{{ $kabkota->id }}" onclick="deletekabkota(this.id)"> <i class="fa fa-trash"></i>
 													</button>
-													<form id="delete-form-{{ $provinsi->id_provinsi }}" action="{{ route('provinsi.destroy', $provinsi->id_provinsi) }}" method="POST" style="display: none;">
+													<form id="delete-form-{{ $kabkota->id }}" action="{{ route('kabkota.destroy', $kabkota->id) }}" method="POST" style="display: none;">
 														@csrf
 														@method('DELETE')
 													</form>
@@ -140,7 +136,7 @@
 			});
 		});
 
-    function deleteprovinsi(id) {
+    function deletekabkota(id) {
         Swal.fire({
             title: 'Yakin Ingin Hapus Data ini?',
             text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",

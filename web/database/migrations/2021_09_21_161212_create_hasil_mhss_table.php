@@ -17,10 +17,10 @@ class CreateHasilMhssTable extends Migration
             $table->increments('id_hasilmhs');
             $table->integer('jawaban');
             //relasi pertanyaan
-            $table->unsignedInteger('id_pertanyaan')->nullable();
+            $table->unsignedInteger('id')->nullable();
             $table->foreign('id_pertanyaan')
                 ->on('pertanyaans')
-                ->references('id_pertanyaan')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             //relasi user
@@ -41,6 +41,7 @@ class CreateHasilMhssTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('hasil_mhss');
     }
 }

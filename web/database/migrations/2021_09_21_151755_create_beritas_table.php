@@ -14,7 +14,7 @@ class CreateBeritasTable extends Migration
     public function up()
     {
         Schema::create('beritas', function (Blueprint $table) {
-            $table->increments('id_berita');
+            $table->increments('id');
             $table->enum('jenis_berita',['pengumuman','Lowongan Kerja','Internship']);
             $table->text('judul berita');
             $table->text('konten');

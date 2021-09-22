@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kabkota;
+use App\Models\Provinsi;
 
 
 class KabkotaController extends Controller
@@ -12,7 +13,8 @@ class KabkotaController extends Controller
     public function index()
     {
         $kabkotas = Kabkota::all();
-        return view('admin.kabkota', ['kabkotas' => $kabkotas]);
+        $provinsis = Provinsi::all();
+        return view('admin.kabkota', compact('provinsis', 'kabkotas'));
     }
 
     public function create()

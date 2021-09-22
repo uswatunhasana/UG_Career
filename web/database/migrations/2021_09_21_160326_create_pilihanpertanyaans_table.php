@@ -14,13 +14,13 @@ class CreatePilihanpertanyaansTable extends Migration
     public function up()
     {
         Schema::create('pilihanpertanyaans', function (Blueprint $table) {
-            $table->increments('id_pilihanpertanyaan');
+            $table->increments('id');
             $table->text('pilihan_pertanyaan');
             //relasi dengan pertanyaan
             $table->unsignedInteger('id_pertanyaan')->nullable();
             $table->foreign('id_pertanyaan')
                 ->on('pertanyaans')
-                ->references('id_pertanyaan')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();

@@ -9,7 +9,7 @@ class CreatePertanyaansTable extends Migration
     public function up()
     {
         Schema::create('pertanyaans', function (Blueprint $table) {
-            $table->increments('id_pertanyaan');
+            $table->increments('id');
             $table->enum('jenis_pertanyaan',['text','pilihan','checklist']);
             $table->enum('kategori_pertanyaan',['alumni','perusahaan']);
             $table->string('kd_pertanyaan',5);

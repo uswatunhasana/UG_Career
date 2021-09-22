@@ -14,14 +14,14 @@ class CreateKabkotasTable extends Migration
     public function up()
     {
         Schema::create('kabkotas', function (Blueprint $table) {
-            $table->increments('id_kabkotas');
+            $table->increments('id');
             $table->string('kd_kabkota',8);
             $table->string('nama_kabkota',50);
              //relasi kabkota
             $table->unsignedInteger('id_provinsi')->nullable();
             $table->foreign('id_provinsi')
                 ->on('provinsis')
-                ->references('id_provinsi')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

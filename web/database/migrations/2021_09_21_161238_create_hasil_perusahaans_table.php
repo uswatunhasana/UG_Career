@@ -14,13 +14,13 @@ class CreateHasilPerusahaansTable extends Migration
     public function up()
     {
         Schema::create('hasil_perusahaans', function (Blueprint $table) {
-            $table->increments('id_hasilperusahaan');
+            $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan
             $table->unsignedInteger('id_pertanyaan')->nullable();
             $table->foreign('id_pertanyaan')
                 ->on('pertanyaans')
-                ->references('id_pertanyaan')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             //relasi user
@@ -41,6 +41,7 @@ class CreateHasilPerusahaansTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('hasil_perusahaans');
     }
 }

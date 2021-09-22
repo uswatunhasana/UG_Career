@@ -10,7 +10,7 @@ class Kabkota extends Model
 {
     use HasFactory;
     protected $fillable = ['kd_kabkota','nama_kabkota','id_provinsi'];
-    public function kabkota()
+    public function provinsi()
     {
         return $this->belongsTo(Provinsi::class, 'id_provinsi');
     }

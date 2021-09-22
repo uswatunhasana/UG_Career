@@ -29,7 +29,7 @@ class CreateSekjursTable extends Migration
             $table->unsignedInteger('id_prodi')->nullable();
             $table->foreign('id_prodi')
                 ->on('prodis')
-                ->references('id_prodi')
+                ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
@@ -43,6 +43,7 @@ class CreateSekjursTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('sekjurs');
     }
 }
