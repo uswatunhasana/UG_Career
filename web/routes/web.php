@@ -20,12 +20,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index'=>'provinsi.index',
-            'destroy' => 'provinsi.destroy',
         ]);
         Route::resource('/kabkota', KabkotaController::class)->names([
             'index'=>'kabkota.index',
             'store' => 'kabkota.store',
             'destroy' => 'kabkota.destroy',
+            'update' => 'kabkota.update',
         ]);
         Route::resource('/berita', BeritaController::class)->names([
             'index'=>'berita.index',
