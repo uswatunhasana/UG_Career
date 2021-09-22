@@ -28,10 +28,10 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Add Row</h4>
+										<h4 class="card-title">Cominggsoon</h4>
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
-											Add Row
+											Tambah Data Provinsi
 										</button>
 									</div>
 								</div>
@@ -58,28 +58,17 @@
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label>Name</label>
-																	<input id="addName" type="text" class="form-control" placeholder="fill name">
+																	<label><h4><b>Nama Provinsi</b></h4></label>
+																	<input id="addProvinsi" type="text" name="namaprovinsi" class="form-control" placeholder="nama provinsi">
 																</div>
 															</div>
-															<div class="col-md-6 pr-0">
-																<div class="form-group form-group-default">
-																	<label>Position</label>
-																	<input id="addPosition" type="text" class="form-control" placeholder="fill position">
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group form-group-default">
-																	<label>Office</label>
-																	<input id="addOffice" type="text" class="form-control" placeholder="fill office">
-																</div>
 															</div>
 														</div>
 													</form>
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+													<button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
 												</div>
 											</div>
 										</div>
@@ -94,12 +83,12 @@
 													<th>Aksi</th>
 												</tr>
 											</thead>
-											<tfoot>
+											<!-- <tfoot>
 												<tr>
 												<th width="30px">No</th>
-													<th>Nama Provinsi</th>
+												<th>Nama Provinsi</th>
 												</tr>
-											</tfoot>
+											</tfoot> -->
 											<tbody>
 												@php
 													$no = 1;
@@ -110,6 +99,12 @@
 													<td>{{ $provinsi->nama_provinsi }}</td>
 													<td>
 													<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+													<button class="btn btn-sm btn-danger" type="button" id="{{ $provinsi->id_provinsi }}" onclick="deleteprovinsi(this.id)"> <i class="fa fa-trash"></i>
+													</button>
+													<form id="delete-form-{{ $provinsi->id_provinsi }}" action="{{ route('provinsi.destroy', $provinsi->id_provinsi) }}" method="POST" style="display: none;">
+														@csrf
+														@method('DELETE')
+													</form>
 												</tr>
 												@endforeach
 											</tbody>
@@ -143,6 +138,35 @@
 
 			});
 		});
+
+    function deleteprovinsi(id) {
+        Swal.fire({
+            title: 'Yakin Ingin Hapus Data ini?',
+            text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Tidak',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                event.preventDefault();
+                document.getElementById('delete-form-'+id).submit();
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success')
+            } else (
+                result.dismiss === swal.DismissReason.cancel
+            ) 
+        });
+      } 
+  
 	</script>
 
 @endsection

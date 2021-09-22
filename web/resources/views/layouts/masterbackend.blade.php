@@ -21,7 +21,8 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href=" {{ asset('admin') }}/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href=" {{ asset('admin') }}/assets/css/azzara.min.css">
-    @yield('css')
+    <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
+	@yield('css')
 
 </head>
 <body>
@@ -52,6 +53,7 @@
 	<script src=" {{ asset('admin') }}/assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src=" {{ asset('admin') }}/assets/js/core/popper.min.js"></script>
 	<script src=" {{ asset('admin') }}/assets/js/core/bootstrap.min.js"></script>
+	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
 	<!-- jQuery UI -->
 	<script src=" {{ asset('admin') }}/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	<script src=" {{ asset('admin') }}/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
