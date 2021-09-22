@@ -44,7 +44,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <form role="form" action="{{ route('kabkota.store') }}" method="POST">
+                                                <form role="form" action="{{ route('berita.store') }}" method="POST">
                                                     @csrf
                                                     @method('POST')
 														<div class="row">
