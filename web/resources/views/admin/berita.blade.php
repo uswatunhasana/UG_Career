@@ -31,54 +31,63 @@
 								</div>
 								<div class="card-body">
 									
-									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog modal-xl" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														New</span> 
-														<span class="fw-light">
-															Row
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<form>
+
+
+                                    <!-- Tambah Data Modal -->
+                                    <div class="modal fade bd-example-modal-lg" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="addRowModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <form role="form" action="{{ route('kabkota.store') }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Jenis Berita</b></h4></label>
 																	<input id="addberita" type="text" name="jenisberita" class="form-control" placeholder="Jenis Berita">
 																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Judul Berita</b></h4></label>
 																	<input id="addberita" type="text" name="judulberita" class="form-control" placeholder="Judul Berita">
 																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Isi Berita</b></h4></label>
 																	<input id="addberita" type="text" name="isiberita" class="form-control" placeholder="Isi berita">
 																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Foto</b></h4></label>
+																		<label><h4><b>Foto</b></h4></label>
 																	<input id="addberita" type="file" name="foto" class="form-control" placeholder="Foto">
 																</div>
 															</div>
-															</div>
 														</div>
+												</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                                                </div>
 													</form>
-												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
-												</div>
-											</div>
-										</div>
-									</div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
