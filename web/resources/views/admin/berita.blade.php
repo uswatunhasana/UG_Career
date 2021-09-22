@@ -51,6 +51,12 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Jenis Berita</b></h4></label>
+																	<select class="form-control" name="jenisberita" required="required">
+																		<option disabled selected>-- Jenis Produk --</option>
+																		<option value="aksessoris">Aksessoris</option>
+																		<option value="sparepart">Sparepart</option>
+																		<option value="service">Service</option>
+																	</select>
 																	<input id="addberita" type="text" name="jenisberita" class="form-control" placeholder="Jenis Berita">
 																</div>
 															</div>
