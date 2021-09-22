@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KabkotaController;
+use App\Http\Controllers\BeritaController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -24,6 +25,10 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/kabkota', KabkotaController::class)->names([
             'index'=>'kabkota.index',
             'destroy' => 'kabkota.destroy',
+        ]);
+        Route::resource('/berita', BeritaController::class)->names([
+            'index'=>'berita.index',
+            'destroy' => 'berita.destroy',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
