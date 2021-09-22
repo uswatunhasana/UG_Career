@@ -12,7 +12,7 @@ class Berita extends Model
     [
         'jenis_berita',
         'judul_berita',
-        'konten',
+        'isi_berita',
         'foto'
     ];
     
