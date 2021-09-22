@@ -18,13 +18,25 @@ class BeritaController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
    
     public function store(Request $request)
-    {
-        //
+    {   
+        $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
+        if ($cek_berita == 0) {
+            $berita = new Berita;
+            $berita->jenis_berita = $request->jenis_berita;
+            $berita->judul_berita = $request->judul_berita;
+            $berita->isi_berita = $request->isi_berita;
+            $berita->foto = $request->foto;
+            $berita->save();
+            Alert::success(' Berhasil Tambah Berita ', ' Silahkan Periksa Kembali');
+        } else {
+            Alert::error('Judul Berita Sudah Ada ', ' Silahkan coba lagi');
+        }
+        return redirect()->back();
     }
 
     
