@@ -28,9 +28,24 @@ class BeritaController extends Controller
     }
 
     
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        // $data = $this->db->select('*')
+        //     ->from('beritas')
+        //     ->where('beritas.id', $this->input->post('id'))
+        //     ->get()
+        //     ->result_array();
+
+        // echo json_encode($data);
+
+        $id = $req->get('id');
+
+        $data = Berita::where('beritas.id','=',$id) 
+        ->select('beritas.*')
+        ->get();
+
+        return json_encode($data);
+
     }
 
     
