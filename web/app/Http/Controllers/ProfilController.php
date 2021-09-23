@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Dataweb;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert; 
+use RealRashid\SweetAlert\Facades\Alert;
 
-class DatawebController extends Controller
+class ProfilController extends Controller
 {
-   
+    
     public function index()
     {
-        $datawebs = Dataweb::all();
-        return view('admin.dataweb', ['datawebs' => $datawebs]);
+        $users = User::all();
+        return view('admin.editprofil', ['users' => $users]);
     }
 
     
@@ -23,13 +23,13 @@ class DatawebController extends Controller
         //
     }
 
-   
+    
     public function store(Request $request)
     {
         //
     }
 
-
+    
     public function show($id)
     {
         //
@@ -41,7 +41,7 @@ class DatawebController extends Controller
         //
     }
 
-    
+   
     public function update(Request $request, $id)
     {
         $rules = array(
@@ -68,7 +68,6 @@ class DatawebController extends Controller
             $datawebs = Dataweb::all();
             Alert::success(' Berhasil Update Data ', ' Silahkan dicek kembali');
             return view('admin.dataweb', compact('datawebs'));
-
     }
 
     

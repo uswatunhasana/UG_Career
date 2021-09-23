@@ -18,7 +18,7 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="{{ route('daftaruser.index') }}">
+										<a href="{{ route('user.index') }}">
 											<span class="sub-item">Data User</span>
 										</a>
 									</li>
@@ -88,7 +88,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="../widgets.html">
+							<a href="{{ route('dataweb.index') }}">
 								<i class="fas fa-desktop"></i>
 								<p>Setting Data Web</p>
 							</a>
