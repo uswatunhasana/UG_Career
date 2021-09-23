@@ -54,27 +54,59 @@
 														<div class="row">
 															<div class="col-md-6 pr-0">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<select class="form-control" name="id_provinsi" required="required">
-                                                                        <option disabled selected>-- Daftar Provinsi --</option>
-                                                                        @foreach ($provinsis as $provinsi)
-                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
+																	<label><h4><b>Nama User</b></h4></label>
+                                                                    <select class="form-control" name="id_user" required="required">
+                                                                        <option disabled selected>-- Daftar User --</option>
+                                                                        @foreach ($users as $user)
+                                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                                         @endforeach
                                                                     </select>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodeperusahaan" type="text" name="kd_perusahaan" class="form-control" placeholder="kode kabupaten/kota">
+																	<label><h4><b>Nomor Telepon</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" placeholder="08XXXXXXXXXXX">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Kab/Kota</b></h4></label>
-																	<input id="addperusahaan" type="text" name="nama_perusahaan" class="form-control" placeholder="nama kabupaten/kota">
+																	<label><h4><b>URL Web</b></h4></label>
+																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" placeholder="https://xxxxxxxx.xxx">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Alamat</b></h4></label>
+																	<input id="addalamatperusahaan" type="text" name="alamat" class="form-control" placeholder="nama contact person">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama Contact Person</b></h4></label>
+																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" placeholder="nama contact person">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Jabatan</b></h4></label>
+																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" placeholder="jabatan contact person">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Email Contact Person</b></h4></label>
+																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" placeholder="email contact person">
 																</div>
 															</div>
 														</div>
@@ -109,7 +141,7 @@
 												@foreach($perusahaans as $perusahaan)
 												<tr>
 													<td>{{$no++ }}</td>
-													<td>{{ $perusahaan->nama_instansi }}</td>
+													<td>{{ $perusahaan->user->name }}</td>
 													<td>{{ $perusahaan->no_telp }}</td>
 													<td>{{ $perusahaan->url_web }}</td>
 													<td>{{ $perusahaan->email }}</td>
@@ -148,37 +180,75 @@
                                                 <form role="form" action="{{ route('perusahaan.update', $perusahaan->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
-														<div class="row">
-															<div class="col-md-6 pr-0">
+                                                        <div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<select class="form-control" name="id_provinsi" required="required">
-                                                                        <option disabled selected>-- Daftar Provinsi --</option>
-                                                                        @foreach ($provinsis as $provinsi)
-                                                                        <option value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                        @endforeach
-                                                                        @foreach($provinsis as $provinsi)
-                                                                        <option 
-                                                                        @if($perusahaan->id_provinsi ==  $provinsi->id)
-                                                                            selected="selected" 
-                                                                        @endif
-                                                                        value="{{ $provinsi->id }}">{{ $provinsi->nama_provinsi }}</option>
-                                                                        @endforeach
-                                                                    </select>
+																	<label><h4><b>Nama Instansi</b></h4></label>
+																	<input id="addperusahaan" type="text" name="name" class="form-control" value="{{ perusahaan->user->name }}">
 																</div>
 															</div>
-															<div class="col-md-6">
+														</div>
+                                                        <div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Kode Kab/Kota</b></h4></label>
-																	<input id="addkodeperusahaan" type="text" name="kd_perusahaan" class="form-control" value="{{ $perusahaan->kd_perusahaan }}">
+																	<label><h4><b>Email Perusahaan</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="email" class="form-control" value="{{ perusahaan->user->email }}">
+																</div>
+															</div>
+														</div>
+                                                        <div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nomor Telepon</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" value="{{ perusahaan->no_telp }}">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Kab/Kota</b></h4></label>
-																	<input id="addperusahaan" type="text" name="nama_perusahaan" class="form-control" value="{{ $perusahaan->nama_perusahaan }}">
+																	<label><h4><b>URL Web</b></h4></label>
+																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" value="{{ perusahaan->url_web }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Nama Contact Person</b></h4></label>
+																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" value="{{ perusahaan->nama_cp }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Jabatan</b></h4></label>
+																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" value="{{ perusahaan->jabatan }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Email Contact Person</b></h4></label>
+																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" value="{{ perusahaan->email_cp }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Username</b></h4></label>
+																	<input id="addusernameperusahaan" type="text" name="username" class="form-control" value="{{ perusahaan->user->username }}">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Password</b></h4></label>
+																	<input id="addpasswordperusahaan" type="text" name="password" class="form-control" value="{{ perusahaan->user->password }}">
 																</div>
 															</div>
 														</div>

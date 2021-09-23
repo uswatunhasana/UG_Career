@@ -11,7 +11,6 @@ class CreatePerusahaansTable extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_instansi',30);
             $table->text('alamat');
             $table->string('no_telp',15);
             $table->string('url_web',100);

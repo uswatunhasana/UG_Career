@@ -8,6 +8,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\DaftaruserController;
+use App\Http\Controllers\PerusahaanController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -34,7 +35,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'index'=>'kabkota.index',
             'store' => 'kabkota.store',
             'destroy' => 'kabkota.destroy',
-            'update' => 'kabkota.update',
         ]);
         Route::resource('/perusahaan', PerusahaanController::class)->names([
             'index'=>'perusahaan.index',
