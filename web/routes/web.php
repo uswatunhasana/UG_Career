@@ -8,6 +8,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -53,6 +54,9 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/editprofil', ProfilController::class)->names([
             'index'=>'editprofil.index',
+        ]);
+        Route::resource('/user', UserController::class)->names([
+            'index'=>'user.index',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
