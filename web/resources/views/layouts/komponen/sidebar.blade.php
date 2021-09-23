@@ -18,17 +18,17 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="../components/avatars.html">
+										<a href="{{ route('daftaruser.index') }}">
 											<span class="sub-item">Data User</span>
 										</a>
 									</li>
 									<li>
-										<a href="../components/buttons.html">
+										<a href="{{ route('alumni.index') }}">
 											<span class="sub-item">Data Alumni</span>
 										</a>
 									</li>
 									<li>
-										<a href="../components/gridsystem.html">
+										<a href="{{ route('perusahaan.index') }}">
 											<span class="sub-item">Data Perusahaan</span>
 										</a>
 									</li>

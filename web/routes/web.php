@@ -6,6 +6,8 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KabkotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\DaftaruserController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -18,6 +20,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
 
         Route::resource('/dashboard', AdminController::class)->names([
             'index'=>'administrator.dashboard',
+        ]);
+        Route::resource('/daftaruser', DaftaruserController::class)->names([
+            'index'=>'daftaruser.index',
+        ]);
+        Route::resource('/alumni', AlumniController::class)->names([
+            'index'=>'alumni.index',
         ]);
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index'=>'provinsi.index',
