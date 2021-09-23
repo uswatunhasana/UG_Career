@@ -88,7 +88,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="../widgets.html">
+							<a href="{{ route('dataweb.index') }}">
 								<i class="fas fa-desktop"></i>
 								<p>Setting Data Web</p>
 							</a>
