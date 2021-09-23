@@ -6,6 +6,8 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\KabkotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\DatawebController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -45,6 +47,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
             'store' => 'berita.store'
+        ]);
+        Route::resource('/dataweb', DatawebController::class)->names([
+            'index'=>'dataweb.index',
+        ]);
+        Route::resource('/editprofil', ProfilController::class)->names([
+            'index'=>'editprofil.index',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
