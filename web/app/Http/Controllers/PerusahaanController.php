@@ -14,7 +14,7 @@ class PerusahaanController extends Controller
     {
         $perusahaans = Perusahaan::all();
         $users = User::where('level','=','perusahaan')->select('*')->get();
-        return view('pages.daftar_pelanggan', compact('daftar_pelanggan', 'perusahaans'));
+        return view('admin.perusahaan', compact('users', 'perusahaans'));
     }
 
     
