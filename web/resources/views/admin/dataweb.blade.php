@@ -2,7 +2,7 @@
 @section('title', 'Data Provinsi')
 @section('content',)               
                 <div class="page-header">
-						<h4 class="page-title">Data Provinsi</h4>
+						<h4 class="page-title">Setting Data Web</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="{{ route('administrator.dashboard') }}">
@@ -13,13 +13,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Data Referensi</a>
-							</li>
-							<li class="separator">
-								<i class="flaticon-right-arrow"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Data Provinsi</a>
+								<a href="#">Setting Data Web</a>
 							</li>
 						</ul>
 					</div>
@@ -28,52 +22,40 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Cominggsoon</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-											<i class="fa fa-plus"></i>
-											Tambah Data Provinsi
-										</button>
 									</div>
 								</div>
+								@foreach ($datawebs as $dataweb)
 								<div class="card-body">
-									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														New</span> 
-														<span class="fw-light">
-															Row
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
+									<form role="form" action="{{ route('dataweb.update', $dataweb->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+											<div class="col-md-6">
+											
+												<div class="form-group">
+													<label for="largeInput">Nama Web</label>
+													<input type="text" class="form-control form-control" name = "nama_web" id="nama_web" value="{{ $dataweb->nama_web }}">
 												</div>
-												<div class="modal-body">
-													<p class="small">Create a new row using this form, make sure you fill them all</p>
-													<form>
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label><h4><b>Nama Provinsi</b></h4></label>
-																	<input id="addProvinsi" type="text" name="namaprovinsi" class="form-control" placeholder="nama provinsi">
-																</div>
-															</div>
-															</div>
-														</div>
-													</form>
+												<div class="form-group">
+													<label for="largeInput">No. Telepon</label>
+													<input type="text" class="form-control form-control" name = "no_telp" id="defaultInput" value="{{ $dataweb->no_telp }}">
 												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
+												<div class="form-group">
+													<label for="largeInput">Email</label>
+													<input type="text" class="form-control form-control" name = "email" id="defaultInput" value="{{ $dataweb->email }}">
 												</div>
+												<div class="form-group">
+													<label for="largeInput">Alamat</label>
+													<input type="text" class="form-control form-control" name = "alamat" id="defaultInput" value="{{ $dataweb->alamat }}">
+												</div>
+												<div class="form-group">
+													<label for="largeInput">Jam Operasional</label>
+													<input type="text" class="form-control form-control" name = "jam_pelayanan" id="defaultInput" value="{{ $dataweb->jam_pelayanan }}">
+												</div>
+											
+												<button type="submit" class="btn btn-warning" style="margin-left: 600px;">Ubah Data</button>
 											</div>
-										</div>
-									</div>
-
+											@endforeach
+									</form>
 								</div>
 							</div>
 						</div>
