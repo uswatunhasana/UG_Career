@@ -8,6 +8,7 @@ use App\Models\Perusahaan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class PerusahaanController extends Controller
@@ -16,11 +17,7 @@ class PerusahaanController extends Controller
     public function index()
     {
         $perusahaans = Perusahaan::all();
-        $users = User::leftJoin('perusahaans', 'users.id', '=', 'perusahaans.id_user')
-        ->where('user.level','=','perusahaan')
-        ->where('user.id','!=','perusahaan.id_user')
-        ->select('*')->get();
-        return view('admin.perusahaan', compact('users', 'perusahaans'));
+        return view('admin.perusahaan', compact('perusahaans'));
     }
 
     public function create()
@@ -30,32 +27,41 @@ class PerusahaanController extends Controller
 
     public function store(Request $request)
     {
-        $rules = array(
-            'alamat' => 'string|required',
-            'no_telp' => 'string|required',
-            'url_web' => 'string|required',
-            'nama_cp' => 'string|required',
-            'jabatan' => 'string|required',
-        );
-        $validation = Validator::make($request->all(), $rules);
-        if ($validation->fails()) {
-            Alert::error('Invalid Data', 'Data Wajib diisi');
-            return redirect()->back();
-        }
-        $cek_perusahaan = Perusahaan::where('id_user', $request->id_user)->count();
+        // $rules = array(
+        //     'password' => 'string|min:8|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Password min 8 digit');
+        //     return redirect()->back();
+        // }
+        $cek_perusahaan = User::where('username', $request->username)->count();
         if ($cek_perusahaan == 0) {
+            $user = new User;
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->email_verified_at=now();
+            $user->level = 'perusahaan';
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            $get_id_user = DB::getPdo()->lastInsertId();;
+
             $perusahaan = new Perusahaan;
-            $perusahaan->id_user = $request->id_user;
+            $perusahaan->id_user =  $get_id_user;
             $perusahaan->alamat = $request->alamat;
             $perusahaan->no_telp = $request->no_telp;
             $perusahaan->url_web = $request->url_web;
             $perusahaan->nama_cp = $request->nama_cp;
             $perusahaan->jabatan = $request->jabatan;
             $perusahaan->email_cp = $request->email_cp;
+            $perusahaan->created_at = now();
+            $perusahaan->updated_at = now();
             $perusahaan->save();
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         } else {
-            Alert::error('Data Kab/Kota Sudah Ada ', ' Silahkan coba lagi');
+            Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
         }
         return redirect()->back();
     }
@@ -75,7 +81,59 @@ class PerusahaanController extends Controller
 
     public function update(Request $request, $id)
     {
+        // $rules = array(
+        //     'username' => 'string|unique|required',
+        //     'password' => 'string|min:8|required',
+        //     'name' => 'string|required',
+        //     'email' => 'string|unique|required',
+        //     'alamat' => 'string|required',
+        //     'no_telp' => 'string|required',
+        //     'url_web' => 'string|required',
+        //     'nama_cp' => 'string|required',
+        //     'jabatan' => 'string|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Data sudah tersedia');
+        //     return redirect()->back();
+        // }
+        $cek_perusahaan = User::where('email', $request->email)->count();
+        if ($cek_perusahaan == 0) {
+            $perusahaan = Perusahaan::findOrFail($id)
+            ->where('perusahaans.id', '=', $id)
+            ->select('perusahaans.*')
+            ->first();
+
+            $user = User::findOrFail($perusahaan->id_user)
+            ->where('users.id', '=', $perusahaan->id_user)
+            ->select('users.*')
+            ->first();
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->level = 'perusahaan';
+            if($request->filled('password')) {
+                Hash::make($request->password);
+            } else {
+                $user->password;
+            }
+            $user->save();
         
+            $perusahaan->id_user = $perusahaan->id_user;
+            $perusahaan->alamat = $request->alamat;
+            $perusahaan->no_telp = $request->no_telp;
+            $perusahaan->url_web = $request->url_web;
+            $perusahaan->nama_cp = $request->nama_cp;
+            $perusahaan->jabatan = $request->jabatan;
+            $perusahaan->email_cp = $request->email_cp;
+            $perusahaan->save();
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+        } else {
+            Alert::error('Data Kab/Kota Sudah Ada ', ' Silahkan coba lagi');
+        }
+        return redirect()->back();
+       
+
     }
 
     public function destroy($id)

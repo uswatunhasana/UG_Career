@@ -72,7 +72,7 @@ class ProdiController extends Controller
             return redirect()->back();
         }
 
-        $update_prodi = prodi::findOrFail($id)
+        $update_prodi = Prodi::findOrFail($id)
         ->where('prodis.id', '=', $id)
         ->select('prodis.*')
         ->first();

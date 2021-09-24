@@ -8,6 +8,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PerusahaanController;
 
 Route::get('/', function () {
     return view('dashboard');

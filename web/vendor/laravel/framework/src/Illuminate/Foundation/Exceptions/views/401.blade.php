@@ -1,4 +1,4 @@
-@extends('errors::minimal')
+@extends('errors::azzara')
 
 @section('title', __('Unauthorized'))
 @section('code', '401')

@@ -51,22 +51,27 @@
                                                 <form role="form" action="{{ route('perusahaan.store') }}" method="POST">
                                                     @csrf
                                                     @method('POST')
-														<div class="row">
-															<div class="col-md-6 pr-0">
+                                                        <div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Nama User</b></h4></label>
-                                                                    <select class="form-control" name="id_user" required="required">
-                                                                        <option disabled selected>-- Daftar User --</option>
-                                                                        @foreach ($users as $user)
-                                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
+																	<label><h4><b>Nama Instansi</b></h4></label>
+																	<input id="addperusahaan" type="text" name="name" class="form-control" placeholder="nama perusahaan">
 																</div>
 															</div>
-															<div class="col-md-6">
+														</div>
+                                                        <div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Email Perusahaan</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email perusahaan">
+																</div>
+															</div>
+														</div>
+                                                        <div class="row">
+															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nomor Telepon</b></h4></label>
-																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" placeholder="08XXXXXXXXXXX">
+																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" placeholder="no telepon perusahaan">
 																</div>
 															</div>
 														</div>
@@ -74,15 +79,15 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>URL Web</b></h4></label>
-																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" placeholder="https://xxxxxxxx.xxx">
+																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" placeholder="http://contoh.com" pattern="https?://.+" required oninvalid="this.setCustomValidity('masukkan url sesuai dengan format')">
 																</div>
 															</div>
 														</div>
-														<div class="row">
+                                                        <div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Alamat</b></h4></label>
-																	<input id="addalamatperusahaan" type="text" name="alamat" class="form-control" placeholder="nama contact person">
+																	<label><h4><b>Alamat Perusahaan</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="alamat" class="form-control" placeholder="alamat perusahaan">
 																</div>
 															</div>
 														</div>
@@ -90,7 +95,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Contact Person</b></h4></label>
-																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" placeholder="nama contact person">
+																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" placeholder="nama contact person perusahaan">
 																</div>
 															</div>
 														</div>
@@ -98,7 +103,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Jabatan</b></h4></label>
-																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" placeholder="jabatan contact person">
+																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" placeholder="jabatan">
 																</div>
 															</div>
 														</div>
@@ -106,7 +111,28 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Email Contact Person</b></h4></label>
-																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" placeholder="email contact person">
+																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email contact person perusahaan">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Username</b></h4></label>
+																	<input id="addusernameperusahaan" type="text" name="username" class="form-control" placeholder="username pengguna">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Password</b></h4></label>
+                                                                    <div class="input-group input-group-merge" id="show_hide_password">   
+                                                                        <input class="form-control" type="password" placeholder="******" id="password" placeholder="password (min 8 kombinasi karakter angka)" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                                                        </div>
+                                                                    </div>
 																</div>
 															</div>
 														</div>
@@ -144,7 +170,7 @@
 													<td>{{ $perusahaan->user->name }}</td>
 													<td>{{ $perusahaan->no_telp }}</td>
 													<td>{{ $perusahaan->url_web }}</td>
-													<td>{{ $perusahaan->email }}</td>
+													<td>{{ $perusahaan->user->email }}</td>
 													<td>{{ $perusahaan->alamat }}</td>
 													<td>
 													<!-- <button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
@@ -171,7 +197,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -184,7 +210,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Instansi</b></h4></label>
-																	<input id="addperusahaan" type="text" name="name" class="form-control" value="{{ perusahaan->user->name }}">
+																	<input id="addperusahaan" type="text" name="name" class="form-control" value="{{ $perusahaan->user->name }}">
 																</div>
 															</div>
 														</div>
@@ -192,7 +218,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Email Perusahaan</b></h4></label>
-																	<input id="addnotelpperusahaan" type="text" name="email" class="form-control" value="{{ perusahaan->user->email }}">
+																	<input id="addnotelpperusahaan" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $perusahaan->user->email }}">
 																</div>
 															</div>
 														</div>
@@ -200,7 +226,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nomor Telepon</b></h4></label>
-																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" value="{{ perusahaan->no_telp }}">
+																	<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" value="{{ $perusahaan->no_telp }}">
 																</div>
 															</div>
 														</div>
@@ -208,7 +234,15 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>URL Web</b></h4></label>
-																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" value="{{ perusahaan->url_web }}">
+																	<input id="addurlwebperusahaan" type="text" name="url_web" class="form-control" value="{{ $perusahaan->url_web }}">
+																</div>
+															</div>
+														</div>
+                                                        <div class="row">
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label><h4><b>Alamat Perusahaan</b></h4></label>
+																	<input id="addnotelpperusahaan" type="text" name="alamat" class="form-control" value="{{ $perusahaan->alamat }}">
 																</div>
 															</div>
 														</div>
@@ -216,7 +250,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Nama Contact Person</b></h4></label>
-																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" value="{{ perusahaan->nama_cp }}">
+																	<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" value="{{ $perusahaan->nama_cp }}">
 																</div>
 															</div>
 														</div>
@@ -224,7 +258,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Jabatan</b></h4></label>
-																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" value="{{ perusahaan->jabatan }}">
+																	<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" value="{{ $perusahaan->jabatan }}">
 																</div>
 															</div>
 														</div>
@@ -232,7 +266,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Email Contact Person</b></h4></label>
-																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" value="{{ perusahaan->email_cp }}">
+																	<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $perusahaan->email_cp }}">
 																</div>
 															</div>
 														</div>
@@ -240,15 +274,20 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label><h4><b>Username</b></h4></label>
-																	<input id="addusernameperusahaan" type="text" name="username" class="form-control" value="{{ perusahaan->user->username }}">
+																	<input id="addusernameperusahaan" type="text" name="username" class="form-control" value="{{ $perusahaan->user->username }}" disabled>
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label><h4><b>Password</b></h4></label>
-																	<input id="addpasswordperusahaan" type="text" name="password" class="form-control" value="{{ perusahaan->user->password }}">
+																	<label><h4><b>Ubah Password</b></h4></label>
+                                                                    <div class="input-group input-group-merge" id="show_hide_password">   
+                                                                        <input class="form-control" type="password" placeholder="******" id="password" name="password">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                                                        </div>
+                                                                    </div>
 																</div>
 															</div>
 														</div>
@@ -316,6 +355,21 @@
             ) 
         })
       } 
+
+      $(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "fa-eye-slash" );
+            $('#show_hide_password i').removeClass( "fa-eye" );
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "fa-eye-slash" );
+            $('#show_hide_password i').addClass( "fa-eye" );
+        }
+    });
+});
 	</script>
 
 @endsection

@@ -15,7 +15,7 @@ class CreatePerusahaansTable extends Migration
             $table->string('no_telp',15);
             $table->string('url_web',100);
             $table->string('nama_cp',25);
-            $table->string('jabatan',25);
+            $table->string('jabatan',100);
             $table->string('email_cp',25);
             //relasi user
             $table->unsignedInteger('id_user')->nullable();
