@@ -4,78 +4,141 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Alumni;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AlumniController extends Controller
 {
 
     public function index()
     {
-        return view('admin.dataalumni');
+        $alumnis = Alumni::all();
+        return view('admin.alumni', compact('alumnis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        // $rules = array(
+        //     'password' => 'string|min:8|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Password min 8 digit');
+        //     return redirect()->back();
+        // }
+        $cek_alumni = User::where('username', $request->username)->count();
+        if ($cek_alumni == 0) {
+            $user = new User;
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->email_verified_at=now();
+            $user->level = 'alumni';
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            $get_id_user = DB::getPdo()->lastInsertId();;
+
+            $alumni = new alumni;
+            $alumni->id_user =  $get_id_user;
+            $alumni->alamat = $request->alamat;
+            $alumni->no_telp = $request->no_telp;
+            $alumni->url_web = $request->url_web;
+            $alumni->nama_cp = $request->nama_cp;
+            $alumni->jabatan = $request->jabatan;
+            $alumni->email_cp = $request->email_cp;
+            $alumni->created_at = now();
+            $alumni->updated_at = now();
+            $alumni->save();
+            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
+        } else {
+            Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+        }
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        // $rules = array(
+        //     'username' => 'string|unique|required',
+        //     'password' => 'string|min:8|required',
+        //     'name' => 'string|required',
+        //     'email' => 'string|unique|required',
+        //     'alamat' => 'string|required',
+        //     'no_telp' => 'string|required',
+        //     'url_web' => 'string|required',
+        //     'nama_cp' => 'string|required',
+        //     'jabatan' => 'string|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Data sudah tersedia');
+        //     return redirect()->back();
+        // }
+        $cek_alumni = User::where('email', $request->email)->count();
+        if ($cek_alumni == 0) {
+            $alumni = alumni::findOrFail($id)
+            ->where('alumnis.id', '=', $id)
+            ->select('alumnis.*')
+            ->first();
+
+            $user = User::findOrFail($alumni->id_user)
+            ->where('users.id', '=', $alumni->id_user)
+            ->select('users.*')
+            ->first();
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->level = 'alumni';
+            if($request->filled('password')) {
+                Hash::make($request->password);
+            } else {
+                $user->password;
+            }
+            $user->save();
+        
+            $alumni->id_user = $alumni->id_user;
+            $alumni->alamat = $request->alamat;
+            $alumni->no_telp = $request->no_telp;
+            $alumni->url_web = $request->url_web;
+            $alumni->nama_cp = $request->nama_cp;
+            $alumni->jabatan = $request->jabatan;
+            $alumni->email_cp = $request->email_cp;
+            $alumni->save();
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+        } else {
+            Alert::error('Data Kab/Kota Sudah Ada ', ' Silahkan coba lagi');
+        }
+        return redirect()->back();
+       
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        DB::table('alumnis')->where('id_user', $id)->delete();
+        return redirect()->back();
     }
 }
