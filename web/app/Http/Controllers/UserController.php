@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class BeritaController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::where('level','=','prodi')->select('*')->get();
         return view('admin.user', ['users' => $users]);
     }
 
