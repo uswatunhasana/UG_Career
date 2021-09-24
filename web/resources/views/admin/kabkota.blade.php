@@ -1,5 +1,5 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data kabkota')
+@section('title', 'Data Kab/Kota')
 @section('content',)               
 <div class="page-header">
 	<h4 class="page-title">Data Kabupaten/Kota</h4>
@@ -19,7 +19,7 @@
 			<i class="flaticon-right-arrow"></i>
 		</li>
 		<li class="nav-item">
-			<a href="#">Data kabkota</a>
+			<a href="#">Data Kab/Kota</a>
 		</li>
 	</ul>
 </div>
