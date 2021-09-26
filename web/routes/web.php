@@ -7,16 +7,14 @@ use App\Http\Controllers\KabkotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PertAlumniController;
 use App\Http\Controllers\PertPerusahaanController;
 use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
-=======
 use App\Http\Controllers\ProfilController;
->>>>>>> Stashed changes
+
 
 Route::get('/', function () {
     return view('dashboard');
