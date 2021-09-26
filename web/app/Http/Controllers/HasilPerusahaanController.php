@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TracerStudyController extends Controller
+class HasilPerusahaanController extends Controller
 {
     
     public function index()
     {
-        
+        return view('admin.hasil_perusahaan');
     }
 
-   
+    
     public function create()
     {
         //
@@ -31,7 +31,7 @@ class TracerStudyController extends Controller
         //
     }
 
-    
+   
     public function edit($id)
     {
         //
@@ -43,6 +43,7 @@ class TracerStudyController extends Controller
         //
     }
 
+    
     public function destroy($id)
     {
         //

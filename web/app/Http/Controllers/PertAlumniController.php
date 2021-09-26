@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TracerStudyController extends Controller
+class PertAlumniController extends Controller
 {
     
     public function index()
     {
-        
+        return view('admin.pert_alumni');
     }
 
-   
     public function create()
     {
         //
@@ -31,7 +30,6 @@ class TracerStudyController extends Controller
         //
     }
 
-    
     public function edit($id)
     {
         //
@@ -43,6 +41,7 @@ class TracerStudyController extends Controller
         //
     }
 
+   
     public function destroy($id)
     {
         //
