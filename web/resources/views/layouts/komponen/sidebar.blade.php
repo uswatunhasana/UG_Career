@@ -59,22 +59,22 @@
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="../forms/forms.html">
+										<a href="{{ route('pert_alumni.index') }}">
 											<span class="sub-item">Daftar Pertanyaan Alumni</span>
 										</a>
 									</li>
 									<li>
-										<a href="../forms/forms.html">
+										<a href="{{ route('pert_perusahaan.index') }}">
 											<span class="sub-item">Daftar Pertanyaan Perusahaan</span>
 										</a>
 									</li>
 									<li>
-										<a href="../forms/forms.html">
+										<a href="{{ route('hasil_alumni.index') }}">
 											<span class="sub-item">Hasil Survei Alumni</span>
 										</a>
 									</li>
 									<li>
-										<a href="../forms/forms.html">
+										<a href="{{ route('hasil_perusahaan.index') }}">
 											<span class="sub-item">Hasil Survei Perusahaan</span>
 										</a>
 									</li>
