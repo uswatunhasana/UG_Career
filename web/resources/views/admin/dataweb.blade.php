@@ -1,5 +1,5 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data Provinsi')
+@section('title', 'Setting Data Web')
 @section('content',)               
 <div class="page-header">
 	<h4 class="page-title">Setting Data Web</h4>
