@@ -60,7 +60,7 @@
 										<div class="avatar-lg"><img src="{{ asset('admin') }}/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 										<div class="u-text">
 											<h4>{{ Auth::user()->name }}</h4>
-											<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+											<p class="text-muted">hello@example.com</p><a href="{{ route('editprofil.edit', Auth::user()->id) }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
 										</div>
 									</div>
 								</li>
