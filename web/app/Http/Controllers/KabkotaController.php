@@ -30,7 +30,7 @@ class KabkotaController extends Controller
         $rules = array(
             'kd_kabkota' => 'string|max:6|required',
             'id_provinsi' => 'int|required',
-            'nama_kabkota' => 'int|required',
+            'nama_kabkota' => 'string|required',
         );
         $validation = Validator::make($request->all(), $rules);
         if ($validation->fails()) {
