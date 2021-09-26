@@ -9,6 +9,10 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
+use App\Http\Controllers\PertAlumniController;
+use App\Http\Controllers\PertPerusahaanController;
+use App\Http\Controllers\HasilAlumniController;
+use App\Http\Controllers\HasilPerusahaanController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -62,6 +66,18 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/user', UserController::class)->names([
             'index'=>'user.index',
+        ]);
+        Route::resource('/pert_alumni', PertAlumniController::class)->names([
+            'index'=>'pert_alumni.index',
+        ]);
+        Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
+            'index'=>'pert_perusahaan.index',
+        ]);
+        Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
+            'index'=>'hasil_alumni.index',
+        ]);
+        Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
+            'index'=>'hasil_perusahaan.index',
         ]);
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
