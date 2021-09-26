@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
     
     public function index()
     {
-        $users = User::all();
-        return view('admin.editprofil', ['users' => $users]);
+        
     }
 
     
@@ -38,18 +38,17 @@ class ProfilController extends Controller
     
     public function edit($id)
     {
-        //
+        $users = User::where('id','=',$id)->select('*')->get();
+        return view('admin.editprofil', ['users' => $users]);
     }
 
    
     public function update(Request $request, $id)
     {
         $rules = array(
-            'nama_web'      => 'string|required',
-            'no_telp'       => 'string|required',
-            'email'         => 'string|required',
-            'alamat'        => 'string|required',
-            'jam_pelayanan' => 'string|required',
+            'name'     => 'string|required',
+            'email'    => 'string|required',
+            'password' => 'string|min:8|required',
         );
 
         $validation = Validator::make($request->all(), $rules);
@@ -58,14 +57,13 @@ class ProfilController extends Controller
             return redirect()->back();
         }
 
-            $dataweb = Dataweb::find($id);
-            $dataweb->nama_web      = $request['nama_web'];
-            $dataweb->no_telp       = $request['no_telp'];
-            $dataweb->email         = $request['email'];
-            $dataweb->alamat        = $request['alamat'];
-            $dataweb->jam_pelayanan = $request['jam_pelayanan'];
-            $dataweb->update();
-            $datawebs = Dataweb::all();
+            $user = User::findOrFail($id);
+            $user->name     = $request['name'];
+            $user->username    = $request['username'];
+            $user->email    = $request['email'];
+            $user->password = $request[Hash::make('password')];
+            $user->update();
+            $user = User::all();
             Alert::success(' Berhasil Update Data ', ' Silahkan dicek kembali');
             return view('admin.dataweb', compact('datawebs'));
     }
