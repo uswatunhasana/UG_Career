@@ -1,6 +1,7 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data Provinsi')
+@section('title', 'Edit Profil')
 @section('content',)               
+<<<<<<< Updated upstream
 <div class="page-header">
 	<h4 class="page-title">Setting Data Web</h4>
 	<ul class="breadcrumbs">
@@ -46,6 +47,60 @@
 						<div class="form-group">
 							<label for="largeInput">Alamat</label>
 							<input type="text" class="form-control form-control" name = "alamat" id="defaultInput" value="{{ $dataweb->alamat }}">
+=======
+                <div class="page-header">
+						<h4 class="page-title">Edit Profil</h4>
+						<ul class="breadcrumbs">
+							<li class="nav-home">
+								<a href="{{ route('administrator.dashboard') }}">
+									<i class="flaticon-home"></i>
+								</a>
+							</li>
+							<li class="separator">
+								<i class="flaticon-right-arrow"></i>
+							</li>
+							<li class="nav-item">
+								<a href="#">Edit Profil</a>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+									</div>
+								</div>
+								@foreach ($users as $user)
+								<div class="card-body">
+									<form role="form" action="{{ route('editprofil.update', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="largeInput">Nama</label>
+													<input type="text" class="form-control form-control" name = "nama_web" id="name" value="{{ $user->name }}">
+												</div>
+												<div class="form-group">
+													<label for="disableinput">Username</label>
+													<input type="text" class="form-control" id="disableinput" value="{{ $user->name }}" disabled>
+												</div>
+												<div class="form-group">
+													<label for="largeInput">Email</label>
+													<input type="text" class="form-control form-control" name = "email" id="defaultInput" value="{{ $user->email }}">
+												</div>
+												<div class="form-group">
+													<label for="largeInput">Password</label>
+													<input type="text" class="form-control form-control" name = "password" id="defaultInput" value="{{ $user->password }}">
+												</div>
+											
+												<button type="submit" class="btn btn-warning" style="margin-left: 600px;">Ubah Data</button>
+											</div>
+											@endforeach
+									</form>
+								</div>
+							</div>
+>>>>>>> Stashed changes
 						</div>
 						<div class="form-group">
 							<label for="largeInput">Jam Operasional</label>
