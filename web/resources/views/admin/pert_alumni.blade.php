@@ -112,7 +112,7 @@
 									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pertanyaan.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_alumni.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -138,7 +138,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form role="form" action="{{ route('pertanyaan.update', $pertanyaan->id) }}" method="POST">
+					<form role="form" action="{{ route('pert_alumni.update', $pertanyaan->id) }}" method="POST">
 						@csrf
 						@method('PUT')
 						<div class="row">
@@ -147,9 +147,9 @@
 									<label><h4><b>Jenis Pertanyaan</b></h4></label>
 									<select class="form-control" name="jenis_pertanyaan"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 										<!-- <option disabled selected>-- Jenis pertanyaan --</option> -->
-										<option value="text" {{ $pertanyaan->jenis_pertanyaan === 'text' ? 'selected' : '' }} >D3</option>
-										<option value="pilihan" {{ $pertanyaan->jenis_pertanyaan === 'pilihan' ? 'selected' : '' }} >S1</option>
-										<option value="checklist" {{ $pertanyaan->jenis_pertanyaan === 'checklist' ? 'selected' : '' }} >S2</option>
+										<option value="text" {{ $pertanyaan->jenis_pertanyaan === 'text' ? 'selected' : '' }} >Text</option>
+										<option value="pilihan" {{ $pertanyaan->jenis_pertanyaan === 'pilihan' ? 'selected' : '' }} >Pilihan</option>
+										<option value="checklist" {{ $pertanyaan->jenis_pertanyaan === 'checklist' ? 'selected' : '' }} >Checklist</option>
 									</select>
 								</div>
 							</div>
@@ -208,7 +208,7 @@
 			});
 		});
 
-		function deleteprovinsi(id) {
+		function deletepertanyaan(id) {
 			Swal.fire({
 				title: 'Yakin Ingin Hapus Data ini?',
 				text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
