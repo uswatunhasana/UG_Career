@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHasilMhssTable extends Migration
+class CreateHasilAlumnisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHasilMhssTable extends Migration
      */
     public function up()
     {
-        Schema::create('hasil_mhss', function (Blueprint $table) {
+        Schema::create('hasil_alumnis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan

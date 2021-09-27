@@ -9,6 +9,8 @@
 		</button>
 			@php
             $jumlah_perusahaan = \App\Models\Perusahaan::count();
+            $jumlah_pertanyaan = \App\Models\Pertanyaan::count();
+            $jumlah_berita = \App\Models\Berita::count();
             @endphp
 		<!-- <div class="dropdown-menu">
 			<div class="arrow"></div>
@@ -71,7 +73,7 @@
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
 							<p class="card-category">Jumlah Pertanyaan</p>
-							<h4 class="card-title">$ 1,345</h4>
+							<h4 class="card-title">{{ $jumlah_pertanyaan }}</h4>
 						</div>
 					</div>
 				</div>
@@ -128,7 +130,7 @@
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
 							<p class="card-category">Jumlah Berita</p>
-							<h4 class="card-title">576</h4>
+							<h4 class="card-title">{{ $jumlah_berita }}</h4>
 						</div>
 					</div>
 				</div>
