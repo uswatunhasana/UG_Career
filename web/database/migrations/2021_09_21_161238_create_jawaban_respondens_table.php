@@ -43,6 +43,6 @@ class CreateJawabanRespondensTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('hasil_perusahaans');
+        Schema::dropIfExists('jawaban_respondens');
     }
 }
