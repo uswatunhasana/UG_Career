@@ -21,11 +21,11 @@ class UserSeeder extends Seeder
             'updated_at' => now()],
 
             ['name' => 'Aku Mahasiswa',
-            'username' => 'mahasiswa',
+            'username' => 'alumni',
             'email' => 'mahasiswa@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('mahasiswa123'),
-            'level' => 'mahasiswa',
+            'level' => 'alumni',
             'created_at' => now(),
             'updated_at' => now()],
 
