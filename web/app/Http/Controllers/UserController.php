@@ -28,30 +28,25 @@ class UserController extends Controller
    
     public function store(Request $request)
     {   
-        $cek_perusahaan = User::where('username', $request->username)->count();
-        if ($cek_perusahaan == 0) {
+        $cek_sekjur = User::where('username', $request->username)->count();
+        if ($cek_sekjur == 0) {
             $user = new User;
             $user->name = $request->name;
             $user->username = $request->username;
             $user->email = $request->email;
             $user->email_verified_at=now();
-            $user->level = 'perusahaan';
+            $user->level = 'prodi';
             $user->password = Hash::make($request->password);
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;
 
-            $perusahaan = new Sekjur;
-            $perusahaan->id_user =  $get_id_user;
-            $perusahaan->alamat = $request->alamat;
-            $perusahaan->no_telp = $request->no_telp;
-            $perusahaan->url_web = $request->url_web;
-            $perusahaan->nama_cp = $request->nama_cp;
-            $perusahaan->jabatan = $request->jabatan;
-            $perusahaan->email_cp = $request->email_cp;
-            $perusahaan->created_at = now();
-            $perusahaan->updated_at = now();
-            $perusahaan->save();
+            $sekjur = new Sekjur;
+            $sekjur->id_user =  $get_id_user;
+            $sekjur->id_prodi = $request->id_prodi;
+            $sekjur->created_at = now();
+            $sekjur->updated_at = now();
+            $sekjur->save();
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         } else {
             Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');

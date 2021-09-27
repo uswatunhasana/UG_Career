@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHasilPerusahaansTable extends Migration
+class CreateJawabanRespondensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateHasilPerusahaansTable extends Migration
      */
     public function up()
     {
-        Schema::create('hasil_perusahaans', function (Blueprint $table) {
+        Schema::create('jawaban_respondens', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jawaban');
+            $table->enum('kategori_responden',['alumni','perusahaan']);
             //relasi pertanyaan
             $table->unsignedInteger('id_pertanyaan')->nullable();
             $table->foreign('id_pertanyaan')

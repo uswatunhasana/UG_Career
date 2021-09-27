@@ -10,6 +10,7 @@ class Sekjur extends Model
     use HasFactory;
     protected $fillable = [
         'id_prodi',
+        'id_user',
     ];
     public function user()
     {
