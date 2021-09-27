@@ -14,7 +14,7 @@ class PertAlumniController extends Controller
     
     public function index()
     {
-        $pertanyaans = pertanyaan::all();
+        $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->select('*')->get();
         return view('admin.pert_alumni', ['pertanyaans' => $pertanyaans]);
     }
 
