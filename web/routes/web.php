@@ -14,10 +14,7 @@ use App\Http\Controllers\PertPerusahaanController;
 use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
 use App\Http\Controllers\ProfilController;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('dashboard');
