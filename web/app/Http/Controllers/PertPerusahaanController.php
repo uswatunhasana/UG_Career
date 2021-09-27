@@ -42,7 +42,7 @@ class PertPerusahaanController extends Controller
         $cek_pertanyaan = pertanyaan::where('kd_pertanyaan', $request->kd_pertanyaan)->count();
         if ($cek_pertanyaan == 0) {
             $pertanyaan = new pertanyaan;
-            $pertanyaan->kategori_pertanyaan = 'alumni';
+            $pertanyaan->kategori_pertanyaan = 'perusahaan';
             $pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
