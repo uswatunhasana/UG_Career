@@ -33,8 +33,7 @@
 					</button>
 				</div>
 			</div>
-
-			<div class="card-body">
+<div class="card-body">
 				<!-- Tambah Data Modal -->
 				<div class="modal fade bd-example-modal-lg" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="addRowModal" aria-hidden="true">
 					<div class="modal-dialog modal-lg" role="document">
@@ -122,7 +121,7 @@
 								<td>{{ $berita->judul_berita }}</td>
 								<td>{{ $berita->isi_berita }}</td>
 								<td>
-									<img src="{{ asset('/img/'. $berita->foto )}}" height="50" width="50" alt="" srcset="">
+									<img src="{{ asset('img/'. $berita->foto )}}" height="50" width="50" alt="" srcset="">
 								</td>
 							
 								<button type="button" id="detail" class="btn btn-sm btn-primary detail"data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" data-jenis="{{ $berita->jenis_berita }}" data-judul="{{ $berita->judul_berita }}" data-isi="{{ $berita->isi_berita }}" data-foto="{{ $berita->foto }}" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
@@ -143,9 +142,7 @@
 				</div>
 <!-- Akhir List Berita -->
 			</div>
-		</div>
-	</div>
-</div>
+
 
 
 <!-- MODAL VIEW DETAILS -->

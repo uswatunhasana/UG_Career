@@ -9,13 +9,15 @@ use App\Models\Berita;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
     public function index()
     {
         $beritas = Berita::all();
-        return view('admin.berita', ['beritas' => $beritas]);
+        return view('admin.berita1', ['beritas' => $beritas]);
     }
 
     public function create()
@@ -25,24 +27,25 @@ class BeritaController extends Controller
 
    
     public function store(Request $request)
-    {   
-
-        // dd($request->all());
-
-        $af = $request->file('foto')->store('public');
-        $ambilFoto = $af->getClientOriginalName();
-        $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
+    {    $rules = array(
+        'foto' => 'required|mimes:jpeg,png,jpg,gif,svg',
+    );
+    $validation = Validator::make($request->all(), $rules);
+    if ($validation->fails()) {
+        Alert::error('Data Tidak Sesuai', 'Silahkan coba lagi');
+        return redirect()->back();
+    }
         
-
+        $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
         if ($cek_berita == 0) {
             $berita = new Berita;
             $berita->jenis_berita = $request->jenis_berita;
             $berita->judul_berita = $request->judul_berita;
             $berita->isi_berita = $request->isi_berita;
-            $berita->foto = $ambilFoto;
-
-            $af->move(public_path().'/img/', $ambilFoto);
-
+            $file = $request->file('foto');
+            $nama_file = rand().$file->getClientOriginalName();
+            $file->move('public/img/', $nama_file);
+            $berita->foto = $nama_file;
             $berita->save();
 
             Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');
@@ -67,7 +70,37 @@ class BeritaController extends Controller
    
     public function update(Request $request, $id)
     {
-        //
+        $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
+        if ($cek_berita == 0) {
+            $berita = Berita::findOrFail($id);
+
+            if ($request->hasFile('foto')){
+                $image_path = public_path("public/img/".$berita->foto);
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+                $bannerImage = $request->file('foto');
+                $imgName = $bannerImage->getClientOriginalName();
+                $destinationPath = public_path('public/img/');
+                $bannerImage->move($destinationPath, $imgName);
+              } else {
+                $imgName = $berita->foto;
+              }
+
+            $berita->jenis_berita = $request->jenis_berita;
+            $berita->judul_berita = $request->judul_berita;
+            $berita->isi_berita = $request->isi_berita;
+            $file = $request->file('foto');
+            $nama_file = rand().$file->getClientOriginalName();
+            $file->move('public/img/', $nama_file);
+            $berita->foto = $nama_file;
+            $berita->save();
+
+            Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');
+        } else {
+            Alert::error('Judul Berita Sudah Ada', 'Silahkan coba lagi');
+        }
+        return redirect()->back();
     }
 
     

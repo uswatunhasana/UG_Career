@@ -17,8 +17,8 @@ class CreateBeritasTable extends Migration
             $table->increments('id');
             $table->enum('jenis_berita',['pengumuman','Lowongan Kerja','Internship']);
             $table->text('judul_berita');
-            $table->text('konten');
-            $table->string('foto',100);
+            $table->text('isi_berita');
+            $table->string('foto');
             $table->timestamps();
         });
     }
