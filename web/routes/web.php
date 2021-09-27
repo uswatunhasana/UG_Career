@@ -14,10 +14,7 @@ use App\Http\Controllers\PertPerusahaanController;
 use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
 use App\Http\Controllers\ProfilController;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('dashboard');
@@ -61,7 +58,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'index'=>'berita.index',
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
-            'store' => 'berita.store'
+            'store' => 'berita.store',
         ]);
         Route::resource('/dataweb', DatawebController::class)->names([
             'index'=>'dataweb.index',
@@ -78,6 +75,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'index'=>'pert_perusahaan.index',
+            'destroy' => 'pert_perusahaan.destroy',
         ]);
         Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
             'index'=>'hasil_alumni.index',
