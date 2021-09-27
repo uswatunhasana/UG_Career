@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pertanyaan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PertAlumniController extends Controller
 {
@@ -36,6 +39,7 @@ class PertAlumniController extends Controller
         $cek_pertanyaan = pertanyaan::where('kd_pertanyaan', $request->kd_pertanyaan)->count();
         if ($cek_pertanyaan == 0) {
             $pertanyaan = new pertanyaan;
+            $pertanyaan->kategori_pertanyaan = 'alumni';
             $pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
@@ -78,10 +82,11 @@ class PertAlumniController extends Controller
         ->first();
 
         $update_pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
+        $update_pertanyaan->kategori_pertanyaan = 'alumni';
         $update_pertanyaan->pertanyaan = $request->pertanyaan;
         $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
         $update_pertanyaan->save();
-        Alert::success(' Berhasil Update Data ', ' Silahkan dicek kembali');
+        Alert::success('Berhasil Update Data ', ' Silahkan dicek kembali');
         return redirect()->back();
     }
 
