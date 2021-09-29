@@ -17,6 +17,11 @@ class JawabanResponden extends Model
 
     public function user()
     {
-        return $this->belongsTo((User::class, 'id_user'),(Pertanyaan::class, 'id_pertanyaan'));
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function pertanyaan()
+    {
+        return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');
     }
 }
