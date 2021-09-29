@@ -27,7 +27,40 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
-				
+				<!-- Tabel Data -->
+				<div class="table-responsive">
+					<table id="add-row" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="30px">No</th>
+								<th>Tanggal</th>
+								<th>Nama Responden</th>
+								<th>Aksi</th>
+							</tr>
+						</thead>
+						<tbody>
+							@php
+							$no = 1;
+							@endphp
+							@foreach($jawaban_respondens as $jawaban_responden)
+							<tr>
+								<td>{{$no++ }}</td>
+								<td>{{ $jawaban_responden->created_at }}</td>
+								<td>{{ $jawaban_responden->user->name }}</td>
+								<td>
+									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									</button>
+									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('pert_alumni.destroy', $jawaban_responden->id) }}" method="POST" style="display: none;">
+										@csrf
+										@method('DELETE')
+									</form>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
