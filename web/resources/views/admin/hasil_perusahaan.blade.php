@@ -28,15 +28,23 @@
 		<div class="card">
 			
 			<div class="card-body">
+<<<<<<< Updated upstream
 				
+=======
+>>>>>>> Stashed changes
 				<!-- Tabel Data -->
 				<div class="table-responsive">
 					<table id="add-row" class="display table table-striped table-hover" >
 						<thead class="thead-light">
 							<tr>
 								<th width="30px">No</th>
+<<<<<<< Updated upstream
 								<th>Kode Pertanyaan</th>
 								<th>Hasil Pertanyaan</th>
+=======
+								<th>Tanggal</th>
+								<th>Nama Responden</th>
+>>>>>>> Stashed changes
 								<th>Aksi</th>
 							</tr>
 						</thead>
@@ -47,6 +55,7 @@
 							@foreach($jawaban_respondens as $jawaban_responden)
 							<tr>
 								<td>{{$no++ }}</td>
+<<<<<<< Updated upstream
 								<td>{{ $jawaban_responden->kd_pertanyaan }}</td>
 								<td>{{ $jawaban_responden->jawaban }}</td>
 								<td>
@@ -54,6 +63,15 @@
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_perusahaan.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
+=======
+								<td>{{ $jawaban_responden->created_at }}</td>
+								<td>{{ $jawaban_responden->user->name }}</td>
+								<td>
+									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									</button>
+									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('pert_alumni.destroy', $jawaban_responden->id) }}" method="POST" style="display: none;">
+>>>>>>> Stashed changes
 										@csrf
 										@method('DELETE')
 									</form>
@@ -62,6 +80,11 @@
 							</tbody>
 						</table>
 					</div>
+<<<<<<< Updated upstream
+=======
+				</div>
+				</div>
+>>>>>>> Stashed changes
 				</div>
 			</div>
 		</div>
