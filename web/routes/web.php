@@ -76,6 +76,9 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
 <<<<<<< HEAD
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'index'=>'pert_alumni.index',
+            'store' => 'pert_alumni.store',
+            'destroy' => 'pert_alumni.destroy',
+            'update' => 'pert_alumni.update',
         ]);
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'index'=>'pert_perusahaan.index',
@@ -83,9 +86,11 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         ]);
         Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
             'index'=>'hasil_alumni.index',
+            'destroy' => 'hasil_alumni.destroy',
         ]);
         Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
             'index'=>'hasil_perusahaan.index',
+            'destroy' => 'hasil_perusahaan.destroy',
         ]);
 =======
 >>>>>>> parent of 4f831f1 (Update web.php)
