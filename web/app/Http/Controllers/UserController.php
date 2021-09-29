@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Prodi;
 use App\Models\Sekjur;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +18,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('level','=','prodi')->select('*')->get();
-        return view('admin.user', ['users' => $users]);
+        // $prodis = Prodi::all();
+        $sekjurs = Sekjur::all();
+        $prodis = Prodis::leftJoin('sekjurs','prodis.id','=','sekjurs.id_prodi')
+        ->
+        ->where()
+        ->select('prodis.*')->get();
+        return view('admin.user', compact('users', 'prodis','sekjurs'));
     }
 
     public function create()

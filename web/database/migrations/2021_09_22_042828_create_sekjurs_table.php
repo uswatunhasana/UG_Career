@@ -15,7 +15,6 @@ class CreateSekjursTable extends Migration
     {
         Schema::create('sekjurs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('fakultas',100);
             //relasi user
             $table->unsignedInteger('id_user')->nullable();
             $table->foreign('id_user')

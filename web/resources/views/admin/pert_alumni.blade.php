@@ -45,6 +45,23 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
+
+								<div class="form-group">
+								<label for="exampleInputPassword1">Kategori</label>
+								<select class="form-control input-sm" id="kategori" name="kategori">
+									<option value="3">ALL</option>
+									<option value="0" <?php if ($this->uri->segment(3) == 0) {
+																			echo 'selected';
+																		} ?>>Pertanyaan Teks</option>
+									<option value="1" <?php if ($this->uri->segment(3) == 1) {
+																			echo 'selected';
+																		} ?>>Pertanyaan Pilihan</option>
+									<option value="2" <?php if ($this->uri->segment(3) == 2) {
+																			echo 'selected';
+																		} ?>>Pertanyaan Checklist
+									</option>
+								</select>
+							</div>
 							</div>
 							<div class="modal-body">
 								<form role="form" action="{{ route('pert_alumni.store') }}" method="POST">
@@ -206,6 +223,17 @@
 				$('#addRowModal').modal('hide');
 
 			});
+		});
+
+		$(document).ready(function() {
+		$('#select_category').change(function() {
+			var val = $(this).val(); 
+			if (val == 0) {
+				window.location = '{{ route('pert_alumni.pilihan'}}';
+			} else {
+				window.location = '{{ route('pert_alumni.checklist'}}';
+			}
+		});
 		});
 
 		function deletepertanyaan(id) {

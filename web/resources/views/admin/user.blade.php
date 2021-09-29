@@ -1,8 +1,8 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data user')
+@section('title', 'Data sekjur')
 @section('content',)               
 <div class="page-header">
-	<h4 class="page-title">Data user</h4>
+	<h4 class="page-title">Data sekjur</h4>
 	<ul class="breadcrumbs">
 		<li class="nav-home">
 			<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 			<i class="flaticon-right-arrow"></i>
 		</li>
 		<li class="nav-item">
-			<a href="#">Data user</a>
+			<a href="#">Data sekjur</a>
 		</li>
 	</ul>
 </div>
@@ -31,7 +31,7 @@
 					<h4 class="card-title"></h4>
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
-						Tambah Data user
+						Tambah Data sekjur
 					</button>
 				</div>
 			</div>
@@ -54,16 +54,29 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Nama User</b></h4></label>
-												<input id="adduser" type="text" name="name" class="form-control" placeholder="nama user">
+												<label><h4><b>Nama Sekjur</b></h4></label>
+												<input id="addsekjur" type="text" name="name" class="form-control" placeholder="nama sekjur">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Email user</b></h4></label>
-												<input id="addnotelpuser" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email user">
+												<label><h4><b>Jenis Prodi</b></h4></label>
+												<select class="form-control" name="id_prodi" id="id_prodi" onkeyup="addData()"required="required">
+													<option disabled selected>-- Daftar prodi --</option>
+													@foreach ($prodis as $prodi)
+													<option value="{{ $prodi->id }}" data-prodi="{{ $prodi->nama_prodi }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Email</b></h4></label>
+												<input id="addnotelpsekjur" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email sekjur">
 											</div>
 										</div>
 									</div>
@@ -71,7 +84,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Username</b></h4></label>
-												<input id="addusernameuser" type="text" name="username" class="form-control" placeholder="username pengguna">
+												<input id="usernamesekjur" type="text" name="username" class="form-control" placeholder="sekjurname pengguna">
 											</div>
 										</div>
 									</div>
@@ -104,8 +117,8 @@
 						<thead class="thead-light">
 							<tr>
 								<th width="30px">No</th>
-								<th>Nama User </th>
-								<th>Username</th>
+								<th>Nama sekjur </th>
+								<th>sekjurname</th>
 								<th>Email</th>
 								<th>Aksi</th>
 							</tr>
@@ -113,19 +126,20 @@
 						<tbody>
 							@php
 							$no = 1;
+
 							@endphp
-							@foreach($users as $user)
+							@foreach($sekjurs as $sekjur)
 							<tr>
 								<td>{{$no++ }}</td>
-								<td>{{ $user->name }}</td>
-								<td>{{ $user->username}}</td>
-								<td>{{ $user->email }}</td>
+								<td>{{ $sekjur->user->name }}</td>
+								<td>{{ $sekjur->user->username}}</td>
+								<td>{{ $sekjur->user->email }}</td>
 								<td>
-									<!-- <button data-toggle="modal" data-target="#editModal-{{ $user->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
-									<button data-toggle="modal" data-target="#editModal-{{ $user->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="{{ $user->id }}" onclick="deleteuser(this.id)"> <i class="fa fa-trash"></i>
+									<!-- <button data-toggle="modal" data-target="#editModal-{{ $sekjur->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
+									<button data-toggle="modal" data-target="#editModal-{{ $sekjur->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $sekjur->id }}" onclick="deletesekjur(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $sekjur->id }}" action="{{ route('user.destroy', $sekjur->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -140,8 +154,8 @@
 	</div>
 
 	<!-- Tambah Edit Modal -->
-	@foreach ($users as $user)
-	<div class="modal fade" id="editModal-{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	@foreach ($sekjurs as $sekjur)
+	<div class="modal fade" id="editModal-{{ $sekjur->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -151,30 +165,50 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form role="form" action="{{ route('user.update', $user->id) }}" method="POST">
+					<form role="form" action="{{ route('user.update', $sekjur->id) }}" method="POST">
 						@csrf
 						@method('PUT')
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Nama User</b></h4></label>
-									<input id="adduser" type="text" name="name" class="form-control" value="{{ $user->name }}">
+									<label><h4><b>Nama</b></h4></label>
+									<input id="addsekjur" type="text" name="name" class="form-control" value="{{ $sekjur->user->name }}">
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Email User</b></h4></label>
-									<input id="addnotelpuser" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $user->email }}">
+									<label><h4><b>Email</b></h4></label>
+									<input id="addnotelpsekjur" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $sekjur->user->email }}">
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Username</b></h4></label>
-									<input id="addusernameuser" type="text" name="username" class="form-control" value="{{ $user->username }}" disabled>
+									<label><h4><b>Jenis Prodi</b></h4></label>
+									<select class="form-control" name="id_prodi" required="required">
+										<option disabled selected>-- Daftar Prodi --</option>
+										@foreach ($prodis as $prodi)
+										<option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+										@endforeach
+										@foreach($prodis as $prodi)
+										<option 
+										@if($sekjur->id_prodi ==  $prodi->id)
+										selected="selected" 
+										@endif
+										value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>username</b></h4></label>
+									<input id="addsekjurnamesekjur" type="text" name="username" class="form-control" value="{{ $sekjur->user->username }}" disabled>
 								</div>
 							</div>
 						</div>
@@ -228,7 +262,7 @@
 			});
 		});
 
-		function deleteuser(id) {
+		function deletesekjur(id) {
 			swal({
 				title: 'Yakin Ingin Hapus Data ini?',
 				text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
@@ -270,6 +304,17 @@
 				}
 			});
 		});
+
+// 		function addData(){
+//         var prodi = $("#id_prodi option:selected").attr('data-prodi');
+//         var str1="ug_";
+// 		var pecah= prodi.split(" ");
+
+//         var str2 = 
+//         // var str3 = Math.round(bagi); 
+//         // var hasilusername = str1.concat(str2,str2); 
+//         document.getElementById("usernamesekjur").value = hasilusername;
+//    }
 	</script>
 
 	@endsection
