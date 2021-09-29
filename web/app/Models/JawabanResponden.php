@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Pertanyaan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +15,7 @@ class JawabanResponden extends Model
         'id_user',
         'kategori_responden',
         'pertanyaan',
+        'jawaban',
     ];
 
     public function user()
