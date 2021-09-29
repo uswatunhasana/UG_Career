@@ -1,5 +1,16 @@
 @extends('layouts.masterfrontend')
 @section('title', 'Dashboard')
+@section('css')
+<style>
+  #frame-image img {
+    
+    max-height: 320px;
+    position: absolute;
+    left: -10px;
+    top: -86px;
+}
+</style>
+@endsection
 @section('content')
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center">
@@ -95,33 +106,17 @@
     </header>
 
     <div class="row">
-
+    
+    @foreach($beritas as $berita)
       <div class="col-lg-4">
         <div class="post-box">
-          <div class="post-img"><img src="{{ asset('assets') }}/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-          <span class="post-date">Tue, September 15</span>
-          <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit</h3>
+          <div class="post-img frame-image img"><img src="{{ asset('img/'. $berita->foto )}}" class="img-fluid rounded" width="300px"alt=""></div>
+          <span class="post-date">{{ tanggal_indonesia($berita->created_at) }}</span>
+          <h3 class="post-title">{{ $berita->judul_berita }}</h3>
           <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
-
-      <div class="col-lg-4">
-        <div class="post-box">
-          <div class="post-img"><img src="{{ asset('assets') }}/img/blog/blog-2.jpg" class="img-fluid" alt=""></div>
-          <span class="post-date">Fri, August 28</span>
-          <h3 class="post-title">Et repellendus molestiae qui est sed omnis voluptates magnam</h3>
-          <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="post-box">
-          <div class="post-img"><img src="{{ asset('assets') }}/img/blog/blog-3.jpg" class="img-fluid" alt=""></div>
-          <span class="post-date">Mon, July 11</span>
-          <h3 class="post-title">Quia assumenda est et veritatis aut quae</h3>
-          <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
+      @endforeach
 
     </div>
 
@@ -246,7 +241,7 @@
       <h2>Hubungi</h2>
       <p>Kontak Kami</p>
     </header>
-
+    @foreach($datawebs as $dataweb)
     <div class="row gy-4">
 
       <div class="col-lg-6">
@@ -255,63 +250,37 @@
           <div class="col-md-6">
             <div class="info-box">
               <i class="bi bi-geo-alt"></i>
-              <h3>Address</h3>
-              <p>A108 Adam Street,<br>New York, NY 535022</p>
+              <h3>Alamat</h3>
+              <p>{{ $dataweb->alamat}}</p>
             </div>
           </div>
           <div class="col-md-6">
             <div class="info-box">
               <i class="bi bi-telephone"></i>
-              <h3>Call Us</h3>
-              <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              <h3>Nomor Telepon</h3>
+              <p>{{ $dataweb->no_telp }}</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+          <div class="row gy-4">
           <div class="col-md-6">
             <div class="info-box">
               <i class="bi bi-envelope"></i>
-              <h3>Email Us</h3>
-              <p>info@example.com<br>contact@example.com</p>
+              <h3>Email</h3>
+              <p>{{ $dataweb->email }}</p>
             </div>
           </div>
           <div class="col-md-6">
             <div class="info-box">
               <i class="bi bi-clock"></i>
-              <h3>Open Hours</h3>
-              <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+              <h3>Jam Pelayanan</h3>
+              <p>{{ $dataweb->jam_pelayanan }}</p>
             </div>
           </div>
-        </div>
-
-      </div>
-
-      <div class="col-lg-6">
-        <form action="forms/contact.php" method="post" class="php-email-form">
-          <div class="row gy-4">
-
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-            </div>
-
-            <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-            </div>
-
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-            </div>
-
-            <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-            </div>
-
-            <div class="col-md-12 text-center">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-              <button type="submit">Send Message</button>
-            </div>
+          @endforeach
           </div>
-        </form>
       </div>
     </div>
   </div>

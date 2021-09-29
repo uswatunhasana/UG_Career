@@ -9,19 +9,17 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
-<<<<<<< HEAD
 use App\Http\Controllers\PertAlumniController;
 use App\Http\Controllers\PertPerusahaanController;
 use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\DashboardController;
 
-=======
->>>>>>> parent of 4f831f1 (Update web.php)
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
+Route::resource('/', DashboardController::class)->names([
+]);
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
@@ -73,7 +71,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/user', UserController::class)->names([
             'index'=>'user.index',
         ]);
-<<<<<<< HEAD
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'index'=>'pert_alumni.index',
             'store' => 'pert_alumni.store',
@@ -92,8 +89,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'index'=>'hasil_perusahaan.index',
             'destroy' => 'hasil_perusahaan.destroy',
         ]);
-=======
->>>>>>> parent of 4f831f1 (Update web.php)
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
 
