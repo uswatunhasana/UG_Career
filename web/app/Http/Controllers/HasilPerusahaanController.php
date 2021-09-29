@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\JawabanResponden;
 
 class HasilPerusahaanController extends Controller
 {
     
     public function index()
     {
-        return view('admin.hasil_perusahaan');
+        $jawaban_respondens = JawabanResponden::where('kategori_responden','=','perusahaan')->select('*')->get();
+        return view('admin.hasil_perusahaan', ['jawaban_respondens' => $jawaban_respondens]);
     }
 
     
