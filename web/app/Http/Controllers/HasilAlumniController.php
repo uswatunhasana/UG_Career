@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\JawabanResponden;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HasilAlumniController extends Controller
 {
     public function index()
     {
-        return view('admin.hasil_alumni');
+        $jawaban_respondens = JawabanResponden::where('kategori_responden','=','alumni')->select('*')->get();
+        return view('admin.hasil_alumni', compact('jawaban_respondens'));
     }
 
     public function create()
@@ -39,6 +44,7 @@ class HasilAlumniController extends Controller
 
     public function destroy($id)
     {
-        //
+        DB::table('jawaban_respondens')->where('id', $id)->delete();
+        return redirect()->back();
     }
 }
