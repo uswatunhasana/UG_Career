@@ -9,12 +9,15 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
+<<<<<<< HEAD
 use App\Http\Controllers\PertAlumniController;
 use App\Http\Controllers\PertPerusahaanController;
 use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
 use App\Http\Controllers\ProfilController;
 
+=======
+>>>>>>> parent of 4f831f1 (Update web.php)
 
 Route::get('/', function () {
     return view('dashboard');
@@ -70,6 +73,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/user', UserController::class)->names([
             'index'=>'user.index',
         ]);
+<<<<<<< HEAD
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'index'=>'pert_alumni.index',
         ]);
@@ -83,6 +87,8 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
             'index'=>'hasil_perusahaan.index',
         ]);
+=======
+>>>>>>> parent of 4f831f1 (Update web.php)
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
 
