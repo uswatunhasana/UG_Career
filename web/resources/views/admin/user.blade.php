@@ -54,21 +54,21 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Nama Sekjur</b></h4></label>
-												<input id="addsekjur" type="text" name="name" class="form-control" placeholder="nama sekjur">
+												<label><h4><b>Jenis Prodi</b></h4></label>
+												<select class="form-control" name="id_prodi" id="id_prodi" onchange="addData()" required="required">
+													<option disabled selected>-- Daftar prodi --</option>
+													@foreach ($prodis as $prodi)
+													<option value="{{ $prodi->id }}" data-nama="{{ $prodi->nama_prodi }}" data-prodi="{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+													@endforeach
+												</select>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Prodi</b></h4></label>
-												<select class="form-control" name="id_prodi" id="id_prodi" onkeyup="addData()"required="required">
-													<option disabled selected>-- Daftar prodi --</option>
-													@foreach ($prodis as $prodi)
-													<option value="{{ $prodi->id }}" data-prodi="{{ $prodi->nama_prodi }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
-													@endforeach
-												</select>
+												<label><h4><b>Nama Sekjur</b></h4></label>
+												<input id="name" type="text" name="name" class="form-control" placeholder="nama sekjur">
 											</div>
 										</div>
 									</div>
@@ -305,16 +305,15 @@
 			});
 		});
 
-// 		function addData(){
-//         var prodi = $("#id_prodi option:selected").attr('data-prodi');
-//         var str1="ug_";
-// 		var pecah= prodi.split(" ");
+		function addData(){
+        var prodi = $("#id_prodi option:selected").attr('data-prodi'); 
+        var namaprodi = $("#id_prodi option:selected").attr('data-nama'); 
+		var str1 = "ug_"
+		
 
-//         var str2 = 
-//         // var str3 = Math.round(bagi); 
-//         // var hasilusername = str1.concat(str2,str2); 
-//         document.getElementById("usernamesekjur").value = hasilusername;
-//    }
+        document.getElementById("name").value = prodi;
+        document.getElementById("username").value = prodi;
+   }
 	</script>
 
 	@endsection

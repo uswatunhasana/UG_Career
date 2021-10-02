@@ -18,12 +18,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('level','=','prodi')->select('*')->get();
-        // $prodis = Prodi::all();
+        $prodis = Prodi::all();
         $sekjurs = Sekjur::all();
-        $prodis = Prodis::leftJoin('sekjurs','prodis.id','=','sekjurs.id_prodi')
-        ->
-        ->where()
-        ->select('prodis.*')->get();
+
         return view('admin.user', compact('users', 'prodis','sekjurs'));
     }
 

@@ -61,6 +61,7 @@
     </div>
   </header><!-- End Header -->
   @yield('konten')
+  @yield('sidebarberita')
 
 
   <!-- ======= Footer ======= -->

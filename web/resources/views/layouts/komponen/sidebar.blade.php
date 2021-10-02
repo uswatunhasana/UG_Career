@@ -23,7 +23,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="{{ route('alumni.index') }}">
+										<a href="">
 											<span class="sub-item">Data Alumni</span>
 										</a>
 									</li>

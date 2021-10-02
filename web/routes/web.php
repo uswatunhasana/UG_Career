@@ -19,7 +19,15 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::resource('/', DashboardController::class)->names([
+    'index'=>'dashboard.user'
 ]);
+// Route::resource('/berita', DashboardController::class)->names([
+//     'show'=>'beritasingle.show',
+//     'beritaall' => 'beritaall'
+// ]);
+Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
+Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
+Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
@@ -29,12 +37,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/dashboard', AdminController::class)->names([
             'index'=>'administrator.dashboard',
         ]);
-        Route::resource('/daftaruser', DaftaruserController::class)->names([
-            'index'=>'daftaruser.index',
-        ]);
-        Route::resource('/alumni', AlumniController::class)->names([
-            'index'=>'alumni.index',
-        ]);
+
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index'=>'provinsi.index',
         ]);

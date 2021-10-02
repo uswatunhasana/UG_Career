@@ -113,7 +113,13 @@
           <div class="post-img frame-image img"><img src="{{ asset('img/'. $berita->foto )}}" class="img-fluid rounded" width="300px"alt=""></div>
           <span class="post-date">{{ tanggal_indonesia($berita->created_at) }}</span>
           <h3 class="post-title">{{ $berita->judul_berita }}</h3>
-          <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          <a href="{{route('beritasingle.show', $berita->id)}}" class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
+          <!-- <button class="readmore stretched-link mt-auto" type="button" id="{{ $berita->id }}" onclick="showberita(this.id)"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i>
+									</button>
+									<form id="show-form-{{ $berita->id }}" action="{{ route('beritasingle.show', $berita->id) }}" method="GET" style="display: none;">
+										@csrf
+										@method('GET')
+									</form> -->
         </div>
       </div>
       @endforeach
@@ -287,4 +293,12 @@
 </section><!-- End Contact Section -->
 
 </main><!-- End #main -->
+@section('scripts')
+<script type="text/javascript">
+function showpertanyaan(id) {
+					event.preventDefault();
+					document.getElementById('show-form-'+id).submit();
+		} 
+    </script>
+@endsection
 @endsection
