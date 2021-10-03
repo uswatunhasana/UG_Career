@@ -53,11 +53,10 @@
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <li><a class="nav-link scrollto" href="#about">Isi Kuisioner</a></li>
-          <li><a class="getstarted scrollto" href="#about">Login</a></li>
+          <li><a class="getstarted scrollto" href="#">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
     </div>
   </header><!-- End Header -->
   @yield('content')
