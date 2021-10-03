@@ -61,7 +61,7 @@
     </div>
   </header><!-- End Header -->
   @yield('content')
-
+    
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
