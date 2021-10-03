@@ -15,6 +15,7 @@ use App\Http\Controllers\HasilAlumniController;
 use App\Http\Controllers\HasilPerusahaanController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthUserController;
 
 
 
@@ -26,6 +27,8 @@ Route::resource('/', DashboardController::class)->names([
 //     'beritaall' => 'beritaall'
 // ]);
 // Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
+Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login');
+Route::get('daftar', 'App\Http\Controllers\AuthUserController@create')->name('daftar');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
