@@ -53,39 +53,15 @@
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <li><a class="nav-link scrollto" href="#about">Isi Kuisioner</a></li>
-<<<<<<< Updated upstream
           <li><a class="getstarted scrollto" href="#about">Login</a></li>
-          <li><a class="getstarted scrollto" href="#about">Login</a></li>
-=======
-          <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#DaftarModal">Daftar</button>
->>>>>>> Stashed changes
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-		
+
     </div>
   </header><!-- End Header -->
   @yield('content')
-	<!-- Modal -->
-		<div class="modal fade" id="DaftarModal" tabindex="-1" aria-labelledby="DaftarModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="DaftarModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-			</div>
-		</div>
-		</div>
+    
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -118,15 +94,6 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets') }}/js/main.js"></script>
   @yield('scripts')
-  
-<!-- Modal Login -->
-@section('customjs')
-<script>
- $('#DaftarModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
-</script>
-  @endsection
 </body>
 
 </html>
