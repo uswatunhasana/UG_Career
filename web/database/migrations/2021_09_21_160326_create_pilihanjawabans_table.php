@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePilihanpertanyaansTable extends Migration
+class CreatePilihanjawabansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -35,6 +35,6 @@ class CreatePilihanpertanyaansTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('pilihanpertanyaans');
+        Schema::dropIfExists('pilihanjawabans');
     }
 }

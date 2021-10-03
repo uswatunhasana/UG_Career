@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pertanyaan;
-use App\Models\PilihanPertanyaan;
+use App\Models\PilihanJawaban;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,7 +26,7 @@ class PertAlumniController extends Controller
     }
     public function ajaxdetail($id)
     {
-        $data = PilihanPertanyaan::where('id_pertanyaan','=', $id)->select('*')->get();
+        $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
 		echo json_encode($data);
     }
 
@@ -66,7 +66,7 @@ class PertAlumniController extends Controller
 
             foreach($request->pilihan_jawaban as $key => $value)
             {
-                $perusahaan = new PilihanPertanyaan;
+                $perusahaan = new PilihanJawaban;
                 $perusahaan->pilihan_jawaban = $value;
                 $perusahaan->id_pertanyaan =  $get_id_pertanyaan;
                 $perusahaan->created_at = now();
@@ -94,28 +94,65 @@ class PertAlumniController extends Controller
     
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'kd_pertanyaan' => 'string|max:6|required',
-            'pertanyaan' => 'string|required',
-            'jenis_pertanyaan' => 'string|required',
-        );
-        $validation = Validator::make($request->all(), $rules);
-        if ($validation->fails()) {
-            Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
+        // $rules = array(
+        //     'kd_pertanyaan' => 'string|max:6|required',
+        //     'pertanyaan' => 'string|required',
+        //     'jenis_pertanyaan' => 'string|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
+        //     return redirect()->back();
+        // }
+
+        // $update_pertanyaan = Pertanyaan::findOrFail($id)
+        // ->where('pertanyaans.id', '=', $id)
+        // ->select('pertanyaans.*')
+        // ->first();
+
+        // $update_pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
+        // $update_pertanyaan->kategori_pertanyaan = 'alumni';
+        // $update_pertanyaan->pertanyaan = $request->pertanyaan;
+        // $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+        // $update_pertanyaan->save();
+        // Alert::success('Berhasil Update Data ', ' Silahkan dicek kembali');
+        // return redirect()->back();
+
+        if($request->kategori == "text"){
+            $update_pertanyaan = Pertanyaan::findOrFail($id)
+            ->where('pertanyaans.id', '=', $id)
+            ->select('pertanyaans.*')
+            ->first();
+            $update_pertanyaan->kategori_pertanyaan = 'alumni';
+            $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+            $update_pertanyaan->pertanyaan = $request->pertanyaan;
+            $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+            $update_pertanyaan->save();
+            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
-        }
+        }else{
+            $update_pertanyaan = Pertanyaan::findOrFail($id)
+            ->where('pertanyaans.id', '=', $id)
+            ->select('pertanyaans.*')
+            ->first();
+            $update_pertanyaan->kategori_pertanyaan = 'alumni';
+            $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+            $update_pertanyaan->pertanyaan = $request->pertanyaan;
+            $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+            $update_pertanyaan->save();
+            $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-        $update_pertanyaan = pertanyaan::findOrFail($id)
-        ->where('pertanyaans.id', '=', $id)
-        ->select('pertanyaans.*')
-        ->first();
-
-        $update_pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
-        $update_pertanyaan->kategori_pertanyaan = 'alumni';
-        $update_pertanyaan->pertanyaan = $request->pertanyaan;
-        $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
-        $update_pertanyaan->save();
-        Alert::success('Berhasil Update Data ', ' Silahkan dicek kembali');
+            foreach($request->pilihan_jawaban as $key => $value)
+            {
+                $update_pilihanjawaban = PilihanJawaban::leftJoin('pertanyaans','pertanyaans.id','=','pilihanjawabans.id_pertanyaan')
+                ->select('pilihanjawabans.*')
+                ->first();
+                $update_pilihanjawaban->pilihan_jawaban = $value;
+                $update_pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
+                $update_pilihanjawaban->updated_at = now();
+                $update_pilihanjawaban->save();
+            }}
+            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 
