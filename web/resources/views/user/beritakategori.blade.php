@@ -67,7 +67,7 @@
               <div class="sidebar-item categories">
               @foreach( $kategoris as $kategori)
                 <ul>
-                  <li><a href="{{ route('beritakategori.show', $kategori->jenis_berita) }}">{{ $kategori->jenis_berita }} <span> ({{ $kategori->total }})</span></a></li>
+                  <li><a href="#">{{ $kategori->jenis_berita }} <span> ({{ $kategori->total }})</span></a></li>
                 </ul>
               @endforeach
               </div><!-- End sidebar categories-->

@@ -29,6 +29,14 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
+					<div class="form-group">
+								<label for="exampleInputPassword1">Kategori</label>
+								<select class="form-control input-sm" id="select_category" name="kategori">
+									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
+									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
+									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+								</select>
+							</div>
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah Pertanyaan
@@ -41,45 +49,26 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+								<h5 class="modal-title" id="exampleModalLabel">Tambah Data Pertanyaan</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-
-								<div class="form-group">
-								<label for="exampleInputPassword1">Kategori</label>
-								<select class="form-control input-sm" id="kategori" name="kategori">
-									<option value="3">ALL</option>
-									<option value="0" <?php if ($this->uri->segment(3) == 0) {
-																			echo 'selected';
-																		} ?>>Pertanyaan Teks</option>
-									<option value="1" <?php if ($this->uri->segment(3) == 1) {
-																			echo 'selected';
-																		} ?>>Pertanyaan Pilihan</option>
-									<option value="2" <?php if ($this->uri->segment(3) == 2) {
-																			echo 'selected';
-																		} ?>>Pertanyaan Checklist
-									</option>
-								</select>
-							</div>
 							</div>
 							<div class="modal-body">
 								<form role="form" action="{{ route('pert_alumni.store') }}" method="POST">
 									@csrf
 									@method('POST')
+
+									<div class="form-group">
+								<label for="exampleInputPassword1">Kategori</label>
+								<select class="form-control input-sm"  id="kategori_pertanyaan" name="kategori">
+									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
+									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
+									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+								</select>
+							</div>
 									<div class="row">
-										<div class="col-md-6 pr-0">
-											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Pertanyaan</b></h4></label>
-												<select class="form-control" name="jenis_pertanyaan" required="required">
-													<option disabled selected>-- Pilihan --</option>
-													<option value="text">Teks</option>
-													<option value="pilihan">Pilihan</option>
-													<option value="checklist">Checks</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
+										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Kode Pertanyaan</b></h4></label>
 												<input id="addkodepertalumni" type="text" name="kd_pertanyaan" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
@@ -94,11 +83,73 @@
 											</div>
 										</div>
 									</div>
-
+									<div id="container_pilihan_jawaban">
+									@if(Request::segment( 3 ) != "text")
+									<div id="pilihan_jawaban">
+									<hr/>
+									<label><h4><b>Pilihan Jawaban</b></h4></label>
+									<div class="row control-group after-add-more">
+										<div class="col-sm-9 ">
+												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-success add-more" type="button">
+												<i class="fas fa-plus-square"></i> Add
+											</button>
+										</div>
+									</div> 
+									</div>
+									@endif
 								</div>
+							</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
 									<button type="submit" class="btn btn-primary">Simpan Data</button>
+								</div>
+							</form>
+							<!-- Copy Hide -->
+							<div class="copy invisible">
+								<div class="row control-group">
+									<div class="col-sm-9 ">
+										<label for="largeInput"></label>
+										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+									</div>
+									<div class="col-sm-3">
+									<label for="largeInput"></label>
+									<button class="btn btn-danger remove" type="button"><i class="fas fa-trash-alt"></i> Remove</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Pilihan Jawaban
+								<hr/>
+								<table id="detailtable" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="10px">No</th>
+								<th>Pilihan Jawaban</th>
+							</tr>
+						</thead>
+						<tbody id="detail-table">
+
+						</tbody>
+						</table>
+							</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
 								</div>
 							</form>
 						</div>
@@ -126,7 +177,10 @@
 								<td>{{ $pertanyaan->kd_pertanyaan }}</td>
 								<td>{{ $pertanyaan->pertanyaan }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+								@if(Request::segment( 3 ) != "text")
+									<button data-toggle="modal" id="detail" data-id="{{ $pertanyaan->id }}" data-target="#detailModal" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+								@endif
+									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_alumni.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
@@ -186,6 +240,9 @@
 								</div>
 							</div>
 						</div>
+						<hr/>
+						Pilihan Jawaban
+						
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -203,6 +260,27 @@
 	@endsection
 	@section('customjs')
 	<script >
+
+		$(document).ready(function() {
+				$('#select_category').change(function() {
+					var val = $(this).val(); 
+					window.location = "/UG_Career/administrator/pert_alumni" +"/" +val;
+					
+				});
+			});
+
+			$(document).ready(function() {
+				$('#kategori_pertanyaan').change(function() {
+					var val = $(this).val(); 
+					if(val == "text"){
+						$("#pilihan_jawaban").remove();
+					}else{
+						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
+						$("#container_pilihan_jawaban").html(html);
+					}	
+				});
+			});
+	
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
 			});
@@ -225,16 +303,16 @@
 			});
 		});
 
-		$(document).ready(function() {
-		$('#select_category').change(function() {
-			var val = $(this).val(); 
-			if (val == 0) {
-				window.location = '{{ route('pert_alumni.pilihan'}}';
-			} else {
-				window.location = '{{ route('pert_alumni.checklist'}}';
-			}
-		});
-		});
+		$(document).on("click", ".add-more", function() { 
+          var html = $(".copy").html();
+          $(".after-add-more").after(html);
+
+      // saat tombol remove dklik control group akan dihapus 
+      $("body").on("click",".remove",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+    });
+
 
 		function deletepertanyaan(id) {
 			Swal.fire({
@@ -263,6 +341,23 @@
 					) 
 			});
 		} 
+	
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			$.ajax({
+				url: '/UG_Career/administrator/pert_alumni/detail'+"/"+id,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+					
+				}
+			});
+		});
 		
 	</script>
 

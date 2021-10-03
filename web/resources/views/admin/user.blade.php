@@ -58,7 +58,7 @@
 												<select class="form-control" name="id_prodi" id="id_prodi" onchange="addData()" required="required">
 													<option disabled selected>-- Daftar prodi --</option>
 													@foreach ($prodis as $prodi)
-													<option value="{{ $prodi->id }}" data-nama="{{ $prodi->nama_prodi }}" data-prodi="{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+													<option value="{{ $prodi->id }}" data-nama="{{ $prodi->jenjang }}_{{ $prodi->nama_prodi }}" data-prodi="{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
 													@endforeach
 												</select>
 											</div>
@@ -309,10 +309,11 @@
         var prodi = $("#id_prodi option:selected").attr('data-prodi'); 
         var namaprodi = $("#id_prodi option:selected").attr('data-nama'); 
 		var str1 = "ug_"
-		
-
+		var low = namaprodi.toLowerCase();
+		var str2 = low.replace(/ /g, '');
+		var res = str1.concat(str2)
         document.getElementById("name").value = prodi;
-        document.getElementById("username").value = prodi;
+        document.getElementById("usernamesekjur").value = res;
    }
 	</script>
 

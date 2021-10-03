@@ -14,4 +14,5 @@ class Pertanyaan extends Model
         'kd_pertanyaan',
         'pertanyaan',
     ];
+
 }

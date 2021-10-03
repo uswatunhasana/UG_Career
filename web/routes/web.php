@@ -25,6 +25,7 @@ Route::resource('/', DashboardController::class)->names([
 //     'show'=>'beritasingle.show',
 //     'beritaall' => 'beritaall'
 // ]);
+// Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
@@ -74,8 +75,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/user', UserController::class)->names([
             'index'=>'user.index',
         ]);
+        // Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
+        Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan')->name('pert_alumni.kategori');
+        Route::get('/pert_alumni/detail/{id}', 'App\Http\Controllers\PertAlumniController@ajaxdetail')->name('pert_alumni.ajaxdetail');
+        // Route::get('/pert_alumni/detail/{name}', function ($name) { echo($name); });
+        // Route::get('/pert_alumni/{name}', function ($name) { echo($name); });
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
-            'index'=>'pert_alumni.index',
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
@@ -92,6 +97,8 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'index'=>'hasil_perusahaan.index',
             'destroy' => 'hasil_perusahaan.destroy',
         ]);
+        
+        // Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan');
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
 

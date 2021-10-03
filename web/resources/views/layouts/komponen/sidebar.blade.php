@@ -59,7 +59,7 @@
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="{{ route('pert_alumni.index') }}">
+										<a href="/UG_Career/administrator/pert_alumni/text">
 											<span class="sub-item">Daftar Pertanyaan Alumni</span>
 										</a>
 									</li>
