@@ -140,18 +140,25 @@ class PertAlumniController extends Controller
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
-            $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-            foreach($request->pilihan_jawaban as $key => $value)
-            {
-                $update_pilihanjawaban = PilihanJawaban::leftJoin('pertanyaans','pertanyaans.id','=','pilihanjawabans.id_pertanyaan')
-                ->select('pilihanjawabans.*')
-                ->first();
-                $update_pilihanjawaban->pilihan_jawaban = $value;
-                $update_pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
-                $update_pilihanjawaban->updated_at = now();
-                $update_pilihanjawaban->save();
-            }}
+            $update_pilihanjawaban = PilihanJawaban::findOrFail($request->idpilihan)
+            ->where('pilihanjawabans.id_pertanyaan', '=', $id)
+            ->select('pilihanjawabans.*')
+            ->first();
+
+
+            $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban;
+            $update_pilihanjawaban->save();
+            // }else{
+            //     foreach($request->pilihan_jawaban as $key => $value)
+            //     {
+            //         $update_pilihanjawaban->pilihan_jawaban = $value;
+            //         $update_pilihanjawaban->id_pertanyaan = $id;
+            //         $update_pilihanjawaban->updated_at = now();
+            //         $update_pilihanjawaban->save();
+            //     }
+            // }
+        }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
