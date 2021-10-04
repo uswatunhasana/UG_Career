@@ -58,15 +58,18 @@
 								<form role="form" action="{{ route('pert_alumni.store') }}" method="POST">
 									@csrf
 									@method('POST')
-
-									<div class="form-group">
-								<label for="exampleInputPassword1">Kategori</label>
-								<select class="form-control input-sm"  id="kategori_pertanyaan" name="kategori">
-									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
-									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
-									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
-								</select>
-							</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kategori</b></h4></label>
+												<select class="form-control input-sm"  id="kategori_pertanyaan" name="kategori">
+													<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
+													<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
+													<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
