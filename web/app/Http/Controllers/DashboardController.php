@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dataweb;
 use App\Models\Berita;
+use App\Models\Pertanyaan;
+use App\Models\PilihanPertanyaan;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -91,7 +93,14 @@ class DashboardController extends Controller
         ->get();
        
         return view('user.berita', compact('beritas','kategoris','listberitas'));
+    }
 
+    public function isikuisionerrr()
+    {
+        $pertanyaans= DB::table('pertanyaans')->orderBy('created_at', 'desc')->paginate(2);
+        $pilihanjawabans = DB::table('pilihanjawabans')->orderBy('created_at', 'desc')->paginate(2);
+       
+        return view('user.isikuisioneralumni', compact('pertanyaans','pilihanjawabans'));
     }
 
 

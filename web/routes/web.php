@@ -27,6 +27,8 @@ Route::resource('/', DashboardController::class)->names([
 // ]);
 // Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
+Route::get('/isikuisioner', 'App\Http\Controllers\DashboardController@isikuisionerrr')->name('isikuisionerrr');
+
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
