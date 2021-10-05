@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login UG Tracer</title>
 
+    <!-- Favicons -->
+    <link href="{{ asset('assets') }}/img/favicon.png" rel="icon">
+    <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
+
     <!-- Font Icon -->
     <link rel="stylesheet" href="{!! asset('login_fe/assets/fonts/material-icon/css/material-design-iconic-font.min.css') !!}">
 
@@ -20,7 +24,8 @@
         <h1>Sign In</h1>
         <div class="container">
             <div class="sign-up-content">
-                <form method="POST" class="signup-form">
+                <form method="POST" class="signup-form" action="{{ route('postlogin') }}">
+                    {{ csrf_field() }}
                     <h2 class="form-title">LOGIN</h2>
 
                     <div class="form-textbox">
@@ -29,8 +34,8 @@
                     </div>
 
                     <div class="form-textbox">
-                        <label for="pass">Password</label>
-                        <input type="password" name="pass" id="pass" />
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" />
                     </div>
 
                     <div class="form-textbox">
@@ -39,7 +44,7 @@
                 </form>
 
                 <p class="loginhere">
-                    Belum mempunyai akun ?<a href="#" class="loginhere-link"> Daftar Akun</a>
+                    Belum mempunyai akun ?<a href="{{ route('daftar.registrasi') }}" class="loginhere-link"> Daftar Akun</a>
                 </p>
             </div>
         </div>
