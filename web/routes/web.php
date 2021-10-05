@@ -27,8 +27,10 @@ Route::resource('/', DashboardController::class)->names([
 //     'beritaall' => 'beritaall'
 // ]);
 // Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
-Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login');
-Route::get('daftar', 'App\Http\Controllers\AuthUserController@create')->name('daftar');
+Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login.index');
+Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
+Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
+Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 Route::get('/isikuisioner', 'App\Http\Controllers\DashboardController@isikuisionerrr')->name('isikuisionerrr');
 
@@ -111,6 +113,13 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
     Route::group(['middleware' => ['cek_login:prodi']], function () {
 
         Route::resource('editor', AdminController::class);
+    });
+    // FRONT END
+    Route::group(['middleware' => ['ceklevel:alumni']], function () {
+
+        Route::resource('alumni', DashboardController::class)->names([
+            'alumni'=>'.alumni',
+        ]);
     });
 });
 
