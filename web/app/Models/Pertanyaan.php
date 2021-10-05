@@ -14,5 +14,9 @@ class Pertanyaan extends Model
         'kd_pertanyaan',
         'pertanyaan',
     ];
+    public function pilihanjawaban()
+    {
+    	return $this->hasMany(PilihanJawaban::class, 'id_pertanyaan');
+    }
 
 }

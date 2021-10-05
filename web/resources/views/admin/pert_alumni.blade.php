@@ -123,7 +123,7 @@
 						</div>
 					</div>
 				</div>
-
+<!-- Detail Modal -->
 				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -203,7 +203,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -240,15 +240,57 @@
 								</div>
 							</div>
 						</div>
-						<hr/>
-						Pilihan Jawaban
-						
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-							<button type="submit" class="btn btn-primary">Ubah Data</button>
-						</div>
-					</form>
+						<div id="container_pilihan_jawaban">
+									@if(Request::segment( 3 ) != "text")
+									<div id="pilihan_jawaban">
+									<hr/>
+									<label><h4><b>Pilihan Jawaban</b></h4></label>
+									@php
+									$no =1;
+									$pilihan_jawabans = \App\Models\PilihanJawaban::where('id_pertanyaan','=',$pertanyaan->id)->select('*')->get();
+									@endphp
+									@foreach($pilihan_jawabans as $pilihan_jawaban)
+									<div class="row control-group after-add-more">
+										<div class="col-sm-12 ">
+										<label>Pilihan {{$no++ }}</label>
+												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[$pilihan_jawaban->id]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										</div>
+									</div> 
+									@endforeach
+									</div>
+									<hr/>
+									<label><h4><b>Tambah Jawaban</b></h4></label>
+									<div class="row control-group after-add-more">
+										<div class="col-sm-9 ">
+												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-success add-more" type="button">
+												<i class="fas fa-plus-square"></i> Add
+											</button>
+										</div>
+									</div> 
+									@endif
+								</div>
+							</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+									<button type="submit" class="btn btn-primary">Update Data</button>
+								</div>
+							</form>
+							<!-- Copy Hide -->
+							<div class="copy invisible">
+								<div class="row control-group">
+									<div class="col-sm-9 ">
+										<label for="largeInput"></label>
+										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+									</div>
+									<div class="col-sm-3">
+									<label for="largeInput"></label>
+									<button class="btn btn-danger remove" type="button"><i class="fas fa-trash-alt"></i> Remove</button>
+									</div>
+								</div>
+							</div>
 				</div>
 			</div>
 		</div>
