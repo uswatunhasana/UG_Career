@@ -58,15 +58,18 @@
 								<form role="form" action="{{ route('pert_alumni.store') }}" method="POST">
 									@csrf
 									@method('POST')
-
-									<div class="form-group">
-								<label for="exampleInputPassword1">Kategori</label>
-								<select class="form-control input-sm"  id="kategori_pertanyaan" name="kategori">
-									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
-									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
-									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
-								</select>
-							</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kategori</b></h4></label>
+												<select class="form-control input-sm"  id="kategori_pertanyaan" name="kategori">
+													<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
+													<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
+													<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
@@ -216,7 +219,7 @@
 							<div class="col-md-6 pr-0">
 								<div class="form-group form-group-default">
 									<label><h4><b>Jenis Pertanyaan</b></h4></label>
-									<select class="form-control" name="jenis_pertanyaan"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
+									<select class="form-control" name="kategori"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 										<!-- <option disabled selected>-- Jenis pertanyaan --</option> -->
 										<option value="text" {{ $pertanyaan->jenis_pertanyaan === 'text' ? 'selected' : '' }} >Text</option>
 										<option value="pilihan" {{ $pertanyaan->jenis_pertanyaan === 'pilihan' ? 'selected' : '' }} >Pilihan</option>
@@ -253,7 +256,8 @@
 									<div class="row control-group after-add-more">
 										<div class="col-sm-12 ">
 										<label>Pilihan {{$no++ }}</label>
-												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[$pilihan_jawaban->id]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input name="idpilihan" type="hidden" value="{{$pilihan_jawaban->id}}">
+											<input id="addpilihanjawaban" type="text" name="update_jawaban" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 									</div> 
 									@endforeach
