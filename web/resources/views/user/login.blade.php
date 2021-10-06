@@ -44,7 +44,7 @@
                 </form>
 
                 <p class="loginhere">
-                    Belum mempunyai akun ?<a href="{{ route('daftar.registrasi') }}" class="loginhere-link"> Daftar Akun</a>
+                    Perusahaan yang belum memiliki akun ?<a href="{{ route('daftar.registrasi') }}" class="loginhere-link"> Daftar Akun</a>
                 </p>
             </div>
         </div>
