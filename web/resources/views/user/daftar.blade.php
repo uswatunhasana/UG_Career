@@ -25,15 +25,8 @@
         <div class="container">
             <div class="sign-up-content">
                 <form method="POST" class="signup-form" action="{{ route('simpanregistrasi') }}">
-                    <h2 class="form-title">What type of user are you ?</h2>
-                    <div class="form-radio">
-                        <input type="radio" name="member_level" value="alumni" id="alumni" checked="checked" />
-                        <label for="alumni">Alumni</label>
-
-                        <input type="radio" name="member_level" value="perusahaan" id="perusahaan" />
-                        <label for="perusahaan">Perusahaan</label>
-                    </div>
-
+                    {{ csrf_field() }}
+                    <h2 class="form-title">Daftar Akun Perusahaan</h2>
                     <div class="form-textbox">
                         <label for="name">Full name</label>
                         <input type="text" name="name" id="name" />
