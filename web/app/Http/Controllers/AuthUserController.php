@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthUserController extends Controller
 {
     public function index()
     {
+        // $users = User::all();
         return view('user.login');
     }
 
@@ -45,7 +48,12 @@ class AuthUserController extends Controller
 
     public function simpanregistrasi(Request $request)
     {
-        return view('user.daftar');
+        User::create([
+            'name' => $request->name,
+            'level' => 'perusahaan',
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
     }
 
     public function store(Request $request)
