@@ -36,7 +36,7 @@
                                 <th width="30px">No</th>
 								<th>Jenis Berita</th>
 								<th>Judul Berita</th>
-								<th>Isi Berita</th>
+								<th>Tanggal Posting</th>
 								<th>Foto</th>
 								<th>Aksi</th>
 							</tr>
@@ -50,7 +50,7 @@
 								<td>{{$no++ }}</td>
 								<td>{{ $berita->jenis_berita }}</td>
 								<td>{{ $berita->judul_berita }}</td>
-								<td>{{ $berita->isi_berita }}</td>
+								<td>{{ tanggal_indonesia($berita->created_at) }}</td>
 								<td>
                                     <img src="{{ asset('img/'. $berita->foto )}}" height="50" width="50" alt="" srcset="">
                                 </td>
@@ -110,10 +110,9 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="form-group form-group-default">
 									<label><h4><b>Isi Berita</b></h4></label>
-									<input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi berita">
-								</div>
+									<textarea id="default">Hello, World!</textarea>
+									<!-- <input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi berita"> -->
 							</div>
 						</div>
 						<div class="row">
@@ -173,10 +172,8 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="form-group form-group-default">
 									<label><h4><b>Isi Berita</b></h4></label>
 									<input id="addberita" type="text" name="isi_berita" class="form-control" value="{{ $berita->isi_berita }}">
-								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -227,6 +224,7 @@
 
 			});
 		});
+		tinymce.init({ selector:'textarea#default', menubar:'', theme: 'modern'});      
 
 		function deleteberita(id) {
 			Swal.fire({
@@ -255,6 +253,7 @@
 					) 
 			});
 		} 
+
 		
 	</script>
 

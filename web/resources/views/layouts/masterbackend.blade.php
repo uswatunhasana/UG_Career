@@ -56,6 +56,7 @@
 	<script src=" {{ asset('admin') }}/assets/js/core/bootstrap.min.js"></script>
 	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
 	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
+	<script src="{{ asset('assets') }}/tinymce/js/tinymce/tinymce.min.js"></script>
 	<!-- jQuery UI -->
 	<script src=" {{ asset('admin') }}/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	<script src=" {{ asset('admin') }}/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>

@@ -61,8 +61,9 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'destroy' => 'prodi.destroy',
             'update' => 'prodi.update',
         ]);
+        Route::get('/berita/{kategori}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.kategori');
+        Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
         Route::resource('/berita', BeritaController::class)->names([
-            'index'=>'berita.index',
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
             'store' => 'berita.store',

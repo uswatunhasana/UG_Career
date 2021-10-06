@@ -14,16 +14,34 @@ use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $beritas = Berita::all();
+    //     return view('admin.berita1', ['beritas' => $beritas]);
+    // }
+
+    // public function create()
+    // {
+        
+    // }
+
+    public function index($kategori="pengumuman")
     {
-        $beritas = Berita::all();
-        return view('admin.berita1', ['beritas' => $beritas]);
+        $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
+        return view('admin.berita2', ['beritas' => $beritas]);
     }
 
-    public function create()
+    public function jenisberita($kategori="pengumuman")
     {
-        
+        $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
+        return view('admin.berita2', ['beritas' => $beritas]);
     }
+    public function ajaxdetail($id)
+    {
+        $data = Berita::where('id','=', $id)->select('*')->get();
+		echo json_encode($data);
+    }
+
 
    
     public function store(Request $request)
