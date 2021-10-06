@@ -120,4 +120,9 @@ class DashboardController extends Controller
     {
         //
     }
+
+    public function alumni()
+    {
+        return view('user.alumni');
+    }
 }
