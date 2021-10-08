@@ -56,11 +56,12 @@ class DashboardController extends Controller
         return view('user.beritasingle', compact('beritas','kategoris','listberitas'));
 
     }
+    
     public function beritashow(Berita $beritas)
     {
         if($beritas->jenis_berita == 'Internship'){
         $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
-        } elseif ($beritas->jenis_berita == 'Lowongan Kerja'){
+        } elseif ($beritas->jenis_berita == 'Loker'){
             $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
         }else{
             $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
