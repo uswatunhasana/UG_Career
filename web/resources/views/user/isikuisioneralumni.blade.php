@@ -33,11 +33,11 @@
         <div class="col-md-12">
 
           <div class="form-group">
-            <label for="largeInput">Nomor Mahasiswa</label>
+            <label for="largeInput">NPM</label>
             <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="">
           </div>
           <div class="form-group">
-            <label for="largeInput">Kode PT</label>
+            <label for="largeInput">Tahun Masuk</label>
             <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="">
           </div>
           <div class="form-group">
@@ -45,7 +45,7 @@
             <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="">
           </div>
           <div class="form-group">
-            <label for="largeInput">Kode Prodi</label>
+            <label for="largeInput">Program Studi/Jurusan</label>
             <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="">
           </div>
           <div class="form-group">
@@ -63,10 +63,6 @@
           <div class="form-group">
             <label for="largeInput">NIK</label>
             <input type="text" class="form-control form-control" name = "nik" id="nik" value="">
-          </div>
-          <div class="form-group">
-            <label for="largeInput">NPWP</label>
-            <input type="text" class="form-control form-control" name = "npwp" id="npwp" value="">
           </div>
           <br>
 
