@@ -38,7 +38,7 @@
 					</div>
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
-							<p class="card-category">Jumlah User Almuni</p>
+							<p class="card-category">Jumlah Alumni Terdaftar</p>
 							<h4 class="card-title">{{ $jumlah_user_alumni }}</h4>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 					</div>
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
-							<p class="card-category">Jumlah User Perusahaan</p>
+							<p class="card-category">Jumlah Perusahaan Terdaftar</p>
 							<h4 class="card-title">{{ $jumlah_perusahaan }}</h4>
 						</div>
 					</div>
