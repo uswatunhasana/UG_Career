@@ -178,6 +178,7 @@
 							<tr>
 								<th width="30px">No</th>
 								<th>Kode Pertanyaan</th>
+								<th>Jenis Pertanyaan</th>
 								<th>Pertanyaan</th>
 								<th>Aksi</th>
 							</tr>
@@ -190,6 +191,7 @@
 							<tr>
 								<td>{{$no++ }}</td>
 								<td>{{ $pertanyaan->kd_pertanyaan }}</td>
+								<td>{{ $pertanyaan->kelas_pertanyaan }}</td>
 								<td>{{ $pertanyaan->pertanyaan }}</td>
 								<td>
 								@if(Request::segment( 3 ) != "text")
