@@ -11,6 +11,7 @@ class Pertanyaan extends Model
     protected $fillable = [
         'jenis_pertanyaan',
         'kategori_pertanyaan',
+        'kelas_pertanyaan',
         'kd_pertanyaan',
         'pertanyaan',
     ];

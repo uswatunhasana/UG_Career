@@ -73,6 +73,17 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
+												<label><h4><b>Jenis Pertanyaan</b></h4></label>
+												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
+													<option value="wajib">Wajib</option>
+													<option value="opsional">Opsional</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
 												<label><h4><b>Kode Pertanyaan</b></h4></label>
 												<input id="addkodepertalumni" type="text" name="kd_pertanyaan" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
 											</div>
@@ -166,6 +177,7 @@
 							<tr>
 								<th width="30px">No</th>
 								<th>Kode Pertanyaan</th>
+								<th>Jenis Pertanyaan</th>
 								<th>Pertanyaan</th>
 								<th>Aksi</th>
 							</tr>
@@ -178,6 +190,7 @@
 							<tr>
 								<td>{{$no++ }}</td>
 								<td>{{ $pertanyaan->kd_pertanyaan }}</td>
+								<td>{{ $pertanyaan->kelas_pertanyaan }}</td>
 								<td>{{ $pertanyaan->pertanyaan }}</td>
 								<td>
 								@if(Request::segment( 3 ) != "text")
@@ -227,6 +240,17 @@
 									</select>
 								</div>
 							</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Jenis Pertanyaan</b></h4></label>
+												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
+													<option value="wajib" {{ $pertanyaan->kelas_pertanyaan === 'wajib' ? 'selected' : '' }} >Wajib</option>
+													<option value="opsional" {{ $pertanyaan->kelas_pertanyaan === 'opsional' ? 'selected' : '' }} >Opsional</option>
+												</select>
+											</div>
+										</div>
+									</div>
 											
 							<div class="col-md-6">
 								<div class="form-group form-group-default">
@@ -307,11 +331,10 @@
 	@section('customjs')
 	<script >
 
-		$(document).ready(function() {
+			$(document).ready(function() {
 				$('#select_category').change(function() {
 					var val = $(this).val(); 
-					window.location = "/UG_Career/administrator/pert_alumni" +"/" +val;
-					
+					window.location = "/UG_Career/administrator/pert_alumni" +"/" +val;	
 				});
 			});
 

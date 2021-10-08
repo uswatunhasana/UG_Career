@@ -51,6 +51,7 @@ class PertPerusahaanController extends Controller
             $pertanyaan = new Pertanyaan;
             $pertanyaan->kategori_pertanyaan = 'perusahaan';
             $pertanyaan->jenis_pertanyaan = $request->kategori;
+            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $pertanyaan->save();
@@ -60,6 +61,7 @@ class PertPerusahaanController extends Controller
             $pertanyaan = new Pertanyaan;
             $pertanyaan->kategori_pertanyaan = 'perusahaan';
             $pertanyaan->jenis_pertanyaan = $request->kategori;
+            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $pertanyaan->save();
@@ -126,6 +128,7 @@ class PertPerusahaanController extends Controller
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
@@ -138,6 +141,7 @@ class PertPerusahaanController extends Controller
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();

@@ -70,6 +70,18 @@
 											</div>
 										</div>
 									</div>
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Jenis Pertanyaan</b></h4></label>
+												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
+													<option value="wajib">Wajib</option>
+													<option value="opsional">Opsional</option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
@@ -227,7 +239,18 @@
 									</select>
 								</div>
 							</div>
-											
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Jenis Pertanyaan</b></h4></label>
+												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
+													<option value="wajib" {{ $pertanyaan->kelas_pertanyaan === 'wajib' ? 'selected' : '' }} >Wajib</option>
+													<option value="opsional" {{ $pertanyaan->kelas_pertanyaan === 'opsional' ? 'selected' : '' }} >Opsional</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									
 							<div class="col-md-6">
 								<div class="form-group form-group-default">
 									<label><h4><b>Kode pertanyaan</b></h4></label>
@@ -307,7 +330,7 @@
 	@section('customjs')
 	<script >
 
-		$(document).ready(function() {
+			$(document).ready(function() {
 				$('#select_category').change(function() {
 					var val = $(this).val(); 
 					window.location = "/UG_Career/administrator/pert_perusahaan" +"/" +val;
