@@ -1210,7 +1210,7 @@
         </div>
         <br>
 
-         <b>10. Berdasarkan pengalaman pada pekerjaan Anda  saat ini,  apa saran yang anda berikan  untuk peningkatan kualitas pembelajaran di Universitas Gunadarma?</b>
+        <b>10. Berdasarkan pengalaman pada pekerjaan Anda  saat ini,  apa saran yang anda berikan  untuk peningkatan kualitas pembelajaran di Universitas Gunadarma?</b>
         <br>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -1264,7 +1264,6 @@
 
       </article><!-- End blog entry -->
     </form>
-
   </div>
 </section><!-- End Blog Single Section -->
 
