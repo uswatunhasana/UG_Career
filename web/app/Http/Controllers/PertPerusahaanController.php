@@ -142,23 +142,27 @@ class PertPerusahaanController extends Controller
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
 
-            $update_pilihanjawaban = PilihanJawaban::findOrFail($request->idpilihan)
-            ->where('pilihanjawabans.id_pertanyaan', '=', $id)
+            $i=0;
+            foreach($request->idpilihan as $key => $value){
+            $update_pilihanjawaban = PilihanJawaban::findOrFail($value)
+            ->where('id', '=', $value)
             ->select('pilihanjawabans.*')
             ->first();
-            
-            // if(){
-            $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban;
+
+            $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
             $update_pilihanjawaban->save();
-            // }else{
-            //     foreach($request->pilihan_jawaban as $key => $value)
-            //     {
-            //         $update_pilihanjawaban->pilihan_jawaban = $value;
-            //         $update_pilihanjawaban->id_pertanyaan = $id;
-            //         $update_pilihanjawaban->updated_at = now();
-            //         $update_pilihanjawaban->save();
-            //     }
-            // }
+            
+        }
+        foreach($request->pilihan_jawaban as $key => $value)
+        {
+            $perusahaan = new PilihanJawaban;
+            $perusahaan->pilihan_jawaban = $value;
+            $perusahaan->id_pertanyaan =  $id;
+            $perusahaan->created_at = now();
+            $perusahaan->updated_at = now();
+            $perusahaan->save();
+        }
+            
         }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
