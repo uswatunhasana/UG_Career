@@ -52,8 +52,11 @@ class AuthUserController extends Controller
             'name' => $request->name,
             'level' => 'perusahaan',
             'email' => $request->email,
+            'email_verified_at' => now(),
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
+        return Redirect('/');
     }
 
     public function store(Request $request)
