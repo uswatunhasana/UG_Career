@@ -21,21 +21,17 @@
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
+
 @foreach($beritas as $berita)
         <div class="row">
-
           <div class="col-lg-8 entries">
-
             <article class="entry entry-single">
-
               <div class="entry-img">
                 <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
               </div>
-
               <h2 class="entry-title">
                 <a href="">{{ $berita->judul_berita }}</a>
               </h2>
-
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ tanggal_indonesia($berita->created_at) }}</time></a></li>
@@ -81,8 +77,6 @@
                 @endforeach
 
               </div><!-- End sidebar recent posts-->
-
-
             </div><!-- End sidebar -->
 
           </div><!-- End blog sidebar -->

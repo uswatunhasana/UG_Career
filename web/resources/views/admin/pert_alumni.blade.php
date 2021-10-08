@@ -200,7 +200,7 @@
 		</div>
 	</div>
 
-	<!-- Tambah Edit Modal -->
+	<!--  Edit Modal -->
 	@foreach ($pertanyaans as $pertanyaan)
 	<div class="modal fade" id="editModal-{{ $pertanyaan->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -256,8 +256,8 @@
 									<div class="row control-group after-add-more">
 										<div class="col-sm-12 ">
 										<label>Pilihan {{$no++ }}</label>
-										<input name="idpilihan" type="hidden" value="{{$pilihan_jawaban->id}}">
-											<input id="addpilihanjawaban" type="text" name="update_jawaban" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input name="idpilihan[]" type="hidden" value="{{$pilihan_jawaban->id}}">
+											<input id="addpilihanjawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 									</div> 
 									@endforeach

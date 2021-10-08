@@ -14,17 +14,6 @@ use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
-    // public function index()
-    // {
-    //     $beritas = Berita::all();
-    //     return view('admin.berita1', ['beritas' => $beritas]);
-    // }
-
-    // public function create()
-    // {
-        
-    // }
-
     public function index($kategori="pengumuman")
     {
         $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
@@ -91,7 +80,6 @@ class BeritaController extends Controller
         $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
         if ($cek_berita == 0) {
             $berita = Berita::findOrFail($id);
-
             if ($request->hasFile('foto')){
                 $image_path = public_path("public/img/".$berita->foto);
                 if (File::exists($image_path)) {
@@ -104,7 +92,6 @@ class BeritaController extends Controller
               } else {
                 $imgName = $berita->foto;
               }
-
             $berita->jenis_berita = $request->jenis_berita;
             $berita->judul_berita = $request->judul_berita;
             $berita->isi_berita = $request->isi_berita;

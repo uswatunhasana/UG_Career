@@ -99,5 +99,14 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
+  @section('scripts')
   
+  <script>
+  $(document).ready(function() {
+    $('.flex.justify-between.flex-1').remove();
+    $('.text-sm.text-gray-700.leading-5').remove();
+		});
+    </script>
+
+  @endsection
 @endsection
