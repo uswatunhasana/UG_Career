@@ -38,7 +38,7 @@
 
 <main id="main">
 <!-- ======= Clients Section ======= -->
-<section id="clients" class="clients">
+<!-- <section id="clients" class="clients">
 
   <div class="container" data-aos="fade-up">
 
@@ -62,7 +62,7 @@
     </div>
   </div>
 
-</section><!-- End Clients Section -->
+</section>End Clients Section -->
 
 <!-- ======= Isi Kuisioner Section ======= -->
 <section id="about" class="about">
