@@ -43,8 +43,8 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="{{ route('dashboard.user') }}" class="logo d-flex align-items-center">
-        <img src="{{ asset('assets') }}/img/logo.png" alt="">
-        <span>FlexStart</span>
+        <img src="{{ asset('assets') }}/img/Gundar.png" alt="">
+        <span>UG Career Center</span>
       </a>
 
       <nav id="navbar" class="navbar">
