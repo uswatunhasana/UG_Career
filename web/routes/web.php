@@ -7,6 +7,7 @@ use App\Http\Controllers\KabkotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DatawebController;
+use App\Http\Controllers\DataAlumniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PertAlumniController;
@@ -45,7 +46,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/dashboard', AdminController::class)->names([
             'index'=>'administrator.dashboard',
         ]);
-
+        // Route::get('/dataalumni','App\Http\Controllers\UserController@dataalumni')->nama('dataalumni');
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index'=>'provinsi.index',
         ]);
@@ -83,6 +84,11 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('/user', UserController::class)->names([
             'index'=>'user.index',
         ]);
+        
+        Route::resource('/dataalumni', DataAlumniController::class)->names([
+            'index'=>'dataalumni.index',
+        ]);
+        
         // Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
         Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan')->name('pert_alumni.kategori');
         Route::get('/pert_alumni/detail/{id}', 'App\Http\Controllers\PertAlumniController@ajaxdetail')->name('pert_alumni.ajaxdetail');
