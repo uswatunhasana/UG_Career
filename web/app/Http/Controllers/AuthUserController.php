@@ -6,8 +6,10 @@ use App\Models\Prodi;
 use App\Models\Alumni;
 use App\Models\Perusahaan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 
 class AuthUserController extends Controller
@@ -22,7 +24,7 @@ class AuthUserController extends Controller
     {
         $input = $request->all();
         $this->validate($request,[
-        'email' => 'required|email',
+        'username' => 'required',
         'password' => 'required',
         ]);
 
@@ -37,16 +39,15 @@ class AuthUserController extends Controller
         //     return redirect('login');
         // }
         // return redirect('login')->withSuccess('Username dan Password belum terdaftar');
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+ 
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
-            if(auth()->user()->level == 'alumni'){
-                return redirect()->route('dashboard.user');
-            } else{
-                return redirect()->route('home.perusahaan');
-            }
-        } else {
-        return redirect()->route('login.index')->with('error','Email dan Password salah');
-    }
+            return redirect()->route('dashboard.user');
+        }else{
+            return redirect()->route('login.index')
+                ->with('error','Username dan Password yang anda masukkan salah');
+        }
     }
 
     public function logout(Request $request) {
@@ -63,15 +64,42 @@ class AuthUserController extends Controller
 
     public function simpanregistrasi(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'level' => 'perusahaan',
-            'email' => $request->email,
-            'email_verified_at' => now(),
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-        ]);
-        return Redirect('/');
+        // $rules = array(
+        //     'password' => 'string|min:8|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Password min 8 digit');
+        //     return redirect()->back();
+        // }
+        $daftar_perusahaan = User::where('username', $request->username)->count();
+        if ($daftar_perusahaan == 0) {
+            $user           = new User;
+            $user->name     = $request->name;
+            $user->username = $request->username;
+            $user->email    = $request->email;
+            $user->email_verified_at  = now();
+            $user->level    = 'perusahaan';
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            $get_id_user = DB::getPdo()->lastInsertId();;
+
+            $perusahaan = new Perusahaan;
+            $perusahaan->id_user     =  $get_id_user;
+            $perusahaan->no_telp     = $request->no_telp;
+            $perusahaan->url_web     = $request->url_web;
+            $perusahaan->alamat      = $request->alamat;
+            $perusahaan->nama_cp     = $request->nama_cp;
+            $perusahaan->jabatan     = $request->jabatan;
+            $perusahaan->created_at  = now();
+            $perusahaan->updated_at  = now();
+            $perusahaan->save();
+            Alert::success(' Akun sudah berhasil didaftarkan ');
+        } else {
+            Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+        }
+        return redirect()->back();
     }
 
     public function store(Request $request)
@@ -108,7 +136,7 @@ class AuthUserController extends Controller
             $alumni->created_at  = now();
             $alumni->updated_at  = now();
             $alumni->save();
-            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
+            Alert::success(' Akun sudah berhasil didaftarkan ');
         } else {
             Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
         }
