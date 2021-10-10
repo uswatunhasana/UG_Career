@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Prodi;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,22 +18,33 @@ class AuthUserController extends Controller
 
     public function postlogin(Request $request)
     {
-        request()->validate([
-        'username' => 'required',
+        $input = $request->all();
+        $this->validate($request,[
+        'email' => 'required|email',
         'password' => 'required',
         ]);
 
-        $credentials = $request->only('username', 'password');
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            if ($user->level == 'alumni') {
-                return redirect()->intended('login/alumni');
-            } else {
-                return redirect()->intended('login');
+        // $credentials = $request->only('username', 'password');
+        // if (Auth::attempt($credentials)) {
+        //     $user = Auth::user();
+        //     if ($user->level == 'alumni') {
+        //         return redirect('/');
+        //     } elseif ($user->level == 'perusahaan'){
+        //         return redirect('/');
+        //     }
+        //     return redirect('login');
+        // }
+        // return redirect('login')->withSuccess('Username dan Password belum terdaftar');
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if(auth()->user()->level == 'alumni'){
+                return redirect()->route('dashboard.user');
+            } else{
+                return redirect()->route('home.perusahaan');
             }
-            return redirect('login');
-        }
-        return redirect('login')->withSuccess('Oppes! Silahkan Cek Inputanmu');
+        } else {
+        return redirect()->route('login.index')->with('error','Email dan Password salah');
+    }
     }
 
     public function logout(Request $request) {
@@ -43,7 +55,8 @@ class AuthUserController extends Controller
 
     public function registrasi()
     {
-        return view('user.daftar');
+        $prodis = Prodi::all();
+        return view('user.daftar', ['prodis' => $prodis]);
     }
 
     public function simpanregistrasi(Request $request)
