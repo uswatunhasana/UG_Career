@@ -31,7 +31,9 @@
                <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-               <form action="{{ route('simpanregistrasi') }}" class="alumni" method="POST">
+               <form action="{{ route('store') }}" class="alumni" method="POST">
+                  @csrf
+						@method('POST')
                   <div class="field">
                      <input type="text" placeholder="Masukkan NPM" name="" required>
                   </div>
@@ -42,14 +44,16 @@
                      <input type="text" placeholder="Masukkan Tahun Lulus" name="" required>
                   </div>
                   <div class="field">
-					<label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
-						<select class="form-control" name="id_prodi" required="required" style="">
-						<option disabled selected>-- Daftar Prodi --</option>
-						@foreach ($prodis as $prodi)
-						<option value="{{ $prodi->id }}">{{ $prodi->nama_prodi }}</option>
-						@endforeach
-						</select>
+                     <label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
+                     <select class="form-control" name="id_prodi" required="required" style="">
+                     <option disabled selected>-- Daftar Prodi --</option>
+                     @foreach ($prodis as $prodi)
+                     <option value="{{ $prodi->id }}">{{ $prodi->nama_prodi }}</option>
+                     @endforeach
+                     </select>
                   </div>
+                  <br>
+                  <br>
                   <div class="field">
                      <input type="text" placeholder="Masukkan Nama Lengkap" name="" required>
                   </div>
