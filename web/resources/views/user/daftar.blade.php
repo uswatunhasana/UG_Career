@@ -35,13 +35,13 @@
                   @csrf
 						@method('POST')
                   <div class="field">
-                     <input type="text" placeholder="Masukkan NPM" name="" required>
+                     <input type="text" placeholder="Masukkan NPM" name="npm" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Masuk" name="" required>
+                     <input type="text" placeholder="Masukkan Tahun Masuk" name="tahun_masuk" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Lulus" name="" required>
+                     <input type="text" placeholder="Masukkan Tahun Lulus" name="tahun_lulus" required>
                   </div>
                   <div class="field">
                      <label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
@@ -55,19 +55,22 @@
                   <br>
                   <br>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Nama Lengkap" name="" required>
+                     <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan No.Telepon/handphone" name="" required>
+                     <input type="text" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Email" name="" required>
+                     <input type="text" placeholder="Masukkan Email" name="email" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan NIK" name="" required>
+                     <input type="text" placeholder="Masukkan NIK" name="nik" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" name="" required>
+                     <input type="text" placeholder="Masukkan Username" name="username" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Password" name="password" required>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
@@ -77,15 +80,38 @@
                      Sudah memiliki akun ? <a href="{{ route('login.index') }}">Log in</a>
                   </div>
                </form>
-               <form action="#" class="perusahaan">
+               <form action="{{ route('simpanregistrasi') }}" class="perusahaan" method="POST">
+                  @csrf
+						@method('POST')
                   <div class="field">
-                     <input type="text" placeholder="Email Address" required>
+                     <input type="text" placeholder="Masukkan Nama Perusahaan" name="name" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" required>
+                     <input type="text" placeholder="Masukkan Email Perusahaan" name="email" required>
                   </div>
-                  <div class="pass-link">
-                     <a href="#">Lupa password ?</a>
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan No. Telepon/Handphone" name="no_telp" required>
+                  </div>
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required>
+                  </div>
+                  <div class="field">
+                  <label style="color : #999;"><h3><b>Alamat Perusahaan</b></h3></label>
+                  <textarea class="form-control" aria-label="With textarea" style="" name="alamat" required></textarea>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required>
+                  </div>
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan Jabatan" name="jabatan" required>
+                  </div>
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan Username" name="username" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Password" name="password" required>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
