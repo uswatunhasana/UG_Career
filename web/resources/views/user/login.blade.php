@@ -1,45 +1,10 @@
 @section('title', 'Log in')
 <!DOCTYPE html>
-<<<<<<< Updated upstream
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login UG Tracer</title>
-
-    <!-- Favicons -->
-    <link href="{{ asset('assets') }}/img/favicongundar.png" rel="icon">
-    <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="{!! asset('login_fe/assets/fonts/material-icon/css/material-design-iconic-font.min.css') !!}">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="{!! asset('login_fe/assets/css/style.css') !!}">
-</head>
-<body>
-
-    <div class="main">
-
-        <h1>Sign In</h1>
-        <div class="container">
-            <div class="sign-up-content">
-                <form method="POST" class="signup-form" action="{{ route('postlogin') }}">
-                    {{ csrf_field() }}
-                    <h2 class="form-title">LOGIN</h2>
-
-                    <div class="form-textbox">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" />
-                    </div>
-=======
 <!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
       <title>UG Career | @yield('title')</title>
->>>>>>> Stashed changes
 
       <!-- Favicons -->
         <link href="{{ asset('assets') }}/img/favicon.png" rel="icon">
@@ -51,10 +16,7 @@
       <div class="wrapper">
          <div class="title-text">
             <div class="title alumni">
-               Registrasi
-            </div>
-            <div class="title perusahaan">
-               Registrasi
+               Login
             </div>
          </div>
          <div class="form-container">
