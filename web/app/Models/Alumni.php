@@ -9,12 +9,11 @@ class Alumni extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tgl_lahir',
-        'jenis_kelamin',
-        'alamat_sekarang',
-        'alamat_tetap',
-        'no_telp',
+        'npm',
+        'tahun_masuk',
         'tahun_lulus',
+        'nik',
+        'no_telp',
     ];
     public function user()
     {
