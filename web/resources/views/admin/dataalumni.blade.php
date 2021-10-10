@@ -88,15 +88,18 @@
 											</div>
 										</div>
 									</div>
+
 									<div class="row">
-										<div class='col-sm-6'>
+										<div class='col-sm-12'>
 											<div class="form-group form-group-default">
 												<label><h4><b>Tanggal Lahir</b></h4></label>
-												<div class='input-group date' id='datetimepicker1'>
-												<input type='text' class="form-control" />
-												<span class="input-group-addon">
-												<span><i class="fas fa-calendar-alt"></i></span>
-												</span>
+												<div class="input-group">
+													<input type="text" class="form-control" id="datepicker" name="datepicker">
+													<div class="input-group-append">
+														<span class="input-group-text">
+															<i class="fa fa-calendar"></i>
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -271,10 +274,7 @@
 			$('#add-row').DataTable({
 				"pageLength": 5,
 			});
-		
-		$(function () {
-             $('#datetimepicker1').datetimepicker();
-         });
+	
 
 			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
@@ -289,6 +289,7 @@
 
 			});
 		});
+
 
 		function deletealumni(id) {
 			swal({
@@ -332,7 +333,9 @@
 				}
 			});
 		});
-
+		$('#datepicker').datetimepicker({
+				format: 'MM/DD/YYYY',
+			});
 	</script>
 
 	@endsection

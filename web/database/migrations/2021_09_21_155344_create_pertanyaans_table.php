@@ -13,6 +13,7 @@ class CreatePertanyaansTable extends Migration
             $table->enum('jenis_pertanyaan',['text','pilihan','checklist']);
             $table->enum('kategori_pertanyaan',['alumni','perusahaan']);
             $table->enum('kelas_pertanyaan',['wajib','opsional']);
+            $table->enum('is_cabang',['ya','tidak']);
             $table->string('kd_pertanyaan',5);
             $table->text('pertanyaan');
             $table->timestamps();

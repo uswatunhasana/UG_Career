@@ -90,6 +90,7 @@
   <script src="{{ asset('assets') }}/vendor/purecounter/purecounter.js"></script>
   <script src="{{ asset('assets') }}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/glightbox/js/glightbox.min.js"></script>
+  
   @yield('optionaljs')
   <!-- Template Main JS File -->
   <script src="{{ asset('assets') }}/js/main.js"></script>

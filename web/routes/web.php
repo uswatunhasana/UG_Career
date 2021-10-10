@@ -38,6 +38,7 @@ Route::get('/isikuisioner', 'App\Http\Controllers\DashboardController@isikuision
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
+Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 Route::prefix('administrator')->middleware(['auth'])->group(function(){
