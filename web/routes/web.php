@@ -123,10 +123,10 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         Route::resource('editor', AdminController::class);
     });
     // FRONT END
-    Route::group(['middleware' => ['ceklevel:alumni']], function () {
+    Route::group(['middleware' => ['auth','ceklevel:alumni']], function () {
 
-        Route::resource('alumni', DashboardController::class)->names([
-            'alumni'=>'.alumni',
+        Route::resource('/isikuisioner', DashboardController::class)->names([
+            'isikuisioneralumni'=>'isikuisioner.isikuisionerrr',
         ]);
     });
 });
