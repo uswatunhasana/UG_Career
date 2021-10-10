@@ -97,10 +97,73 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
+												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
+													<option value="tidak">Tidak</option>
+													<option value="ya">Ya</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<!-- Jika Cabang -->
+									<hr/>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kode Pertanyaan Cabang</b></h4></label>
+												<input id="addkodecabang" type="text" name="kd_cabang" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Pertanyaan</b></h4></label>
+												<input id="addpertanyaan" type="text" name="pertanyaan_cabang" class="form-control" placeholder="Masukkan Pertanyaan ">
+											</div>
+										</div>
+									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
 									<div id="pilihan_jawaban">
+									<label><h4><b>Pilihan Jawaban</b></h4></label>
+									<div class="row control-group after-add-more">
+										<div class="col-sm-9 ">
+												<input id="addpilihanjawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-success add-more" type="button">
+												<i class="fas fa-plus-square"></i> Add
+											</button>
+										</div>
+									</div> 
+									</div>
+									@endif
+								</div>
+								<!-- Tidak Cabang -->
 									<hr/>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kode Pertanyaan</b></h4></label>
+												<input id="addkodecabang" type="text" name="kd_cabang" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Pertanyaan</b></h4></label>
+												<input id="addpertanyaan" type="text" name="pertanyaan_cabang" class="form-control" placeholder="Masukkan Pertanyaan ">
+											</div>
+										</div>
+									</div>
+									<div id="container_pilihan_jawaban">
+									@if(Request::segment( 3 ) != "text")
+									<div id="pilihan_jawaban">
 									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">

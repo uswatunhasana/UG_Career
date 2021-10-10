@@ -98,6 +98,17 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
+												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
+													<option value="ya">Ya</option>
+													<option value="tidak">Tidak</option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
 									<div id="pilihan_jawaban">

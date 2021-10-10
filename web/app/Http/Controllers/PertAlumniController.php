@@ -162,6 +162,7 @@ class PertAlumniController extends Controller
     public function destroy($id)
     {
         DB::table('pertanyaans')->where('id', $id)->delete();
+        DB::table('pilihan_jawabans')->where('id_pertanyaan', $id)->delete();
         return redirect()->back();
     }
 }

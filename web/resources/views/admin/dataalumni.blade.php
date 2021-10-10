@@ -29,16 +29,16 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
-					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+					<!-- <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah Data Alumni
-					</button>
+					</button> -->
 				</div>
 			</div>
 			<div class="card-body">
 
 				<!-- Tambah Data Modal -->
-				<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<!-- <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -156,7 +156,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- Tabel Data -->
 				<div class="table-responsive">

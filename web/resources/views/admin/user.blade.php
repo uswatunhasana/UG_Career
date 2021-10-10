@@ -1,8 +1,8 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data sekjur')
+@section('title', 'Data Sekjur')
 @section('content',)               
 <div class="page-header">
-	<h4 class="page-title">Data sekjur</h4>
+	<h4 class="page-title">Data Operator Sekjur</h4>
 	<ul class="breadcrumbs">
 		<li class="nav-home">
 			<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 			<i class="flaticon-right-arrow"></i>
 		</li>
 		<li class="nav-item">
-			<a href="#">Data sekjur</a>
+			<a href="#">Data Operator Sekjur</a>
 		</li>
 	</ul>
 </div>
@@ -54,7 +54,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Prodi</b></h4></label>
+												<label><h4><b>Jenis Jurusan</b></h4></label>
 												<select class="form-control" name="id_prodi" id="id_prodi" onchange="addData()" required="required">
 													<option disabled selected>-- Daftar prodi --</option>
 													@foreach ($prodis as $prodi)
@@ -67,7 +67,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Nama Sekjur</b></h4></label>
+												<label><h4><b>Nama Jurusan</b></h4></label>
 												<input id="name" type="text" name="name" class="form-control" placeholder="nama sekjur">
 											</div>
 										</div>
@@ -117,8 +117,8 @@
 						<thead class="thead-light">
 							<tr>
 								<th width="30px">No</th>
-								<th>Nama sekjur </th>
-								<th>sekjurname</th>
+								<th>Nama Jurusan </th>
+								<th>Operator Sekjur</th>
 								<th>Email</th>
 								<th>Aksi</th>
 							</tr>
@@ -171,7 +171,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Nama</b></h4></label>
+									<label><h4><b>Nama Jurusan</b></h4></label>
 									<input id="addsekjur" type="text" name="name" class="form-control" value="{{ $sekjur->user->name }}">
 								</div>
 							</div>
@@ -187,7 +187,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Jenis Prodi</b></h4></label>
+									<label><h4><b>Jenis Jurusan</b></h4></label>
 									<select class="form-control" name="id_prodi" required="required">
 										<option disabled selected>-- Daftar Prodi --</option>
 										@foreach ($prodis as $prodi)
@@ -207,7 +207,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>username</b></h4></label>
+									<label><h4><b>Username</b></h4></label>
 									<input id="addsekjurnamesekjur" type="text" name="username" class="form-control" value="{{ $sekjur->user->username }}" disabled>
 								</div>
 							</div>

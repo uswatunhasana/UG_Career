@@ -16,12 +16,11 @@ class CreateJawabancabangsTable extends Migration
         Schema::create('jawabancabangs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('kd_cabang',5);
-            $table->text('pertanyaan_cabang');
-            $table->text('jawaban');
+            $table->text('kategori_cabang');
             //relasi dengan pertanyaan
-            $table->unsignedInteger('id_pertanyaan')->nullable();
-            $table->foreign('id_pertanyaan')
-                ->on('pertanyaans')
+            $table->unsignedInteger('id_pilihanjawaban')->nullable();
+            $table->foreign('id_pilihanjawaban')
+                ->on('pilihanjawabans')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
