@@ -7,6 +7,7 @@ use App\Models\Alumni;
 use App\Models\Perusahaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -143,6 +144,35 @@ class AuthUserController extends Controller
         return redirect()->back();
     }
 
+    public function lupa_password()
+    {
+        return view('user.lupapassword');
+    }
+
+    public function post_lupapassword(Request $request)
+    {
+        $request->validate([
+        'email' => 'required|email',
+        ]);
+
+        $user=User::where('email', $request->email)->first();
+
+        if(!$user){
+            return redirect()->back->with('error','Email Pengguna tidak ditemukan.');
+        } else{
+            $cek_user = User::where('email', $request->email)->count();
+            $user = User::all();
+            $user->email = $request->email;
+            if($request->filled('password')) {
+                Hash::make($request->password);
+            } else {
+                $user->password;
+            }
+            $user->save();
+            
+        }
+    }
+    
     public function show($id)
     {
         //
