@@ -7,9 +7,8 @@
       <title>UG Career | @yield('title')</title>
 
       <!-- Favicons -->
-        <!-- <link href="{{ asset('assets') }}/img/favicon.png" rel="icon"> -->
-        <link href="{{ asset('assets') }}/img/favicongundar.png" rel="icon">
-        <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
+      <link href="{{ asset('assets') }}/img/favicongundar.png" rel="icon">
+      <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
       <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
@@ -31,7 +30,7 @@
                      <input type="password" name="password" placeholder="Password" required>
                   </div>
                   <div class="pass-link">
-                     <a href="#">Lupa password ?</a>
+                     <a href="{{ route('lupapassword.lupa_password') }}">Lupa password ?</a>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
