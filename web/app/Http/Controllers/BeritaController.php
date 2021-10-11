@@ -28,26 +28,28 @@ class BeritaController extends Controller
     public function ajaxdetail($id)
     {
         $data = Berita::where('id','=', $id)->select('*')->get();
-		echo json_encode($data);
+        echo json_encode($data);
     }
 
 
-   
+
     public function store(Request $request)
-    {    $rules = array(
-        'foto' => 'required|mimes:jpeg,png,jpg,gif,svg',
-    );
-    $validation = Validator::make($request->all(), $rules);
-    if ($validation->fails()) {
-        Alert::error('Data Tidak Sesuai', 'Silahkan coba lagi');
-        return redirect()->back();
-    }
+    {    
+        $rules = array(
+            'foto' => 'required|mimes:jpeg,png,jpg,gif,svg',
+        );
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Data Tidak Sesuai', 'Silahkan coba lagi');
+            return redirect()->back();
+        }
         
         $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
         if ($cek_berita == 0) {
             $berita = new Berita;
             $berita->jenis_berita = $request->jenis_berita;
             $berita->judul_berita = $request->judul_berita;
+            $berita->preview_berita = $request->preview_berita;
             $berita->isi_berita = $request->isi_berita;
             $file = $request->file('foto');
             $nama_file = rand().$file->getClientOriginalName();
@@ -74,7 +76,7 @@ class BeritaController extends Controller
         //
     }
 
-   
+
     public function update(Request $request, $id)
     {
         $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
@@ -89,11 +91,12 @@ class BeritaController extends Controller
                 $imgName = $bannerImage->getClientOriginalName();
                 $destinationPath = public_path('public/img/');
                 $bannerImage->move($destinationPath, $imgName);
-              } else {
+            } else {
                 $imgName = $berita->foto;
-              }
+            }
             $berita->jenis_berita = $request->jenis_berita;
             $berita->judul_berita = $request->judul_berita;
+            $berita->preview_berita = $request->preview_berita;
             $berita->isi_berita = $request->isi_berita;
             $file = $request->file('foto');
             $nama_file = rand().$file->getClientOriginalName();
