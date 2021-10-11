@@ -46,7 +46,7 @@
                   {{ $berita->isi_berita}}
                 </p>
                 <div class="read-more">
-                  <a href="{{route('beritasingle.show', $berita->id)}}">Read More</a>
+                  <a href="{{route('beritasingle.show', $berita->id)}}">Selengkapnya</a>
                 </div>
               </div>
 
