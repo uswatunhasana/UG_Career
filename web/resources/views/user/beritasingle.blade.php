@@ -8,7 +8,6 @@
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
       <div class="container">
-
         <ol>
           <li><a href="{{ route('dashboard.user') }}">Home</a></li>
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
