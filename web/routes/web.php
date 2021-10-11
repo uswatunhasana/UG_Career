@@ -30,6 +30,9 @@ Route::resource('/', DashboardController::class)->names([
 // Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
 Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login.index');
 Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
+Route::get('lupa_password', 'App\Http\Controllers\AuthUserController@lupa_password')->name('lupapassword.lupa_password');
+Route::post('post_lupapassword', 'App\Http\Controllers\AuthUserController@post_lupapassword')->name('post_lupapassword');
+Route::post('resetpassword', 'App\Http\Controllers\AuthUserController@resetpassword')->name('resetpassword');
 Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
