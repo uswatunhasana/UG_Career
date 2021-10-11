@@ -28,7 +28,8 @@ class PertAlumniController extends Controller
     public function ajaxdetail($id)
     {
         $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
-		echo json_encode($data);
+        $datadetail1 = PertanyaanCabang::where('id_pertanyaan','=', $id)->select('*')->get();
+		echo json_encode($data, $datadetail1);
     }
 
     
@@ -154,6 +155,59 @@ class PertAlumniController extends Controller
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
         }else{
+            if($request->is_cabang == "ya"){
+                $update_pertanyaan = Pertanyaan::findOrFail($id)
+                ->where('pertanyaans.id', '=', $id)
+                ->select('pertanyaans.*')
+                ->first();
+                $update_pertanyaan->kategori_pertanyaan = 'alumni';
+                $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+                $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $update_pertanyaan->pertanyaan = $request->pertanyaan;
+                $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $update_pertanyaan->save();
+
+                foreach($request->idcabang as $key => $value){
+                $update_pilihancabang = PertanyaanCabang::findOrFail($value)
+                ->where('id', '=', $value)
+                ->select('pertanyaancabangs.*')
+                ->first();
+    
+                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$key];
+                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$key];
+                $update_pilihancabang->save();
+            }
+
+                $i=0;
+                foreach($request->idpilihan as $key => $value){
+                $update_pilihanjawaban = PilihanJawaban::findOrFail($value)
+                ->where('id', '=', $value)
+                ->select('pilihanjawabans.*')
+                ->first();
+    
+                $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+                $update_pilihanjawaban->save();
+                
+            }
+            foreach($request->pilihan_jawaban as $key => $value)
+            {
+                $pilihanjawaban = new PilihanJawaban;
+                $pilihanjawaban->pilihan_jawaban = $value;
+                $pilihanjawaban->id_pertanyaan =  $id;
+                $pilihanjawaban->created_at = now();
+                $pilihanjawaban->updated_at = now();
+                $pilihanjawaban->save();
+            }
+            foreach($request->kd_cabang as $key => $val)
+            {
+            $pertanyaancabang= new PertanyaanCabang;
+            $pertanyaancabang->kd_cabang=$val;
+            $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
+            $pertanyaancabang->id_pertanyaan =  $id;
+            $pertanyaancabang->save();
+            }
+
+            }else{
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
@@ -185,7 +239,7 @@ class PertAlumniController extends Controller
             $pilihanjawaban->updated_at = now();
             $pilihanjawaban->save();
         }
-            
+        }
         }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
@@ -195,7 +249,8 @@ class PertAlumniController extends Controller
     public function destroy($id)
     {
         DB::table('pertanyaans')->where('id', $id)->delete();
-        DB::table('pilihan_jawabans')->where('id_pertanyaan', $id)->delete();
+        DB::table('pilihanjawabans')->where('id_pertanyaan', $id)->delete();
+        DB::table('pertanyaancabangs')->where('id_pertanyaan', $id)->delete();
         return redirect()->back();
     }
 }
