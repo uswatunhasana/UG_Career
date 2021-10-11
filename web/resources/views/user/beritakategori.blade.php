@@ -18,6 +18,8 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
+    <!-- ======= Berita Section ======= -->
+
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
 
@@ -25,7 +27,7 @@
 
           <div class="col-lg-8 entries">
             @foreach($beritas as $berita)
-            <article class="entry">
+            <article class="entry entry-single">
 
               <div class="entry-img">
                 <img src="{{ asset('img/'. $berita->foto )}}" alt="" class="img-fluid">

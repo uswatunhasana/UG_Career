@@ -7,8 +7,8 @@
       <title>UG Career | @yield('title')</title>
 
       <!-- Favicons -->
-      <link href="{{ asset('assets') }}/img/favicongundar.png" rel="icon">
-      <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="{{ asset('assets') }}/img/favicon.png" rel="icon">
+        <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
       <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
@@ -16,28 +16,33 @@
       <div class="wrapper">
          <div class="title-text">
             <div class="title alumni">
-               Login
+               Lupa Password
             </div>
          </div>
          <div class="form-container">
             <div class="form-inner">
                <form action="{{ route('postlogin') }}" class="alumni" method="POST">
                    {{ csrf_field() }}
+                   @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                   <div class="field">
-                     <input type="text" name="username" placeholder="{{ __('Username or Email') }}" required>
+                     <input type="email" name="email" placeholder="Masukkan Email" value="{{ $email ?? old('email') }}" required>
+                     <span class="text-danger">@error('email'){{ 'message'}} @enderror</span>
                   </div>
                   <div class="field">
-                     <input type="password" name="password" placeholder="Password" required>
+                     <input type="password" name="password_baru" placeholder="Password" required>
+                     <span class="text-danger">@error('password'){{ 'message'}} @enderror</span>
                   </div>
-                  <div class="pass-link">
-                     <a href="{{ route('lupapassword.lupa_password') }}">Lupa password ?</a>
+                  <div class="field">
+                     <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
+                     <span class="text-danger">@error('confirm_password'){{ 'message'}} @enderror</span>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
-                     <input type="submit" value="Submit">
-                  </div>
-                  <div class="perusahaan-link">
-                     Belum memiliki akun ? <a href="{{ route('daftar.registrasi') }}">Registrasi Akun</a>
+                     <input type="submit" value="Reset Password">
                   </div>
                </form>
             </div>

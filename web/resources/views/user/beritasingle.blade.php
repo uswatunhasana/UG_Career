@@ -21,16 +21,19 @@
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
 
-@foreach($beritas as $berita)
         <div class="row">
           <div class="col-lg-8 entries">
+            @foreach($beritas as $berita)
             <article class="entry entry-single">
+
               <div class="entry-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                <img src="{{ asset('img/'. $berita->foto )}}" alt="" class="img-fluid">
               </div>
+
               <h2 class="entry-title">
                 <a href="">{{ $berita->judul_berita }}</a>
               </h2>
+
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ tanggal_indonesia($berita->created_at) }}</time></a></li>
@@ -38,10 +41,7 @@
               </div>
 
               <div class="entry-content">
-                <img src="{{ asset('img/'. $berita->foto )}}" class="img-fluid" alt="">
-                <p>
-
-                {{ $berita->isi_berita }}</p>
+                <p>{{ $berita->isi_berita }}</p>
               </div>
 
             </article><!-- End blog entry -->
