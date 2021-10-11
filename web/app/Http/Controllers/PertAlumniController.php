@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pertanyaan;
+use App\Models\PertanyaanCabang;
 use App\Models\PilihanJawaban;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -57,24 +58,56 @@ class PertAlumniController extends Controller
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
         }else{
-            $pertanyaan = new Pertanyaan;
-            $pertanyaan->kategori_pertanyaan = 'alumni';
-            $pertanyaan->jenis_pertanyaan = $request->kategori;
-            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
-            $pertanyaan->pertanyaan = $request->pertanyaan;
-            $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
-            $pertanyaan->save();
-            $get_id_pertanyaan = DB::getPdo()->lastInsertId();
+            if($request->is_cabang == "ya"){
+                $pertanyaan = new Pertanyaan;
+                $pertanyaan->kategori_pertanyaan = 'alumni';
+                $pertanyaan->jenis_pertanyaan = $request->kategori;
+                $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $pertanyaan->pertanyaan = $request->pertanyaan;
+                $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $pertanyaan->is_cabang = $request->is_cabang;
+                $pertanyaan->save();
+                $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-            foreach($request->pilihan_jawaban as $key => $value)
-            {
-                $perusahaan = new PilihanJawaban;
-                $perusahaan->pilihan_jawaban = $value;
-                $perusahaan->id_pertanyaan =  $get_id_pertanyaan;
-                $perusahaan->created_at = now();
-                $perusahaan->updated_at = now();
-                $perusahaan->save();
-            }}
+                foreach($request->kd_cabang as $key => $val)
+                {
+                $pertanyaancabang= new PertanyaanCabang;
+                $pertanyaancabang->kd_cabang=$val;
+                $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
+                $pertanyaancabang->id_pertanyaan =  $get_id_pertanyaan;
+                $pertanyaancabang->save();
+                }
+
+                foreach($request->pilihan_jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }else{
+                $pertanyaan = new Pertanyaan;
+                $pertanyaan->kategori_pertanyaan = 'alumni';
+                $pertanyaan->jenis_pertanyaan = $request->kategori;
+                $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $pertanyaan->pertanyaan = $request->pertanyaan;
+                $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $pertanyaan->save();
+                $get_id_pertanyaan = DB::getPdo()->lastInsertId();
+
+                foreach($request->pilihan_jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }
+            }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         } else {
             Alert::error('Data pertanyaan Sudah Ada ', ' Silahkan coba lagi');
@@ -145,12 +178,12 @@ class PertAlumniController extends Controller
         }
         foreach($request->pilihan_jawaban as $key => $value)
         {
-            $perusahaan = new PilihanJawaban;
-            $perusahaan->pilihan_jawaban = $value;
-            $perusahaan->id_pertanyaan =  $id;
-            $perusahaan->created_at = now();
-            $perusahaan->updated_at = now();
-            $perusahaan->save();
+            $pilihanjawaban = new PilihanJawaban;
+            $pilihanjawaban->pilihan_jawaban = $value;
+            $pilihanjawaban->id_pertanyaan =  $id;
+            $pilihanjawaban->created_at = now();
+            $pilihanjawaban->updated_at = now();
+            $pilihanjawaban->save();
         }
             
         }

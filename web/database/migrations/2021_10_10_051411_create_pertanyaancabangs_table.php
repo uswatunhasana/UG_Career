@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJawabancabangsTable extends Migration
+class CreatePertanyaancabangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateJawabancabangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jawabancabangs', function (Blueprint $table) {
+        Schema::create('pertanyaancabangs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('kd_cabang',5);
-            $table->text('kategori_cabang');
+            $table->text('pertanyaan_cabang');
             //relasi dengan pertanyaan
-            $table->unsignedInteger('id_pilihanjawaban')->nullable();
-            $table->foreign('id_pilihanjawaban')
-                ->on('pilihanjawabans')
+            $table->unsignedInteger('id_pertanyaan')->nullable();
+            $table->foreign('id_pertanyaan')
+                ->on('pertanyaans')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

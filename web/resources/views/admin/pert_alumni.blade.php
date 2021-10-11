@@ -97,34 +97,12 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
-												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
-													<option value="tidak">Tidak</option>
-													<option value="ya">Ya</option>
-												</select>
-											</div>
-										</div>
+									<div class="" id="container_cabang">
 									</div>
+
+
 									<!-- Jika Cabang -->
-									<hr/>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Kode Pertanyaan Cabang</b></h4></label>
-												<input id="addkodecabang" type="text" name="kd_cabang" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Pertanyaan</b></h4></label>
-												<input id="addpertanyaan" type="text" name="pertanyaan_cabang" class="form-control" placeholder="Masukkan Pertanyaan ">
-											</div>
-										</div>
+									<div id="container_jikacabang">
 									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
@@ -133,41 +111,6 @@
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
 												<input id="addpilihanjawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
-										</div>
-										<div class="col-sm-3">
-											<button class="btn btn-success add-more" type="button">
-												<i class="fas fa-plus-square"></i> Add
-											</button>
-										</div>
-									</div> 
-									</div>
-									@endif
-								</div>
-								<!-- Tidak Cabang -->
-									<hr/>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Kode Pertanyaan</b></h4></label>
-												<input id="addkodecabang" type="text" name="kd_cabang" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Pertanyaan</b></h4></label>
-												<input id="addpertanyaan" type="text" name="pertanyaan_cabang" class="form-control" placeholder="Masukkan Pertanyaan ">
-											</div>
-										</div>
-									</div>
-									<div id="container_pilihan_jawaban">
-									@if(Request::segment( 3 ) != "text")
-									<div id="pilihan_jawaban">
-									<label><h4><b>Pilihan Jawaban</b></h4></label>
-									<div class="row control-group after-add-more">
-										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -197,6 +140,38 @@
 									</div>
 								</div>
 							</div>
+							<!-- Copy Hide new-->
+							<div class="copy-cabang invisible">
+								<!-- <div class="" id="is_cabang_form"> -->
+									<div class="control-group-cabang"> 
+									<hr/>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kode Pertanyaan Cabang</b></h4></label>
+												<input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Pertanyaan Cabang</b></h4></label>
+												<input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+										<button class="btn btn-danger remove-cabang w-100" type="button"><i class="fas fa-trash-alt"></i> Remove</button>
+										</div>
+									</div>
+									</div>
+								<!-- </div> -->
+							</div>
+
+
+
 						</div>
 					</div>
 				</div>
@@ -392,8 +367,7 @@
 	</div>
 	@endsection
 	@section('customjs')
-	<script >
-
+	<script>
 			$(document).ready(function() {
 				$('#select_category').change(function() {
 					var val = $(this).val(); 
@@ -401,14 +375,27 @@
 				});
 			});
 
+			$(document).on("change", "#is_cabang", function() { 
+					var val = $(this).val(); 
+					if(val == 'ya')	{
+						var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
+						$("#container_jikacabang").html(html);
+					}else{
+						$("#is_cabang_form").remove();
+					}
+				});
+
 			$(document).ready(function() {
 				$('#kategori_pertanyaan').change(function() {
 					var val = $(this).val(); 
 					if(val == "text"){
 						$("#pilihan_jawaban").remove();
+						$("#cabang_option").remove();
 					}else{
 						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
 						$("#container_pilihan_jawaban").html(html);
+						html='<div class="row" id="cabang_option"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label><select class="form-control input-sm"  id="is_cabang" name="is_cabang"><option value="tidak">Tidak</option><option value="ya">Ya</option></select></div></div></div>'
+						$("#container_cabang").html(html);
 					}	
 				});
 			});
@@ -435,13 +422,25 @@
 			});
 		});
 
-		$(document).on("click", ".add-more", function() { 
+	$(document).on("click", ".add-more", function() { 
           var html = $(".copy").html();
           $(".after-add-more").after(html);
 
       // saat tombol remove dklik control group akan dihapus 
+
       $("body").on("click",".remove",function(){ 
           $(this).parents(".control-group").remove();
+      });
+    });
+
+	$(document).on("click", ".add-more-cabang", function() { 
+          var html = $(".copy-cabang").html();
+          $(".after-add-more-cabang").append(html);
+
+      // saat tombol remove dklik control group akan dihapus 
+
+      $("body").on("click",".remove-cabang",function(){ 
+		$(this).parents(".control-group-cabang").remove();
       });
     });
 
