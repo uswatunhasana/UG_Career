@@ -25,7 +25,7 @@
 
           <div class="col-lg-8 entries">
             @foreach($beritas as $berita)
-            <article class="entry">
+            <article class="entry entry-single">
 
               <div class="entry-img">
                 <img src="{{ asset('img/'. $berita->foto )}}" alt="" class="img-fluid">
@@ -43,7 +43,7 @@
 
               <div class="entry-content">
                 <p>
-                  {{ $berita->isi_berita}}
+                  {{ $berita->preview_berita}}
                 </p>
                 <div class="read-more">
                   <a href="{{route('beritasingle.show', $berita->id)}}">Selengkapnya</a>
