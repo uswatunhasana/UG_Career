@@ -15,12 +15,11 @@ class CreateAlumnisTable extends Migration
     {
         Schema::create('alumnis', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('tgl_lahir');
-            $table->enum('jenis_kelamin',['P','L']);
-            $table->text('alamat_sekarang');
-            $table->text('alamat_tetap');
-            $table->string('no_telp',15);
+            $table->string('npm',8);
+            $table->string('tahun_masuk',4);
             $table->string('tahun_lulus',4);
+            $table->string('nik',16);
+            $table->string('no_telp',15);
             //relasi user
             $table->unsignedInteger('id_user')->nullable();
             $table->foreign('id_user')

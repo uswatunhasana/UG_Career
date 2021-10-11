@@ -24,7 +24,7 @@
                <form action="{{ route('postlogin') }}" class="alumni" method="POST">
                    {{ csrf_field() }}
                   <div class="field">
-                     <input type="text" name="email" placeholder="Email Address" required>
+                     <input type="text" name="username" placeholder="{{ __('Username or Email') }}" required>
                   </div>
                   <div class="field">
                      <input type="password" name="password" placeholder="Password" required>
