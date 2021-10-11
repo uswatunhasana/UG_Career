@@ -197,19 +197,31 @@
 								</button>
 							</div>
 							<div class="modal-body">
+								Cabang Pertanyaan
+								<hr/>
+								<table id="detailtable" class="display table table-striped table-hover" >
+									<thead class="thead-light">
+										<tr>
+											<th width="10px">No</th>
+											<th>Kode Cabang</th>
+											<th>Nama Cabang Pertanyaan</th>
+										</tr>
+									</thead>
+									<tbody id="detail1-table">
+									</tbody>
+								</table>
 								Pilihan Jawaban
 								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >
-						<thead class="thead-light">
-							<tr>
-								<th width="10px">No</th>
-								<th>Pilihan Jawaban</th>
-							</tr>
-						</thead>
-						<tbody id="detail-table">
-
-						</tbody>
-						</table>
+									<thead class="thead-light">
+										<tr>
+											<th width="10px">No</th>
+											<th>Pilihan Jawaban</th>
+										</tr>
+									</thead>
+									<tbody id="detail-table">
+									</tbody>
+								</table>
 							</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -321,6 +333,7 @@
 									<div class="row control-group after-add-more">
 										<div class="container">
 											<label for="basic-url">Pertanyaan Cabang {{$no_kd++ }}</label>
+											<input name="idcabang[]" type="hidden" value="{{$pertanyaan_cabang->id}}">
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon3">Kode</span>
@@ -337,7 +350,7 @@
 									</div> 
 									@endforeach
 									<hr/>
-									<label><h4><b>Pilihan Pertanyaan</b></h4></label>
+									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									@foreach($pilihan_jawabans as $pilihan_jawaban)
 									<div class="row control-group after-add-more">
 										<div class="col-sm-12 ">
@@ -539,7 +552,6 @@
 							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
-					
 				}
 			});
 		});
