@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
+    // public function search(Request $request)
+    // {
+       
+    //     $search = Berita::where('title', 'like', "%".$request->search."%")->paginate(2);
+
+    //     return view('user.berita',['beritas'=>$search]);
+    // }
+
     public function index($kategori="pengumuman")
     {
         $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
@@ -30,7 +38,6 @@ class BeritaController extends Controller
         $data = Berita::where('id','=', $id)->select('*')->get();
         echo json_encode($data);
     }
-
 
 
     public function store(Request $request)
@@ -67,7 +74,36 @@ class BeritaController extends Controller
     
     public function show(Request $request)
     {
+        // $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
+        // if ($cek_berita == 0) {
+        //     $berita = Berita::findOrFail($id);
+        //     if ($request->hasFile('foto')){
+        //         $image_path = public_path("public/img/".$berita->foto);
+        //         if (File::exists($image_path)) {
+        //             File::delete($image_path);
+        //         }
+        //         $bannerImage = $request->file('foto');
+        //         $imgName = $bannerImage->getClientOriginalName();
+        //         $destinationPath = public_path('public/img/');
+        //         $bannerImage->move($destinationPath, $imgName);
+        //     } else {
+        //         $imgName = $berita->foto;
+        //     }
+        //     $berita->jenis_berita = $request->jenis_berita;
+        //     $berita->judul_berita = $request->judul_berita;
+        //     $berita->preview_berita = $request->preview_berita;
+        //     $berita->isi_berita = $request->isi_berita;
+        //     $file = $request->file('foto');
+        //     $nama_file = rand().$file->getClientOriginalName();
+        //     $file->move('public/img/', $nama_file);
+        //     $berita->foto = $nama_file;
+        //     $berita->save();
 
+        //     Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');
+        // } else {
+        //     Alert::error('Judul Berita Sudah Ada', 'Silahkan coba lagi');
+        // }
+        // return redirect()->back();
     }
 
     
