@@ -84,7 +84,8 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Isi Berita</b></h4></label>
-												<input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita">
+												<textarea id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita" rows="5"></textarea>
+												<!-- <input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita"> -->
 											</div>
 										</div>
 									</div>
@@ -195,12 +196,51 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+
+
 			<div class="modal-body">
 				<form role="form" action="{{ route('berita.update', $berita->id) }}" method="POST">
 					@csrf
 					@method('PUT')
-
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group form-group-default">
+								<label><h4><b>Kategori</b></h4></label>
+								<select class="form-control" name="jenis_berita"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
+									<option value="Pengumuman" {{ $berita->jenis_berita === 'Pengumuman' ? 'selected' : '' }} >Pengumuman</option>
+									<option value="Loker" {{ $berita->jenis_berita === 'Loker' ? 'selected' : '' }} >Loker</option>
+									<option value="Internship" {{ $berita->jenis_berita === 'Internship' ? 'selected' : '' }} >Internship</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group form-group-default">
+								<label><h4><b>Judul Berita</b></h4></label>
+								<input id="addberita" type="text" name="judul_berita" class="form-control" value="{{ $berita->judul_berita }}">
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group form-group-default">
+								<label><h4><b>Preview Berita</b></h4></label>
+								<input id="addberita" type="text" name="preview_berita" class="form-control" value="{{ $berita->preview_berita }}">
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group form-group-default">
+								<label><h4><b>Isi Berita</b></h4></label>
+								<input id="addberita" type="text" name="isi_berita" class="form-control" value="{{ $berita->isi_berita }}" >
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group form-group-default">
+								<label><h4><b>Foto</b></h4></label>
+								<img src="{{ asset('img/'. $berita->foto )}}" height="50" width="100" alt="" srcset=""><br>
+								<input id="addberita" type="file" name="foto" class="form-control-file" value="{{ $berita->foto }}">
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
 					<button type="submit" class="btn btn-primary">Update Data</button>
@@ -210,6 +250,7 @@
 	</div>
 </div>
 @endforeach
+
 </div>
 </div>
 </div>
