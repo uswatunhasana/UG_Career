@@ -301,7 +301,7 @@
 											</div>
 										</div>
 									</div> -->
-											
+							<input name="kategori" type="hidden" value="{{$pertanyaan->jenis_pertanyaan}}">				
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Kode pertanyaan</b></h4></label>
