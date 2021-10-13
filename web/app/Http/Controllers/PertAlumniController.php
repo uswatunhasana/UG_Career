@@ -52,7 +52,7 @@ class PertAlumniController extends Controller
             $pertanyaan = new Pertanyaan;
             $pertanyaan->kategori_pertanyaan = 'alumni';
             $pertanyaan->jenis_pertanyaan = $request->kategori;
-            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $pertanyaan->save();
@@ -63,7 +63,7 @@ class PertAlumniController extends Controller
                 $pertanyaan = new Pertanyaan;
                 $pertanyaan->kategori_pertanyaan = 'alumni';
                 $pertanyaan->jenis_pertanyaan = $request->kategori;
-                $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
                 $pertanyaan->pertanyaan = $request->pertanyaan;
                 $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
                 $pertanyaan->is_cabang = $request->is_cabang;
@@ -92,7 +92,7 @@ class PertAlumniController extends Controller
                 $pertanyaan = new Pertanyaan;
                 $pertanyaan->kategori_pertanyaan = 'alumni';
                 $pertanyaan->jenis_pertanyaan = $request->kategori;
-                $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
                 $pertanyaan->pertanyaan = $request->pertanyaan;
                 $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
                 $pertanyaan->save();
@@ -148,7 +148,7 @@ class PertAlumniController extends Controller
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'alumni';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
-            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
@@ -162,19 +162,21 @@ class PertAlumniController extends Controller
                 ->first();
                 $update_pertanyaan->kategori_pertanyaan = 'alumni';
                 $update_pertanyaan->jenis_pertanyaan = $request->kategori;
-                $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
                 $update_pertanyaan->pertanyaan = $request->pertanyaan;
                 $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
                 $update_pertanyaan->save();
 
+                $j=0;
+                $k=0;
                 foreach($request->idcabang as $key => $value){
                 $update_pilihancabang = PertanyaanCabang::findOrFail($value)
                 ->where('id', '=', $value)
                 ->select('pertanyaancabangs.*')
                 ->first();
     
-                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$key];
-                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$key];
+                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$j++];
+                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$k++];
                 $update_pilihancabang->save();
             }
 
@@ -189,6 +191,18 @@ class PertAlumniController extends Controller
                 $update_pilihanjawaban->save();
                 
             }
+
+            if($request->kd_cabang != null){
+            foreach($request->kd_cabang as $key => $val)
+            {
+            $pertanyaancabang= new PertanyaanCabang;
+            $pertanyaancabang->kd_cabang=$val;
+            $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
+            $pertanyaancabang->id_pertanyaan =  $id;
+            $pertanyaancabang->save();
+            }
+        }
+            if($request->pilihanjawaban != null){
             foreach($request->pilihan_jawaban as $key => $value)
             {
                 $pilihanjawaban = new PilihanJawaban;
@@ -198,23 +212,16 @@ class PertAlumniController extends Controller
                 $pilihanjawaban->updated_at = now();
                 $pilihanjawaban->save();
             }
-            foreach($request->kd_cabang as $key => $val)
-            {
-            $pertanyaancabang= new PertanyaanCabang;
-            $pertanyaancabang->kd_cabang=$val;
-            $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
-            $pertanyaancabang->id_pertanyaan =  $id;
-            $pertanyaancabang->save();
-            }
+        }
 
-            }else{
+         }else{
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'alumni';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
-            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
