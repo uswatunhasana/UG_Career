@@ -107,7 +107,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
             'update' => 'pert_alumni.update',
         ]);
         Route::get('/pert_perusahaan/{kategori}', 'App\Http\Controllers\PertPerusahaanController@jenispertanyaan')->name('pert_perusahaan.kategori');
-        Route::get('/pert_perusahaan/detail/{id}', 'App\Http\Controllers\PertPerusahaanController@ajaxdetail')->name('pert_perusahaan.ajaxdetail');
+        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}', 'App\Http\Controllers\PertPerusahaanController@ajaxdetail')->name('pert_perusahaan.ajaxdetail');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
