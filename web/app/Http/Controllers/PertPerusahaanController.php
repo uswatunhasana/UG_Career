@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Pertanyaan;
+use App\Models\PertanyaanCabang;
 use App\Models\PilihanJawaban;
 
 
@@ -25,9 +26,15 @@ class PertPerusahaanController extends Controller
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','perusahaan')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
         return view('admin.pert_perusahaan', ['pertanyaans' => $pertanyaans]);
     }
-    public function ajaxdetail($id)
+    public function ajaxdetail($id, $is_cabang)
     {
-        $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
+        if($is_cabang == "ya"){
+            $data["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
+            $data["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$id)->select('*')->get();
+        }else{
+            $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
+        }
+        // $datadetail1 = PertanyaanCabang::where('id_pertanyaan','=', $id)->select('*')->get();
 		echo json_encode($data);
     }
 
@@ -51,31 +58,64 @@ class PertPerusahaanController extends Controller
             $pertanyaan = new Pertanyaan;
             $pertanyaan->kategori_pertanyaan = 'perusahaan';
             $pertanyaan->jenis_pertanyaan = $request->kategori;
-            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $pertanyaan->save();
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
         }else{
-            $pertanyaan = new Pertanyaan;
-            $pertanyaan->kategori_pertanyaan = 'perusahaan';
-            $pertanyaan->jenis_pertanyaan = $request->kategori;
-            $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
-            $pertanyaan->pertanyaan = $request->pertanyaan;
-            $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
-            $pertanyaan->save();
-            $get_id_pertanyaan = DB::getPdo()->lastInsertId();
+            if($request->is_cabang == "ya"){
+                $pertanyaan = new Pertanyaan;
+                $pertanyaan->kategori_pertanyaan = 'perusahaan';
+                $pertanyaan->jenis_pertanyaan = $request->kategori;
+                // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $pertanyaan->pertanyaan = $request->pertanyaan;
+                $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $pertanyaan->is_cabang = $request->is_cabang;
+                $pertanyaan->save();
+                $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-            foreach($request->pilihan_jawaban as $key => $value)
-            {
-                $perusahaan = new PilihanJawaban;
-                $perusahaan->pilihan_jawaban = $value;
-                $perusahaan->id_pertanyaan =  $get_id_pertanyaan;
-                $perusahaan->created_at = now();
-                $perusahaan->updated_at = now();
-                $perusahaan->save();
-            }}
+                foreach($request->kd_cabang as $key => $val)
+                {
+                $pertanyaancabang= new PertanyaanCabang;
+                $pertanyaancabang->kd_cabang=$val;
+                $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
+                $pertanyaancabang->id_pertanyaan =  $get_id_pertanyaan;
+                $pertanyaancabang->save();
+                }
+
+                foreach($request->pilihan_jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }else{
+                $pertanyaan = new Pertanyaan;
+                $pertanyaan->kategori_pertanyaan = 'perusahaan';
+                $pertanyaan->jenis_pertanyaan = $request->kategori;
+                $pertanyaan->is_cabang= $request->is_cabang;
+                // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $pertanyaan->pertanyaan = $request->pertanyaan;
+                $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $pertanyaan->save();
+                $get_id_pertanyaan = DB::getPdo()->lastInsertId();
+
+                foreach($request->pilihan_jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }
+            }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         } else {
             Alert::error('Data pertanyaan Sudah Ada ', ' Silahkan coba lagi');
@@ -107,19 +147,25 @@ class PertPerusahaanController extends Controller
         //     Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
         //     return redirect()->back();
         // }
+        $cek_tambahpertanyaan=0;
+        foreach($request->kd_cabang as $kd_cabang){
+        if($kd_cabang != null){
+            $cek_tambahpertanyaan++;
+            // dd($kd_cabang);
+            // echo('ok');
+            // die;
+        }
+        }
+        $cek_tambahjawaban=0;
+        foreach($request->kd_cabang as $kd_cabang){
+        if($kd_cabang != null){
+            $cek_tambahjawaban++;
+            // dd($kd_cabang);
+            // echo('ok');
+            // die;
+        }
+        }
 
-        // $update_pertanyaan = Pertanyaan::findOrFail($id)
-        // ->where('pertanyaans.id', '=', $id)
-        // ->select('pertanyaans.*')
-        // ->first();
-
-        // $update_pertanyaan->jenis_pertanyaan = $request->jenis_pertanyaan;
-        // $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
-        // $update_pertanyaan->pertanyaan = $request->pertanyaan;
-        // $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
-        // $update_pertanyaan->save();
-        // Alert::success('Berhasil Update Data ', ' Silahkan dicek kembali');
-        // return redirect()->back();
 
         if($request->kategori == "text"){
             $update_pertanyaan = Pertanyaan::findOrFail($id)
@@ -128,20 +174,80 @@ class PertPerusahaanController extends Controller
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
-            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
         }else{
+            if($request->is_cabang == "ya"){
+                $update_pertanyaan = Pertanyaan::findOrFail($id)
+                ->where('pertanyaans.id', '=', $id)
+                ->select('pertanyaans.*')
+                ->first();
+                $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
+                $update_pertanyaan->jenis_pertanyaan = $request->kategori;
+                // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+                $update_pertanyaan->pertanyaan = $request->pertanyaan;
+                $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
+                $update_pertanyaan->save();
+
+                $j=0;
+                foreach($request->idcabang as $key => $value){
+                $update_pilihancabang = PertanyaanCabang::findOrFail($value)
+                ->where('id', '=', $value)
+                ->select('pertanyaancabangs.*')
+                ->first();
+    
+                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$j];
+                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$j];
+                $j++;
+                $update_pilihancabang->save();
+            }
+
+                $i=0;
+                foreach($request->idpilihan as $key => $value){
+                $update_pilihanjawaban = PilihanJawaban::findOrFail($value)
+                ->where('id', '=', $value)
+                ->select('pilihanjawabans.*')
+                ->first();
+    
+                $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+                $update_pilihanjawaban->save();
+                
+            }
+
+            if($cek_tambahpertanyaan > 0){
+            foreach($request->kd_cabang as $key => $val)
+            {
+            $pertanyaancabang= new PertanyaanCabang;
+            $pertanyaancabang->kd_cabang=$val;
+            $pertanyaancabang->pertanyaan_cabang=$request->pertanyaan_cabang[$key];
+            $pertanyaancabang->id_pertanyaan =  $id;
+            $pertanyaancabang->save();
+            }
+        }
+            if($cek_tambahjawaban > 0){
+            foreach($request->pilihan_jawaban as $key => $value)
+            {
+                $pilihanjawaban = new PilihanJawaban;
+                $pilihanjawaban->pilihan_jawaban = $value;
+                $pilihanjawaban->id_pertanyaan =  $id;
+                $pilihanjawaban->created_at = now();
+                $pilihanjawaban->updated_at = now();
+                $pilihanjawaban->save();
+            }
+        }
+
+    }else{
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
             ->first();
             $update_pertanyaan->kategori_pertanyaan = 'perusahaan';
             $update_pertanyaan->jenis_pertanyaan = $request->kategori;
-            $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
+            // $update_pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
@@ -159,14 +265,14 @@ class PertPerusahaanController extends Controller
         }
         foreach($request->pilihan_jawaban as $key => $value)
         {
-            $perusahaan = new PilihanJawaban;
-            $perusahaan->pilihan_jawaban = $value;
-            $perusahaan->id_pertanyaan =  $id;
-            $perusahaan->created_at = now();
-            $perusahaan->updated_at = now();
-            $perusahaan->save();
+            $pilihanjawaban = new PilihanJawaban;
+            $pilihanjawaban->pilihan_jawaban = $value;
+            $pilihanjawaban->id_pertanyaan =  $id;
+            $pilihanjawaban->created_at = now();
+            $pilihanjawaban->updated_at = now();
+            $pilihanjawaban->save();
         }
-            
+        }
         }
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
@@ -176,6 +282,8 @@ class PertPerusahaanController extends Controller
     public function destroy($id)
     {
         DB::table('pertanyaans')->where('id', $id)->delete();
+        DB::table('pilihanjawabans')->where('id_pertanyaan', $id)->delete();
+        DB::table('pertanyaancabangs')->where('id_pertanyaan', $id)->delete();
         return redirect()->back();
     }
 }
