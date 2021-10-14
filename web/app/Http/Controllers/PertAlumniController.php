@@ -25,11 +25,16 @@ class PertAlumniController extends Controller
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
         return view('admin.pert_alumni', ['pertanyaans' => $pertanyaans]);
     }
-    public function ajaxdetail($id)
+    public function ajaxdetail($id, $is_cabang)
     {
-        $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
-        $datadetail1 = PertanyaanCabang::where('id_pertanyaan','=', $id)->select('*')->get();
-		echo json_encode($data, $datadetail1);
+        if($is_cabang == "ya"){
+            $data["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
+            $data["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$id)->select('*')->get();
+        }else{
+            $data = PilihanJawaban::where('id_pertanyaan','=', $id)->select('*')->get();
+        }
+        // $datadetail1 = PertanyaanCabang::where('id_pertanyaan','=', $id)->select('*')->get();
+		echo json_encode($data);
     }
 
     
@@ -92,6 +97,7 @@ class PertAlumniController extends Controller
                 $pertanyaan = new Pertanyaan;
                 $pertanyaan->kategori_pertanyaan = 'alumni';
                 $pertanyaan->jenis_pertanyaan = $request->kategori;
+                $pertanyaan->is_cabang= $request->is_cabang;
                 // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
                 $pertanyaan->pertanyaan = $request->pertanyaan;
                 $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
@@ -140,6 +146,25 @@ class PertAlumniController extends Controller
         //     Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
         //     return redirect()->back();
         // }
+        $cek_tambahpertanyaan=0;
+        foreach($request->kd_cabang as $kd_cabang){
+        if($kd_cabang != null){
+            $cek_tambahpertanyaan++;
+            // dd($kd_cabang);
+            // echo('ok');
+            // die;
+        }
+        }
+        $cek_tambahjawaban=0;
+        foreach($request->kd_cabang as $kd_cabang){
+        if($kd_cabang != null){
+            $cek_tambahjawaban++;
+            // dd($kd_cabang);
+            // echo('ok');
+            // die;
+        }
+        }
+
 
         if($request->kategori == "text"){
             $update_pertanyaan = Pertanyaan::findOrFail($id)
@@ -168,15 +193,15 @@ class PertAlumniController extends Controller
                 $update_pertanyaan->save();
 
                 $j=0;
-                $k=0;
                 foreach($request->idcabang as $key => $value){
                 $update_pilihancabang = PertanyaanCabang::findOrFail($value)
                 ->where('id', '=', $value)
                 ->select('pertanyaancabangs.*')
                 ->first();
     
-                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$j++];
-                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$k++];
+                $update_pilihancabang->kd_cabang = $request->update_kdcabang[$j];
+                $update_pilihancabang->pertanyaan_cabang = $request->update_cabang[$j];
+                $j++;
                 $update_pilihancabang->save();
             }
 
@@ -192,7 +217,7 @@ class PertAlumniController extends Controller
                 
             }
 
-            if($request->kd_cabang != null){
+            if($cek_tambahpertanyaan > 0){
             foreach($request->kd_cabang as $key => $val)
             {
             $pertanyaancabang= new PertanyaanCabang;
@@ -202,7 +227,7 @@ class PertAlumniController extends Controller
             $pertanyaancabang->save();
             }
         }
-            if($request->pilihanjawaban != null){
+            if($cek_tambahjawaban > 0){
             foreach($request->pilihan_jawaban as $key => $value)
             {
                 $pilihanjawaban = new PilihanJawaban;
@@ -214,7 +239,7 @@ class PertAlumniController extends Controller
             }
         }
 
-         }else{
+    }else{
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
