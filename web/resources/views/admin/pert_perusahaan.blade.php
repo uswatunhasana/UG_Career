@@ -70,8 +70,7 @@
 											</div>
 										</div>
 									</div>
-
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Jenis Pertanyaan</b></h4></label>
@@ -81,12 +80,12 @@
 												</select>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Kode Pertanyaan</b></h4></label>
-												<input id="addkodepertperusahaan" type="text" name="kd_pertanyaan" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+												<input id="addkodepertalumni" type="text" name="kd_pertanyaan" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
 											</div>
 										</div>
 									</div>
@@ -98,25 +97,34 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									@if(Request::segment( 3 ) != "text")
+									<div class="row" id="cabang_option">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
 												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
-													<option value="ya">Ya</option>
 													<option value="tidak">Tidak</option>
+													<option value="ya">Ya</option>
 												</select>
 											</div>
 										</div>
 									</div>
+									@endif
+									<div class="" id="container_cabang">
+									</div>
+
+
+									<!-- Jika Cabang -->
+									<div id="container_jikacabang">
+									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
 									<div id="pilihan_jawaban">
-									<hr/>
+										<hr/>
 									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addpilihanjawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -146,6 +154,35 @@
 									</div>
 								</div>
 							</div>
+							<!-- Copy Hide new-->
+							<div class="copy-cabang invisible">
+								<!-- <div class="" id="is_cabang_form"> -->
+									<div class="control-group-cabang"> 
+									<hr/>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Kode Pertanyaan Cabang</b></h4></label>
+												<input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Pertanyaan Cabang</b></h4></label>
+												<input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+										<button class="btn btn-danger remove-cabang w-100" type="button"><i class="fas fa-trash-alt"></i> Remove</button>
+										</div>
+									</div>
+									</div>
+								<!-- </div> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -159,20 +196,21 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
+							<div class="modal-body" id="modal_body_detail">
+						
+
 								Pilihan Jawaban
 								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >
-						<thead class="thead-light">
-							<tr>
-								<th width="10px">No</th>
-								<th>Pilihan Jawaban</th>
-							</tr>
-						</thead>
-						<tbody id="detail-table">
-
-						</tbody>
-						</table>
+									<thead class="thead-light">
+										<tr>
+											<th width="10px">No</th>
+											<th>Pilihan Jawaban</th>
+										</tr>
+									</thead>
+									<tbody id="detail-table">
+									</tbody>
+								</table>
 							</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -189,9 +227,9 @@
 							<tr>
 								<th width="30px">No</th>
 								<th>Kode Pertanyaan</th>
-								<th>Jenis Pertanyaan</th>
+								<!-- <th>Jenis Pertanyaan</th> -->
 								<th>Pertanyaan</th>
-								<th>Aksi</th>
+								<th width="150px">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -202,16 +240,16 @@
 							<tr>
 								<td>{{$no++ }}</td>
 								<td>{{ $pertanyaan->kd_pertanyaan }}</td>
-								<td>{{ $pertanyaan->kelas_pertanyaan }}</td>
+								<!-- <td>{{ $pertanyaan->kelas_pertanyaan }}</td> -->
 								<td>{{ $pertanyaan->pertanyaan }}</td>
 								<td>
 								@if(Request::segment( 3 ) != "text")
-									<button data-toggle="modal" id="detail" data-id="{{ $pertanyaan->id }}" data-target="#detailModal" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+									<button data-toggle="modal" id="detail" data-id="{{ $pertanyaan->id }}" data-is_cabang="{{ $pertanyaan->is_cabang }}" data-target="#detailModal" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
 								@endif
 									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_perusahaan.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_alumni.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -225,7 +263,7 @@
 		</div>
 	</div>
 
-	<!-- Tambah Edit Modal -->
+	<!--  Edit Modal -->
 	@foreach ($pertanyaans as $pertanyaan)
 	<div class="modal fade" id="editModal-{{ $pertanyaan->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -241,18 +279,7 @@
 						@csrf
 						@method('PUT')
 						<div class="row">
-							<div class="col-md-6 pr-0">
-								<div class="form-group form-group-default">
-									<label><h4><b>Jenis Pertanyaan</b></h4></label>
-									<select class="form-control" name="kategori"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
-										<!-- <option disabled selected>-- Jenis pertanyaan --</option> -->
-										<option value="text" {{ $pertanyaan->jenis_pertanyaan === 'text' ? 'selected' : '' }} >Text</option>
-										<option value="pilihan" {{ $pertanyaan->jenis_pertanyaan === 'pilihan' ? 'selected' : '' }} >Pilihan</option>
-										<option value="checklist" {{ $pertanyaan->jenis_pertanyaan === 'checklist' ? 'selected' : '' }} >Checklist</option>
-									</select>
-								</div>
-							</div>
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Jenis Pertanyaan</b></h4></label>
@@ -262,9 +289,10 @@
 												</select>
 											</div>
 										</div>
-									</div>
-									
-							<div class="col-md-6">
+									</div> -->
+							<input name="kategori" type="hidden" value="{{$pertanyaan->jenis_pertanyaan}}">				
+							<input name="is_cabang" type="hidden" value="{{$pertanyaan->is_cabang}}">				
+							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Kode pertanyaan</b></h4></label>
 									<input id="addkodepertanyaan" type="text" name="kd_pertanyaan" class="form-control" value="{{ $pertanyaan->kd_pertanyaan }}">
@@ -283,21 +311,80 @@
 									@if(Request::segment( 3 ) != "text")
 									<div id="pilihan_jawaban">
 									<hr/>
-									<label><h4><b>Pilihan Jawaban</b></h4></label>
+									<label><h4><b>Pertanyaan  Cabang</b></h4></label>
 									@php
-									$no =1;
+									$no_jwb =1;
+									$no_pert=1;
+									$no_kd =1;
 									$pilihan_jawabans = \App\Models\PilihanJawaban::where('id_pertanyaan','=',$pertanyaan->id)->select('*')->get();
+									$pertanyaan_cabangs = \App\Models\PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan->id)->select('*')->get();
 									@endphp
+									@if($pertanyaan->is_cabang == 'ya')
+									@foreach($pertanyaan_cabangs as $pertanyaan_cabang)
+									<div class="row control-group">
+										<div class="container">
+											<label for="basic-url">Pertanyaan Cabang {{$no_kd++ }}</label>
+											<input name="idcabang[]" type="hidden" value="{{$pertanyaan_cabang->id}}">
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon3">Kode</span>
+												</div>
+												<input id="addpilihanjawaban" type="text" name="update_kdcabang[]" value="{{$pertanyaan_cabang->kd_cabang}}" class="form-control" >
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon3">Pertanyaan</span>
+												</div>
+												<input id="addpilihanjawaban" type="text" name="update_cabang[]" value="{{$pertanyaan_cabang->pertanyaan_cabang}}" class="form-control" >
+											</div>
+										</div>
+									</div> 
+									@endforeach
+									@endif
+									<hr/>
+									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									@foreach($pilihan_jawabans as $pilihan_jawaban)
-									<div class="row control-group after-add-more">
+									<div class="row control-group">
 										<div class="col-sm-12 ">
-										<label>Pilihan {{$no++ }}</label>
-										<input name="idpilihan" type="hidden" value="{{$pilihan_jawaban->id}}">
-											<input id="addpilihanjawaban" type="text" name="update_jawaban" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<label>Pilihan {{$no_jwb++ }}</label>
+										<input name="idpilihan[]" type="hidden" value="{{$pilihan_jawaban->id}}">
+											<input id="addpilihanjawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" >
 										</div>
 									</div> 
 									@endforeach
 									</div>
+									@if($pertanyaan->is_cabang == 'ya')
+									<hr/>
+									<label><h4><b>Tambah Pertanyaan Cabang</b></h4></label>
+									<div class="row control-group">
+										<div class="container">
+										<div class="after-add-more-cabang" id="is_cabang_form">
+											<hr/>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group form-group-default">
+														<label><h4><b>Kode Pertanyaan Cabang</b></h4></label>
+														<input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group form-group-default">
+														<label><h4><b>Pertanyaan Cabang</b></h4></label>
+														<input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan ">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button">
+													<i class="fas fa-plus-square"></i> Add</button>
+												</div>
+											</div>
+										</div>
+										</div>
+									</div> 
+									@endif
 									<hr/>
 									<label><h4><b>Tambah Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
@@ -341,14 +428,22 @@
 	</div>
 	@endsection
 	@section('customjs')
-	<script >
-
+	<script>
 			$(document).ready(function() {
 				$('#select_category').change(function() {
 					var val = $(this).val(); 
-					window.location = "/UG_Career/administrator/pert_perusahaan" +"/" +val;
-					
+					window.location = "/UG_Career/administrator/pert_perusahaan" +"/" +val;	
 				});
+			});
+
+			$(document).on("change", "#is_cabang", function() { 
+				var val = $(this).val(); 
+				if(val == 'ya')	{
+					var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
+					$("#container_jikacabang").html(html);
+				}else{
+					$("#is_cabang_form").remove();
+				}
 			});
 
 			$(document).ready(function() {
@@ -356,9 +451,12 @@
 					var val = $(this).val(); 
 					if(val == "text"){
 						$("#pilihan_jawaban").remove();
+						$("#cabang_option").remove();
 					}else{
 						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
 						$("#container_pilihan_jawaban").html(html);
+						html='<div class="row" id="cabang_option"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label><select class="form-control input-sm"  id="is_cabang" name="is_cabang"><option value="tidak">Tidak</option><option value="ya">Ya</option></select></div></div></div>'
+						$("#container_cabang").html(html);
 					}	
 				});
 			});
@@ -385,13 +483,25 @@
 			});
 		});
 
-		$(document).on("click", ".add-more", function() { 
+	$(document).on("click", ".add-more", function() { 
           var html = $(".copy").html();
           $(".after-add-more").after(html);
 
       // saat tombol remove dklik control group akan dihapus 
+
       $("body").on("click",".remove",function(){ 
           $(this).parents(".control-group").remove();
+      });
+    });
+
+	$(document).on("click", ".add-more-cabang", function() { 
+          var html = $(".copy-cabang").html();
+          $(".after-add-more-cabang").append(html);
+
+      // saat tombol remove dklik control group akan dihapus 
+
+      $("body").on("click",".remove-cabang",function(){ 
+		$(this).parents(".control-group-cabang").remove();
       });
     });
 
@@ -426,17 +536,45 @@
 	
 		$(document).on('click', '#detail', function() {
 			var id = $(this).data('id');
+			var is_cabang = $(this).data('is_cabang');
+				var url = '/UG_Career/administrator/pert_perusahaan/detail'+"/"+id+"/"+is_cabang;
+				if (is_cabang == "ya") {
+					var html = '<div id="container_pertanyaancabang">Pertanyaan Cabang <hr/> <table id="detailtable" class="display table table-striped table-hover" ><thead class="thead-light"><tr><th width="10px">No</th><th>Kode Cabang</th><th>Nama Cabang Pertanyaan</th></tr></thead><tbody id="detailpertanyaancabang-table"></tbody></table></div>';
+					$('#modal_body_detail').prepend(html);
+				}else{
+					$('#container_pertanyaancabang').remove();
+				}
 			$.ajax({
-				url: '/UG_Career/administrator/pert_perusahaan/detail'+"/"+id,
+				url: url,
 				method: "GET",
 				dataType: 'json',
 				success: function(datas) {
-					var htmlkom = '';
+					// pilihan_jawaban = Object.entries(datas);
+					// console.log(datas);
+					if(is_cabang == "ya"){
+						datas = Object.entries(datas);
+						pertanyaan_cabang = datas[1][1];
+						pilihan_jawaban = datas[0][1];
+						var htmlkom = '';
+						for (i = 0; i < pilihan_jawaban.length; i++) {
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ pilihan_jawaban[i].pilihan_jawaban+'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+						htmlkom='';
+						for (i = 0; i < pertanyaan_cabang.length; i++) {
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ pertanyaan_cabang[i].kd_cabang +'</td><td>'+ pertanyaan_cabang[i].pertanyaan_cabang  +'</td></tr>';
+							// htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas.pertanyaan_cabang[i].pertanyaan_cabang +'</td></tr>';
+						}
+						$('#detailpertanyaancabang-table').html(htmlkom);
+					}else{
+						var htmlkom = '';
+						$('#detailpertanyaancabang-table').html(htmlkom);
 						for (i = 0; i < datas.length; i++) {
 							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
-					
+					}
+
 				}
 			});
 		});
