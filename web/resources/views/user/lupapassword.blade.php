@@ -9,10 +9,12 @@
       <!-- Favicons -->
         <link href="{{ asset('assets') }}/img/favicon.png" rel="icon">
         <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
-      <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
+        <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
+        <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
+      @include('sweetalert::alert')
       <div class="wrapper">
          <div class="title-text">
             <div class="title alumni">
@@ -57,5 +59,7 @@
            return false;
          });
       </script>
+	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
+	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
    </body>
 </html>
