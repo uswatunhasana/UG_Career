@@ -1,4 +1,4 @@
-@section('title', 'Log in')
+@section('title','Lupa Password')
 <!DOCTYPE html>
 <!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
@@ -21,7 +21,9 @@
          </div>
          <div class="form-container">
             <div class="form-inner">
-               <form action="{{ route('post_lupapassword') }}" class="alumni" method="POST">
+               <form action="{{ route('post_lupa_password') }}" class="alumni" method="POST">
+                  @csrf
+						@method('POST')
                   <div class="field">
                      <input type="email" name="email" placeholder="Masukkan Email" value="{{ old('email') }}" required>
                      @if($errors->any('email'))
