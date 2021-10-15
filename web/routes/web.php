@@ -31,7 +31,7 @@ Route::resource('/', DashboardController::class)->names([
 Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login.index');
 Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
 Route::get('lupa_password', 'App\Http\Controllers\AuthUserController@lupa_password')->name('lupapassword.lupa_password');
-Route::post('post_lupapassword', 'App\Http\Controllers\AuthUserController@post_lupapassword')->name('post_lupapassword');
+Route::post('/post_lupa_password', 'App\Http\Controllers\AuthUserController@post_lupa_password')->name('post_lupa_password');
 Route::post('resetpassword', 'App\Http\Controllers\AuthUserController@resetpassword')->name('resetpassword');
 Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
