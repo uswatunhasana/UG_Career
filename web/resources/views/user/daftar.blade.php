@@ -10,9 +10,11 @@
       <link href="{{ asset('assets') }}/img/favicongundar.png" rel="icon">
       <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
       <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
+      <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
+      @include('sweetalert::alert')
       <div class="wrapper">
          <div class="title-text">
             <div class="title alumni">
@@ -48,7 +50,7 @@
                      <select class="form-control" name="id_prodi" required="required" style="">
                      <option disabled selected>-- Daftar Prodi --</option>
                      @foreach ($prodis as $prodi)
-                     <option value="{{ $prodi->id }}">{{ $prodi->nama_prodi }}</option>
+                     <option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
                      @endforeach
                      </select>
                   </div>
@@ -143,5 +145,7 @@
            return false;
          });
       </script>
+	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
+	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
    </body>
 </html>
