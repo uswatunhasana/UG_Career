@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 
 class AlumniController extends Controller
 {
@@ -43,7 +44,7 @@ class AlumniController extends Controller
             $user->email = $request->email;
             $user->email_verified_at=now();
             $user->level = 'alumni';
-            $user->password = Hash::make($request->password);
+            $user->password = Crypt::encryptString($request->password);
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;
@@ -113,7 +114,7 @@ class AlumniController extends Controller
             $user->email = $request->email;
             $user->level = 'alumni';
             if($request->filled('password')) {
-                Hash::make($request->password);
+                Crypt::encryptString($request->password);
             } else {
                 $user->password;
             }
