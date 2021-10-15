@@ -279,17 +279,6 @@
 						@csrf
 						@method('PUT')
 						<div class="row">
-									<!-- <div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Pertanyaan</b></h4></label>
-												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
-													<option value="wajib" {{ $pertanyaan->kelas_pertanyaan === 'wajib' ? 'selected' : '' }} >Wajib</option>
-													<option value="opsional" {{ $pertanyaan->kelas_pertanyaan === 'opsional' ? 'selected' : '' }} >Opsional</option>
-												</select>
-											</div>
-										</div>
-									</div> -->
 							<input name="kategori" type="hidden" value="{{$pertanyaan->jenis_pertanyaan}}">				
 							<input name="is_cabang" type="hidden" value="{{$pertanyaan->is_cabang}}">				
 							<div class="col-sm-12">
@@ -308,10 +297,9 @@
 							</div>
 						</div>
 						<div id="container_pilihan_jawaban">
+
+							<div id="pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
-									<div id="pilihan_jawaban">
-									<hr/>
-									<label><h4><b>Pertanyaan  Cabang</b></h4></label>
 									@php
 									$no_jwb =1;
 									$no_pert=1;
@@ -320,6 +308,8 @@
 									$pertanyaan_cabangs = \App\Models\PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan->id)->select('*')->get();
 									@endphp
 									@if($pertanyaan->is_cabang == 'ya')
+									<hr/>
+									<label><h4><b>Pertanyaan  Cabang</b></h4></label>
 									@foreach($pertanyaan_cabangs as $pertanyaan_cabang)
 									<div class="row control-group">
 										<div class="container">

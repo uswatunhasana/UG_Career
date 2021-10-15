@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Dataweb;
 use App\Models\Berita;
 use App\Models\Pertanyaan;
-use App\Models\PilihanPertanyaan;
+use App\Models\PertanyaanCabang;
+use App\Models\PilihanJawaban;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -98,10 +99,23 @@ class DashboardController extends Controller
 
     public function isikuisionerrr()
     {
-        $pertanyaans= DB::table('pertanyaans')->orderBy('created_at', 'desc')->paginate(2);
-        $pilihanjawabans = DB::table('pilihanjawabans')->orderBy('created_at', 'desc')->paginate(2);
+
+        $pertanyaans = Pertanyaan::all();
+        $i=0;
+        foreach ($pertanyaans as $pertanyaan) {
+            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
+            if($pertanyaan['is_cabang'] == "ya"){
+                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('*')->get();
+
+            }
+            $i++;
+        }
+        var_dump( $pertanyaans[13]['pertanyaan_cabang']);
+        die;
+        // dd($pertanyaans);
+
        
-        return view('user.isikuisioneralumni', compact('pertanyaans','pilihanjawabans'));
+        return view('user.isikuisioneralumni');
     }
 
 

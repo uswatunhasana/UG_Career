@@ -34,35 +34,35 @@
 
           <div class="form-group">
             <label for="largeInput">NPM</label>
-            <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="">
+            <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Tahun Masuk</label>
-            <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="">
+            <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Tahun Lulus</label>
-            <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="">
+            <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Program Studi/Jurusan</label>
-            <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="">
+            <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nama</label>
-            <input type="text" class="form-control form-control" name = "nama" id="nama" value="">
+            <input type="text" class="form-control form-control" name = "nama" id="nama" value="" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nomor Telepon/HP</label>
-            <input type="text" class="form-control form-control" name = "nomortelepon" id="nomortelepon" value="">
+            <input type="text" class="form-control form-control" name = "nomortelepon" id="nomortelepon" value=""readonly >
           </div>
           <div class="form-group">
             <label for="largeInput">Email</label>
-            <input type="text" class="form-control form-control" name = "email" id="email" value="">
+            <input type="text" class="form-control form-control" name = "email" id="email" value=""readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">NIK</label>
-            <input type="text" class="form-control form-control" name = "nik" id="nik" value="">
+            <input type="text" class="form-control form-control" name = "nik" id="nik" value=""readonly>
           </div>
           <br>
 
