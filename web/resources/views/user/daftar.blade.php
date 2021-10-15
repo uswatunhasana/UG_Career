@@ -129,7 +129,7 @@
          const alumniForm = document.querySelector("form.alumni");
          const alumniBtn = document.querySelector("label.alumni");
          const perusahaanBtn = document.querySelector("label.perusahaan");
-         const perusahaanLink = document.querySelector("form .perusahaan-link a");
+         // const perusahaanLink = document.querySelector("form .perusahaan-link a");
          perusahaanBtn.onclick = (()=>{
            alumniForm.style.marginLeft = "-50%";
            alumniText.style.marginLeft = "-50%";
