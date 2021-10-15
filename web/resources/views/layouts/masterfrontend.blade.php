@@ -50,11 +50,27 @@
 
       <nav id="navbar" class="navbar">
         <ul>
+          @guest
           <li><a class="nav-link scrollto active" href="{{ route('dashboard.user') }}">Home</a></li>
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+          @else
+          @if (Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisionerrr') }}">Isi Kuisioner</a></li>
+          <li>
+									<div class="user-box">
+										<div class="avatar-lg"><img src="{{ asset('admin') }}/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+										<div class="u-text">
+											<h4>{{ Auth::user()->name }}</h4>
+											<p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ route('editprofil.edit', Auth::user()->id) }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+										</div>
+									</div>
+								</li>
+          @endif
+          @endguest
+          @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
+          @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
