@@ -12,12 +12,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\TracerEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthUserController extends Controller
 {
     public function index()
     {
-        // $users = User::all();
         return view('user.login');
     }
 
@@ -149,27 +150,40 @@ class AuthUserController extends Controller
         return view('user.lupapassword');
     }
 
-    public function post_lupapassword(Request $request)
+    public function post_lupa_password(Request $request)
     {
+        
+            $cek_user = User::findOrFail($request->email)
+                ->where('email', '=', $request->email)
+                ->select('users.*')
+                ->first();
+            dd($cek_user);
+            
         $request->validate([
         'email' => 'required|email',
         ]);
 
-        $user=User::where('email', $request->email)->first();
+        $user=User::where('email', $request->email)->count();
 
         if(!$user){
-            return redirect()->back->with('error','Email Pengguna tidak ditemukan.');
-        } else{
-            $cek_user = User::where('email', $request->email)->count();
-            $user = User::all();
-            $user->email = $request->email;
-            if($request->filled('password')) {
-                Hash::make($request->password);
-            } else {
-                $user->password;
-            }
-            $user->save();
-            
+            return redirect()->back();
+        } else {
+            // $cek_user = User::where('email', $request->email)->count();
+            // $user = User::all();
+            // $user->email = $request->email;
+            // if($request->filled('password')) {
+            //     Hash::make($request->password);
+            // } else {
+            //     $user->password;
+            // }
+            // $user->save();
+            // Mail::to("firdaaviola17@gmail.com")->send(new TracerEmail());
+            // $user=User::where('email', $request->email)->count();
+            //  \Mail::raw('Halo '.'name', $request->name, function ($message) use ($user){
+            //      $message->to($user->email, $user->name);
+            //      $message->subject('Haloooooooooo!!!');
+            //  });
+            return redirect()->back();
         }
     }
     
