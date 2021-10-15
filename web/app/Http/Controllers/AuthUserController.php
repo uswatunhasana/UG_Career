@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\TracerEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthUserController extends Controller
 {
@@ -25,6 +26,7 @@ class AuthUserController extends Controller
     public function postlogin(Request $request)
     {
         $input = $request->all();
+        // dd($input);
         $this->validate($request,[
         'username' => 'required',
         'password' => 'required',
@@ -47,8 +49,8 @@ class AuthUserController extends Controller
         {
             return redirect()->route('dashboard.user');
         }else{
-            return redirect()->route('login.index')
-                ->with('error','Username dan Password yang anda masukkan salah');
+            Alert::error('Salah Username atau Password ', ' Silahkan coba lagi');
+            return redirect()->back();
         }
     }
 
@@ -82,7 +84,7 @@ class AuthUserController extends Controller
             $user->email    = $request->email;
             $user->email_verified_at  = now();
             $user->level    = 'perusahaan';
-            $user->password = Hash::make($request->password);
+            $user->password = Crypt::encryptString($request->password);
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;
@@ -100,8 +102,9 @@ class AuthUserController extends Controller
             Alert::success(' Akun sudah berhasil didaftarkan ');
         } else {
             Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+            return redirect()->back();
         }
-        return redirect()->back();
+        return view('user.login');
     }
 
     public function store(Request $request)
@@ -122,7 +125,7 @@ class AuthUserController extends Controller
             $user->email    = $request->email;
             $user->email_verified_at  = now();
             $user->level    = 'alumni';
-            $user->password = Hash::make($request->password);
+            $user->password = Crypt::encryptString($request->password);
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;
@@ -141,8 +144,9 @@ class AuthUserController extends Controller
             Alert::success(' Akun sudah berhasil didaftarkan ');
         } else {
             Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+            return redirect()->back();
         }
-        return redirect()->back();
+        return view('user.login');
     }
 
     public function lupa_password()
@@ -153,12 +157,12 @@ class AuthUserController extends Controller
     public function post_lupa_password(Request $request)
     {
         
-            $cek_user = User::findOrFail($request->email)
-                ->where('email', '=', $request->email)
-                ->select('users.*')
-                ->first();
-            dd($cek_user);
-            
+            // $cek_user = User::findOrFail($request->email)
+            //     ->where('email', '=', $request->email)
+            //     ->select('users.*')
+            //     ->first();
+            // dd($cek_user);
+
         $request->validate([
         'email' => 'required|email',
         ]);
@@ -168,19 +172,15 @@ class AuthUserController extends Controller
         if(!$user){
             return redirect()->back();
         } else {
-            // $cek_user = User::where('email', $request->email)->count();
-            // $user = User::all();
-            // $user->email = $request->email;
-            // if($request->filled('password')) {
-            //     Hash::make($request->password);
-            // } else {
-            //     $user->password;
-            // }
-            // $user->save();
             // Mail::to("firdaaviola17@gmail.com")->send(new TracerEmail());
-            // $user=User::where('email', $request->email)->count();
-            //  \Mail::raw('Halo '.'name', $request->name, function ($message) use ($user){
-            //      $message->to($user->email, $user->name);
+            $data_user = User::where('email','=', $request->email)->select('*')->first();
+            $decrypted = Crypt::decryptString($data_user->password);
+            Mail::send('user.email', ['data_user' => $data_user, 'password' => $decrypted], function ($m) use ($data_user) {
+                $m->from("example@gmail.com", config('app.Mail.TracerEmail', 'APP Name'));
+                $m->to($data_user->email, $data_user->email)->subject('Email UG Tracer');
+            });
+            //  \Mail::raw('Halo '.$data_user->name, 'Username : '.$data_user->username, function ($message) use ($data_user){
+            //      $message->to($data_user->email, $data_user->name);
             //      $message->subject('Haloooooooooo!!!');
             //  });
             return redirect()->back();
