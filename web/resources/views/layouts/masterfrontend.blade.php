@@ -24,6 +24,7 @@
   <link href="{{ asset('assets') }}/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="{{ asset('assets') }}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="{{ asset('assets') }}/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets') }}/css/style.css" rel="stylesheet">
@@ -59,6 +60,7 @@
       </nav><!-- .navbar -->
     </div>
   </header><!-- End Header -->
+  @include('sweetalert::alert')
   @yield('content')
     
 
@@ -84,6 +86,8 @@
   <!-- Vendor JS Files -->
   <script src=" {{ asset('admin') }}/assets/js/core/jquery.3.2.1.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
+	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/aos/aos.js"></script>
   <script src="{{ asset('assets') }}/vendor/php-email-form/validate.js"></script>
   <script src="{{ asset('assets') }}/vendor/swiper/swiper-bundle.min.js"></script>
