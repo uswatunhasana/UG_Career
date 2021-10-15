@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class UserSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('890admin'),
-            'confirm_password' => null,
+            'password' => Crypt::encryptString('890admin'),
+            // 'confirm_password' => null,
             'level' => 'admin',
             'created_at' => now(),
             'updated_at' => now()],
@@ -25,8 +26,8 @@ class UserSeeder extends Seeder
             'username' => 'alumni',
             'email' => 'mahasiswa@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('mahasiswa123'),
-            'confirm_password' => null,
+            'password' => Crypt::encryptString('mahasiswa123'),
+            // 'confirm_password' => null,
             'level' => 'alumni',
             'created_at' => now(),
             'updated_at' => now()],
@@ -35,8 +36,8 @@ class UserSeeder extends Seeder
             'username' => 'perusahaan',
             'email' => 'perusahaan@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('usaha1234'),
-            'confirm_password' => null,
+            'password' => Crypt::encryptString('usaha1234'),
+            // 'confirm_password' => null,
             'level' => 'perusahaan',
             'created_at' => now(),
             'updated_at' => now()],
@@ -46,8 +47,8 @@ class UserSeeder extends Seeder
             'username' => 'prodi',
             'email' => 'prodi@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('901prodi'),
-            'confirm_password' => null,
+            'password' => Crypt::encryptString('901prodi'),
+            // 'confirm_password' => null,
             'level' => 'prodi',
             'created_at' => now(),
             'updated_at' => now()]];
