@@ -13,8 +13,8 @@ class HasilAlumniController extends Controller
 {
     public function index()
     {
-        $jawaban_respondens = JawabanResponden::where('kategori_responden','=','alumni')->select('*')->get();
-        return view('admin.hasil_alumni', compact('jawaban_respondens'));
+        // $jawaban_respondens = JawabanResponden::where('kategori_responden','=','alumni')->select('*')->get();
+        return view('admin.hasil_alumni');
     }
 
     public function create()

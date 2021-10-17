@@ -26,6 +26,19 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
+			<div class="card-header">
+				<div class="">
+					<h4 class="card-title"></h4>
+					<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
+					<i class="fas fa-download"></i>
+						Impor Data
+					</button>
+					<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+					<i class="fas fa-upload"></i>
+						Ekspor Data
+					</button>
+				</div>
+			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
 				<div class="table-responsive">
@@ -42,21 +55,19 @@
 							@php
 							$no = 1;
 							@endphp
-							@foreach($jawaban_respondens as $jawaban_responden)
 							<tr>
 								<td>{{$no++ }}</td>
-								<td>{{ $jawaban_responden->created_at }}</td>
-								<td>{{ $jawaban_responden->user->name }}</td>
+								<td></td>
+								<td></td>
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									<button data-toggle="modal" data-target="#editModal-" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-sm btn-danger" type="button" id="" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('pert_alumni.destroy', $jawaban_responden->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-" action="" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
 								</tr>
-								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -65,6 +76,56 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal  Impor -->
+	<div class="modal fade" id="addImport" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content ">
+                <div class="modal-header">
+                  <h5 class="modal-title mb-0" id="addModalLabel">Upload Produk File Excel</h5>
+                </div>
+              <div class="modal-body">
+                 <!-- Card body -->
+                <form role="form" action="" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('POST')
+                    <!-- Input groups with icon -->
+                  <div class="col-md-12 text-center">
+                    <h5 class="h2 card-title mb-2">Langkah-Langkah Upload File</h5>
+                    <div class="col-12 img-import-area">
+                      <img src="" class="img-fluid" width="600px">
+                    </div>
+                    	<div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada gambar</p>
+	                    </div>
+	                    <div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>
+	                    </div>
+                     	<div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">3. Jika sudah sesuai pilih file</p>
+	                    </div>
+	                    <div class="d-flex py-2 mb-4">
+	                        <p class="font-weight-semibold text-gray mb-0">4. Klik simpan, maka data otomatis tersimpan</p>
+	                    </div>
+                  </div>
+                    <div class="form-group row ">
+                      <label for="kode_barang" class="col-md-2 col-form-label form-control-label text-center">Upload file<span class="text-danger">*</span></label>
+                      <div class="col-md-9">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="file" lang="en" name="file" required="required">
+                          <label class="custom-file-label" for="customFileLang">Pilih File</label>
+                        </div>
+                      </div>
+                  </div>       
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit Data</button>
+            </div>
+            </form>
+         </div>
+       </div>
+    </div>
 	@endsection
 	@section('customjs')
 	<script >

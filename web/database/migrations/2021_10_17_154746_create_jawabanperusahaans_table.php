@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJawabanRespondensTable extends Migration
+class CreateJawabanperusahaansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,21 @@ class CreateJawabanRespondensTable extends Migration
      */
     public function up()
     {
-        Schema::create('jawaban_respondens', function (Blueprint $table) {
+        Schema::create('jawabanperusahaans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jawaban');
-            $table->enum('kategori_responden',['alumni','perusahaan']);
             //relasi pertanyaan
-            $table->unsignedInteger('id_pertanyaan')->nullable();
-            $table->foreign('id_pertanyaan')
+            $table->unsignedInteger('kd_pertanyaan')->nullable();
+            $table->foreign('kd_pertanyaan')
                 ->on('pertanyaans')
-                ->references('id')
+                ->references('kd_pertanyaan')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             //relasi user
-            $table->unsignedInteger('id_user')->nullable();
-            $table->foreign('id_user')
+            $table->unsignedInteger('email')->nullable();
+            $table->foreign('email')
                 ->on('users')
-                ->references('id')
+                ->references('email')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
@@ -42,7 +41,6 @@ class CreateJawabanRespondensTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('jawaban_respondens');
+        Schema::dropIfExists('jawabanperusahaans');
     }
 }

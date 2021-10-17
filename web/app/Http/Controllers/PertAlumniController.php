@@ -13,7 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PertAlumniController extends Controller
 {
-    
     public function index($kategori="teks")
     {
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
@@ -25,6 +24,7 @@ class PertAlumniController extends Controller
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
         return view('admin.pert_alumni', ['pertanyaans' => $pertanyaans]);
     }
+
     public function ajaxdetail($id, $is_cabang)
     {
         if($is_cabang == "ya"){
@@ -123,16 +123,6 @@ class PertAlumniController extends Controller
         return redirect()->back();
     }
 
-    
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
 
     
     public function update(Request $request, $id)

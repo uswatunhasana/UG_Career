@@ -50,11 +50,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          @guest
           <li><a class="nav-link scrollto active" href="{{ route('dashboard.user') }}">Home</a></li>
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
-          @else
           @if (Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisionerrr') }}">Isi Kuisioner</a></li>
           <li>
@@ -67,10 +65,7 @@
 									</div>
 								</li>
           @endif
-          @endguest
-          @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
-          @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

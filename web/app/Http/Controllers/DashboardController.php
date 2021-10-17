@@ -100,22 +100,41 @@ class DashboardController extends Controller
     public function isikuisionerrr()
     {
 
-        $pertanyaans = Pertanyaan::all();
+        $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->orderBy('kd_pertanyaan')->get();
+
+        // dd($pertanyaans);
         $i=0;
         foreach ($pertanyaans as $pertanyaan) {
             $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
             if($pertanyaan['is_cabang'] == "ya"){
                 $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('*')->get();
-
             }
             $i++;
         }
-        var_dump( $pertanyaans[13]['pertanyaan_cabang']);
-        die;
+        // var_dump( $pertanyaans[13]['pertanyaan_cabang']);
+        // die;
         // dd($pertanyaans);
+        return view('user.isikuisioneralumni', compact('pertanyaans'));
+    }
 
-       
-        return view('user.isikuisioneralumni');
+    public function isikuisionercontoh()
+    {
+
+        $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->orderBy('kd_pertanyaan')->get();
+
+        // dd($pertanyaans);
+        $i=0;
+        foreach ($pertanyaans as $pertanyaan) {
+            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
+            if($pertanyaan['is_cabang'] == "ya"){
+                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('*')->get();
+            }
+            $i++;
+        }
+        // var_dump( $pertanyaans[13]['pertanyaan_cabang']);
+        // die;
+        // dd($pertanyaans);
+        return view('user.isikuisioner_alumni', compact('pertanyaans'));
     }
 
 

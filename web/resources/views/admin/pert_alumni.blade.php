@@ -35,6 +35,7 @@
 									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
 									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
 									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+									<option value="pilihan dan text" @if (Request::segment( 3 ) == "pilihan dan text")selected="selected" @endif>Pertanyaan Pilihan dan Text</option>
 								</select>
 							</div>
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
@@ -66,6 +67,7 @@
 													<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
 													<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
 													<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+													<option value="pilihan dan text" @if (Request::segment( 3 ) == "pilihan dan text")selected="selected" @endif>Pertanyaan Pilihan dan Text</option>
 												</select>
 											</div>
 										</div>
@@ -97,25 +99,26 @@
 											</div>
 										</div>
 									</div>
-									@if(Request::segment( 3 ) != "text")
-									<div class="row" id="cabang_option">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
-												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
-													<option value="tidak">Tidak</option>
-													<option value="ya">Ya</option>
-												</select>
+									<div class="" id="container_cabang">
+										@if(Request::segment( 3 ) != "text")
+										<div class="row" id="cabang_option">
+											<div class="col-sm-12">
+												<div class="form-group form-group-default">
+													<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
+													<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
+														<option value="tidak">Tidak</option>
+														<option value="ya">Ya</option>
+													</select>
+												</div>
 											</div>
 										</div>
-									</div>
-									@endif
-									<div class="" id="container_cabang">
-									</div>
+										@endif
+										</div>
 
 
 									<!-- Jika Cabang -->
 									<div id="container_jikacabang">
+
 									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
@@ -297,7 +300,6 @@
 							</div>
 						</div>
 						<div id="container_pilihan_jawaban">
-
 							<div id="pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
 									@php
@@ -428,13 +430,20 @@
 
 			$(document).on("change", "#is_cabang", function() { 
 				var val = $(this).val(); 
+				var kategori = $('#kategori_pertanyaan').val();
+				// console.log(kategori);
 				if(val == 'ya')	{
 					var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
 					$("#container_jikacabang").html(html);
+					if(kategori == 'pilihan dan text'){
+					$("#container_jikacabang").append(html);
+					}
 				}else{
 					$("#is_cabang_form").remove();
 				}
 			});
+
+
 
 			$(document).ready(function() {
 				$('#kategori_pertanyaan').change(function() {
@@ -447,6 +456,10 @@
 						$("#container_pilihan_jawaban").html(html);
 						html='<div class="row" id="cabang_option"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label><select class="form-control input-sm"  id="is_cabang" name="is_cabang"><option value="tidak">Tidak</option><option value="ya">Ya</option></select></div></div></div>'
 						$("#container_cabang").html(html);
+					}
+					if(val== "pilihan dan text"){
+						$('#is_cabang').attr('disabled', true);
+						$("#is_cabang").val('ya');
 					}	
 				});
 			});

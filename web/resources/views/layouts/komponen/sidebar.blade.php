@@ -64,7 +64,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="{{ route('pert_perusahaan.index') }}">
+										<a href="/UG_Career/administrator/pert_perusahaan/text">
 											<span class="sub-item">Daftar Pertanyaan Perusahaan</span>
 										</a>
 									</li>

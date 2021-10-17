@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Pertanyaan;
 use App\Models\PertanyaanCabang;
 use App\Models\PilihanJawaban;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PertPerusahaanController extends Controller
 {
@@ -60,6 +59,7 @@ class PertPerusahaanController extends Controller
             $pertanyaan->jenis_pertanyaan = $request->kategori;
             // $pertanyaan->kelas_pertanyaan = $request->kelas_pertanyaan;
             $pertanyaan->pertanyaan = $request->pertanyaan;
+            $pertanyaan->is_cabang = 'tidak';
             $pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $pertanyaan->save();
             Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
@@ -147,24 +147,6 @@ class PertPerusahaanController extends Controller
         //     Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
         //     return redirect()->back();
         // }
-        $cek_tambahpertanyaan=0;
-        foreach($request->kd_cabang as $kd_cabang){
-        if($kd_cabang != null){
-            $cek_tambahpertanyaan++;
-            // dd($kd_cabang);
-            // echo('ok');
-            // die;
-        }
-        }
-        $cek_tambahjawaban=0;
-        foreach($request->kd_cabang as $kd_cabang){
-        if($kd_cabang != null){
-            $cek_tambahjawaban++;
-            // dd($kd_cabang);
-            // echo('ok');
-            // die;
-        }
-        }
 
 
         if($request->kategori == "text"){
@@ -178,10 +160,30 @@ class PertPerusahaanController extends Controller
             $update_pertanyaan->pertanyaan = $request->pertanyaan;
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
-            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();
         }else{
+
+
             if($request->is_cabang == "ya"){
+                $cek_tambahpertanyaan=0;
+                foreach($request->kd_cabang as $kd_cabang){
+                if($kd_cabang != null){
+                    $cek_tambahpertanyaan++;
+                    // dd($kd_cabang);
+                    // echo('ok');
+                    // die;
+                }
+                }
+                $cek_tambahjawaban=0;
+                foreach($request->kd_cabang as $kd_cabang){
+                if($kd_cabang != null){
+                    $cek_tambahjawaban++;
+                    // dd($kd_cabang);
+                    // echo('ok');
+                    // die;
+                }
+                }
                 $update_pertanyaan = Pertanyaan::findOrFail($id)
                 ->where('pertanyaans.id', '=', $id)
                 ->select('pertanyaans.*')
@@ -205,7 +207,7 @@ class PertPerusahaanController extends Controller
                 $j++;
                 $update_pilihancabang->save();
             }
-
+            if($request->idpilihan != null){
                 $i=0;
                 foreach($request->idpilihan as $key => $value){
                 $update_pilihanjawaban = PilihanJawaban::findOrFail($value)
@@ -216,7 +218,7 @@ class PertPerusahaanController extends Controller
                 $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
                 $update_pilihanjawaban->save();
                 
-            }
+            }}
 
             if($cek_tambahpertanyaan > 0){
             foreach($request->kd_cabang as $key => $val)
@@ -241,6 +243,7 @@ class PertPerusahaanController extends Controller
         }
 
     }else{
+       
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
@@ -252,6 +255,7 @@ class PertPerusahaanController extends Controller
             $update_pertanyaan->kd_pertanyaan = $request->kd_pertanyaan;
             $update_pertanyaan->save();
 
+            if($request->idpilihan != null){
             $i=0;
             foreach($request->idpilihan as $key => $value){
             $update_pilihanjawaban = PilihanJawaban::findOrFail($value)
@@ -261,8 +265,9 @@ class PertPerusahaanController extends Controller
 
             $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
             $update_pilihanjawaban->save();
-            
-        }
+            }}
+
+        if($request->pilihan_jawaban == null){
         foreach($request->pilihan_jawaban as $key => $value)
         {
             $pilihanjawaban = new PilihanJawaban;
@@ -272,9 +277,10 @@ class PertPerusahaanController extends Controller
             $pilihanjawaban->updated_at = now();
             $pilihanjawaban->save();
         }
+    }
         }
         }
-            Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 
