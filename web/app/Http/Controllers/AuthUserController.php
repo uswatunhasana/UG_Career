@@ -45,8 +45,14 @@ class AuthUserController extends Controller
         // return redirect('login')->withSuccess('Username dan Password belum terdaftar');
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
  
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'], )))
         {
+            $user = Auth::user();
+            if ($user->level == 'alumni') {
+                return redirect()->intended('dashboard.user');
+            } elseif ($user->level == 'perusahaan'){
+                return redirect()->intended('dashboard.user');
+            }
             return redirect()->route('dashboard.user');
         }else{
             Alert::error('Salah Username atau Password ', ' Silahkan coba lagi');
