@@ -25,9 +25,15 @@
          <div class="form-container">
             <div class="form-inner">
                <form action="{{ route('postlogin') }}" class="alumni" method="POST">
-                   {{ csrf_field() }}
+                  @csrf
+						@method('POST')
                   <div class="field">
-                     <input type="text" name="username" placeholder="{{ __('Username or Email') }}" required>
+                     <input id="username" placeholder="Masukkan Username" type="username" class="form-control form-control-xl @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                   </div>
                   <div class="field">
                      <input type="password" name="password" placeholder="Password" required>
