@@ -28,7 +28,7 @@
                   @csrf
 						@method('POST')
                   <div class="field">
-                     <input id="username" placeholder="Masukkan Username" type="username" class="form-control form-control-xl @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                     <input id="username" placeholder="Masukkan Username" type="username" class="form-control form-control-xl @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
