@@ -45,7 +45,7 @@ class UserController extends Controller
             $user->forget_password = Crypt::encryptString($request->password);
             $user->save();
 
-            $get_id_user = DB::getPdo()->lastInsertId();;
+            $get_id_user = DB::getPdo()->lastInsertId();
 
             $sekjur = new Sekjur;
             $sekjur->id_user =  $get_id_user;

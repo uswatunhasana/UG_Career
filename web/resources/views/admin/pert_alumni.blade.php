@@ -127,7 +127,7 @@
 									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -149,7 +149,7 @@
 								<div class="row control-group">
 									<div class="col-sm-9 ">
 										<label for="largeInput"></label>
-										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 									</div>
 									<div class="col-sm-3">
 									<label for="largeInput"></label>
@@ -321,13 +321,13 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon3">Kode</span>
 												</div>
-												<input id="addpilihanjawaban" type="text" name="update_kdcabang[]" value="{{$pertanyaan_cabang->kd_cabang}}" class="form-control" >
+												<input id="update_kdcabang" type="text" name="update_kdcabang[]" value="{{$pertanyaan_cabang->kd_cabang}}" class="form-control" >
 											</div>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon3">Pertanyaan</span>
 												</div>
-												<input id="addpilihanjawaban" type="text" name="update_cabang[]" value="{{$pertanyaan_cabang->pertanyaan_cabang}}" class="form-control" >
+												<input id="update_cabang" type="text" name="update_cabang[]" value="{{$pertanyaan_cabang->pertanyaan_cabang}}" class="form-control" >
 											</div>
 										</div>
 									</div> 
@@ -340,7 +340,7 @@
 										<div class="col-sm-12 ">
 										<label>Pilihan {{$no_jwb++ }}</label>
 										<input name="idpilihan[]" type="hidden" value="{{$pilihan_jawaban->id}}">
-											<input id="addpilihanjawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" >
+											<input id="addUpdate_jawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->jawaban}}" class="form-control" >
 										</div>
 									</div> 
 									@endforeach
@@ -381,7 +381,7 @@
 									<label><h4><b>Tambah Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -402,7 +402,7 @@
 								<div class="row control-group">
 									<div class="col-sm-9 ">
 										<label for="largeInput"></label>
-										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 									</div>
 									<div class="col-sm-3">
 									<label for="largeInput"></label>
@@ -443,8 +443,6 @@
 				}
 			});
 
-
-
 			$(document).ready(function() {
 				$('#kategori_pertanyaan').change(function() {
 					var val = $(this).val(); 
@@ -452,7 +450,7 @@
 						$("#pilihan_jawaban").remove();
 						$("#cabang_option").remove();
 					}else{
-						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
+						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
 						$("#container_pilihan_jawaban").html(html);
 						html='<div class="row" id="cabang_option"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label><select class="form-control input-sm"  id="is_cabang" name="is_cabang"><option value="tidak">Tidak</option><option value="ya">Ya</option></select></div></div></div>'
 						$("#container_cabang").html(html);
@@ -573,7 +571,7 @@
 						var htmlkom = '';
 						$('#detailpertanyaancabang-table').html(htmlkom);
 						for (i = 0; i < datas.length; i++) {
-							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].jawaban +'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
 					}

@@ -85,10 +85,11 @@ class PertAlumniController extends Controller
                 $pertanyaancabang->save();
                 }
 
-                foreach($request->pilihan_jawaban as $key => $value)
+                foreach($request->jawaban as $key => $value)
                 {
                     $pilihanjawaban = new PilihanJawaban;
-                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->jawaban = $value;
+                    
                     $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
                     $pilihanjawaban->created_at = now();
                     $pilihanjawaban->updated_at = now();
@@ -105,10 +106,10 @@ class PertAlumniController extends Controller
                 $pertanyaan->save();
                 $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-                foreach($request->pilihan_jawaban as $key => $value)
+                foreach($request->jawaban as $key => $value)
                 {
                     $pilihanjawaban = new PilihanJawaban;
-                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->jawaban = $value;
                     $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
                     $pilihanjawaban->created_at = now();
                     $pilihanjawaban->updated_at = now();
@@ -166,8 +167,8 @@ class PertAlumniController extends Controller
                 }
                 }
                 $cek_tambahjawaban=0;
-                foreach($request->kd_cabang as $kd_cabang){
-                if($kd_cabang != null){
+                foreach($request->jawaban as $jawaban){
+                if($jawaban != null){
                     $cek_tambahjawaban++;
                     // dd($kd_cabang);
                     // echo('ok');
@@ -205,7 +206,7 @@ class PertAlumniController extends Controller
                 ->select('pilihanjawabans.*')
                 ->first();
     
-                $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+                $update_pilihanjawaban->jawaban = $request->update_jawaban[$i++];
                 $update_pilihanjawaban->save();
                 
             }}
@@ -221,10 +222,10 @@ class PertAlumniController extends Controller
             }
         }
             if($cek_tambahjawaban > 0){
-            foreach($request->pilihan_jawaban as $key => $value)
+            foreach($request->jawaban as $key => $value)
             {
                 $pilihanjawaban = new PilihanJawaban;
-                $pilihanjawaban->pilihan_jawaban = $value;
+                $pilihanjawaban->jawaban = $value;
                 $pilihanjawaban->id_pertanyaan =  $id;
                 $pilihanjawaban->created_at = now();
                 $pilihanjawaban->updated_at = now();
@@ -234,6 +235,15 @@ class PertAlumniController extends Controller
 
     }else{
        
+        $cek_tambahjawaban=0;
+                foreach($request->jawaban as $jawaban){
+                if($jawaban != null){
+                    $cek_tambahjawaban++;
+                    dd($cek_tambahjawaban);
+                    // echo('ok');
+                    // die;
+                }
+                }
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
@@ -253,22 +263,37 @@ class PertAlumniController extends Controller
             ->select('pilihanjawabans.*')
             ->first();
 
-            $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+            $update_pilihanjawaban->jawaban = $request->update_jawaban[$i++];
             $update_pilihanjawaban->save();
             }}
 
-        if($request->pilihan_jawaban == null){
-        foreach($request->pilihan_jawaban as $key => $value)
-        {
-            $pilihanjawaban = new PilihanJawaban;
-            $pilihanjawaban->pilihan_jawaban = $value;
-            $pilihanjawaban->id_pertanyaan =  $id;
-            $pilihanjawaban->created_at = now();
-            $pilihanjawaban->updated_at = now();
-            $pilihanjawaban->save();
-        }
+            if($cek_tambahjawaban > 0){
+                foreach($request->jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $id;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }
+
+        // if($request->pilihan_jawaban != null){
+        // foreach($request->pilihan_jawaban as $key => $value)
+        // {
+        //     $pilihanjawaban = new PilihanJawaban;
+        //     $pilihanjawaban->jawaban = $value;
+        //     $pilihanjawaban->id_pertanyaan =  $id;
+        //     $pilihanjawaban->created_at = now();
+        //     $pilihanjawaban->updated_at = now();
+        //     $pilihanjawaban->save();
+        // }
+        // }else{
+        //     Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+        //     return redirect()->back();
+        // }
     }
-        }
         }
             Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();

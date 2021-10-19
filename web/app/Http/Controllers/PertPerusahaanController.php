@@ -13,7 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PertPerusahaanController extends Controller
 {
-    
     public function index($kategori="teks")
     {
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','perusahaan')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
@@ -25,6 +24,7 @@ class PertPerusahaanController extends Controller
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','perusahaan')->where('jenis_pertanyaan','=',$kategori)->select('*')->get();
         return view('admin.pert_perusahaan', ['pertanyaans' => $pertanyaans]);
     }
+
     public function ajaxdetail($id, $is_cabang)
     {
         if($is_cabang == "ya"){
@@ -85,10 +85,11 @@ class PertPerusahaanController extends Controller
                 $pertanyaancabang->save();
                 }
 
-                foreach($request->pilihan_jawaban as $key => $value)
+                foreach($request->jawaban as $key => $value)
                 {
                     $pilihanjawaban = new PilihanJawaban;
-                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->jawaban = $value;
+                    
                     $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
                     $pilihanjawaban->created_at = now();
                     $pilihanjawaban->updated_at = now();
@@ -105,10 +106,10 @@ class PertPerusahaanController extends Controller
                 $pertanyaan->save();
                 $get_id_pertanyaan = DB::getPdo()->lastInsertId();
 
-                foreach($request->pilihan_jawaban as $key => $value)
+                foreach($request->jawaban as $key => $value)
                 {
                     $pilihanjawaban = new PilihanJawaban;
-                    $pilihanjawaban->pilihan_jawaban = $value;
+                    $pilihanjawaban->jawaban = $value;
                     $pilihanjawaban->id_pertanyaan =  $get_id_pertanyaan;
                     $pilihanjawaban->created_at = now();
                     $pilihanjawaban->updated_at = now();
@@ -123,16 +124,6 @@ class PertPerusahaanController extends Controller
         return redirect()->back();
     }
 
-    
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
 
     
     public function update(Request $request, $id)
@@ -147,7 +138,6 @@ class PertPerusahaanController extends Controller
         //     Alert::error('Invalid ', 'Kode pertanyaan Maksimal 5 Angka dan Data Tidak Boleh Kosong');
         //     return redirect()->back();
         // }
-
 
         if($request->kategori == "text"){
             $update_pertanyaan = Pertanyaan::findOrFail($id)
@@ -176,8 +166,8 @@ class PertPerusahaanController extends Controller
                 }
                 }
                 $cek_tambahjawaban=0;
-                foreach($request->kd_cabang as $kd_cabang){
-                if($kd_cabang != null){
+                foreach($request->jawaban as $jawaban){
+                if($jawaban != null){
                     $cek_tambahjawaban++;
                     // dd($kd_cabang);
                     // echo('ok');
@@ -215,7 +205,7 @@ class PertPerusahaanController extends Controller
                 ->select('pilihanjawabans.*')
                 ->first();
     
-                $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+                $update_pilihanjawaban->jawaban = $request->update_jawaban[$i++];
                 $update_pilihanjawaban->save();
                 
             }}
@@ -231,10 +221,10 @@ class PertPerusahaanController extends Controller
             }
         }
             if($cek_tambahjawaban > 0){
-            foreach($request->pilihan_jawaban as $key => $value)
+            foreach($request->jawaban as $key => $value)
             {
                 $pilihanjawaban = new PilihanJawaban;
-                $pilihanjawaban->pilihan_jawaban = $value;
+                $pilihanjawaban->jawaban = $value;
                 $pilihanjawaban->id_pertanyaan =  $id;
                 $pilihanjawaban->created_at = now();
                 $pilihanjawaban->updated_at = now();
@@ -244,6 +234,15 @@ class PertPerusahaanController extends Controller
 
     }else{
        
+        $cek_tambahjawaban=0;
+                foreach($request->jawaban as $jawaban){
+                if($jawaban != null){
+                    $cek_tambahjawaban++;
+                    // dd($cek_tambahjawaban);
+                    // echo('ok');
+                    // die;
+                }
+                }
             $update_pertanyaan = Pertanyaan::findOrFail($id)
             ->where('pertanyaans.id', '=', $id)
             ->select('pertanyaans.*')
@@ -263,22 +262,37 @@ class PertPerusahaanController extends Controller
             ->select('pilihanjawabans.*')
             ->first();
 
-            $update_pilihanjawaban->pilihan_jawaban = $request->update_jawaban[$i++];
+            $update_pilihanjawaban->jawaban = $request->update_jawaban[$i++];
             $update_pilihanjawaban->save();
             }}
 
-        if($request->pilihan_jawaban == null){
-        foreach($request->pilihan_jawaban as $key => $value)
-        {
-            $pilihanjawaban = new PilihanJawaban;
-            $pilihanjawaban->pilihan_jawaban = $value;
-            $pilihanjawaban->id_pertanyaan =  $id;
-            $pilihanjawaban->created_at = now();
-            $pilihanjawaban->updated_at = now();
-            $pilihanjawaban->save();
-        }
+            if($cek_tambahjawaban > 0){
+                foreach($request->jawaban as $key => $value)
+                {
+                    $pilihanjawaban = new PilihanJawaban;
+                    $pilihanjawaban->jawaban = $value;
+                    $pilihanjawaban->id_pertanyaan =  $id;
+                    $pilihanjawaban->created_at = now();
+                    $pilihanjawaban->updated_at = now();
+                    $pilihanjawaban->save();
+                }
+            }
+
+        // if($request->pilihan_jawaban != null){
+        // foreach($request->pilihan_jawaban as $key => $value)
+        // {
+        //     $pilihanjawaban = new PilihanJawaban;
+        //     $pilihanjawaban->jawaban = $value;
+        //     $pilihanjawaban->id_pertanyaan =  $id;
+        //     $pilihanjawaban->created_at = now();
+        //     $pilihanjawaban->updated_at = now();
+        //     $pilihanjawaban->save();
+        // }
+        // }else{
+        //     Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+        //     return redirect()->back();
+        // }
     }
-        }
         }
             Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();

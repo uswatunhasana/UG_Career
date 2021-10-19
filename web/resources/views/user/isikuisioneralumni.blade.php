@@ -88,7 +88,7 @@
                 <tr>
                   <th scope="col" class="text"><b>No.</b></th>
                   @foreach( $pertanyaan->pilihanjawaban as $pilihanjawaban)
-                  <th scope="col" class="text" style="color: red;"><b>{{ $pilihanjawaban-> pilihan_jawaban}}</b></th>
+                  <th scope="col" class="text" style="color: red;"><b>{{ $pilihanjawaban->jawaban}}</b></th>
                   @endforeach
                 </tr>
               </thead>
@@ -99,7 +99,7 @@
                   @foreach( $pertanyaan->pilihanjawaban as $pilihanjawaban)
                   <td>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="{{$pertanyaan_cabang->kd_cabang}}" id="{{$pertanyaan_cabang->kd_cabang}}" value="{{$pilihanjawaban->pilihan_jawaban}}">
+                      <input class="form-check-input" type="radio" name="{{$pertanyaan_cabang->kd_cabang}}" id="{{$pertanyaan_cabang->kd_cabang}}" value="{{$pilihanjawaban->jawaban}}">
                       <label class="form-check-label" for="{{$pertanyaan_cabang->kd_cabang}}"></label>
                     </div>
                   </td>
@@ -112,9 +112,9 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->pilihan_jawaban}}">
+              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
-              {{ $pilihanjawaban->pilihan_jawaban }}
+              {{ $pilihanjawaban->jawaban }}
               </label>
             </div>
             @endforeach
@@ -125,9 +125,9 @@
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->pilihan_jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" >
+              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" >
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
-              {{ $pilihanjawaban->pilihan_jawaban }}
+              {{ $pilihanjawaban->jawaban }}
               </label>
             </div>
             @endforeach

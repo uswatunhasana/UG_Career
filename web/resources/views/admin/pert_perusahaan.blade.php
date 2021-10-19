@@ -35,6 +35,7 @@
 									<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
 									<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
 									<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+									<option value="pilihan dan text" @if (Request::segment( 3 ) == "pilihan dan text")selected="selected" @endif>Pertanyaan Pilihan dan Text</option>
 								</select>
 							</div>
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
@@ -66,6 +67,7 @@
 													<option value="text" @if (Request::segment( 3 ) == "text")selected="selected" @endif >Pertanyaan Text</option>
 													<option value="pilihan" @if (Request::segment( 3 ) == "pilihan")selected="selected" @endif>Pertanyaan Pilihan</option>
 													<option value="checklist" @if (Request::segment( 3 ) == "checklist")selected="selected" @endif>Pertanyaan Checklist</option>
+													<option value="pilihan dan text" @if (Request::segment( 3 ) == "pilihan dan text")selected="selected" @endif>Pertanyaan Pilihan dan Text</option>
 												</select>
 											</div>
 										</div>
@@ -97,25 +99,26 @@
 											</div>
 										</div>
 									</div>
-									@if(Request::segment( 3 ) != "text")
-									<div class="row" id="cabang_option">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
-												<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
-													<option value="tidak">Tidak</option>
-													<option value="ya">Ya</option>
-												</select>
+									<div class="" id="container_cabang">
+										@if(Request::segment( 3 ) != "text")
+										<div class="row" id="cabang_option">
+											<div class="col-sm-12">
+												<div class="form-group form-group-default">
+													<label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label>
+													<select class="form-control input-sm"  id="is_cabang" name="is_cabang">
+														<option value="tidak">Tidak</option>
+														<option value="ya">Ya</option>
+													</select>
+												</div>
 											</div>
 										</div>
-									</div>
-									@endif
-									<div class="" id="container_cabang">
-									</div>
+										@endif
+										</div>
 
 
 									<!-- Jika Cabang -->
 									<div id="container_jikacabang">
+
 									</div>
 									<div id="container_pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
@@ -124,7 +127,7 @@
 									<label><h4><b>Pilihan Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -146,7 +149,7 @@
 								<div class="row control-group">
 									<div class="col-sm-9 ">
 										<label for="largeInput"></label>
-										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 									</div>
 									<div class="col-sm-3">
 									<label for="largeInput"></label>
@@ -197,8 +200,6 @@
 								</button>
 							</div>
 							<div class="modal-body" id="modal_body_detail">
-						
-
 								Pilihan Jawaban
 								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >
@@ -249,7 +250,7 @@
 									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_alumni.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_perusahaan.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -279,17 +280,6 @@
 						@csrf
 						@method('PUT')
 						<div class="row">
-									<!-- <div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Pertanyaan</b></h4></label>
-												<select class="form-control input-sm"  id="kelas_pertanyaan" name="kelas_pertanyaan">
-													<option value="wajib" {{ $pertanyaan->kelas_pertanyaan === 'wajib' ? 'selected' : '' }} >Wajib</option>
-													<option value="opsional" {{ $pertanyaan->kelas_pertanyaan === 'opsional' ? 'selected' : '' }} >Opsional</option>
-												</select>
-											</div>
-										</div>
-									</div> -->
 							<input name="kategori" type="hidden" value="{{$pertanyaan->jenis_pertanyaan}}">				
 							<input name="is_cabang" type="hidden" value="{{$pertanyaan->is_cabang}}">				
 							<div class="col-sm-12">
@@ -308,10 +298,8 @@
 							</div>
 						</div>
 						<div id="container_pilihan_jawaban">
+							<div id="pilihan_jawaban">
 									@if(Request::segment( 3 ) != "text")
-									<div id="pilihan_jawaban">
-									<hr/>
-									<label><h4><b>Pertanyaan  Cabang</b></h4></label>
 									@php
 									$no_jwb =1;
 									$no_pert=1;
@@ -320,6 +308,8 @@
 									$pertanyaan_cabangs = \App\Models\PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan->id)->select('*')->get();
 									@endphp
 									@if($pertanyaan->is_cabang == 'ya')
+									<hr/>
+									<label><h4><b>Pertanyaan  Cabang</b></h4></label>
 									@foreach($pertanyaan_cabangs as $pertanyaan_cabang)
 									<div class="row control-group">
 										<div class="container">
@@ -329,13 +319,13 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon3">Kode</span>
 												</div>
-												<input id="addpilihanjawaban" type="text" name="update_kdcabang[]" value="{{$pertanyaan_cabang->kd_cabang}}" class="form-control" >
+												<input id="update_kdcabang" type="text" name="update_kdcabang[]" value="{{$pertanyaan_cabang->kd_cabang}}" class="form-control" >
 											</div>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon3">Pertanyaan</span>
 												</div>
-												<input id="addpilihanjawaban" type="text" name="update_cabang[]" value="{{$pertanyaan_cabang->pertanyaan_cabang}}" class="form-control" >
+												<input id="update_cabang" type="text" name="update_cabang[]" value="{{$pertanyaan_cabang->pertanyaan_cabang}}" class="form-control" >
 											</div>
 										</div>
 									</div> 
@@ -348,7 +338,7 @@
 										<div class="col-sm-12 ">
 										<label>Pilihan {{$no_jwb++ }}</label>
 										<input name="idpilihan[]" type="hidden" value="{{$pilihan_jawaban->id}}">
-											<input id="addpilihanjawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->pilihan_jawaban}}" class="form-control" >
+											<input id="addUpdate_jawaban" type="text" name="update_jawaban[]" value="{{$pilihan_jawaban->jawaban}}" class="form-control" >
 										</div>
 									</div> 
 									@endforeach
@@ -389,7 +379,7 @@
 									<label><h4><b>Tambah Jawaban</b></h4></label>
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
-												<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -410,7 +400,7 @@
 								<div class="row control-group">
 									<div class="col-sm-9 ">
 										<label for="largeInput"></label>
-										<input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+										<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
 									</div>
 									<div class="col-sm-3">
 									<label for="largeInput"></label>
@@ -438,9 +428,14 @@
 
 			$(document).on("change", "#is_cabang", function() { 
 				var val = $(this).val(); 
+				var kategori = $('#kategori_pertanyaan').val();
+				// console.log(kategori);
 				if(val == 'ya')	{
 					var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
 					$("#container_jikacabang").html(html);
+					if(kategori == 'pilihan dan text'){
+					$("#container_jikacabang").append(html);
+					}
 				}else{
 					$("#is_cabang_form").remove();
 				}
@@ -453,10 +448,14 @@
 						$("#pilihan_jawaban").remove();
 						$("#cabang_option").remove();
 					}else{
-						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
+						var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
 						$("#container_pilihan_jawaban").html(html);
 						html='<div class="row" id="cabang_option"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Apakah Pertanyaan Bercabang?</b></h4></label><select class="form-control input-sm"  id="is_cabang" name="is_cabang"><option value="tidak">Tidak</option><option value="ya">Ya</option></select></div></div></div>'
 						$("#container_cabang").html(html);
+					}
+					if(val== "pilihan dan text"){
+						$('#is_cabang').attr('disabled', true);
+						$("#is_cabang").val('ya');
 					}	
 				});
 			});
@@ -557,7 +556,7 @@
 						pilihan_jawaban = datas[0][1];
 						var htmlkom = '';
 						for (i = 0; i < pilihan_jawaban.length; i++) {
-							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ pilihan_jawaban[i].pilihan_jawaban+'</td></tr>';
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ pilihan_jawaban[i].jawaban+'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
 						htmlkom='';
@@ -570,7 +569,7 @@
 						var htmlkom = '';
 						$('#detailpertanyaancabang-table').html(htmlkom);
 						for (i = 0; i < datas.length; i++) {
-							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].jawaban +'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
 					}
