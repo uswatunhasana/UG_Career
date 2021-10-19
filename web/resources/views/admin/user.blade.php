@@ -117,8 +117,8 @@
 						<thead class="thead-light">
 							<tr>
 								<th width="30px">No</th>
-								<th>Nama Jurusan </th>
-								<th>Operator Sekjur</th>
+								<th>Nama Prodi </th>
+								<th>Operator</th>
 								<th>Email</th>
 								<th>Aksi</th>
 							</tr>
