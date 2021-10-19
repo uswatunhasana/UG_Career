@@ -2,7 +2,7 @@
 @section('title', 'Data alumni')
 @section('content',)               
 <div class="page-header">
-	<h4 class="page-title">Data Alumni Terdaftar</h4>
+	<h4 class="page-title">Data alumni</h4>
 	<ul class="breadcrumbs">
 		<li class="nav-home">
 			<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 			<i class="flaticon-right-arrow"></i>
 		</li>
 		<li class="nav-item">
-			<a href="#">Data Alumni Terdaftar</a>
+			<a href="#">Data alumni</a>
 		</li>
 	</ul>
 </div>
@@ -29,20 +29,20 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
-					<!-- <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
-						Tambah Data Alumni
-					</button> -->
+						Tambah Data alumni
+					</button>
 				</div>
 			</div>
 			<div class="card-body">
 
 				<!-- Tambah Data Modal -->
-				<!-- <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Tambah Data Alumni</h5>
+								<h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -54,8 +54,53 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
-												<label><h4><b>Nama Alumni</b></h4></label>
-												<input id="name" type="text" name="name" class="form-control" placeholder="Nama Alumni">
+												<label><h4><b>NPM Alumni</b></h4></label>
+												<input id="addalumni" type="text" name="npm" class="form-control" placeholder="NPM alumni">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Tahun Masuk</b></h4></label>
+												<input id="addnotelpalumni" type="text" name="tahun_masuk" class="form-control" placeholder="Tahun masuk alumni">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Tahun Lulus</b></h4></label>
+												<input id="addnotelpalumni" type="text" name="tahun_lulus" class="form-control" placeholder="Tahun lulus alumni ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
+												<select class="form-control" name="id_prodi" required="required" style="">
+												<option disabled selected>-- Daftar Prodi --</option>
+												@foreach ($prodis as $prodi)
+												<option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+												@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Nama lengkap alumni</b></h4></label>
+												<input id="addnotelpalumni" type="text" name="name" class="form-control" placeholder="Nama lengkap alumni">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>Nomor Telepon/HP</b></h4></label>
+												<input id="addnamacpalumni" type="text" name="no_telp" class="form-control" placeholder="No. telp/HP alumni">
 											</div>
 										</div>
 									</div>
@@ -63,7 +108,15 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email</b></h4></label>
-												<input id="addnotelpalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email alumni">
+												<input id="addjabatanalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="Email alumni">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>NIK</b></h4></label>
+												<input id="addemailcpalumni" type="text" name="nik" class="form-control" placeholder="NIK alumni">
 											</div>
 										</div>
 									</div>
@@ -71,7 +124,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Username</b></h4></label>
-												<input id="usernamealumni" type="text" name="username" class="form-control" placeholder="Masukkan Username Pengguna">
+												<input id="addusernamealumni" type="text" name="username" class="form-control" placeholder="Username pengguna">
 											</div>
 										</div>
 									</div>
@@ -88,66 +141,6 @@
 											</div>
 										</div>
 									</div>
-
-									<div class="row">
-										<div class='col-sm-12'>
-											<div class="form-group form-group-default">
-												<label><h4><b>Tanggal Lahir</b></h4></label>
-												<div class="input-group">
-													<input type="text" class="form-control" id="datepicker" name="datepicker">
-													<div class="input-group-append">
-														<span class="input-group-text">
-															<i class="fa fa-calendar"></i>
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Jenis Kelamin</b></h4></label>
-												<select class="form-control input-sm"  id="jenis_kelamin" name="jenis_kelamin">
-													<option value="P">Perempuan</option>
-													<option value="L">Laki-Laki</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Alamat Sekarang</b></h4></label>
-												<input id="alamatsekarang" type="text" name="alamat_sekarang" class="form-control" placeholder="Masukkan Alamat Sekarang">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Alamat Tetap</b></h4></label>
-												<input id="alamat_tetap" type="text" name="alamat_tetap" class="form-control" placeholder="Masukkan Alamat Tetap (KTP)">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Nomor Telepon</b></h4></label>
-												<input id="no_telp" type="text" name="no_telp" class="form-control" placeholder="Masukkan Nomor Telpon Aktif">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group form-group-default">
-												<label><h4><b>Tahun Lulus</b></h4></label>
-												<input id="tahunlulus" type="Text" name="tahun_lulus" class="form-control" placeholder="Masukkan Tahun Lulus Kuliah">
-											</div>
-										</div>
-									</div>
-
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -156,7 +149,7 @@
 							</form>
 						</div>
 					</div>
-				</div> -->
+				</div>
 
 				<!-- Tabel Data -->
 				<div class="table-responsive">
@@ -164,29 +157,30 @@
 						<thead class="thead-light">
 							<tr>
 								<th width="30px">No</th>
-								<th>Nama Alumni </th>
-								<th>Username</th>
+								<th>Nama Lengkap </th>
+								<th>NPM </th>
 								<th>Email</th>
+								<th>Prodi</th>
 								<th>Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
 							@php
 							$no = 1;
-
 							@endphp
 							@foreach($alumnis as $alumni)
 							<tr>
 								<td>{{$no++ }}</td>
 								<td>{{ $alumni->user->name }}</td>
-								<td>{{ $alumni->user->username}}</td>
+								<td>{{ $alumni->npm }}</td>
 								<td>{{ $alumni->user->email }}</td>
+								<td>{{ $alumni->prodi->nama_prodi }}</td>
 								<td>
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $alumni->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button data-toggle="modal" data-target="#editModal-{{ $alumni->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $alumni->id }}" onclick="deletealumni(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $alumni->id }}" action="{{ route('dataalumni.destroy', $alumni->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $alumni->id }}" action="{{ route('dataalumni.destroy', $alumni->id_user) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -218,8 +212,60 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
-									<label><h4><b>Nama</b></h4></label>
-									<input id="addalumni" type="text" name="name" class="form-control" value="{{ $alumni->user->name }}">
+									<label><h4><b>NPM Alumni</b></h4></label>
+									<input id="addalumni" type="text" name="npm" class="form-control" value="{{ $alumni->npm }}" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>Tahun Masuk</b></h4></label>
+									<input id="addnotelpalumni" type="text" name="tahun_masuk" class="form-control" value="{{ $alumni->tahun_masuk }}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>Tahun Lulus</b></h4></label>
+									<input id="addnotelpalumni" type="text" name="tahun_lulus" class="form-control" value="{{ $alumni->tahun_lulus }}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
+									<select class="form-control" name="id_prodi" required="required" style="">
+									<option disabled selected>-- Daftar Prodi --</option>
+									@foreach ($prodis as $prodi)
+									<option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+									@endforeach
+									@foreach($prodis as $prodi)
+									<option 
+									@if($alumni->id_prodi ==  $prodi->id)
+									selected="selected" 
+									@endif
+									value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+									@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>Nama alumni</b></h4></label>
+									<input id="addnotelpalumni" type="text" name="name" class="form-control" value="{{ $alumni->user->name }}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>Nomor Telepon/HP</b></h4></label>
+									<input id="addnamacpalumni" type="text" name="no_telp" class="form-control" value="{{ $alumni->no_telp }}">
 								</div>
 							</div>
 						</div>
@@ -227,7 +273,15 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Email</b></h4></label>
-									<input id="addnotelpalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $alumni->user->email }}">
+									<input id="addjabatanalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $alumni->user->email }}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>NIK</b></h4></label>
+									<input id="addemailcpalumni" type="text" name="nik" class="form-control" value="{{ $alumni->nik }}">
 								</div>
 							</div>
 						</div>
@@ -235,7 +289,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Username</b></h4></label>
-									<input id="addalumninamealumni" type="text" name="username" class="form-control" value="{{ $alumni->user->username }}" disabled>
+									<input id="addusernamealumni" type="text" name="username" class="form-control" value="{{ $alumni->user->username }}" disabled>
 								</div>
 							</div>
 						</div>
@@ -274,7 +328,6 @@
 			$('#add-row').DataTable({
 				"pageLength": 5,
 			});
-	
 
 			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
@@ -289,7 +342,6 @@
 
 			});
 		});
-
 
 		function deletealumni(id) {
 			swal({
@@ -333,9 +385,6 @@
 				}
 			});
 		});
-		$('#datepicker').datetimepicker({
-				format: 'MM/DD/YYYY',
-			});
 	</script>
 
 	@endsection
