@@ -17,19 +17,19 @@ class CreateJawabanalumnisTable extends Migration
             $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan
-            $table->unsignedInteger('kd_pertanyaan')->nullable();
-            $table->foreign('kd_pertanyaan')
-                ->on('pertanyaans')
-                ->references('kd_pertanyaan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            //relasi user
-            $table->unsignedInteger('npm')->nullable();
-            $table->foreign('npm')
-                ->on('alumnis')
-                ->references('npm')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            // $table->unsignedInteger('kd_pertanyaan')->nullable();
+            // $table->foreign('kd_pertanyaan')
+            //     ->on('pertanyaans')
+            //     ->references('kd_pertanyaan')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
+            // //relasi user
+            // $table->unsignedInteger('npm')->nullable();
+            // $table->foreign('npm')
+            //     ->on('alumnis')
+            //     ->references('npm')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }
