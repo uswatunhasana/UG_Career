@@ -12,8 +12,7 @@
             $jumlah_pertanyaan = \App\Models\Pertanyaan::count();
             $jumlah_berita = \App\Models\Berita::count();
            
-            $jumlah_responden_alumni = \App\Models\JawabanResponden::where('kategori_responden','=','alumni')->count();
-            $jumlah_responden_perusahaan = \App\Models\JawabanResponden::where('kategori_responden','=','perusahaan')->count();
+            
             $jumlah_user_alumni = \App\Models\User::where('level','=','alumni')->count();
             @endphp
 		<!-- <div class="dropdown-menu">
@@ -96,7 +95,7 @@
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
 							<p class="card-category">Jumlah Responden Almuni</p>
-							<h4 class="card-title">{{$jumlah_responden_alumni}}</h4>
+							<h4 class="card-title"></h4>
 						</div>
 					</div>
 				</div>
@@ -115,7 +114,7 @@
 					<div class="col col-stats ml-3 ml-sm-0">
 						<div class="numbers">
 							<p class="card-category">Jumlah Responden Perusahaan</p>
-							<h4 class="card-title">{{ $jumlah_responden_perusahaan}}</h4>
+							<h4 class="card-title"></h4>
 						</div>
 					</div>
 				</div>
