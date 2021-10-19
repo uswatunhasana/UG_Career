@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\TracerEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class AuthUserController extends Controller
 {
@@ -62,6 +63,7 @@ class AuthUserController extends Controller
                 return redirect()->intended('/');
             }
             return redirect()->route('login');
+            Alert::success(' Request email telah terkirim.');
         }else{
             Alert::error('Salah Username atau Password ', ' Silahkan coba lagi');
             return redirect()->back();
@@ -82,14 +84,14 @@ class AuthUserController extends Controller
 
     public function simpanregistrasi(Request $request)
     {
-        // $rules = array(
-        //     'password' => 'string|min:8|required',
-        // );
-        // $validation = Validator::make($request->all(), $rules);
-        // if ($validation->fails()) {
-        //     Alert::error('Invalid Data', 'Password min 8 digit');
-        //     return redirect()->back();
-        // }
+        $rules = array(
+            'password' => 'string|min:8',
+        );
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
+            return redirect()->back();
+        }
         $daftar_perusahaan = User::where('username', $request->username)->count();
         if ($daftar_perusahaan == 0) {
             $user           = new User;
@@ -124,14 +126,14 @@ class AuthUserController extends Controller
 
     public function store(Request $request)
     {
-        // $rules = array(
-        //     'password' => 'string|min:8|required',
-        // );
-        // $validation = Validator::make($request->all(), $rules);
-        // if ($validation->fails()) {
-        //     Alert::error('Invalid Data', 'Password min 8 digit');
-        //     return redirect()->back();
-        // }
+        $rules = array(
+            'password' => 'string|min:8',
+        );
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
+            return redirect()->back();
+        }
         $daftar_alumni = User::where('username', $request->username)->count();
         if ($daftar_alumni == 0) {
             $user           = new User;
