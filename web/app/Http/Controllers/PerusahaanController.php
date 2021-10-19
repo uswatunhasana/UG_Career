@@ -28,14 +28,14 @@ class PerusahaanController extends Controller
 
     public function store(Request $request)
     {
-        // $rules = array(
-        //     'password' => 'string|min:8|required',
-        // );
-        // $validation = Validator::make($request->all(), $rules);
-        // if ($validation->fails()) {
-        //     Alert::error('Invalid Data', 'Password min 8 digit');
-        //     return redirect()->back();
-        // }
+        $rules = array(
+            'password' => 'string|min:8|required',
+        );
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Invalid Data', 'Password min 8 digit');
+            return redirect()->back();
+        }
         $cek_perusahaan = User::where('username', $request->username)->count();
         if ($cek_perusahaan == 0) {
             $user = new User;
@@ -83,22 +83,22 @@ class PerusahaanController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $rules = array(
-        //     'username' => 'string|unique|required',
-        //     'password' => 'string|min:8|required',
-        //     'name' => 'string|required',
-        //     'email' => 'string|unique|required',
-        //     'alamat' => 'string|required',
-        //     'no_telp' => 'string|required',
-        //     'url_web' => 'string|required',
-        //     'nama_cp' => 'string|required',
-        //     'jabatan' => 'string|required',
-        // );
-        // $validation = Validator::make($request->all(), $rules);
-        // if ($validation->fails()) {
-        //     Alert::error('Invalid Data', 'Data sudah tersedia');
-        //     return redirect()->back();
-        // }
+        $rules = array(
+            'username' => 'string|unique|required',
+            'password' => 'string|min:8|required',
+            'name' => 'string|required',
+            'email' => 'string|unique|required',
+            'alamat' => 'string|required',
+            'no_telp' => 'string|required',
+            'url_web' => 'string|required',
+            'nama_cp' => 'string|required',
+            'jabatan' => 'string|required',
+        );
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Invalid Data', 'Data sudah tersedia');
+            return redirect()->back();
+        }
         $cek_perusahaan = User::where('email', $request->email)->count();
         if ($cek_perusahaan == 0) {
             $perusahaan = Perusahaan::findOrFail($id)
@@ -137,7 +137,6 @@ class PerusahaanController extends Controller
         }
         return redirect()->back();
        
-
     }
 
     public function destroy($id)
