@@ -41,7 +41,8 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->email_verified_at=now();
             $user->level = 'prodi';
-            $user->password = Crypt::encryptString($request->password);
+            $user->password = Hash::make($request->password);
+            $user->forget_password = Crypt::encryptString($request->password);
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;

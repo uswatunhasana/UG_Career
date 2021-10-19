@@ -62,6 +62,7 @@ class ProfilController extends Controller
             $user->username    = $request['username'];
             $user->email    = $request['email'];
             $user->password = $request[Hash::make('password')];
+            $user->forget_password = $request[Hash::make('password')];
             $user->update();
             $user = User::all();
             Alert::success(' Berhasil Update Data ', ' Silahkan dicek kembali');
