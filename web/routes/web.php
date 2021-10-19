@@ -32,7 +32,7 @@ Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('logi
 Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
 Route::get('lupa_password', 'App\Http\Controllers\AuthUserController@lupa_password')->name('lupapassword.lupa_password');
 Route::post('/post_lupa_password', 'App\Http\Controllers\AuthUserController@post_lupa_password')->name('post_lupa_password');
-Route::post('resetpassword', 'App\Http\Controllers\AuthUserController@resetpassword')->name('resetpassword');
+Route::post('password_update', 'App\Http\Controllers\AuthUserController@password_update')->name('password_update');
 Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
