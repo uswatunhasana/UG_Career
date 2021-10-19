@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
     	return $this->hasOne(User::class, 'id_user');
     }
+
+    public function alumni()
+    {
+    	return $this->hasOne(User::class, 'id_user');
+    }
 }
