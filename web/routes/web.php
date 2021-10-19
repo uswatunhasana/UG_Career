@@ -95,6 +95,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function(){
         
         Route::resource('/dataalumni', DataAlumniController::class)->names([
             'index'=>'dataalumni.index',
+            'destroy' => 'dataalumni.destroy',
         ]);
         
         // Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
