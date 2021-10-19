@@ -21,19 +21,20 @@
          </div>
          <div class="form-container">
             <div class="form-inner">
-               <form action="{{ route('postlogin') }}" class="alumni" method="POST">
+               <form action="{{ route('password_update') }}" class="alumni" method="POST">
                    {{ csrf_field() }}
                    @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
+                  <input type="hidden" name="token" value="{{ $token }}">
                   <div class="field">
                      <input type="email" name="email" placeholder="Masukkan Email" value="{{ $email ?? old('email') }}" required>
                      <span class="text-danger">@error('email'){{ 'message'}} @enderror</span>
                   </div>
                   <div class="field">
-                     <input type="password" name="password_baru" placeholder="Password" required>
+                     <input type="password" name="password_baru" placeholder="Password baru" required>
                      <span class="text-danger">@error('password'){{ 'message'}} @enderror</span>
                   </div>
                   <div class="field">
