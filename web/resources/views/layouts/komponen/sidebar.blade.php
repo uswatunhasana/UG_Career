@@ -19,7 +19,7 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="{{ route('user.index') }}">
-											<span class="sub-item">Data Operator Sekjur</span>
+											<span class="sub-item">Data Operator Prodi</span>
 										</a>
 									</li>
 									<li>
