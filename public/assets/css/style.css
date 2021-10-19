@@ -708,17 +708,17 @@ section {
   font-size: 18px;
 }
 .services .service-box.blue {
-  border-bottom: 3px solid #2db6fa;
+  border-bottom: 3px solid #972dfa;
 }
 .services .service-box.blue .icon {
-  color: #2db6fa;
+  color: #972dfa;
   background: #dbf3fe;
 }
 .services .service-box.blue .read-more {
-  color: #2db6fa;
+  color: #972dfa;
 }
 .services .service-box.blue:hover {
-  background: #2db6fa;
+  background: #972dfa;
 }
 .services .service-box.orange {
   border-bottom: 3px solid #f68c09;
@@ -1495,7 +1495,7 @@ section {
 }
 .blog .entry .entry-meta {
   margin-bottom: 15px;
-  color: #4084fd;
+  color: #b140fd;
 }
 .blog .entry .entry-meta ul {
   display: flex;
@@ -1575,7 +1575,7 @@ section {
   border-top: 1px solid #e6e6e6;
 }
 .blog .entry .entry-footer i {
-  color: #0d64fd;
+  color: #b90dfd;
   display: inline;
 }
 .blog .entry .entry-footer a {
@@ -1682,7 +1682,7 @@ section {
 .blog .blog-comments .comment time {
   display: block;
   font-size: 14px;
-  color: #013ca3;
+  color: #6801a3;
   margin-bottom: 5px;
 }
 .blog .blog-comments .comment.comment-reply {
@@ -1731,7 +1731,7 @@ section {
   background-color: #610296;
 }
 .blog .blog-pagination {
-  color: #024ed5;
+  color: #9202d5;
 }
 .blog .blog-pagination ul {
   display: flex;
@@ -1804,7 +1804,7 @@ section {
   line-height: 0;
 }
 .blog .sidebar .search-form form button:hover {
-  background: #5465f2;
+  background: #ab54f2;
 }
 .blog .sidebar .categories ul {
   list-style: none;
@@ -1862,7 +1862,7 @@ section {
   display: inline-block;
 }
 .blog .sidebar .tags ul a {
-  color: #0257ee;
+  color: #8402ee;
   font-size: 14px;
   padding: 6px 14px;
   margin: 0 6px 8px 0;
