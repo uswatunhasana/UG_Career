@@ -17,19 +17,19 @@ class CreateJawabanperusahaansTable extends Migration
             $table->increments('id');
             $table->integer('jawaban');
             //relasi pertanyaan
-            $table->unsignedInteger('kd_pertanyaan')->nullable();
-            $table->foreign('kd_pertanyaan')
-                ->on('pertanyaans')
-                ->references('kd_pertanyaan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            //relasi user
-            $table->unsignedInteger('email')->nullable();
-            $table->foreign('email')
-                ->on('users')
-                ->references('email')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            // $table->unsignedInteger('kd_pertanyaan')->nullable();
+            // $table->foreign('kd_pertanyaan')
+            //     ->on('pertanyaans')
+            //     ->references('kd_pertanyaan')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
+            // //relasi user
+            // $table->unsignedInteger('email')->nullable();
+            // $table->foreign('email')
+            //     ->on('users')
+            //     ->references('email')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }
