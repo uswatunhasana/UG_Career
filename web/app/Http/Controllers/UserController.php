@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Sekjur;
-use App\Models\Alumni;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 
 class UserController extends Controller
@@ -77,12 +77,39 @@ class UserController extends Controller
    
     public function update(Request $request, $id)
     {
+        $sekjur = Sekjur::findOrFail($id)
+            ->where('sekjurs.id', '=', $id)
+            ->select('sekjurs.*')
+            ->first();
+
+            $user = User::findOrFail($sekjur->id_user)
+            ->where('users.id', '=', $sekjur->id_user)
+            ->select('users.*')
+            ->first();
+            $user->name = $request->name;
+            $user->username = $user->username;
+            $user->email = $request->email;
+            $user->level = 'prodi';
+            if($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+                $user->forget_password = Crypt::encryptString($request->password);
+            } else {
+                $user->password = $user->password;
+                $user->forget_password = $user->forget_password;
+            }
+            $user->save();
         
+            $sekjur->id_user     = $sekjur->id_user;
+            $sekjur->id_prodi    = $sekjur->id_prodi;
+            $sekjur->save();
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+        return redirect()->back();
     }
 
     
     public function destroy($id)
     {
+        DB::table('sekjurs')->where('id_user', $id)->delete();
         DB::table('users')->where('id', $id)->delete();
         return redirect()->back();
     }

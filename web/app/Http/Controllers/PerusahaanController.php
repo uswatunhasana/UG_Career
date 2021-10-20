@@ -83,25 +83,23 @@ class PerusahaanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'username' => 'string|unique|required',
-            'password' => 'string|min:8|required',
-            'name' => 'string|required',
-            'email' => 'string|unique|required',
-            'alamat' => 'string|required',
-            'no_telp' => 'string|required',
-            'url_web' => 'string|required',
-            'nama_cp' => 'string|required',
-            'jabatan' => 'string|required',
-        );
-        $validation = Validator::make($request->all(), $rules);
-        if ($validation->fails()) {
-            Alert::error('Invalid Data', 'Data sudah tersedia');
-            return redirect()->back();
-        }
-        $cek_perusahaan = User::where('email', $request->email)->count();
-        if ($cek_perusahaan == 0) {
-            $perusahaan = Perusahaan::findOrFail($id)
+        // $rules = array(
+        //     'username' => 'string|unique|required',
+        //     'password' => 'string|min:8|required',
+        //     'name' => 'string|required',
+        //     'email' => 'string|unique|required',
+        //     'alamat' => 'string|required',
+        //     'no_telp' => 'string|required',
+        //     'url_web' => 'string|required',
+        //     'nama_cp' => 'string|required',
+        //     'jabatan' => 'string|required',
+        // );
+        // $validation = Validator::make($request->all(), $rules);
+        // if ($validation->fails()) {
+        //     Alert::error('Invalid Data', 'Data sudah tersedia');
+        //     return redirect()->back();
+        // }
+        $perusahaan = Perusahaan::findOrFail($id)
             ->where('perusahaans.id', '=', $id)
             ->select('perusahaans.*')
             ->first();
@@ -111,7 +109,7 @@ class PerusahaanController extends Controller
             ->select('users.*')
             ->first();
             $user->name = $request->name;
-            $user->username = $request->username;
+            $user->username = $user->username;
             $user->email = $request->email;
             $user->level = 'perusahaan';
             if($request->filled('password')) {
@@ -123,18 +121,15 @@ class PerusahaanController extends Controller
             }
             $user->save();
         
-            $perusahaan->id_user = $perusahaan->id_user;
-            $perusahaan->alamat = $request->alamat;
-            $perusahaan->no_telp = $request->no_telp;
-            $perusahaan->url_web = $request->url_web;
-            $perusahaan->nama_cp = $request->nama_cp;
-            $perusahaan->jabatan = $request->jabatan;
+            $perusahaan->id_user  = $perusahaan->id_user;
+            $perusahaan->alamat   = $perusahaan->alamat;
+            $perusahaan->no_telp  = $request->no_telp;
+            $perusahaan->url_web  = $request->url_web;
+            $perusahaan->nama_cp  = $request->nama_cp;
+            $perusahaan->jabatan  = $request->jabatan;
             $perusahaan->email_cp = $request->email_cp;
             $perusahaan->save();
             Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
-        } else {
-            Alert::error('Data Kab/Kota Sudah Ada ', ' Silahkan coba lagi');
-        }
         return redirect()->back();
        
     }
