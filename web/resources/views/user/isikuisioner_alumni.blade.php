@@ -11,7 +11,7 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="{{ route('isikuisioneralumni') }}">Isi Kuisioner Alumni</a></li>
+        <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}">Isi Kuisioner Alumni</a></li>
       </ol>
       <h2>Isi Kuisioner Alumni UG Career</h2>
 

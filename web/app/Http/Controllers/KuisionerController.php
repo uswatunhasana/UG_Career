@@ -22,8 +22,9 @@ class KuisionerController extends Controller
         //
     }
 
-    public function isikuisioneralumni()
+    public function isikuisioneralumni($id)
     {
+        $alumnis = Alumni::where('id_user','=',$id)->select('*')->get();
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->orderBy('kd_pertanyaan')->get();
         $i=0;
         foreach ($pertanyaans as $pertanyaan) {
@@ -33,7 +34,7 @@ class KuisionerController extends Controller
             }
             $i++;
         }
-        return view('user.isikuisioneralumni', compact('pertanyaans'));
+        return view('user.isikuisioneralumni', compact('pertanyaans','alumnis'));
     }
 
     public function isikuisionerperusahaan($id)
