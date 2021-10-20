@@ -14,9 +14,15 @@ class Alumni extends Model
         'tahun_lulus',
         'nik',
         'no_telp',
+        'id_prodi',
+        'id_user',
     ];
     public function user()
     {
     	return $this->belongsTo(User::class, 'id_user');
+    }
+    public function prodi()
+    {
+    	return $this->belongsTo(User::class, 'id_prodi');
     }
 }

@@ -15,7 +15,8 @@ class CreateJawabanalumnisTable extends Migration
     {
         Schema::create('jawabanalumnis', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('jawaban');
+            $table->text('jawaban');
+            $table->string('kd_pertanyaan',5);
             //relasi pertanyaan
             // $table->unsignedInteger('kd_pertanyaan')->nullable();
             // $table->foreign('kd_pertanyaan')
@@ -24,12 +25,12 @@ class CreateJawabanalumnisTable extends Migration
             //     ->onUpdate('cascade')
             //     ->onDelete('cascade');
             // //relasi user
-            // $table->unsignedInteger('npm')->nullable();
-            // $table->foreign('npm')
-            //     ->on('alumnis')
-            //     ->references('npm')
-            //     ->onUpdate('cascade')
-            //     ->onDelete('cascade');
+            $table->unsignedInteger('id_user')->nullable();
+            $table->foreign('id_user')
+                ->on('users')
+                ->references('id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

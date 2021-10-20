@@ -47,7 +47,7 @@
                   </div>
                   <div class="field">
                      <label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
-                     <select class="form-control" name="id_prodi" required="required" style="">
+                     <select class="form-control" name="id_prodi" required="required">
                      <option disabled selected>-- Daftar Prodi --</option>
                      @foreach ($prodis as $prodi)
                      <option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
@@ -99,7 +99,7 @@
                   </div>
                   <div class="field">
                   <label style="color : #999;"><h3><b>Alamat Perusahaan</b></h3></label>
-                  <textarea class="form-control" aria-label="With textarea" style="" name="alamat" required></textarea>
+                  <textarea class="form-control" aria-label="With textarea" name="alamat" required></textarea>
                   </div>
                   <br>
                   <br>

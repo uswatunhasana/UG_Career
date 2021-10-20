@@ -1,5 +1,5 @@
 @extends('layouts.masterfrontend')
-@section('title', 'Isi Kuisioner Alumni')
+@section('title', 'Isi Kuisioner Perusahaan')
 @section('css')
 @endsection
 @section('content')
@@ -11,63 +11,63 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="{{ route('isikuisioneralumni') }}">Isi Kuisioner Alumni</a></li>
+        <li><a href="{{ route('isikuisionerperusahaan',Auth::user()->id) }}">Isi Kuisioner Perusahaan</a></li>
       </ol>
-      <h2>Isi Kuisioner Alumni UG Career</h2>
+      <h2>Isi Kuisioner Perusahaan UG Career</h2>
 
     </div>
   </section><!-- End Breadcrumbs -->
-
+  
   <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
+    @php
+    $hasil_perusahaan = \App\Models\HasilPerusahaan::where('email', Auth::user()->email)->count();
+    @endphp
+    @if($hasil_perusahaan == 0)
 
-      <form role="form" action="" method="POST">
+      <form role="form" action="{{ route('kuisionerperusahaan.store') }}" method="POST">
        @csrf
-       @method('PUT')
+       @method('POST')
        <article class="entry">
         <!-- Identitas -->
         <h2 class="entry-title">
-          <a>Bagian 1: Identitas Alumni</a>
+          <a>Bagian 1: Identitas Perusahaan</a>
         </h2>
         
         <div class="col-md-12">
-
+        @foreach($perusahaans as $perusahaan)
           <div class="form-group">
-            <label for="largeInput">NPM</label>
-            <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="" readonly>
+            <label for="largeInput">Nama Perusahaan</label>
+            <input type="text" class="form-control form-control" name = "nama_perusahaan" id="nama_perusahaan" value="{{ $perusahaan->user->name }}" readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">Tahun Masuk</label>
-            <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="" readonly>
+            <label for="largeInput">Email Perusahaan</label>
+            <input type="text" class="form-control form-control" name = "email_perusahaan" id="email_perusahaan" value="{{ $perusahaan->user->email }}" readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">Tahun Lulus</label>
-            <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="" readonly>
+            <label for="largeInput">Nomor Telepon</label>
+            <input type="text" class="form-control form-control" name = "no_telp" id="no_telp" value="{{ $perusahaan->no_telp }}" readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">Program Studi/Jurusan</label>
-            <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="" readonly>
+            <label for="largeInput">URL Web</label>
+            <input type="text" class="form-control form-control" name = "url_web" id="url_web" value="{{ $perusahaan->url_web }}" readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">Nama</label>
-            <input type="text" class="form-control form-control" name = "nama" id="nama" value="" readonly>
+            <label for="largeInput">Alamat Perusahaan</label>
+            <input type="text" class="form-control form-control" name = "alamat_perusahaan" id="alamat_perusahaan" value="{{ $perusahaan->alamat }}" readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">Nomor Telepon/HP</label>
-            <input type="text" class="form-control form-control" name = "nomortelepon" id="nomortelepon" value=""readonly >
+            <label for="largeInput">Kontak Personal</label>
+            <input type="text" class="form-control form-control" name = "kontak_person" id="kontak_person" value="{{ $perusahaan->nama_cp }}"readonly >
           </div>
           <div class="form-group">
-            <label for="largeInput">Email</label>
-            <input type="text" class="form-control form-control" name = "email" id="email" value=""readonly>
-          </div>
-          <div class="form-group">
-            <label for="largeInput">NIK</label>
-            <input type="text" class="form-control form-control" name = "nik" id="nik" value=""readonly>
+            <label for="largeInput">Jabatan</label>
+            <input type="text" class="form-control form-control" name = "jabatan" id="jabatan" value="{{ $perusahaan->jabatan }}"readonly>
           </div>
           <br>
-
+          @endforeach
           <!-- Tracer Study -->
-          <h2 class="entry-title"><a>Bagian 2: Tracer Study</a></h2>
+          <h2 class="entry-title"><a>Bagian 2: Tracer Perusahaan</a></h2>
           <!-- Kuisioner Wajib -->
           <h4><a style="color: red;">Kuisioner Wajib</a></h4>
           <br/>
@@ -76,6 +76,7 @@
         @if($pertanyaan->jenis_pertanyaan == 'text')
         <div class="form-group">
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
+            <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_pertanyaan}}">	
             <input type="text" class="form-control form-control" name = "{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="">
             <br/>
         </div>
@@ -86,9 +87,9 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="text"><b>No.</b></th>
+                  <th scope="col" class="text"><b>Pertanyaan</b></th>
                   @foreach( $pertanyaan->pilihanjawaban as $pilihanjawaban)
-                  <th scope="col" class="text" style="color: red;"><b>{{ $pilihanjawaban->jawaban}}</b></th>
+                  <th scope="col" class="text" style="color: red;">{{ $pilihanjawaban->jawaban}}</th>
                   @endforeach
                 </tr>
               </thead>
@@ -99,6 +100,7 @@
                   @foreach( $pertanyaan->pilihanjawaban as $pilihanjawaban)
                   <td>
                     <div class="form-check form-check-inline">
+                    <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_cabang}}">	
                       <input class="form-check-input" type="radio" name="{{$pertanyaan_cabang->kd_cabang}}" id="{{$pertanyaan_cabang->kd_cabang}}" value="{{$pilihanjawaban->jawaban}}">
                       <label class="form-check-label" for="{{$pertanyaan_cabang->kd_cabang}}"></label>
                     </div>
@@ -112,6 +114,7 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
+              <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_pertanyaan}}">	
               <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
               {{ $pilihanjawaban->jawaban }}
@@ -122,7 +125,7 @@
             <br/>
         </div>
         @else
-            <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
+            <label for="{{ $pertanyaan->kd_pertanyaan }}">{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" >
@@ -137,6 +140,14 @@
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </article><!-- End blog entry -->
     </form>
+    @else
+    <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Perusahaanmu Telah Mengisi Kuisioner!</h4>
+    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+    <hr>
+    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+  </div>
+    @endif
   </div>
 </section><!-- End Blog Single Section -->
 

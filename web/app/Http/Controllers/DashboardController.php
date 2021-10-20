@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dataweb;
 use App\Models\Berita;
-use App\Models\Pertanyaan;
-use App\Models\PertanyaanCabang;
-use App\Models\PilihanJawaban;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -97,46 +94,7 @@ class DashboardController extends Controller
         return view('user.berita', compact('beritas','kategoris','listberitas'));
     }
 
-    public function isikuisionerrr()
-    {
-
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->orderBy('kd_pertanyaan')->get();
-
-        // dd($pertanyaans);
-        $i=0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
-            if($pertanyaan['is_cabang'] == "ya"){
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('*')->get();
-            }
-            $i++;
-        }
-        // var_dump( $pertanyaans[13]['pertanyaan_cabang']);
-        // die;
-        // dd($pertanyaans);
-        return view('user.isikuisioneralumni', compact('pertanyaans'));
-    }
-
-    public function isikuisionercontoh()
-    {
-
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan','=','alumni')->orderBy('kd_pertanyaan')->get();
-
-        // dd($pertanyaans);
-        $i=0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
-            if($pertanyaan['is_cabang'] == "ya"){
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('*')->get();
-            }
-            $i++;
-        }
-        // var_dump( $pertanyaans[13]['pertanyaan_cabang']);
-        // die;
-        // dd($pertanyaans);
-        return view('user.isikuisioner_alumni', compact('pertanyaans'));
-    }
-
+   
 
     public function edit($id)
     {

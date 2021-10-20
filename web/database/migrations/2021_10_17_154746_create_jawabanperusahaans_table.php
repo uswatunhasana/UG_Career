@@ -16,18 +16,21 @@ class CreateJawabanperusahaansTable extends Migration
         Schema::create('jawabanperusahaans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('jawaban');
-            //relasi pertanyaan
-            // $table->unsignedInteger('kd_pertanyaan')->nullable();
-            // $table->foreign('kd_pertanyaan')
+            $table->string('kd_pertanyaan',5);
+            $table->string('email',25);
+
+            // // relasi pertanyaan
+            // $table->unsignedInteger('id_pertanyaan')->nullable();
+            // $table->foreign('id_pertanyaan')
             //     ->on('pertanyaans')
-            //     ->references('kd_pertanyaan')
+            //     ->references('id')
             //     ->onUpdate('cascade')
             //     ->onDelete('cascade');
-            // //relasi user
-            // $table->unsignedInteger('email')->nullable();
-            // $table->foreign('email')
+            //relasi user
+            // $table->unsignedInteger('id_user')->nullable();
+            // $table->foreign('id_user')
             //     ->on('users')
-            //     ->references('email')
+            //     ->references('id')
             //     ->onUpdate('cascade')
             //     ->onDelete('cascade');
             $table->timestamps();
@@ -41,6 +44,7 @@ class CreateJawabanperusahaansTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('jawabanperusahaans');
     }
 }

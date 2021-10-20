@@ -37,7 +37,11 @@ Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanr
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
-Route::get('/isikuisioner', 'App\Http\Controllers\DashboardController@isikuisionerrr')->name('isikuisionerrr');
+Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
+Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
+// Route::get('/isikuisioner/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
+Route::get('/isikuisionerperusahaan/{id}', 'App\Http\Controllers\KuisionerController@isikuisionerperusahaan')->name('isikuisionerperusahaan');
+Route::post('/isikuisionerperusahaan/store', 'App\Http\Controllers\KuisionerController@kuisionerperusahaanstore')->name('kuisionerperusahaan.store');
 Route::get('/isikuisionercontoh', 'App\Http\Controllers\DashboardController@isikuisionercontoh');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
