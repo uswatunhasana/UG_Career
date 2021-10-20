@@ -32,11 +32,11 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="largeInput">Nama</label>
-													<input type="text" class="form-control form-control" name = "nama_web" id="name" value="{{ $user->name }}">
+													<input type="text" class="form-control form-control" name = "name" id="name" value="{{ $user->name }}">
 												</div>
 												<div class="form-group">
 													<label for="disableinput">Username</label>
-													<input type="text" class="form-control" id="disableinput" value="{{ $user->name }}" disabled>
+													<input type="text" class="form-control" id="disableinput" name = "username" value="{{ $user->username }}" disabled>
 												</div>
 												<div class="form-group">
 													<label for="largeInput">Email</label>
