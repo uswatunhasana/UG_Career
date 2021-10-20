@@ -11,17 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
 class BeritaController extends Controller
 {
-    // public function search(Request $request)
-    // {
-       
-    //     $search = Berita::where('title', 'like', "%".$request->search."%")->paginate(2);
-
-    //     return view('user.berita',['beritas'=>$search]);
-    // }
-
     public function index($kategori="pengumuman")
     {
         $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
@@ -33,6 +24,7 @@ class BeritaController extends Controller
         $beritas = Berita::where('jenis_berita','=',$kategori)->select('*')->get();
         return view('admin.berita2', ['beritas' => $beritas]);
     }
+
     public function ajaxdetail($id)
     {
         $data = Berita::where('id','=', $id)->select('*')->get();

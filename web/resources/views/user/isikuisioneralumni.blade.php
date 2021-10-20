@@ -11,7 +11,7 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="{{ route('isikuisioneralumni') }}">Isi Kuisioner Alumni</a></li>
+        <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}">Isi Kuisioner Alumni</a></li>
       </ol>
       <h2>Isi Kuisioner Alumni UG Career</h2>
 
@@ -29,42 +29,42 @@
         <h2 class="entry-title">
           <a>Bagian 1: Identitas Alumni</a>
         </h2>
-        
+        @foreach($alumnis as $alumni)
         <div class="col-md-12">
-
           <div class="form-group">
             <label for="largeInput">NPM</label>
-            <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="" readonly>
+            <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="{{ $alumni->user->name }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Tahun Masuk</label>
-            <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="" readonly>
+            <input type="text" class="form-control form-control" name = "kodept" id="kodept" value="{{ $alumni->tahun_masuk }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Tahun Lulus</label>
-            <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="" readonly>
+            <input type="text" class="form-control form-control" name = "tahunlulus" id="tahunlulus" value="{{ $alumni->tahun_lulus }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Program Studi/Jurusan</label>
-            <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="" readonly>
+            <input type="text" class="form-control form-control" name = "kodeprodi" id="kodeprodi" value="{{ $alumni->prodi->nama_prodi }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nama</label>
-            <input type="text" class="form-control form-control" name = "nama" id="nama" value="" readonly>
+            <input type="text" class="form-control form-control" name = "nama" id="nama" value="{{ $alumni->user->name }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nomor Telepon/HP</label>
-            <input type="text" class="form-control form-control" name = "nomortelepon" id="nomortelepon" value=""readonly >
+            <input type="text" class="form-control form-control" name = "nomortelepon" id="nomortelepon" value="{{ $alumni->no_telp }}"readonly >
           </div>
           <div class="form-group">
             <label for="largeInput">Email</label>
-            <input type="text" class="form-control form-control" name = "email" id="email" value=""readonly>
+            <input type="text" class="form-control form-control" name = "email" id="email" value="{{ $alumni->user->email }}"readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">NIK</label>
-            <input type="text" class="form-control form-control" name = "nik" id="nik" value=""readonly>
+            <input type="text" class="form-control form-control" name = "nik" id="nik" value="{{ $alumni->nik }}"readonly>
           </div>
           <br>
+          @endforeach
 
           <!-- Tracer Study -->
           <h2 class="entry-title"><a>Bagian 2: Tracer Study</a></h2>
