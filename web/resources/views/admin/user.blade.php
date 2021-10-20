@@ -2,7 +2,7 @@
 @section('title', 'Data Sekjur')
 @section('content',)               
 <div class="page-header">
-	<h4 class="page-title">Data Operator Sekjur</h4>
+	<h4 class="page-title">Data Operator</h4>
 	<ul class="breadcrumbs">
 		<li class="nav-home">
 			<a href="{{ route('administrator.dashboard') }}">
@@ -19,7 +19,7 @@
 			<i class="flaticon-right-arrow"></i>
 		</li>
 		<li class="nav-item">
-			<a href="#">Data Operator Sekjur</a>
+			<a href="#">Data Operator</a>
 		</li>
 	</ul>
 </div>
@@ -139,7 +139,7 @@
 									<button data-toggle="modal" data-target="#editModal-{{ $sekjur->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $sekjur->id }}" onclick="deletesekjur(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $sekjur->id }}" action="{{ route('user.destroy', $sekjur->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $sekjur->id }}" action="{{ route('user.destroy', $sekjur->id_user) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
