@@ -75,9 +75,13 @@ class ProfilController extends Controller
             // $user = User::all();
             Alert::success(' Berhasil Update Data ', ' Silahkan dicek kembali');
             return redirect()->back();
-
     }
 
+    public function editprofil($id)
+    {
+        $users = User::where('id','=',$id)->select('*')->get();
+        return view('user.edit-profil', ['users' => $users]);
+    }
     
     public function destroy($id)
     {
