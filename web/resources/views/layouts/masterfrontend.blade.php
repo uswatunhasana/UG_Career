@@ -55,7 +55,7 @@
           <li><a href="{{ route('beritaall') }}">Berita</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           @if(Auth::user()->level == "alumni")
-          <li><a href="{{ route('isikuisioneralmuni') }}">Isi Kuisioner</a></li>
+          <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}">Isi Kuisioner</a></li>
           @elseif(Auth::user()->level == "perusahaan")
           <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
           @endif
