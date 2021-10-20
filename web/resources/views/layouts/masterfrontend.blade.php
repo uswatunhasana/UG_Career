@@ -51,13 +51,15 @@
       <nav id="navbar" class="navbar">
         <ul>
 
-          <li><a class="nav-link scrollto active" href="{{ route('dashboard.user') }}">Home</a></li>
-          <li><a href="{{ route('beritaall') }}">Berita</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+          <li><a class="nav-link scrollto @if (Request::segment(1) == '') active @endif" href="{{ route('dashboard.user') }}">Home</a></li>
+          <li><a class="nav-link scrollto @if (Request::segment(1) == 'berita') active @endif" href="{{ route('beritaall') }}">Berita</a></li>
+          <li><a class="nav-link scrollto @if (Request::segment(1) == '#contact') active @endif" href="{{ route('dashboard.user') }}/#contact">Kontak Kami</a></li>
+          @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisioneralmuni') }}">Isi Kuisioner</a></li>
           @elseif(Auth::user()->level == "perusahaan")
           <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
+          @endif
           @endif
           @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
