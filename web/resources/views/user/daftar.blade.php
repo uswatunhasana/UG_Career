@@ -11,7 +11,11 @@
       <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
       <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
       <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {{-- CDN --}}
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+{{-- CDN       --}}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
       @include('sweetalert::alert')
@@ -40,10 +44,12 @@
                      <input type="text" placeholder="Masukkan NPM" name="npm" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Masuk" name="tahun_masuk" required>
+                     <input type="text" class="form-control datepicker" name="tahun_masuk" placeholder="Masukkan Tahun Masuk" maxlength="4"/>
+                     {{-- <input type="text" placeholder="Masukkan Tahun Masuk" name="tahun_masuk" required> --}}
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Lulus" name="tahun_lulus" required>
+                     <input type="text" class="form-control datepicker" name="tahun_lulus" placeholder="Masukkan Tahun Lulus" maxlength="4" />
+                     {{-- <input type="text" placeholder="Masukkan Tahun Lulus" name="tahun_lulus" required> --}}
                   </div>
                   <div class="field">
                      <label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
@@ -106,6 +112,11 @@
                   <div class="field">
                      <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required>
                   </div>
+                  {{-- Email CP --}}
+                  <div class="field">
+                     <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required>
+                  </div>
+                  {{-- end --}}
                   <div class="field">
                      <input type="text" placeholder="Masukkan Jabatan" name="jabatan" required>
                   </div>
@@ -147,5 +158,21 @@
       </script>
 	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
 	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
-   </body>
+
+    {{-- CDN --}}
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".datepicker").datepicker({
+     format: "yyyy",
+     viewMode: "years", 
+     minViewMode: "years",
+     autoclose:true
+  });   
+})
+</script>
+{{-- END CDN    --}}
+</body>
 </html>
