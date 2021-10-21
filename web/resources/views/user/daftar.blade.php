@@ -11,6 +11,10 @@
       <link href="{{ asset('assets') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
       <link rel="stylesheet" href="{!! asset('login_fe/assets/styles.css') !!}">
       <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
+      {{-- CDN --}}
+      <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+      {{-- CDN       --}}
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
@@ -40,13 +44,14 @@
                      <input type="text" placeholder="Masukkan NPM" name="npm" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Masuk" name="tahun_masuk" required>
+                     <input type="text" class="form-control datepicker" name="tahun_masuk" placeholder="Masukkan Tahun Masuk" maxlength="4">
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Tahun Lulus" name="tahun_lulus" required>
+                     <input type="text" class="form-control datepicker" name="tahun_lulus" placeholder="Masukkan Tahun Lulus" maxlength="4">
                   </div>
+                  <br>
                   <div class="field">
-                     <label style="color : #999;"><h3><b>Program Studi/Jurusan</b></h3></label>
+                     <label style="color : #999;"><h4><b>Program Studi/Jurusan</b></h4></label>
                      <select class="form-control" name="id_prodi" required="required">
                      <option disabled selected>-- Daftar Prodi --</option>
                      @foreach ($prodis as $prodi)
@@ -56,14 +61,15 @@
                   </div>
                   <br>
                   <br>
+                  <br>
                   <div class="field">
                      <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
+                     <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Email" name="email" required>
+                     <input type="email" placeholder="Masukkan Email" name="email" required>
                   </div>
                   <div class="field">
                      <input type="text" placeholder="Masukkan NIK" name="nik" required>
@@ -89,22 +95,26 @@
                      <input type="text" placeholder="Masukkan Nama Perusahaan" name="name" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan Email Perusahaan" name="email" required>
+                     <input type="email" placeholder="Masukkan Email Perusahaan" name="email" required>
                   </div>
                   <div class="field">
-                     <input type="text" placeholder="Masukkan No. Telepon/Handphone" name="no_telp" required>
+                     <input type="number" placeholder="Masukkan No. Telepon/Handphone" name="no_telp" required>
                   </div>
                   <div class="field">
                      <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required>
                   </div>
                   <div class="field">
-                  <label style="color : #999;"><h3><b>Alamat Perusahaan</b></h3></label>
+                  <label style="color : #999;"><h4><b>Alamat Perusahaan</b></h4></label>
                   <textarea class="form-control" aria-label="With textarea" name="alamat" required></textarea>
                   </div>
                   <br>
                   <br>
+                  <br>
                   <div class="field">
                      <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required>
+                  </div>
+                  <div class="field">
+                     <input type="email" placeholder="Masukkan Email Kontak Personal" name="email_cp" required>
                   </div>
                   <div class="field">
                      <input type="text" placeholder="Masukkan Jabatan" name="jabatan" required>
@@ -147,5 +157,21 @@
       </script>
 	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
 	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
-   </body>
+
+    {{-- CDN --}}
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".datepicker").datepicker({
+     format: "yyyy",
+     viewMode: "years", 
+     minViewMode: "years",
+     autoclose:true
+  });   
+})
+</script>
+{{-- END CDN    --}}
+</body>
 </html>
