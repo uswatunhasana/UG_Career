@@ -69,7 +69,6 @@
           @else
               <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li class="image"><img src="{{ asset('admin') }}/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" style="margin left: 10px;"></li>
               <br>
               <li class="tombol" ><a href="{{ route('editprofil', Auth::user()->id) }}"><button type="button" class="btn btn-primary" >Lihat Profil</button></a></li>
               <li><hr class="dropdown-divider"></li>

@@ -34,7 +34,6 @@
         </h2>
         @foreach($alumnis as $alumni)
         <div class="col-md-12">
-
           <div class="form-group">
             <label for="largeInput">NPM</label>
             <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" value="{{ $alumni->user->name }}" readonly>

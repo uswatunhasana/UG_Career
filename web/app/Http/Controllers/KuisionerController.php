@@ -9,7 +9,8 @@ use App\Models\PertanyaanCabang;
 use App\Models\Jawabanresponden;
 use App\Models\Jawabanrespondendetail;
 use App\Models\PilihanJawaban;
-use App\Models\HasilPerusahaan;
+use App\Models\Provinsi;
+use App\Models\Kabkota;
 use App\Models\Perusahaan;
 use App\Models\Alumni;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class KuisionerController extends Controller
     public function isikuisioneralumni($id)
     {
         $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
+        $provinsis = Provinsi::all();
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
         foreach ($pertanyaans as $pertanyaan) {
@@ -36,12 +38,13 @@ class KuisionerController extends Controller
             }
             $i++;
         }
-        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis'));
+        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis','provinsis'));
     }
 
     public function isikuisionerperusahaan($id)
     {
         $perusahaans = Perusahaan::where('id_user', '=', $id)->select('*')->get();
+        $provinsis = Provinsi::all();
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'perusahaan')->orderBy('kd_pertanyaan')->get();
         $i = 0;
         foreach ($pertanyaans as $pertanyaan) {
@@ -51,7 +54,7 @@ class KuisionerController extends Controller
             }
             $i++;
         }
-        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans'));
+        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans','provinsis'));
     }
 
     public function isikuisionercontoh($id)
@@ -61,21 +64,22 @@ class KuisionerController extends Controller
         return view('user.isikuisioner_alumni', compact('pertanyaans', 'alumnis'));
     }
 
-    public function createjawabanalumni(Request $request)
-    {
-        $user = Auth::user();
-        // foreach($pertanyaans as $key => $val)
-        // {
-        // $hasil_perusahaan= new HasilPerusahaan;
-        // $hasil_perusahaan->jawaban=$val;
-        // $hasil_perusahaan->kd_pertanyaan=$request->kd_pertanyaan[$key];
-        // $hasil_perusahaan->email =  $user->email;
-        // $hasil_perusahaan->save();
-        // }
-        Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
-        return redirect()->back();
+    public function ajaxkabkota($id){
+        $data = Kabkota::where('id_provinsi','=',$id)->get();
+        dd($data);
+            // $desa = Desa::where("desa_kec",$request->kecID)->pluck('desa_kode','desa_nama');
+            // return response()->json($desa);
+        echo json_encode($data);
     }
-
+    // public function getKabkota(Request $request){
+    //     $data = Kabkota::where('id_provinsi','=',$request->provinsi_id)->get();
+    //     // $kecamatan = Kecamatan::where("kec_kab",$request->kabID)->pluck('kec_kode','kec_nama');
+    //     return response()->json($data);
+    // }
+    // public function getKabkota(Request $request){
+    //     $kabkota = Kabkota::where('id_provinsi','=',$request->id)->pluck('id','nama_kabkota');
+    //     return response()->json($kabkota);
+    // }
 
     public function kuisionerperusahaanstore(Request $request)
     {
@@ -91,11 +95,10 @@ class KuisionerController extends Controller
 
             $get_id_responden = DB::getPdo()->lastInsertId();;
         
-        foreach($request->all() as $key => $val)
+        foreach($request->except('_token','_method') as $key => $val)
         {
-            dd($key);
         $hasil_perusahaan= new Jawabanrespondendetail;
-        $hasil_perusahaan->kd_pertanyaan=$request->kd_pertanyaan[$key];
+        $hasil_perusahaan->kd_pertanyaan=$key;
         $hasil_perusahaan->jawaban=$val;
         $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
         $hasil_perusahaan->save();
@@ -103,7 +106,7 @@ class KuisionerController extends Controller
     // }else{
 
     //     }
-
+        Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 
@@ -132,7 +135,7 @@ class KuisionerController extends Controller
     // }else{
 
     //     }
-
+        Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 

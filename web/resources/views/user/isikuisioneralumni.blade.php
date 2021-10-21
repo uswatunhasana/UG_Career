@@ -138,9 +138,108 @@
             <br/>
         @endif
         @endforeach
+        <b>8. Pertanyaan studi lanjut</b>
+            <br>
+            <!-- <a>Sumber Biaya:</a>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Biaya Sendiri 
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Beasiswa
+              </label>
+            </div> -->
+        <label>Sumber Biaya:</label>
+        <div class="form-group col-md-12">
+          <select class="form-control" id="inlineFormCustomSelect">
+            <option selected>--Pilih Sumber Biaya--</option>
+            <option value="Biaya Sendiri">Biaya Sendiri</option>  
+            <option value="Beasiswa">Beasiswa</option>  
+          </select>
+        </div>
+            <div class="form-group">
+              <label for="largeInput">Perguruan Tinggi:</label>
+              <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" placeholder="Pilih Kode PT" value="">
+            </div>
+            <div class="form-group">
+              <label for="largeInput">Program Studi:</label>
+              <input type="text" class="form-control form-control" name = "nomormahasiswa" id="nomormahasiswa" placeholder="Pilih Kode PT" value="">
+            </div>
+            <div class="form-group">
+              <label for="largeInput">Tanggal Masuk:</label>
+              <input type="date" class="form-control" name="tgl_terdaftar_npwp" id="tgl_terdaftar_npwp" placeholder="mm/dd/yy" value="" />
+            </div>
+            <br>
+          
+            <label><b>2. Kapan anda mulai mencari pekerjaan?Mohon pekerjaan sambilan tidak dimasukkan</b></label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="F3" id="F3" value="" checked> 
+              <label for="exampleRadios1">Kira-kira</label>
+              <input type="text" name="firstname" id="inputZip" placeholder="Bulan"> bulan sebelum lulus     
+            </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> 
+              <label for="exampleRadios1">Kira-kira</label>
+              <input type="text" name="firstname" id="inputZip" placeholder="Bulan"> bulan sesudah lulus     
+            </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Saya tidak mencari kerja
+              </label>
+            </div>
+            <br/>
 
-        
-
+            <label><b>2. Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="F504" id="F504" value="ya" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Ya
+              </label>
+              <div class="form-group">
+                <label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label>
+                <input type="text" class="form-control form-control" name = "F504A" id="F504A" value="">
+              </div>
+              <div class="form-group">
+                <label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label>
+                <input type="text" class="form-control form-control" name = "F504B" id="F504B" value="">
+              </div>
+            </div>     
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="F504" id="F504" value="tidak" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Tidak
+              </label>
+              <div class="form-group">
+                <label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label>
+                <input type="text" class="form-control form-control" name = "F504A" id="bulan_kerja" value="">
+              </div>
+            </div>
+            <br/>
+            <b>3. Dimana lokasi tempat Anda bekerja?</b>
+            <div class="form-group">
+              <label for="largeInput">Provinsi</label>
+              <select class="form-select" name="provinsi" id="provinsi">
+                <option selected>---Pilih Provinsi---</option>
+                @foreach ($provinsis as $provinsi)
+                    <option value="{{$provinsi->id}}">{{$provinsi->nama_provinsi}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="largeInput">Kab/Kota</label>
+              <select class="form-select" name="kabkota" id="kabkota">
+              <option selected>---Pilih Kab/Kota---</option>
+              </select>
+            </div>
+            <br>
 
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </article><!-- End blog entry -->
@@ -159,5 +258,48 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
+@section('scripts')
+<script type="text/javascript">
+// $(document).on("change", "#provinsi", function(){
+// 			var id = $(this).val;
+//       var url = '/UG_Career/getkabkota'+"/"+id;
+// 			$.ajax({
+// 				url: url,
+// 				method: "GET",
+// 				dataType: 'json',
+// 				success: function(datas) {
+// 						var htmlkom = '';
+// 						for (i = 0; i < datas.length; i++) {
+// 							htmlkom += '<tr><td>'+ (i) +'</td><td>'+ datas[i].nama_kabkota +'</td></tr>';
+// 						}
+// 						$('#kabkota').html(htmlkom);
+// 				}
+// 			});
+// 		});
 
+$('#provinsi').change(function(){
+    var id = $(this).val();    
+    if(id){
+        $.ajax({
+           type:"GET",
+           url:"getkabkota?id="+id,
+           dataType: 'JSON',
+           success:function(res){               
+            if(res){
+                $("#kabkota").empty();
+                $("#kabkota").append('<option>---Pilih Kab/Kota---</option>');
+                $.each(res,function(nama,kode){
+                    $("#kabkota").append('<option value="'+kode+'">'+nama+'</option>');
+                });
+            }else{
+               $("#kabkota").empty();
+            }
+           }
+        });
+    }else{
+        $("#kabkota").empty();
+    }      
+   });
+</script>
+@endsection('scripts')
 @endsection
