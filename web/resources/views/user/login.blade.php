@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-   <body>
+   <body style="background-color:purple !important;">
       @include('sweetalert::alert')
       <div class="wrapper">
          <div class="title-text">
@@ -43,7 +43,11 @@
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
+<<<<<<< Updated upstream
                      <input type="submit" value="Login">
+=======
+                     <input type="submit" value="Log in">
+>>>>>>> Stashed changes
                   </div>
                   <div class="perusahaan-link">
                      Belum memiliki akun ? <a href="{{ route('daftar.registrasi') }}">Registrasi Akun</a>
