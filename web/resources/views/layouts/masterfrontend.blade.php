@@ -95,7 +95,7 @@
               <!-- <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
             <ul class="kotak">
               <br>
-              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
+              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 70%;">Lihat Profil</button></a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
             </ul> -->
