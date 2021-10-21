@@ -49,6 +49,8 @@ Route::post('/isikuisioneralumni/store', 'App\Http\Controllers\KuisionerControll
 Route::get('/isikuisionercontoh', 'App\Http\Controllers\DashboardController@isikuisionercontoh');
 Route::get('/editprofil_front/{id}', 'App\Http\Controllers\ProfilController@editprofil_front')->name('editprofil_front');
 Route::post('/updateprofil/{id}', 'App\Http\Controllers\ProfilController@updateprofil')->name('updateprofil');
+Route::get('/editprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@editprofilperusahaan')->name('editprofilperusahaan');
+Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@updateprofilperusahaan')->name('updateprofilperusahaan');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');

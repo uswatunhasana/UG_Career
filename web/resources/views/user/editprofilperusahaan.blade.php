@@ -1,5 +1,5 @@
 @extends('layouts.masterfrontend')
-@section('title', 'Edit Profil')
+@section('title', 'Edit Profil Perusahaan')
 @section('css')
 @endsection
 @section('content')
@@ -11,9 +11,9 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="#">Edit Profil</a></li>
+        <li><a href="#">Edit Profil Perusahaan</a></li>
       </ol>
-      <h2>Edit Profil</h2>
+      <h2>Edit Profil Perusahaan</h2>
 
     </div>
   </section><!-- End Breadcrumbs -->
@@ -25,49 +25,54 @@
       
         <div class="col-lg-12 entries">
           <article class="entry entry-single">
-            @foreach ($alumnis as $alumni)
+            @foreach ($perusahaans as $perusahaan)
                 <div class="col-lg-6">
-                  <form role="form" action="{{ route('updateprofil', $alumni->id) }}" method="POST">
+                  <form role="form" action="{{ route('updateprofilperusahaan', $perusahaan->id) }}" method="POST">
                     <div class="form-group">
                       @csrf
                       @method('POST')
-                        <label for="largeInput">NPM</label>
-                        <input type="text" class="form-control form-control" name ="npm" id="npm" value="{{ $alumni->npm }}" readonly>
+                        <label for="largeInput">Nama Instansi</label>
+                        <input type="text" class="form-control form-control" name ="name" id="name" value="{{ $perusahaan->user->name }}" readonly>
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">Nama Lengkap</label>
-                        <input type="text" class="form-control form-control" name ="name" id="name" value="{{ $alumni->user->name }}">
+                        <label for="largeInput">Email Perusahaan</label>
+                        <input type="text" class="form-control form-control" name ="email" id="email" value="{{ $perusahaan->user->email }}">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">Tahun Masuk</label>
-                        <input type="text" class="form-control form-control" name ="tahun_masuk" id="tahun_masuk" value="{{ $alumni->tahun_masuk }}">
+                        <label for="largeInput">Nomor Telepon</label>
+                        <input type="text" class="form-control form-control" name ="no_telp" id="no_telp" value="{{ $perusahaan->no_telp }}">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">Tahun Lulus</label>
-                        <input type="text" class="form-control form-control" name ="tahun_lulus" id="tahun_lulus" value="{{ $alumni->tahun_lulus }}">
+                        <label for="largeInput">URL Web</label>
+                        <input type="text" class="form-control form-control" name ="url_web" id="url_web" value="{{ $perusahaan->url_web }}">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">No. Telepon/HP</label>
-                        <input type="text" class="form-control form-control" name ="no_telp" id="no_telp" value="{{ $alumni->no_telp }}">
+                        <label for="largeInput">Alamat Perusahaan</label>
+                        <input type="text" class="form-control form-control" name ="alamat" id="alamat" value="{{ $perusahaan->alamat }}">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">Email</label>
-                        <input type="text" class="form-control form-control" name ="email" id="email" value="{{ $alumni->user->email }}">
+                        <label for="largeInput">Nama Contact Person</label>
+                        <input type="text" class="form-control form-control" name ="nama_cp" id="nama_cp" value="{{ $perusahaan->nama_cp }}">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">NIK</label>
-                        <input type="text" class="form-control form-control" name ="nik" id="nik" value="{{ $alumni->nik }}">
+                        <label for="largeInput">Jabatan</label>
+                        <input type="text" class="form-control form-control" name ="jabatan" id="jabatan" value="{{ $perusahaan->jabatan }}">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="largeInput">Email Contact Person</label>
+                        <input type="text" class="form-control form-control" name ="email_cp" id="email_cp" value="{{ $perusahaan->email_cp }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Username</label>
-                        <input type="text" class="form-control form-control" name ="username" id="username" value="{{ $alumni->user->username }}" readonly>
+                        <input type="text" class="form-control form-control" name ="username" id="username" value="{{ $perusahaan->user->username }}" readonly>
                     </div>
                     <br>
                     <div class="form-group">

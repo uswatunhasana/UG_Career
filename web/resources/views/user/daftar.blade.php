@@ -102,9 +102,12 @@
                   </div>
                   <div class="field">
                      <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required>
+                     <h6 style="color: #999;">*jika tidak memiliki URL perusahaan silahkan isi -</h6>
                   </div>
+                  <br>
+                  <br>
                   <div class="field">
-                  <label style="color : #999;"><h4><b>Alamat Perusahaan</b></h4></label>
+                  <label style="color : #999;"><h4>Alamat Perusahaan</h4></label>
                   <textarea class="form-control" aria-label="With textarea" name="alamat" required></textarea>
                   </div>
                   <br>
