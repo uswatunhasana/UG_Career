@@ -28,6 +28,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets') }}/css/style.css" rel="stylesheet">
+
+  
   @yield('css')
   <!-- =======================================================
   * Template Name: FlexStart - v1.5.0
@@ -64,7 +66,13 @@
           @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
           @else
-          <li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><h4>{{ Auth::user()->name }}</h4></li>
+              <li><p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ route('editprofil.edit', Auth::user()->id) }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></li>
+            </ul>
+          </li>
+          <!-- <li>
 									<div class="user-box">
 										<div class="avatar-lg"><img src="{{ asset('admin') }}/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 										<div class="u-text">
@@ -72,7 +80,7 @@
 											<p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ route('editprofil.edit', Auth::user()->id) }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
 										</div>
 									</div>
-								</li>
+								</li> -->
           @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

@@ -20,9 +20,9 @@
   <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
     @php
-    $hasil_perusahaan = \App\Models\HasilPerusahaan::where('email', Auth::user()->email)->count();
+    $responden = \App\Models\Jawabanresponden::where('id_user', Auth::user()->id)->count();
     @endphp
-    @if($hasil_perusahaan == 0)
+    @if($responden == 0)
 
       <form role="form" action="{{ route('kuisionerperusahaan.store') }}" method="POST">
        @csrf
@@ -136,6 +136,7 @@
             <br/>
         @endif
         @endforeach
+        
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </article><!-- End blog entry -->
     </form>

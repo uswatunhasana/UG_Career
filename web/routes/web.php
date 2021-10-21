@@ -42,6 +42,7 @@ Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->nam
 Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
 Route::get('/isikuisionerperusahaan/{id}', 'App\Http\Controllers\KuisionerController@isikuisionerperusahaan')->name('isikuisionerperusahaan');
 Route::post('/isikuisionerperusahaan/store', 'App\Http\Controllers\KuisionerController@kuisionerperusahaanstore')->name('kuisionerperusahaan.store');
+Route::post('/isikuisioneralumni/store', 'App\Http\Controllers\KuisionerController@kuisioneralumnistore')->name('kuisioneralumni.store');
 Route::get('/isikuisionercontoh', 'App\Http\Controllers\DashboardController@isikuisionercontoh');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pertanyaan;
 use App\Models\PertanyaanCabang;
+use App\Models\Jawabanresponden;
+use App\Models\Jawabanrespondendetail;
 use App\Models\PilihanJawaban;
 use App\Models\HasilPerusahaan;
 use App\Models\Perusahaan;
@@ -77,35 +79,59 @@ class KuisionerController extends Controller
   
     public function kuisionerperusahaanstore(Request $request)
     {
-        // $perusahaans = Perusahaan::all();
     
         $user = Auth::user();
-        // $input = $request->all();
-        $pertanyaans = Pertanyaan::leftJoin('pertanyaancabangs','pertanyaancabangs.id_pertanyaan','=','pertanyaans.id')
-        ->select('pertanyaans.kd_pertanyaan','pertanyaancabangs.kd_cabang')
-        ->get();
-        dd($pertanyaans);
-        // dd($pertanyaans);
 
-        // $kd_pertanyaan[$key] = $request->$pertanyaan->kd_pertanyaan;
-        // $i=0;
-        // foreach ($pertanyaans as $pertanyaan) {
-        //     $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
-        //     if($pertanyaan['is_cabang'] == "ya"){
-        //         $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('kd_cabang ')->get();
-        //     }
-        //     $i++;
-        // }
-        // dd($request->kd_pertanyaan['F2']);
+        // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
+        // if ($cek_perusahaan == 0) {
+            $responden = new Jawabanresponden;
+            $responden->user_id = $user->id;
+            $responden->kategori_responden = 'perusahaan';
+            $responden->save();
+
+            $get_id_responden = DB::getPdo()->lastInsertId();;
         
-        foreach($pertanyaans as $key => $val)
+        foreach($request->all() as $key => $val)
         {
-        $hasil_perusahaan= new HasilPerusahaan;
-        $hasil_perusahaan->jawaban=$val;
+            dd($key);
+        $hasil_perusahaan= new Jawabanrespondendetail;
         $hasil_perusahaan->kd_pertanyaan=$request->kd_pertanyaan[$key];
-        $hasil_perusahaan->email =  $user->email;
+        $hasil_perusahaan->jawaban=$val;
+        $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
         $hasil_perusahaan->save();
         }
+    // }else{
+
+    //     }
+
+        return redirect()->back();
+    }
+
+    public function kuisioneralumnistore(Request $request)
+    {
+    
+        $user = Auth::user();
+
+        // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
+        // if ($cek_perusahaan == 0) {
+            $responden = new Jawabanresponden;
+            $responden->id_user = $user->id;
+            $responden->kategori_responden = 'alumni';
+            $responden->save();
+
+            $get_id_responden = DB::getPdo()->lastInsertId();;
+        
+        foreach($request->except('_token','_method') as $key => $val)
+        {
+        $hasil_alumni= new Jawabanrespondendetail;
+        $hasil_alumni->kd_pertanyaan= $key;
+        $hasil_alumni->jawaban=$val;
+        $hasil_alumni->id_jawabanresponden=  $get_id_responden;
+        $hasil_alumni->save();
+        }
+    // }else{
+
+    //     }
 
         return redirect()->back();
     }
