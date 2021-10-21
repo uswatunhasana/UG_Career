@@ -13,11 +13,11 @@ body {
     height: 100%;
     width: 100%;
     place-items: center;
-    background: -webkit-linear-gradient(left, #a445b2, #cf42fa);
+    background: -webkit-linear-gradient(left, #763996, #b63adb);
 }
 
 ::selection {
-    background: #cf42fa;
+    background: #b63adb;
     color: #fff;
 }
 
@@ -79,7 +79,7 @@ body {
     left: 0;
     z-index: 0;
     border-radius: 5px;
-    background: -webkit-linear-gradient(left, #a445b2, #cf42fa);
+    background: -webkit-linear-gradient(left, #763996, #b63adb);
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -168,7 +168,7 @@ form .field input:focus::placeholder {
 
 .form-inner form .pass-link a,
 .form-inner form .perusahaan-link a {
-    color: #cf42fa;
+    color: #b63adb;
     text-decoration: none;
 }
 
@@ -190,7 +190,7 @@ form .btn .btn-layer {
     width: 300%;
     position: absolute;
     left: -100%;
-    background: -webkit-linear-gradient(right, #a445b2, #cf42fa, #a445b2, #cf42fa);
+    background: -webkit-linear-gradient(right, #763996, #b63adb, #763996, #b63adb);
     border-radius: 5px;
     transition: all 0.4s ease;
     ;
@@ -258,7 +258,7 @@ form .form-control select:focus::placeholder {
 
 .form-inner form .pass-link a,
 .form-inner form .perusahaan-link a {
-    color: #cf42fa;
+    color: #b63adb;
     text-decoration: none;
 }
 
