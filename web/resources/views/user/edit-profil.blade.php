@@ -22,7 +22,7 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
-
+      
         <div class="col-lg-12 entries">
           <article class="entry entry-single">
             @foreach ($alumnis as $alumni)
