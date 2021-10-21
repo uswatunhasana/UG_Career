@@ -20,12 +20,14 @@
       <h1 data-aos="fade-up">UG Tracer</h1>
       <h2 data-aos="fade-up" data-aos-delay="400">Bagi alumni dan perusahaan yang belum memiliki akun dapat melakukan registrasi melalui link berikut</h2>
       <div data-aos="fade-up" data-aos-delay="600">
+        @guest
         <div class="text-center text-lg-start">
           <a href="{{ route('daftar.registrasi') }}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
             <span>Registrasi</span>
             <i class="bi bi-arrow-right"></i>
           </a>
         </div>
+        @endguest
       </div>
     </div>
     <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -77,12 +79,16 @@
           <p>
             Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
           </p>
+          @if(isset(Auth::user()->level))
+          @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
           <div class="text-center text-lg-start">
             <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-              <span>Read More</span>
+              <span>Isi Kuisioner Sekarang</span>
               <i class="bi bi-arrow-right"></i>
             </a>
           </div>
+          @endif
+          @endif
         </div>
       </div>
 

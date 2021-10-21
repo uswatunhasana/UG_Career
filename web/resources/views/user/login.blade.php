@@ -34,7 +34,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                  </div>
+                  </div><br>
                   <div class="field">
                      <input type="password" name="password" placeholder="Password" required>
                   </div>
@@ -43,7 +43,7 @@
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
-                     <input type="submit" value="Submit">
+                     <input type="submit" value="Login">
                   </div>
                   <div class="perusahaan-link">
                      Belum memiliki akun ? <a href="{{ route('daftar.registrasi') }}">Registrasi Akun</a>
