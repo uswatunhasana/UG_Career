@@ -25,55 +25,60 @@
 
         <div class="col-lg-12 entries">
           <article class="entry entry-single">
+            @foreach ($alumnis as $alumni)
                 <div class="col-lg-6">
+                  <form role="form" action="{{ route('updateprofil', $alumni->id) }}" method="POST">
                     <div class="form-group">
+                      @csrf
+                      @method('POST')
                         <label for="largeInput">NPM</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="" readonly>
+                        <input type="text" class="form-control form-control" name ="npm" id="npm" value="{{ $alumni->npm }}" readonly>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Nama Lengkap</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="name" id="name" value="{{ $alumni->user->name }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Tahun Masuk</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="tahun_masuk" id="tahun_masuk" value="{{ $alumni->tahun_masuk }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Tahun Lulus</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="tahun_lulus" id="tahun_lulus" value="{{ $alumni->tahun_lulus }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">No. Telepon/HP</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="no_telp" id="no_telp" value="{{ $alumni->no_telp }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Email</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="email" id="email" value="{{ $alumni->user->email }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">NIK</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <input type="text" class="form-control form-control" name ="nik" id="nik" value="{{ $alumni->nik }}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Username</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="" readonly>
+                        <input type="text" class="form-control form-control" name ="username" id="username" value="{{ $alumni->user->username }}" readonly>
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="largeInput">Password</label>
-                        <input type="text" class="form-control form-control" name = "" id="" value="">
+                        <label for="largeInput">Ubah Password</label>
+                        <input type="text" class="form-control form-control" name ="password" id="password" placeholder="*********">
                     </div>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-warning" style="margin-left: 500px;">Ubah data</button>
-
+              @endforeach
+          </form>
 
         </div><!-- End blog sidebar -->
 
