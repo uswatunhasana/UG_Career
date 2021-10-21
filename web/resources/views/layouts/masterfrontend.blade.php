@@ -27,6 +27,17 @@
   <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
   <link href="{{ asset('assets') }}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- FONT AWESOME -->
+  <script src=" {{ asset('admin') }}/assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset('admin') }}/assets/css/fonts.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets') }}/css/style.css" rel="stylesheet">
 
@@ -67,12 +78,12 @@
           @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
           @else
-              <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
+              <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 28px;" ></i></a>
+            <ul class="kotak">
               <br>
-              <li class="tombol" ><a href="{{ route('editprofil', Auth::user()->id) }}"><button type="button" class="btn btn-primary" >Lihat Profil</button></a></li>
+              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a href="{{url('log_out')}}">Log out</a></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
             </ul>
           @endguest
         </ul>
