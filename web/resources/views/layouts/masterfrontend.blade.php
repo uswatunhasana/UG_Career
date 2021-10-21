@@ -78,7 +78,7 @@
           @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
           @else
-              <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 28px;" ></i></a>
+              <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
             <ul class="kotak">
               <br>
               <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
