@@ -37,31 +37,31 @@
         @foreach($perusahaans as $perusahaan)
           <div class="form-group">
             <label for="largeInput">Nama Perusahaan</label>
-            <input type="text" class="form-control form-control" name = "nama_perusahaan" id="nama_perusahaan" value="{{ $perusahaan->user->name }}" readonly>
+            <input type="text" class="form-control form-control" id="nama_perusahaan" value="{{ $perusahaan->user->name }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Email Perusahaan</label>
-            <input type="text" class="form-control form-control" name = "email_perusahaan" id="email_perusahaan" value="{{ $perusahaan->user->email }}" readonly>
+            <input type="text" class="form-control form-control" id="email_perusahaan" value="{{ $perusahaan->user->email }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nomor Telepon</label>
-            <input type="text" class="form-control form-control" name = "no_telp" id="no_telp" value="{{ $perusahaan->no_telp }}" readonly>
+            <input type="text" class="form-control form-control" id="no_telp" value="{{ $perusahaan->no_telp }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">URL Web</label>
-            <input type="text" class="form-control form-control" name = "url_web" id="url_web" value="{{ $perusahaan->url_web }}" readonly>
+            <input type="text" class="form-control form-control"  id="url_web" value="{{ $perusahaan->url_web }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Alamat Perusahaan</label>
-            <input type="text" class="form-control form-control" name = "alamat_perusahaan" id="alamat_perusahaan" value="{{ $perusahaan->alamat }}" readonly>
+            <input type="text" class="form-control form-control" id="alamat_perusahaan" value="{{ $perusahaan->alamat }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Kontak Personal</label>
-            <input type="text" class="form-control form-control" name = "kontak_person" id="kontak_person" value="{{ $perusahaan->nama_cp }}"readonly >
+            <input type="text" class="form-control form-control"  id="kontak_person" value="{{ $perusahaan->nama_cp }}"readonly >
           </div>
           <div class="form-group">
             <label for="largeInput">Jabatan</label>
-            <input type="text" class="form-control form-control" name = "jabatan" id="jabatan" value="{{ $perusahaan->jabatan }}"readonly>
+            <input type="text" class="form-control form-control" id="jabatan" value="{{ $perusahaan->jabatan }}"readonly>
           </div>
           <br>
           @endforeach
@@ -75,7 +75,6 @@
         @if($pertanyaan->jenis_pertanyaan == 'text')
         <div class="form-group">
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
-            <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_pertanyaan}}">	
             <input type="text" class="form-control form-control" name = "{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="">
             <br/>
         </div>
@@ -99,7 +98,6 @@
                   @foreach( $pertanyaan->pilihanjawaban as $pilihanjawaban)
                   <td>
                     <div class="form-check form-check-inline">
-                    <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_cabang}}">	
                       <input class="form-check-input" type="radio" name="{{$pertanyaan_cabang->kd_cabang}}" id="{{$pertanyaan_cabang->kd_cabang}}" value="{{$pilihanjawaban->jawaban}}">
                       <label class="form-check-label" for="{{$pertanyaan_cabang->kd_cabang}}"></label>
                     </div>
@@ -113,7 +111,6 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input name="kd_pertanyaan[]" type="hidden" value="{{$pertanyaan->kd_pertanyaan}}">	
               <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
               {{ $pilihanjawaban->jawaban }}

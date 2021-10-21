@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Alumni;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\HasilRespondenDetail;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -17,8 +19,9 @@ class AlumniController extends Controller
 
     public function index()
     {
-        $alumnis = Alumni::all();
-        return view('admin.alumni', compact('alumnis'));
+        return Excel::download(new HasilRespondenDetail, 'jawabanrespondens.xlsx');
+        // $alumnis = Alumni::all();
+        // return view('admin.alumni', compact('alumnis'));
     }
 
     public function create()

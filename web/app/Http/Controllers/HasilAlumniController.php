@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\JawabanResponden;
+use App\Models\Jawabanresponden;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,8 +13,8 @@ class HasilAlumniController extends Controller
 {
     public function index()
     {
-        // $jawaban_respondens = JawabanResponden::where('kategori_responden','=','alumni')->select('*')->get();
-        return view('admin.hasil_alumni');
+        $jawaban_respondens = Jawabanresponden::where('kategori_responden','=','alumni')->select('*')->get();
+        return view('admin.hasil_alumni', compact('jawaban_respondens'));
     }
 
     public function create()

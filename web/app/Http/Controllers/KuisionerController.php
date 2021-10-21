@@ -66,7 +66,6 @@ class KuisionerController extends Controller
 
     public function ajaxkabkota($id){
         $data = Kabkota::where('id_provinsi','=',$id)->get();
-        dd($data);
             // $desa = Desa::where("desa_kec",$request->kecID)->pluck('desa_kode','desa_nama');
             // return response()->json($desa);
         echo json_encode($data);
@@ -89,20 +88,29 @@ class KuisionerController extends Controller
         // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
         // if ($cek_perusahaan == 0) {
             $responden = new Jawabanresponden;
-            $responden->user_id = $user->id;
+            $responden->id_user = $user->id;
             $responden->kategori_responden = 'perusahaan';
             $responden->save();
 
-            $get_id_responden = DB::getPdo()->lastInsertId();;
+            $get_id_responden = DB::getPdo()->lastInsertId();
         
-        foreach($request->except('_token','_method') as $key => $val)
-        {
-        $hasil_perusahaan= new Jawabanrespondendetail;
-        $hasil_perusahaan->kd_pertanyaan=$key;
-        $hasil_perusahaan->jawaban=$val;
-        $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
-        $hasil_perusahaan->save();
-        }
+            foreach($request->except('_token','_method') as $key => $val)
+            {
+            $hasil_perusahaan= new Jawabanrespondendetail;
+            if(is_array($request->$key)){
+                foreach($request->$key as $k => $v){
+                    $hasil_perusahaan->kd_pertanyaan= $key;
+                   $hasil_perusahaan->jawaban=$v;
+                   $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
+                   $hasil_perusahaan->save();
+                }
+            }else{
+               $hasil_perusahaan->kd_pertanyaan= $key;
+               $hasil_perusahaan->jawaban=$val;
+               $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
+               $hasil_perusahaan->save();
+            }
+            }
     // }else{
 
     //     }
@@ -122,15 +130,26 @@ class KuisionerController extends Controller
             $responden->kategori_responden = 'alumni';
             $responden->save();
 
-            $get_id_responden = DB::getPdo()->lastInsertId();;
+            $get_id_responden = DB::getPdo()->lastInsertId();
         
         foreach($request->except('_token','_method') as $key => $val)
         {
-        $hasil_alumni= new Jawabanrespondendetail;
-        $hasil_alumni->kd_pertanyaan= $key;
-        $hasil_alumni->jawaban=$val;
-        $hasil_alumni->id_jawabanresponden=  $get_id_responden;
-        $hasil_alumni->save();
+            if(is_array($request->$key)){
+                foreach($request[$key] as $k => $v){
+                $hasil_alumni= new Jawabanrespondendetail;
+                $hasil_alumni->kd_pertanyaan= $key;
+                $hasil_alumni->jawaban=$v;
+                $hasil_alumni->id_jawabanresponden=  $get_id_responden;
+                // dd($hasil_alumni);
+                $hasil_alumni->save();
+            }
+        }else{
+            $hasil_alumni= new Jawabanrespondendetail;
+            $hasil_alumni->kd_pertanyaan= $key;
+            $hasil_alumni->jawaban=$val;
+            $hasil_alumni->id_jawabanresponden=  $get_id_responden;
+            $hasil_alumni->save();
+        }
         }
     // }else{
 

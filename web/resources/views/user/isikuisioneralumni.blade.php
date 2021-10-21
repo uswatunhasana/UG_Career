@@ -24,7 +24,6 @@
     $responden = \App\Models\Jawabanresponden::where('id_user', Auth::user()->id)->count();
     @endphp
     @if($responden == 0)
-
       <form role="form" action="{{ route('kuisioneralumni.store') }}" method="POST">
        @csrf
        @method('POST')
@@ -114,6 +113,14 @@
             </table>
             <br>
             @else
+            @if($pertanyaan->kd_pertanyaan == "F1B")
+            <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}">
+                <option selected>--Pilih Bidang Kerja--</option>
+            @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
+            <option value="{{ $pilihanjawaban->jawaban }}">{{$pilihanjawaban->jawaban}}</option>  
+            @endforeach
+            </select>
+            @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
               <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->jawaban}}">
@@ -123,27 +130,19 @@
             </div>
             @endforeach
             @endif
+            @endif
             <br/>
         </div>
         @else
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
-        @if($pertanyaan->kd_pertanyaan == "F1B")
-        <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}">
-            <option selected>--Pilih Bidang Kerja--</option>
-        @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
-        <option value="{{ $pilihanjawaban->jawaban }}">{{$pilihanjawaban->jawaban}}</option>  
-        @endforeach
-        </select>
-        @else
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" >
+              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[]" id="{{ $pertanyaan->kd_pertanyaan }}" >
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
               {{ $pilihanjawaban->jawaban }}
               </label>
             </div>
         @endforeach
-        @endif
             <br/>
         @endif
         @endforeach
@@ -185,22 +184,22 @@
             </div>
             <br>
           
-            <label><b>2. Kapan anda mulai mencari pekerjaan?Mohon pekerjaan sambilan tidak dimasukkan</b></label>
+            <label><b>2. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
             <br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="" id="" value="" checked> 
+              <input class="form-check-input" type="radio" name="" id="" value=""> 
               <label for="exampleRadios1">Kira-kira</label>
               <input type="text" name="F3" id="F3" placeholder="Bulan"> bulan sebelum lulus     
             </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="" id="" value="" checked> 
+              <input class="form-check-input" type="radio" name="" id="" value=""> 
               <label for="exampleRadios1">Kira-kira</label>
               <input type="text" name="F3" id="F3" placeholder="Bulan"> bulan sesudah lulus     
             </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="F3" id="F3" value="F3" checked>
+              <input class="form-check-input" type="radio" name="F3" id="F3" value="Saya tidak mencari kerja">
               <label class="form-check-label" for="exampleRadios1">
                 Saya tidak mencari kerja
               </label>
@@ -209,27 +208,19 @@
 
             <label><b>2. Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="F504" id="F504" value="ya" checked>
+              <input class="form-check-input F504" type="radio" name="F504" id="" value="ya">
               <label class="form-check-label" for="exampleRadios1">
                 Ya
               </label>
-              <div class="form-group">
-                <label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label>
-                <input type="text" class="form-control form-control" name = "F504A" id="F504A" value="">
-              </div>
-              <div class="form-group">
-                <label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label>
-                <input type="text" class="form-control form-control" name = "F504B" id="F504B" value="">
+              <div id="container_504_ya">
               </div>
             </div>     
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="F504" id="F504" value="tidak" checked>
+              <input class="form-check-input F504" type="radio" name="F504" id="" value="tidak">
               <label class="form-check-label" for="exampleRadios1">
                 Tidak
               </label>
-              <div class="form-group">
-                <label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label>
-                <input type="text" class="form-control form-control" name = "F504A" id="bulan_kerja" value="">
+              <div id="container_504_tidak">
               </div>
             </div>
             <br/>
@@ -270,46 +261,40 @@
 <!-- ======= Footer ======= -->
 @section('scripts')
 <script type="text/javascript">
-// $(document).on("change", "#provinsi", function(){
-// 			var id = $(this).val;
-//       var url = '/UG_Career/getkabkota'+"/"+id;
-// 			$.ajax({
-// 				url: url,
-// 				method: "GET",
-// 				dataType: 'json',
-// 				success: function(datas) {
-// 						var htmlkom = '';
-// 						for (i = 0; i < datas.length; i++) {
-// 							htmlkom += '<tr><td>'+ (i) +'</td><td>'+ datas[i].nama_kabkota +'</td></tr>';
-// 						}
-// 						$('#kabkota').html(htmlkom);
-// 				}
-// 			});
-// 		});
 
 $('#provinsi').change(function(){
-    var id = $(this).val();    
-    if(id){
-        $.ajax({
-           type:"GET",
-           url:"getkabkota?id="+id,
-           dataType: 'JSON',
-           success:function(res){               
-            if(res){
-                $("#kabkota").empty();
-                $("#kabkota").append('<option>---Pilih Kab/Kota---</option>');
-                $.each(res,function(nama,kode){
-                    $("#kabkota").append('<option value="'+kode+'">'+nama+'</option>');
-                });
-            }else{
-               $("#kabkota").empty();
-            }
-           }
-        });
-    }else{
-        $("#kabkota").empty();
-    }      
-   });
+    var id = $(this).val();   
+    var url = '/UG_Career/getkabkota'+"/"+id;
+    $.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+						var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<option value="'+datas[i].id+'">'+datas[i].nama_kabkota+'</option>';
+						}
+						$('#kabkota').html(htmlkom);
+
+				}
+			});  
+});
+
+$(document).ready(function() {
+				$('.F504').change(function() {
+					var val = $(this).val(); 
+					if(val == "ya"){
+						$("#container_504_tidak").empty();
+						var html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="text" class="form-control form-control" name = "F504A" id="F504A" value=""></div><div class="form-group"><label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label><input type="text" class="form-control form-control" name = "F504B" id="F504B" value=""></div>';
+            $("#container_504_ya").html(html);
+					}else{
+						$("#container_504_ya").empty();
+            html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="text" class="form-control form-control" name = "F504A" id="bulan_kerja" value=""></div>';
+            $("#container_504_tidak").html(html);
+					}
+				});
+			});
+
 </script>
 @endsection('scripts')
 @endsection
