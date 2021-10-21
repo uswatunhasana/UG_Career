@@ -71,20 +71,34 @@
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}">Isi Kuisioner</a></li>
-          @elseif(Auth::user()->level == "perusahaan")
-          <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
-          @endif
-          @endif
-          @guest
-          <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
-          @else
-              <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
             <ul class="kotak">
               <br>
               <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
             </ul>
+          @elseif(Auth::user()->level == "perusahaan")
+          <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
+          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+            <ul class="kotak">
+              <br>
+              <li class="tombol"><a href="{{ route('editprofilperusahaan', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
+            </ul>
+          @endif
+          @endif
+          @guest
+          <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
+          @else
+              <!-- <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+            <ul class="kotak">
+              <br>
+              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
+            </ul> -->
           @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
