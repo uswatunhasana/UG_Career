@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Alumni;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
@@ -77,10 +78,61 @@ class ProfilController extends Controller
             return redirect()->back();
     }
 
-    public function editprofil($id)
+    // FRONT END PROFIL
+    public function editprofil_front($id)
     {
         $users = User::where('id','=',$id)->select('*')->get();
-        return view('user.edit-profil', ['users' => $users]);
+        $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
+        return view('user.edit-profil', ['users' => $users, 'alumnis'=>$alumnis]);
+    }
+
+    public function updateprofil(Request $request, $id)
+    {
+        $rules = array(
+            'name'        => 'string',
+            'email'       => 'string',
+            'nik'         => 'string',
+            'npm'         => 'string',
+            'tahun_masuk' => 'string',
+            'tahun_lulus' => 'string',
+            'no_telp'     => 'string',
+        );
+
+        $validation = Validator::make($request->all(), $rules);
+        if ($validation->fails()) {
+            Alert::error('Invalid Data', 'Password Minimal 8 Karakter, kombinasi dari huruf dan angka');
+            return redirect()->back();
+        }
+            $alumni = Alumni::findOrFail($id)
+            ->where('alumnis.id', '=', $id)
+            ->select('alumnis.*')
+            ->first();
+
+            $user = User::findOrFail($alumni->id_user);
+            $user->name     = $request->name;
+            $user->username    = $user->username;
+            $user->email    = $request->email;
+            // $user->password = $request[Hash::make('password')];
+            // $user->forget_password = $request[Hash::make('password')];
+            if($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+                $user->forget_password = Crypt::encryptString($request->password);
+            } else {
+                $user->password = $user->password;
+                $user->forget_password = $user->forget_password;
+            }
+            $user->save();
+
+            $alumni->id_user     = $alumni->id_user;
+            $alumni->npm         = $alumni->npm;
+            $alumni->tahun_masuk = $request->tahun_masuk;
+            $alumni->tahun_lulus = $request->tahun_lulus;
+            $alumni->id_prodi    = $request->id_prodi;
+            $alumni->no_telp     = $request->no_telp;
+            $alumni->nik         = $request->nik;
+            $alumni->save();
+            Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
+            return redirect()->back();
     }
     
     public function destroy($id)
