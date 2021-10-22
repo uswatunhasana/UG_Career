@@ -2,44 +2,44 @@
 @section('title', 'Dashboard')
 @section('css')
 <style>
-  #frame-image img {
-    
-    max-height: 320px;
-    position: absolute;
-    left: -10px;
-    top: -86px;
+#frame-image img {
+
+  max-height: 320px;
+  position: absolute;
+  left: -10px;
+  top: -86px;
 }
 </style>
 @endsection
 @section('content')
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center">
-<div class="container">
-  <div class="row">
-    <div class="col-lg-6 d-flex flex-column justify-content-center">
-      <h1 data-aos="fade-up">UG Tracer</h1>
-      <h2 data-aos="fade-up" data-aos-delay="400">Bagi alumni dan perusahaan yang belum memiliki akun dapat melakukan registrasi melalui link berikut</h2>
-      <div data-aos="fade-up" data-aos-delay="600">
-        @guest
-        <div class="text-center text-lg-start">
-          <a href="{{ route('daftar.registrasi') }}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-            <span>Registrasi</span>
-            <i class="bi bi-arrow-right"></i>
-          </a>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex flex-column justify-content-center">
+        <h1 data-aos="fade-up">UG Tracer</h1>
+        <h2 data-aos="fade-up" data-aos-delay="400">Bagi alumni dan perusahaan yang belum memiliki akun dapat melakukan registrasi melalui link berikut</h2>
+        <div data-aos="fade-up" data-aos-delay="600">
+          @guest
+          <div class="text-center text-lg-start">
+            <a href="{{ route('daftar.registrasi') }}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>Registrasi</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+          @endguest
         </div>
-        @endguest
+      </div>
+      <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+        <img src="{{ asset('assets') }}/img/gundarlogocopy.png" class="img-fluid" alt="">
       </div>
     </div>
-    <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-      <img src="{{ asset('assets') }}/img/gundarlogocopy.png" class="img-fluid" alt="">
-    </div>
   </div>
-</div>
 
 </section><!-- End Hero -->
 
 <main id="main">
-<!-- ======= Clients Section ======= -->
+  <!-- ======= Clients Section ======= -->
 <!-- <section id="clients" class="clients">
 
   <div class="container" data-aos="fade-up">
@@ -74,11 +74,11 @@
 
       <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
         <div class="content">
-          <h3>Who We Are</h3>
-          <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
-          <p>
+          <h3>Tentang Kami</h3>
+          <h2>Kami sangat senang menyambut Anda sebagai bagian dari keluarga Gunadarma, di sini di Career Center Universitas Gunadarma. Kami ingin memberi tahu Anda bahwa situs kami sedang dalam proses menuju kesempurnaannya. Jangan ragu untuk menjelajahi dan mendapatkan manfaat dari fitur kami.</h2>
+          <!-- <p>
             Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-          </p>
+          </p> -->
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
           <div class="text-center text-lg-start">
@@ -112,8 +112,8 @@
     </header>
 
     <div class="row">
-    
-    @foreach($beritas as $berita)
+
+      @foreach($beritas as $berita)
       <div class="col-lg-4">
         <div class="post-box">
           <div class="post-img frame-image img"><img src="{{ asset('img/'. $berita->foto )}}" class="img-fluid rounded" width="300px"alt=""></div>
@@ -126,78 +126,68 @@
 										@csrf
 										@method('GET')
 									</form> -->
-        </div>
-      </div>
-      @endforeach
+                </div>
+              </div>
+              @endforeach
 
-    </div>
-
-  </div>
-
-</section><!-- End Recent Blog Posts Section -->   
-<!-- ======= Recent Blog Posts Section ======= -->
-
-<!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
-
-  <div class="container" data-aos="fade-up">
-
-    <header class="section-header">
-      <h2>Hubungi</h2>
-      <p>Kontak Kami</p>
-    </header>
-    @foreach($datawebs as $dataweb)
-    <div class="row gy-4">
-
-      <div class="col-lg-6">
-
-        <div class="row gy-4">
-          <div class="col-md-6">
-            <div class="info-box">
-              <i class="bi bi-geo-alt"></i>
-              <h3>Alamat</h3>
-              <p>{{ $dataweb->alamat}}</p>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="info-box">
-              <i class="bi bi-telephone"></i>
-              <h3>Nomor Telepon</h3>
-              <p>{{ $dataweb->no_telp }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-          <div class="row gy-4">
-          <div class="col-md-6">
-            <div class="info-box">
-              <i class="bi bi-envelope"></i>
-              <h3>Email</h3>
-              <p>{{ $dataweb->email }}</p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="info-box">
-              <i class="bi bi-clock"></i>
-              <h3>Jam Pelayanan</h3>
-              <p>{{ $dataweb->jam_pelayanan }}</p>
-            </div>
-          </div>
-          @endforeach
-          </div>
-      </div>
-    </div>
-  </div>
-</section><!-- End Contact Section -->
 
-</main><!-- End #main -->
-@section('scripts')
-<script type="text/javascript">
-function showpertanyaan(id) {
-					event.preventDefault();
-					document.getElementById('show-form-'+id).submit();
-		} 
-    </script>
-@endsection
-@endsection
+          </div>
+
+        </section><!-- End Recent Blog Posts Section -->   
+        <!-- ======= Recent Blog Posts Section ======= -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+
+          <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+              <h2>Hubungi</h2>
+              <p>Kontak Kami</p>
+            </header>
+            @foreach($datawebs as $dataweb)
+            <div class="row gy-4">
+
+              <div class="col-lg-12">
+
+                <div class="row gy-4">
+                  <div class="col-md-4">
+                    <div class="info-box">
+                      <i class="bi bi-geo-alt"></i>
+                      <h3>Alamat</h3>
+                      <p>{{ $dataweb->alamat}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="info-box">
+                      <i class="bi bi-envelope"></i>
+                      <h3>Email</h3>
+                      <p>{{ $dataweb->email }}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="info-box">
+                      <i class="bi bi-clock"></i>
+                      <h3>Jam Pelayanan</h3>
+                      <p>{{ $dataweb->jam_pelayanan }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @endforeach
+ 
+           </div>
+          </div>
+        </section><!-- End Contact Section -->
+
+      </main><!-- End #main -->
+      @section('scripts')
+      <script type="text/javascript">
+        function showpertanyaan(id) {
+         event.preventDefault();
+         document.getElementById('show-form-'+id).submit();
+       } 
+     </script>
+     @endsection
+     @endsection
