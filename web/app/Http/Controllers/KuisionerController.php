@@ -29,16 +29,19 @@ class KuisionerController extends Controller
     {
         $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        $pertanyaans = [];
+        foreach ($pertanyaansquery as $pertanyaan) {
+            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
+            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
-        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis','provinsis'));
+        ksort($pertanyaans, SORT_NATURAL);
+        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis', 'provinsis'));
     }
 
     public function isikuisionerperusahaan($id)
@@ -54,7 +57,7 @@ class KuisionerController extends Controller
             }
             $i++;
         }
-        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans','provinsis'));
+        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans', 'provinsis'));
     }
 
     public function isikuisionercontoh($id)
@@ -64,10 +67,11 @@ class KuisionerController extends Controller
         return view('user.isikuisioner_alumni', compact('pertanyaans', 'alumnis'));
     }
 
-    public function ajaxkabkota($id){
-        $data = Kabkota::where('id_provinsi','=',$id)->get();
-            // $desa = Desa::where("desa_kec",$request->kecID)->pluck('desa_kode','desa_nama');
-            // return response()->json($desa);
+    public function ajaxkabkota($id)
+    {
+        $data = Kabkota::where('id_provinsi', '=', $id)->get();
+        // $desa = Desa::where("desa_kec",$request->kecID)->pluck('desa_kode','desa_nama');
+        // return response()->json($desa);
         echo json_encode($data);
     }
     // public function getKabkota(Request $request){
@@ -82,78 +86,76 @@ class KuisionerController extends Controller
 
     public function kuisionerperusahaanstore(Request $request)
     {
-    
+
         $user = Auth::user();
 
         // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
         // if ($cek_perusahaan == 0) {
-            $responden = new Jawabanresponden;
-            $responden->id_user = $user->id;
-            $responden->kategori_responden = 'perusahaan';
-            $responden->save();
+        $responden = new Jawabanresponden;
+        $responden->id_user = $user->id;
+        $responden->kategori_responden = 'perusahaan';
+        $responden->save();
 
-            $get_id_responden = DB::getPdo()->lastInsertId();
-        
-            foreach($request->except('_token','_method') as $key => $val)
-            {
-            $hasil_perusahaan= new Jawabanrespondendetail;
-            if(is_array($request->$key)){
-                foreach($request->$key as $k => $v){
-                    $hasil_perusahaan->kd_pertanyaan= $key;
-                   $hasil_perusahaan->jawaban=$v;
-                   $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
-                   $hasil_perusahaan->save();
+        $get_id_responden = DB::getPdo()->lastInsertId();
+
+        foreach ($request->except('_token', '_method') as $key => $val) {
+            $hasil_perusahaan = new Jawabanrespondendetail;
+            if (is_array($request->$key)) {
+                foreach ($request->$key as $k => $v) {
+                    $hasil_perusahaan->kd_pertanyaan = $key;
+                    $hasil_perusahaan->jawaban = $v;
+                    $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                    $hasil_perusahaan->save();
                 }
-            }else{
-               $hasil_perusahaan->kd_pertanyaan= $key;
-               $hasil_perusahaan->jawaban=$val;
-               $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
-               $hasil_perusahaan->save();
+            } else {
+                $hasil_perusahaan->kd_pertanyaan = $key;
+                $hasil_perusahaan->jawaban = $val;
+                $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                $hasil_perusahaan->save();
             }
-            }
-    // }else{
+        }
+        // }else{
 
-    //     }
+        //     }
         Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 
     public function kuisioneralumnistore(Request $request)
     {
-    
+
         $user = Auth::user();
 
         // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
         // if ($cek_perusahaan == 0) {
-            $responden = new Jawabanresponden;
-            $responden->id_user = $user->id;
-            $responden->kategori_responden = 'alumni';
-            $responden->save();
+        $responden = new Jawabanresponden;
+        $responden->id_user = $user->id;
+        $responden->kategori_responden = 'alumni';
+        $responden->save();
 
-            $get_id_responden = DB::getPdo()->lastInsertId();
-        
-        foreach($request->except('_token','_method') as $key => $val)
-        {
-            if(is_array($request->$key)){
-                foreach($request[$key] as $k => $v){
-                $hasil_alumni= new Jawabanrespondendetail;
-                $hasil_alumni->kd_pertanyaan= $key;
-                $hasil_alumni->jawaban=$v;
-                $hasil_alumni->id_jawabanresponden=  $get_id_responden;
-                // dd($hasil_alumni);
+        $get_id_responden = DB::getPdo()->lastInsertId();
+
+        foreach ($request->except('_token', '_method') as $key => $val) {
+            if (is_array($request->$key)) {
+                foreach ($request[$key] as $k => $v) {
+                    $hasil_alumni = new Jawabanrespondendetail;
+                    $hasil_alumni->kd_pertanyaan = $key;
+                    $hasil_alumni->jawaban = $v;
+                    $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                    // dd($hasil_alumni);
+                    $hasil_alumni->save();
+                }
+            } else {
+                $hasil_alumni = new Jawabanrespondendetail;
+                $hasil_alumni->kd_pertanyaan = $key;
+                $hasil_alumni->jawaban = $val;
+                $hasil_alumni->id_jawabanresponden =  $get_id_responden;
                 $hasil_alumni->save();
             }
-        }else{
-            $hasil_alumni= new Jawabanrespondendetail;
-            $hasil_alumni->kd_pertanyaan= $key;
-            $hasil_alumni->jawaban=$val;
-            $hasil_alumni->id_jawabanresponden=  $get_id_responden;
-            $hasil_alumni->save();
         }
-        }
-    // }else{
+        // }else{
 
-    //     }
+        //     }
         Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
