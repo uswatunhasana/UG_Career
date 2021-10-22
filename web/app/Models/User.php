@@ -39,7 +39,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
     public function perusahaan()
     {
     	return $this->hasOne(Perusahaan::class, 'id_user');
@@ -48,5 +47,9 @@ class User extends Authenticatable
     public function alumni()
     {
     	return $this->hasOne(Alumni::class, 'id_user');
+    }
+    public function jawabanresponden()
+    {
+    	return $this->hasOne(Jawabanresponden::class, 'id_user');
     }
 }

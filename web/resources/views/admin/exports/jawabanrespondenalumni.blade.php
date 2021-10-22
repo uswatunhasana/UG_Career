@@ -5,11 +5,14 @@
         <th>kdpstmsmh</th>
         <th>nimhsmsmh</th>
         <th>nmmhsmsmh</th>
-        <!-- <th>telpomsmh</th>		 -->
+        <th>telpomsmh</th>		
         <th>emailmsmh</th>	
         <th>tahun_lulus</th>	
         <th>nik</th>
-        <th>F21</th>
+        @foreach ($kd_pertanyaans as $kd_pertanyaan)
+        <th>{{ $kd_pertanyaan->kd_pertanyaan }}</th>
+        @endforeach
+        <!-- <th>F21</th>
         <th>F22</th>
         <th>F23</th>
         <th>F24</th>
@@ -58,7 +61,7 @@
         <th>F1772</th>
         <th>F1774</th>
         <th>F1D</th>
-        <th>F1E</th> 
+        <th>F1E</th>  -->
     </tr>
     </thead>
     <tbody>
@@ -66,13 +69,15 @@
         <tr>
             <td>031037</td>
             <td></td>
-            <td>{{ $jawabanresponden->user->npm }}</td>
+            <td>{{ $jawabanresponden->user->alumni->npm }}</td>
             <td>{{ $jawabanresponden->user->name }}</td>
-           
+            <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td>
             <td>{{ $jawabanresponden->user->email }}</td>
             <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td>
-            <td>{{ $jawabanresponden->user->alumni->nik }}</td>
-            <td>{{ $jawabanresponden->jawabanrespondendetail->jawaban }}</td>
+            <td>'{{ $jawabanresponden->user->alumni->nik }}</td>
+            @foreach($jawabanresponden->jawabanrespondendetail as $jawabanrespondendetail )
+            <td>{{ $jawabanrespondendetail->jawaban  }}</td>
+           @endforeach
         </tr>
     @endforeach
     </tbody>

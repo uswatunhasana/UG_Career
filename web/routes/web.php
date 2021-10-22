@@ -127,14 +127,19 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
         ]);
-        Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
-            'index' => 'hasil_alumni.index',
-            'destroy' => 'hasil_alumni.destroy',
-        ]);
-        Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
-            'index' => 'hasil_perusahaan.index',
-            'destroy' => 'hasil_perusahaan.destroy',
-        ]);
+        
+        Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
+        Route::get('/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden');
+        Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');
+        
+        // Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
+        //     'index' => 'hasil_alumni.index',
+        //     'destroy' => 'hasil_alumni.destroy',
+        // ]);
+        // Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
+        //     'index' => 'hasil_perusahaan.index',
+        //     'destroy' => 'hasil_perusahaan.destroy',
+        // ]);
 
         // Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan');
     });

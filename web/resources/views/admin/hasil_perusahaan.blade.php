@@ -26,7 +26,19 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
-			
+			<div class="card-header">
+				<div class="">
+					<h4 class="card-title"></h4>
+					<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
+					<i class="fas fa-download"></i>
+						Impor Data
+					</button>
+					<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+					<i class="fas fa-upload"></i>
+						Ekspor Data
+					</button>
+				</div>
+			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
 				<div class="table-responsive">
@@ -43,16 +55,16 @@
 							@php
 							$no = 1;
 							@endphp
-							@foreach($jawaban_respondens as $jawaban_responden)
 							<tr>
+								@foreach($jawaban_respondens as $jawaban_responden)
 								<td>{{$no++ }}</td>
-								<td>{{ $jawaban_responden->created_at }}</td>
+								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
 									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									<button class="btn btn-sm btn-danger" type="button" id="" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('pert_alumni.destroy', $jawaban_responden->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden', $jawaban_responden->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -63,74 +75,65 @@
 					</div>
 				</div>
 				</div>
-				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Tambah Edit Modal -->
-	@foreach ($jawaban_respondens as $jawaban_responden)
-	<div class="modal fade" id="editModal-{{ $pertanyaan->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form role="form" action="{{ route('pert_perusahaan.update', $pertanyaan->id) }}" method="POST">
-						@csrf
-						@method('PUT')
-						<div class="row">
-							<div class="col-md-6 pr-0">
-								<div class="form-group form-group-default">
-									<label><h4><b>Jenis Pertanyaan</b></h4></label>
-									<select class="form-control" name="jenis_pertanyaan"  required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
-										<!-- <option disabled selected>-- Jenis pertanyaan --</option> -->
-										<option value="text" {{ $pertanyaan->jenis_pertanyaan === 'text' ? 'selected' : '' }} >Text</option>
-										<option value="pilihan" {{ $pertanyaan->jenis_pertanyaan === 'pilihan' ? 'selected' : '' }} >Pilihan</option>
-										<option value="checklist" {{ $pertanyaan->jenis_pertanyaan === 'checklist' ? 'selected' : '' }} >Checklist</option>
-									</select>
-								</div>
-							</div>
-							
-							<div class="col-md-6">
-								<div class="form-group form-group-default">
-									<label><h4><b>Kode pertanyaan</b></h4></label>
-									<input id="addkodepertanyaan" type="text" name="kd_pertanyaan" class="form-control" value="{{ $pertanyaan->kd_pertanyaan }}">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="form-group form-group-default">
-									<label><h4><b>Nama pertanyaan</b></h4></label>
-									<input id="addpertanyaan" type="text" name="pertanyaan" class="form-control" value="{{ $pertanyaan->pertanyaan }}">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-						<button type="submit" class="btn btn-primary">Ubah Data</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	@endforeach
-</div>
-</div>
-</div>
-</div>
-@endsection
-@section('customjs')
-<script >
-	$(document).ready(function() {
-		$('#basic-datatables').DataTable({
-		});
+	<!-- Modal  Impor -->
+	<div class="modal fade" id="addImport" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content ">
+                <div class="modal-header">
+                  <h5 class="modal-title mb-0" id="addModalLabel">Upload Produk File Excel</h5>
+                </div>
+              <div class="modal-body">
+                 <!-- Card body -->
+                <form role="form" action="" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('POST')
+                    <!-- Input groups with icon -->
+                  <div class="col-md-12 text-center">
+                    <h5 class="h2 card-title mb-2">Langkah-Langkah Upload File</h5>
+                    <div class="col-12 img-import-area">
+                      <img src="" class="img-fluid" width="600px">
+                    </div>
+                    	<div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada gambar</p>
+	                    </div>
+	                    <div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>
+	                    </div>
+                     	<div class="d-flex py-2 border-bottom">
+	                        <p class="font-weight-semibold text-gray mb-0">3. Jika sudah sesuai pilih file</p>
+	                    </div>
+	                    <div class="d-flex py-2 mb-4">
+	                        <p class="font-weight-semibold text-gray mb-0">4. Klik simpan, maka data otomatis tersimpan</p>
+	                    </div>
+                  </div>
+                    <div class="form-group row ">
+                      <label for="kode_barang" class="col-md-2 col-form-label form-control-label text-center">Upload file<span class="text-danger">*</span></label>
+                      <div class="col-md-9">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="file" lang="en" name="file" required="required">
+                          <label class="custom-file-label" for="customFileLang">Pilih File</label>
+                        </div>
+                      </div>
+                  </div>       
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit Data</button>
+            </div>
+            </form>
+         </div>
+       </div>
+    </div>
+	@endsection
+	@section('customjs')
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
 			// Add Row
 			$('#add-row').DataTable({
 				"pageLength": 5,
@@ -150,34 +153,34 @@
 			});
 		});
 
-	function deletejawaban(id) {
-		Swal.fire({
-			title: 'Yakin Ingin Hapus Data ini?',
-			text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Ya, Hapus!',
-			cancelButtonText: 'Tidak',
-			confirmButtonClass: 'btn btn-success',
-			cancelButtonClass: 'btn btn-danger',
-			buttonsStyling: false,
-			reverseButtons: true
-		}).then((result) => {
-			if (result.value) {
-				event.preventDefault();
-				document.getElementById('delete-form-'+id).submit();
-				Swal.fire(
-					'Deleted!',
-					'Your file has been deleted.',
-					'success')
-			} else (
-				result.dismiss === swal.DismissReason.cancel
-				) 
-		});
-	} 
-	
-</script>
+		function deletejawaban_responden(id) {
+			Swal.fire({
+				title: 'Yakin Ingin Hapus Data ini?',
+				text: "Data Tidak Bisa Dikembalikan Setelah Dihapus!",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus!',
+				cancelButtonText: 'Tidak',
+				confirmButtonClass: 'btn btn-success',
+				cancelButtonClass: 'btn btn-danger',
+				buttonsStyling: false,
+				reverseButtons: true
+			}).then((result) => {
+				if (result.value) {
+					event.preventDefault();
+					document.getElementById('delete-form-'+id).submit();
+					Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success')
+				} else (
+					result.dismiss === swal.DismissReason.cancel
+					) 
+			});
+		} 
+		
+	</script>
 
-@endsection
+	@endsection

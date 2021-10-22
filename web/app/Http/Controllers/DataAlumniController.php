@@ -22,7 +22,7 @@ class DataAlumniController extends Controller
 
     public function index()
     {
-        $respondens=Jawabanresponden::all();
+        
 
         // dd($respondens->jawabanrespondendetail);
         return Excel::download(new HasilRespondenDetail, 'users.xlsx');
