@@ -22,8 +22,8 @@ class AlumniController extends Controller
     {
 
         // return Excel::download(new HasilRespondenDetail, 'jawabanrespondens.xlsx');
-        // $alumnis = Alumni::all();
-        // return view('admin.alumni', compact('alumnis'));
+        $alumnis = Alumni::all();
+        return view('admin.alumni', compact('alumnis'));
     }
 
     public function create()

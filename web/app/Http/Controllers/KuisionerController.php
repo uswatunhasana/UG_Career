@@ -29,31 +29,37 @@ class KuisionerController extends Controller
     {
         $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        $pertanyaans = [];
+        foreach ($pertanyaansquery as $pertanyaan) {
+            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
+            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
-        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis','provinsis'));
+        ksort($pertanyaans, SORT_NATURAL);
+        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis', 'provinsis'));
     }
 
     public function isikuisionerperusahaan($id)
     {
         $perusahaans = Perusahaan::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'perusahaan')->orderBy('kd_pertanyaan')->get();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        $pertanyaans = [];
+        foreach ($pertanyaansquery as $pertanyaan) {
+            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
+            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
+        ksort($pertanyaans, SORT_NATURAL);
         return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans','provinsis'));
     }
 
@@ -70,15 +76,6 @@ class KuisionerController extends Controller
             // return response()->json($desa);
         echo json_encode($data);
     }
-    // public function getKabkota(Request $request){
-    //     $data = Kabkota::where('id_provinsi','=',$request->provinsi_id)->get();
-    //     // $kecamatan = Kecamatan::where("kec_kab",$request->kabID)->pluck('kec_kode','kec_nama');
-    //     return response()->json($data);
-    // }
-    // public function getKabkota(Request $request){
-    //     $kabkota = Kabkota::where('id_provinsi','=',$request->id)->pluck('id','nama_kabkota');
-    //     return response()->json($kabkota);
-    // }
 
     public function kuisionerperusahaanstore(Request $request)
     {

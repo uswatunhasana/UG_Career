@@ -69,12 +69,12 @@
 										</a>
 									</li>
 									<li class="@if (Request::segment( 2 ) == 'hasil_alumni') active text-primary @endif">
-										<a href="{{ route('hasil_alumni.index') }}">
+										<a href="{{ route('hasil_alumni') }}">
 											<span class="sub-item">Hasil Survei Alumni</span>
 										</a>
 									</li>
 									<li class="@if (Request::segment( 2 ) == 'hasil_perusahaan') active text-primary @endif">
-										<a href="{{ route('hasil_perusahaan.index') }}">
+										<a href="{{ route('hasil_perusahaan') }}">
 											<span class="sub-item">Hasil Survei Perusahaan</span>
 										</a>
 									</li>
