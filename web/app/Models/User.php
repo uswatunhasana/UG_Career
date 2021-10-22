@@ -39,13 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
     public function perusahaan()
     {
-    	return $this->hasOne(User::class, 'id_user');
+    	return $this->hasOne(Perusahaan::class, 'id_user');
     }
 
     public function alumni()
     {
-    	return $this->hasOne(User::class, 'id_user');
+    	return $this->hasOne(Alumni::class, 'id_user');
     }
 }

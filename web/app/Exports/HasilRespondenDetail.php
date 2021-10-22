@@ -12,9 +12,7 @@ class HasilRespondenDetail implements FromView
     public function view(): View
     {
         return view('admin.exports.jawabanrespondenalumni', [
-            'jawabanrespondens' => Jawabanresponden::leftJoin('jawabanrespondendetails', 'jawabanrespondendetails.id_jawabanresponden', '=', 'jawabanrespondens.id')
-            ->select('jawabanrespondens.*', 'jawabanrespondendetails.*')
-            ->get()
+            'jawabanrespondens' => Jawabanresponden::all()
         ]);
     }
 }

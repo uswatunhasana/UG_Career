@@ -227,7 +227,7 @@
             <b>3. Dimana lokasi tempat Anda bekerja?</b>
             <div class="form-group">
               <label for="largeInput">Provinsi</label>
-              <select class="form-select" name="F5A2" id="provinsi">
+              <select class="form-select" name="F510B" id="provinsi">
                 <option selected>---Pilih Provinsi---</option>
                 @foreach ($provinsis as $provinsi)
                     <option value="{{$provinsi->id}}">{{$provinsi->nama_provinsi}}</option>
@@ -236,7 +236,7 @@
             </div>
             <div class="form-group">
               <label for="largeInput">Kab/Kota</label>
-              <select class="form-select" name="F5A2" id="kabkota">
+              <select class="form-select" name="F510B" id="kabkota">
               <option selected>---Pilih Kab/Kota---</option>
               </select>
             </div>

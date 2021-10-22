@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Alumni;
+use App\Models\Jawabanresponden;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\HasilRespondenDetail;
@@ -19,7 +20,8 @@ class AlumniController extends Controller
 
     public function index()
     {
-        return Excel::download(new HasilRespondenDetail, 'jawabanrespondens.xlsx');
+
+        // return Excel::download(new HasilRespondenDetail, 'jawabanrespondens.xlsx');
         // $alumnis = Alumni::all();
         // return view('admin.alumni', compact('alumnis'));
     }

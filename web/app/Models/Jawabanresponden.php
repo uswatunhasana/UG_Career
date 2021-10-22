@@ -18,4 +18,8 @@ class Jawabanresponden extends Model
     {
     	return $this->hasMany(Jawabanrespondendetail::class, 'id_jawabanresponden');
     }
+    public function user()
+    {
+    	return $this->belongsTo(User::class, 'id');
+    }
 }

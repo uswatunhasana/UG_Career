@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Exports\HasilRespondenDetail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Alumni;
+use App\Models\Jawabanresponden;
 use App\Models\User;
 use App\Models\Prodi;
 use Illuminate\Support\Facades\Crypt;
@@ -21,6 +22,9 @@ class DataAlumniController extends Controller
 
     public function index()
     {
+        $respondens=Jawabanresponden::all();
+
+        // dd($respondens->jawabanrespondendetail);
         return Excel::download(new HasilRespondenDetail, 'users.xlsx');
         // $alumnis = Alumni::all();
         // $prodis = Prodi::all();
