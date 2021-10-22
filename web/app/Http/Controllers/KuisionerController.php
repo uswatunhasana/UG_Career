@@ -24,8 +24,12 @@ class KuisionerController extends Controller
 
     public function isikuisioneralumni($id)
     {
-        $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
+        // $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
+        function sort($a, $b)
+        {
+            return strlen($b) - strlen($a);
+        }
         $i = 0;
         foreach ($pertanyaans as $pertanyaan) {
             $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
