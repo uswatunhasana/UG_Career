@@ -127,9 +127,16 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
         ]);
-        
+        Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
+            'store' => 'pert_perusahaan.store',
+            'destroy' => 'pert_perusahaan.destroy',
+            'update' => 'pert_perusahaan.update',
+        ]);
         Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
-        Route::get('/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden');
+        Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@export')->name('hasil_alumni.export');
+        
+        Route::delete('/hasil_alumni/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.alumni');
+        Route::delete('/hasil_perusahaan/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.perusahaan');
         Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');
         
         // Route::resource('/hasil_alumni', HasilAlumniController::class)->names([

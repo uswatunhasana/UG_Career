@@ -128,26 +128,38 @@ class KuisionerController extends Controller
             $responden->save();
 
             $get_id_responden = DB::getPdo()->lastInsertId();
-        
-        foreach($request->except('_token','_method') as $key => $val)
-        {
-            if(is_array($request->$key)){
-                foreach($request[$key] as $k => $v){
-                $hasil_alumni= new Jawabanrespondendetail;
-                $hasil_alumni->kd_pertanyaan= $key;
-                $hasil_alumni->jawaban=$v;
-                $hasil_alumni->id_jawabanresponden=  $get_id_responden;
-                // dd($hasil_alumni);
-                $hasil_alumni->save();
+
+            foreach ($request->except('_token', '_method') as $key => $val) {
+                if (is_array($request->$key)) {
+                    foreach ($request[$key] as $k => $v) {
+                        $hasil_alumni = new Jawabanrespondendetail;
+                        $hasil_alumni->kd_pertanyaan = $key;
+                        $hasil_alumni->kd_jawaban = $key;
+                        $hasil_alumni->jawaban = $v;
+                        $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                        // dd($hasil_alumni);
+                        $hasil_alumni->save();
+                        
+                    }
+                } else {
+                    $hasil_alumni = new Jawabanrespondendetail;
+                    $pertanyaan_cabang = PertanyaanCabang::where('kd_cabang', '=', $key)->select('id_pertanyaan')->get();
+                    if ($pertanyaan_cabang->first()){
+                        $kd_pert = Pertanyaan::where('id', '=', $pertanyaan_cabang[0]->id_pertanyaan)->select('kd_pertanyaan')->get();
+                        // dd($kd_pert[0]->kd_pertanyaan);
+                        $hasil_alumni->kd_pertanyaan = $kd_pert[0]->kd_pertanyaan;
+                    }else{
+                        $hasil_alumni->kd_pertanyaan = $key;
+                    }
+                    $hasil_alumni->kd_jawaban = $key;
+                    $hasil_alumni->jawaban = $val;
+                    $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                    $hasil_alumni->save();
+                    $pertanyaan_cabang = [];
+                }
             }
-        }else{
-            $hasil_alumni= new Jawabanrespondendetail;
-            $hasil_alumni->kd_pertanyaan= $key;
-            $hasil_alumni->jawaban=$val;
-            $hasil_alumni->id_jawabanresponden=  $get_id_responden;
-            $hasil_alumni->save();
-        }
-        }
+        
+        
     // }else{
 
     //     }

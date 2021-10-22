@@ -13,7 +13,7 @@ class HasilRespondenDetail implements FromView
     public function view(): View
     {
         $jawabanrespondens=Jawabanresponden::all();
-        $kd_pertanyaan_querys= Jawabanrespondendetail::select('kd_pertanyaan')->groupby('kd_pertanyaan')->get();
+        $kd_pertanyaan_querys= Jawabanrespondendetail::select('kd_jawaban','kd_pertanyaan')->groupby('kd_pertanyaan','kd_jawaban')->get();
         $kd_pertanyaans=[];
         foreach($kd_pertanyaan_querys as $query){
             $kd_pertanyaans[$query->kd_pertanyaan]=$query;

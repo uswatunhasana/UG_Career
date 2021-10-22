@@ -10,7 +10,7 @@
         <th>tahun_lulus</th>	
         <th>nik</th>
         @foreach ($kd_pertanyaans as $kd_pertanyaan)
-        <th>{{ $kd_pertanyaan->kd_pertanyaan }}</th>
+        <th>{{ $kd_pertanyaan->kd_jawaban }}</th>
         @endforeach
         <!-- <th>F21</th>
         <th>F22</th>
@@ -69,14 +69,39 @@
         <tr>
             <td>031037</td>
             <td></td>
-            <td>{{ $jawabanresponden->user->alumni->npm }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            {{-- <td>{{ $jawabanresponden->user->alumni->npm }}</td> --}}
             <td>{{ $jawabanresponden->user->name }}</td>
-            <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td>
+            {{-- <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td> --}}
             <td>{{ $jawabanresponden->user->email }}</td>
-            <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td>
-            <td>'{{ $jawabanresponden->user->alumni->nik }}</td>
-            @foreach($jawabanresponden->jawabanrespondendetail as $jawabanrespondendetail )
-            <td>{{ $jawabanrespondendetail->jawaban  }}</td>
+            {{-- <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td> --}}
+            {{-- <td>'{{ $jawabanresponden->user->alumni->nik }}</td> --}}
+            @foreach ($kd_pertanyaans as $kd_pertanyaan)
+             @foreach($jawabanresponden->jawabanrespondendetail as $key => $val )
+             @php
+             $len = count($jawabanresponden->jawabanrespondendetail);
+             @endphp
+            @if ($kd_pertanyaan->kd_jawaban == $val->kd_jawaban)
+            <?php $jawabanchecklists = \App\Models\Jawabanrespondendetail::where('kd_jawaban', $val->kd_jawaban)->get(); ?>
+                @if (count($jawabanchecklists)>1)
+                <td>
+                    @foreach ($jawabanchecklists as $jawabanchecklist)
+                        {{$jawabanchecklist->jawaban}} ||
+                    @endforeach
+                </td>
+                <?php break; ?>
+                @else
+                <td>{{ $val->jawaban  }}</td>
+                <?php break; ?>
+                @endif
+            @endif
+            @if ($key == $len)
+                <td></td>
+            @endif
+            @endforeach
            @endforeach
         </tr>
     @endforeach

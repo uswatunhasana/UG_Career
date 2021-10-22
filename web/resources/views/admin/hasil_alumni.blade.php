@@ -33,7 +33,7 @@
 					<i class="fas fa-download"></i>
 						Impor Data
 					</button>
-					<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+					<button class="btn btn-warning btn-round ml-auto" action="{{ route('hasil_alumni.export') }}" method="get" data-toggle="modal" data-target="#addRowModal">
 					<i class="fas fa-upload"></i>
 						Ekspor Data
 					</button>
@@ -62,9 +62,9 @@
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
 									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden', $jawaban_responden->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden.alumni', $jawaban_responden->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>

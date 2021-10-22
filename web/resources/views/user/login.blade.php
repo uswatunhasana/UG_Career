@@ -43,11 +43,7 @@
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
-<<<<<<< Updated upstream
-                     <input type="submit" value="Login">
-=======
                      <input type="submit" value="Log in">
->>>>>>> Stashed changes
                   </div>
                   <div class="perusahaan-link">
                      Belum memiliki akun ? <a href="{{ route('daftar.registrasi') }}">Registrasi Akun</a>

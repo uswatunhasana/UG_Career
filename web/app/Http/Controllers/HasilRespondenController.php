@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jawabanresponden;
 use Illuminate\Support\Facades\DB;
+use App\Exports\HasilRespondenDetail;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -39,6 +41,10 @@ class HasilRespondenController extends Controller
         //
     }
 
+    public function export(){
+        return Excel::download(new HasilRespondenDetail, 'users.xlsx');
+    }
+    
     public function update(Request $request, $id)
     {
         //

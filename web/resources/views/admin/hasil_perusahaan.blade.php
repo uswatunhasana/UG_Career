@@ -62,9 +62,9 @@
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
 									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden', $jawaban_responden->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden.alumni', $jawaban_responden->id) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
@@ -98,7 +98,7 @@
                       <img src="" class="img-fluid" width="600px">
                     </div>
                     	<div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada gambar</p>
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada folder berikut<a href=""></a></p>
 	                    </div>
 	                    <div class="d-flex py-2 border-bottom">
 	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>

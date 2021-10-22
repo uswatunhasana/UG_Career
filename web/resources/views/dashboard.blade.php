@@ -75,10 +75,11 @@
       <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
         <div class="content">
           <h3>Tentang Kami</h3>
-          <h2>Kami sangat senang menyambut Anda sebagai bagian dari keluarga Gunadarma, di sini di Career Center Universitas Gunadarma. Kami ingin memberi tahu Anda bahwa situs kami sedang dalam proses menuju kesempurnaannya. Jangan ragu untuk menjelajahi dan mendapatkan manfaat dari fitur kami.</h2>
-          <!-- <p>
-            Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-          </p> -->
+          <h2>Kami sangat senang menyambut Anda sebagai bagian dari keluarga Gunadarma, di sini di Career Center Universitas Gunadarma.</h2>
+          <p>
+          Kami ingin memberi tahu Anda bahwa situs kami sedang dalam proses menuju kesempurnaannya. Jangan ragu untuk menjelajahi dan mendapatkan manfaat dari fitur kami.
+          Dalam rangka membantu meningkatkan kualitas akademik Universitas Gunadarma.
+          </p>
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
           <div class="text-center text-lg-start">
