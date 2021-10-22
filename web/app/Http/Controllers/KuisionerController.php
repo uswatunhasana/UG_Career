@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pertanyaan;
 use App\Models\PertanyaanCabang;
+use App\Models\Jawabanresponden;
+use App\Models\Jawabanrespondendetail;
 use App\Models\PilihanJawaban;
-use App\Models\HasilPerusahaan;
+use App\Models\Provinsi;
+use App\Models\Kabkota;
 use App\Models\Perusahaan;
 use App\Models\Alumni;
 use Illuminate\Support\Facades\DB;
@@ -24,26 +27,28 @@ class KuisionerController extends Controller
 
     public function isikuisioneralumni($id)
     {
-        // $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
-        function sort($a, $b)
-        {
-            return strlen($b) - strlen($a);
-        }
+        $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
+        $provinsis = Provinsi::all();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        $pertanyaans = [];
+        foreach ($pertanyaansquery as $pertanyaan) {
+            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
+            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
-        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis'));
+        ksort($pertanyaans, SORT_NATURAL);
+        dd($pertanyaans);
+        return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis', 'provinsis'));
     }
 
     public function isikuisionerperusahaan($id)
     {
         $perusahaans = Perusahaan::where('id_user', '=', $id)->select('*')->get();
+        $provinsis = Provinsi::all();
         $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'perusahaan')->orderBy('kd_pertanyaan')->get();
         $i = 0;
         foreach ($pertanyaans as $pertanyaan) {
@@ -53,7 +58,7 @@ class KuisionerController extends Controller
             }
             $i++;
         }
-        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans'));
+        return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans', 'provinsis'));
     }
 
     public function isikuisionercontoh($id)
@@ -63,53 +68,105 @@ class KuisionerController extends Controller
         return view('user.isikuisioner_alumni', compact('pertanyaans', 'alumnis'));
     }
 
-    public function createjawabanalumni(Request $request)
+    public function ajaxkabkota($id)
     {
+        $data = Kabkota::where('id_provinsi', '=', $id)->get();
+        // $desa = Desa::where("desa_kec",$request->kecID)->pluck('desa_kode','desa_nama');
+        // return response()->json($desa);
+        echo json_encode($data);
+    }
+    // public function getKabkota(Request $request){
+    //     $data = Kabkota::where('id_provinsi','=',$request->provinsi_id)->get();
+    //     // $kecamatan = Kecamatan::where("kec_kab",$request->kabID)->pluck('kec_kode','kec_nama');
+    //     return response()->json($data);
+    // }
+    // public function getKabkota(Request $request){
+    //     $kabkota = Kabkota::where('id_provinsi','=',$request->id)->pluck('id','nama_kabkota');
+    //     return response()->json($kabkota);
+    // }
+
+    public function kuisionerperusahaanstore(Request $request)
+    {
+
         $user = Auth::user();
-        // foreach($pertanyaans as $key => $val)
-        // {
-        // $hasil_perusahaan= new HasilPerusahaan;
-        // $hasil_perusahaan->jawaban=$val;
-        // $hasil_perusahaan->kd_pertanyaan=$request->kd_pertanyaan[$key];
-        // $hasil_perusahaan->email =  $user->email;
-        // $hasil_perusahaan->save();
-        // }
+
+        // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
+        // if ($cek_perusahaan == 0) {
+        $responden = new Jawabanresponden;
+        $responden->id_user = $user->id;
+        $responden->kategori_responden = 'perusahaan';
+        $responden->save();
+
+        $get_id_responden = DB::getPdo()->lastInsertId();
+
+        foreach ($request->except('_token', '_method') as $key => $val) {
+            $hasil_perusahaan = new Jawabanrespondendetail;
+            if (is_array($request->$key)) {
+                foreach ($request->$key as $k => $v) {
+                    $hasil_perusahaan->kd_pertanyaan = $key;
+                    $hasil_perusahaan->jawaban = $v;
+                    $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                    $hasil_perusahaan->save();
+                }
+            } else {
+                $hasil_perusahaan->kd_pertanyaan = $key;
+                $hasil_perusahaan->jawaban = $val;
+                $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                $hasil_perusahaan->save();
+            }
+        }
+        // }else{
+
+        //     }
         Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 
-
-    public function kuisionerperusahaanstore(Request $request)
+    public function kuisioneralumnistore(Request $request)
     {
-        // $perusahaans = Perusahaan::all();
 
         $user = Auth::user();
-        // $input = $request->all();
-        $pertanyaans = Pertanyaan::leftJoin('pertanyaancabangs', 'pertanyaancabangs.id_pertanyaan', '=', 'pertanyaans.id')
-            ->select('pertanyaans.kd_pertanyaan', 'pertanyaancabangs.kd_cabang')
-            ->get();
-        dd($pertanyaans);
-        // dd($pertanyaans);
 
-        // $kd_pertanyaan[$key] = $request->$pertanyaan->kd_pertanyaan;
-        // $i=0;
-        // foreach ($pertanyaans as $pertanyaan) {
-        //     $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan','=', $pertanyaan['id'])->select('*')->get();
-        //     if($pertanyaan['is_cabang'] == "ya"){
-        //         $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan','=',$pertanyaan['id'])->select('kd_cabang ')->get();
-        //     }
-        //     $i++;
-        // }
-        // dd($request->kd_pertanyaan['F2']);
+        // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
+        // if ($cek_perusahaan == 0) {
+        $responden = new Jawabanresponden;
+        $responden->id_user = $user->id;
+        $responden->kategori_responden = 'alumni';
+        $responden->save();
 
-        foreach ($pertanyaans as $key => $val) {
-            $hasil_perusahaan = new HasilPerusahaan;
-            $hasil_perusahaan->jawaban = $val;
-            $hasil_perusahaan->kd_pertanyaan = $request->kd_pertanyaan[$key];
-            $hasil_perusahaan->email =  $user->email;
-            $hasil_perusahaan->save();
+        $get_id_responden = DB::getPdo()->lastInsertId();
+
+        foreach ($request->except('_token', '_method') as $key => $val) {
+            if (is_array($request->$key)) {
+                foreach ($request[$key] as $k => $v) {
+                    $hasil_alumni = new Jawabanrespondendetail;
+                    $hasil_alumni->kd_pertanyaan = $key;
+                    $hasil_alumni->kd_jawaban = $key;
+                    $hasil_alumni->jawaban = $v;
+                    $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                    // dd($hasil_alumni);
+                    $hasil_alumni->save();
+                }
+            } else {
+                $hasil_alumni = new Jawabanrespondendetail;
+                $pertanyaan_cabang = PertanyaanCabang::where('kd_cabang', '=', $key)->select('id_pertanyaan')->get();
+                if ($pertanyaan_cabang->first()) {
+                    $kd_pert = Pertanyaan::where('id', '=', $pertanyaan_cabang[0]->id_pertanyaan)->select('kd_pertanyaan')->get();
+                    $hasil_alumni->kd_pertanyaan = $kd_pert[0]->kd_pertanyaan;
+                } else {
+                    $hasil_alumni->kd_pertanyaan = $key;
+                }
+                $hasil_alumni->kd_jawaban = $key;
+                $hasil_alumni->jawaban = $val;
+                $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                $hasil_alumni->save();
+                $pertanyaan_cabang = [];
+            }
         }
+        // }else{
 
+        //     }
+        Alert::success(' Berhasil Tambah Data ', ' Silahkan Periksa Kembali');
         return redirect()->back();
     }
 

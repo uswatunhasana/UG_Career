@@ -23,11 +23,25 @@
   <link href="{{ asset('assets') }}/vendor/aos/aos.css" rel="stylesheet">
   <link href="{{ asset('assets') }}/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="{{ asset('assets') }}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="{{ asset('assets') }}/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-   <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
+  <link href="{{ asset('assets') }}/css/styless.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
+  <link href="{{ asset('assets') }}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- FONT AWESOME -->
+  <script src=" {{ asset('admin') }}/assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset('admin') }}/assets/css/fonts.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets') }}/css/style.css" rel="stylesheet">
+
+  
   @yield('css')
   <!-- =======================================================
   * Template Name: FlexStart - v1.5.0
@@ -57,22 +71,34 @@
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}">Isi Kuisioner</a></li>
+          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+            <ul class="kotak">
+              <br>
+              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
+            </ul>
           @elseif(Auth::user()->level == "perusahaan")
           <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
+          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+            <ul class="kotak">
+              <br>
+              <li class="tombol"><a href="{{ route('editprofilperusahaan', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
+            </ul>
           @endif
           @endif
           @guest
           <li><a class="getstarted scrollto" href="{{ route('login.index') }}">Login</a></li>
           @else
-          <li>
-									<div class="user-box">
-										<div class="avatar-lg"><img src="{{ asset('admin') }}/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
-										<div class="u-text">
-											<h4>{{ Auth::user()->name }}</h4>
-											<p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ route('editprofil.edit', Auth::user()->id) }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-										</div>
-									</div>
-								</li>
+              <!-- <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+            <ul class="kotak">
+              <br>
+              <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 70%;">Lihat Profil</button></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{{url('log_out')}}" class="logout">Log out</a></li>
+            </ul> -->
           @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -105,6 +131,7 @@
   <!-- Vendor JS Files -->
   <script src=" {{ asset('admin') }}/assets/js/core/jquery.3.2.1.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
 	<script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/aos/aos.js"></script>

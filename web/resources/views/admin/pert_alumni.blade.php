@@ -569,7 +569,7 @@
 						$('#detailpertanyaancabang-table').html(htmlkom);
 					}else{
 						var htmlkom = '';
-						$('#detailpertanyaancabang-table').html(htmlkom);
+						// $('#detailpertanyaancabang-table').html(htmlkom);
 						for (i = 0; i < datas.length; i++) {
 							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].jawaban +'</td></tr>';
 						}

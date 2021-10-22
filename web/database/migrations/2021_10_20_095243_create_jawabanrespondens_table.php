@@ -16,7 +16,7 @@ class CreateJawabanrespondensTable extends Migration
         Schema::create('jawabanrespondens', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('kategori_responden',['alumni','perusahaan']);
-            // relasi user
+            // relasi
             $table->unsignedInteger('id_user')->nullable();
             $table->foreign('id_user')
                 ->on('users')

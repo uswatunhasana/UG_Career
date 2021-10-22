@@ -36,13 +36,21 @@ Route::post('password_update', 'App\Http\Controllers\AuthUserController@password
 Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
+Route::get('log_out', 'App\Http\Controllers\AuthUserController@log_out')->name('log_out');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
 Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
+Route::get('/getkabkota/{id}', 'App\Http\Controllers\KuisionerController@ajaxkabkota');
+// Route::get('/getkabkota', [KuisionerController::class, 'getKabkota']);
 Route::get('/isikuisionerperusahaan/{id}', 'App\Http\Controllers\KuisionerController@isikuisionerperusahaan')->name('isikuisionerperusahaan');
 Route::post('/isikuisionerperusahaan/store', 'App\Http\Controllers\KuisionerController@kuisionerperusahaanstore')->name('kuisionerperusahaan.store');
+Route::post('/isikuisioneralumni/store', 'App\Http\Controllers\KuisionerController@kuisioneralumnistore')->name('kuisioneralumni.store');
 Route::get('/isikuisionercontoh', 'App\Http\Controllers\DashboardController@isikuisionercontoh');
+Route::get('/editprofil_front/{id}', 'App\Http\Controllers\ProfilController@editprofil_front')->name('editprofil_front');
+Route::post('/updateprofil/{id}', 'App\Http\Controllers\ProfilController@updateprofil')->name('updateprofil');
+Route::get('/editprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@editprofilperusahaan')->name('editprofilperusahaan');
+Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@updateprofilperusahaan')->name('updateprofilperusahaan');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
@@ -140,6 +148,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::resource('/isikuisioner', DashboardController::class)->names([
             'isikuisioneralumni' => 'isikuisioner.isikuisionerrr',
         ]);
+
+        
+
+        // Route::resource('/edit-profil', ProfilController::class)->names([
+        //     'editprofil' => 'edit-profil.editprofil'
+        // ]);
     });
 });
 

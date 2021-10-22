@@ -70,10 +70,10 @@ class AuthUserController extends Controller
         }
     }
 
-    public function logout(Request $request) {
+    public function log_out(Request $request) {
         $request->session()->flush();
         Auth::logout();
-        return Redirect('/');
+        return redirect('/');
     }
 
     public function registrasi()
@@ -112,6 +112,7 @@ class AuthUserController extends Controller
             $perusahaan->url_web     = $request->url_web;
             $perusahaan->alamat      = $request->alamat;
             $perusahaan->nama_cp     = $request->nama_cp;
+            $perusahaan->email_cp    = $request->email_cp;
             $perusahaan->jabatan     = $request->jabatan;
             $perusahaan->created_at  = now();
             $perusahaan->updated_at  = now();

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
+use App\Exports\HasilRespondenDetail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Alumni;
 use App\Models\User;
 use App\Models\Prodi;
@@ -19,10 +21,11 @@ class DataAlumniController extends Controller
 
     public function index()
     {
-        $alumnis = Alumni::all();
-        $prodis = Prodi::all();
-        // dd($alumnis);
-        return view('admin.dataalumni', compact('alumnis', 'prodis'));
+        return Excel::download(new HasilRespondenDetail, 'users.xlsx');
+        // $alumnis = Alumni::all();
+        // $prodis = Prodi::all();
+        // // dd($alumnis);
+        // return view('admin.dataalumni', compact('alumnis', 'prodis'));
     }
 
     public function create()
