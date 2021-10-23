@@ -87,9 +87,16 @@
           UG Career Merupakan Web Pendataan Alumni dan Mitra Perusahaan yang Berkerja Sama. Dalam rangka meningkatkan kualitas akademik Universitas Gunadarma, silahkan login dan register untuk membantu kami dalam melakukan pendataan Alumni dan Perusahaan.
           </p>
           @if(isset(Auth::user()->level))
-          @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
+          @if(Auth::user()->level == "alumni") 
           <div class="text-center text-lg-start">
-            <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+            <a href="{{ route('isikuisioneralumni', Auth::user()->id) }}" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>Isi Kuisioner Sekarang</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+          @elseif(Auth::user()->level == "perusahaan")
+          <div class="text-center text-lg-start">
+            <a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
               <span>Isi Kuisioner Sekarang</span>
               <i class="bi bi-arrow-right"></i>
             </a>
