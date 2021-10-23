@@ -91,23 +91,36 @@ class KuisionerController extends Controller
 
             $get_id_responden = DB::getPdo()->lastInsertId();
         
-            foreach($request->except('_token','_method') as $key => $val)
-            {
-            $hasil_perusahaan= new Jawabanrespondendetail;
-            if(is_array($request->$key)){
-                foreach($request->$key as $k => $v){
-                    $hasil_perusahaan->kd_pertanyaan= $key;
-                   $hasil_perusahaan->jawaban=$v;
-                   $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
-                   $hasil_perusahaan->save();
+            foreach ($request->except('_token', '_method') as $key => $val) {
+                if (is_array($request->$key)) {
+                    foreach ($request[$key] as $k => $v) {
+                        $hasil_perusahaan = new Jawabanrespondendetail;
+                        $hasil_perusahaan->kd_pertanyaan = $key;
+                        $hasil_perusahaan->kd_jawaban = $key;
+                        $hasil_perusahaan->jawaban = $v;
+                        $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                        // dd($hasil_perusahaan);
+                        $hasil_perusahaan->save();
+                        
+                    }
+                } else {
+                    $hasil_perusahaan = new Jawabanrespondendetail;
+                    $pertanyaan_cabang = PertanyaanCabang::where('kd_cabang', '=', $key)->select('id_pertanyaan')->get();
+                    if ($pertanyaan_cabang->first()){
+                        $kd_pert = Pertanyaan::where('id', '=', $pertanyaan_cabang[0]->id_pertanyaan)->select('kd_pertanyaan')->get();
+                        // dd($kd_pert[0]->kd_pertanyaan);
+                        $hasil_perusahaan->kd_pertanyaan = $kd_pert[0]->kd_pertanyaan;
+                    }else{
+                        $hasil_perusahaan->kd_pertanyaan = $key;
+                    }
+                    $hasil_perusahaan->kd_jawaban = $key;
+                    $hasil_perusahaan->jawaban = $val;
+                    $hasil_perusahaan->id_jawabanresponden =  $get_id_responden;
+                    $hasil_perusahaan->save();
+                    $pertanyaan_cabang = [];
                 }
-            }else{
-               $hasil_perusahaan->kd_pertanyaan= $key;
-               $hasil_perusahaan->jawaban=$val;
-               $hasil_perusahaan->id_jawabanresponden=  $get_id_responden;
-               $hasil_perusahaan->save();
             }
-            }
+        
     // }else{
 
     //     }

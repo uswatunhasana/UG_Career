@@ -69,33 +69,31 @@
         <tr>
             <td>031037</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            {{-- <td>{{ $jawabanresponden->user->alumni->npm }}</td> --}}
+            <td>{{ $jawabanresponden->user->alumni->npm }}</td>
             <td>{{ $jawabanresponden->user->name }}</td>
-            {{-- <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td> --}}
+            <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td>
             <td>{{ $jawabanresponden->user->email }}</td>
-            {{-- <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td> --}}
-            {{-- <td>'{{ $jawabanresponden->user->alumni->nik }}</td> --}}
+            <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td>
+            <td>'{{ $jawabanresponden->user->alumni->nik }}</td>
             @foreach ($kd_pertanyaans as $kd_pertanyaan)
              @foreach($jawabanresponden->jawabanrespondendetail as $key => $val )
              @php
              $len = count($jawabanresponden->jawabanrespondendetail);
              @endphp
             @if ($kd_pertanyaan->kd_jawaban == $val->kd_jawaban)
-            <?php $jawabanchecklists = \App\Models\Jawabanrespondendetail::where('kd_jawaban', $val->kd_jawaban)->get(); ?>
+            @php 
+            $jawabanchecklists = \App\Models\Jawabanrespondendetail::where('kd_jawaban', $val->kd_jawaban)->where('id_jawabanresponden', $val->id_jawabanresponden)->get();
+            @endphp
                 @if (count($jawabanchecklists)>1)
                 <td>
                     @foreach ($jawabanchecklists as $jawabanchecklist)
                         {{$jawabanchecklist->jawaban}} ||
                     @endforeach
                 </td>
-                <?php break; ?>
+               @break
                 @else
                 <td>{{ $val->jawaban  }}</td>
-                <?php break; ?>
+               @break
                 @endif
             @endif
             @if ($key == $len)
