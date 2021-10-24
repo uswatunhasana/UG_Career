@@ -18,9 +18,16 @@
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center">
         <h1 data-aos="fade-up">UG Tracer</h1>
+        @guest
         <h2 data-aos="fade-up" data-aos-delay="400">Bagi alumni dan perusahaan yang belum memiliki akun dapat melakukan registrasi melalui link berikut</h2>
+        @endguest
+        @if(isset(Auth::user()->level))
+          @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
+        <h2 data-aos="fade-up" data-aos-delay="400">Selamat Datang {{ Auth::user()->name }} ! Silahkan Isi Kuisioner dan Jelajahi Fitur Kami.</h2>
+        @endif
+        @endif
         <div data-aos="fade-up" data-aos-delay="600">
-          @guest
+        @guest
           <div class="text-center text-lg-start">
             <a href="{{ route('daftar.registrasi') }}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
               <span>Registrasi</span>
@@ -74,15 +81,22 @@
 
       <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
         <div class="content">
-          <h3>Tentang Kami</h3>
-          <h2>Kami sangat senang menyambut Anda sebagai bagian dari keluarga Gunadarma, di sini di Career Center Universitas Gunadarma. Kami ingin memberi tahu Anda bahwa situs kami sedang dalam proses menuju kesempurnaannya. Jangan ragu untuk menjelajahi dan mendapatkan manfaat dari fitur kami.</h2>
-          <!-- <p>
-            Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-          </p> -->
+          <h3>UG Career Center Universitas Gunadarma</h3>
+          <h2>Selamat Datang Di Situs UG Career Center Universitas Gunadarma. </h2>
+          <p>
+          UG Career Merupakan Web Pendataan Alumni dan Mitra Perusahaan yang Berkerja Sama. Dalam rangka meningkatkan kualitas akademik Universitas Gunadarma, silahkan login dan register untuk membantu kami dalam melakukan pendataan Alumni dan Perusahaan.
+          </p>
           @if(isset(Auth::user()->level))
-          @if(Auth::user()->level == "alumni" or Auth::user()->level == "perusahaan")
+          @if(Auth::user()->level == "alumni") 
           <div class="text-center text-lg-start">
-            <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+            <a href="{{ route('isikuisioneralumni', Auth::user()->id) }}" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>Isi Kuisioner Sekarang</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+          @elseif(Auth::user()->level == "perusahaan")
+          <div class="text-center text-lg-start">
+            <a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
               <span>Isi Kuisioner Sekarang</span>
               <i class="bi bi-arrow-right"></i>
             </a>

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Alumni;
 use App\Exports\HasilRespondenDetail;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\Alumni;
 use App\Models\Jawabanresponden;
 use App\Models\User;
 use App\Models\Prodi;
@@ -26,6 +26,7 @@ class DataAlumniController extends Controller
 
         // dd($respondens->jawabanrespondendetail);
         return Excel::download(new HasilRespondenDetail, 'users.xlsx');
+       
         // $alumnis = Alumni::all();
         // $prodis = Prodi::all();
         // // dd($alumnis);

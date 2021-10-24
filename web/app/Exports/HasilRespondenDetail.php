@@ -16,7 +16,7 @@ class HasilRespondenDetail implements FromView
         $kd_pertanyaan_querys = Jawabanrespondendetail::select('kd_jawaban', 'kd_pertanyaan')->orderBy('kd_jawaban')->get();
         $kd_pertanyaans = [];
         foreach ($kd_pertanyaan_querys as $query) {
-            $kd_pertanyaans[$query->kd_pertanyaan . $query->kd_jawaban] = $query;
+            $kd_pertanyaans[$query->kd_pertanyaan . "-" . $query->kd_jawaban] = $query;
         }
         ksort($kd_pertanyaans, SORT_NATURAL);
         // dd($kd_pertanyaans);
