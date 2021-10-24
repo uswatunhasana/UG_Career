@@ -118,27 +118,41 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								Pilihan Jawaban
-								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >
 									<thead class="thead-light">
 										<tr>
-											<th width="10px">No</th>
-											<th>Pilihan Jawaban</th>
+											<th>Jenis Berita</th>
+											<th>Judul Berita</th>
+											<th>Preview Berita</th>
+											<th>Isi Berita</th>
+											<th>Foto</th>
 										</tr>
 									</thead>
 									<tbody id="detail-table">
-
+										@php
+										$no = 1;
+										@endphp
+										@foreach($beritas as $berita)
+										<tr>
+											<td>{{ $berita->jenis_berita }}</td>
+											<td>{{ $berita->judul_berita }}</td>
+											<td>{{ $berita->preview_berita }}</td>
+											<td>{{ $berita->isi_berita }}</td>
+											<td>
+												<img src="{{ asset('img/'. $berita->foto )}}" height="50" width="50" alt="" srcset="">
+											</td>
+										</tr>
+										@endforeach
 									</tbody>
 								</table>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
 							</div>
-						</form>
+						</div>
 					</div>
 				</div>
-			</div>
+					
 
 			<!-- Tabel Data -->
 			<div class="table-responsive">
