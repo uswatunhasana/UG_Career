@@ -63,7 +63,7 @@
                <br>
                <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required>
+                  <input type="text" placeholder="Masukkan NPM" name="name" required>
                </div>
                <div class="field">
                   <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
