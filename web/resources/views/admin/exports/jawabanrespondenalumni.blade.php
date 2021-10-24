@@ -69,16 +69,12 @@
         <tr>
             <td>031037</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            {{-- <td>{{ $jawabanresponden->user->alumni->npm }}</td> --}}
+           <td>{{ $jawabanresponden->user->alumni->npm }}</td>
             <td>{{ $jawabanresponden->user->name }}</td>
-            {{-- <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td> --}}
+            <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td>
             <td>{{ $jawabanresponden->user->email }}</td>
-            {{-- <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td> --}}
-            {{-- <td>'{{ $jawabanresponden->user->alumni->nik }}</td> --}}
+            <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td>
+            <td>'{{ $jawabanresponden->user->alumni->nik }}</td>
              @php
              $len = count($jawabanresponden->jawabanrespondendetail);
              @endphp
@@ -86,11 +82,11 @@
              @foreach($jawabanresponden->jawabanrespondendetail as $key => $val )
             @if ($kd_pertanyaan->kd_jawaban == $val->kd_jawaban)
                 <td>{{ $val->jawaban  }}</td>
-                <?php break; ?>
+                @break
             @endif
             @if ($key == $len)
                 <td></td>
-                <?php break; ?>
+                @break
             @endif
             @endforeach
            @endforeach

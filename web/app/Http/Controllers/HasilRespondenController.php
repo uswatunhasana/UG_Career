@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Jawabanresponden;
 use Illuminate\Support\Facades\DB;
 use App\Exports\HasilRespondenDetail;
+use App\Exports\HasilRespondenPerusahaanDetail;
 use App\Imports\JawabanRespondenDetailImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,10 @@ class HasilRespondenController extends Controller
 
     public function exportalumni(){
         return Excel::download(new HasilRespondenDetail, 'hasilalumni.xlsx');
+    }
+
+    public function exportperusahaan(){
+        return Excel::download(new HasilRespondenPerusahaanDetail, 'hasilperusahaan.xlsx');
     }
     public function importalumni(Request $request){
         $validator = Validator::make($request->all(), [

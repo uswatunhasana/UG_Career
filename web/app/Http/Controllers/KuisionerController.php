@@ -48,7 +48,7 @@ class KuisionerController extends Controller
     {
         $perusahaans = Perusahaan::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'perusahaan')->orderBy('kd_pertanyaan')->get();
         $i = 0;
         $pertanyaans = [];
         foreach ($pertanyaansquery as $pertanyaan) {

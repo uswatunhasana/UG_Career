@@ -33,9 +33,11 @@
 					<i class="fas fa-download"></i>
 						Impor Data
 					</button>
-					<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-					<i class="fas fa-upload"></i>
+					<button class="btn btn-warning btn-round ml-auto">
+					<a href="{{ route('hasil_perusahaan.export')}}" style="color:white">
+						<i class="fas fa-upload"></i>
 						Ekspor Data
+					</a>
 					</button>
 				</div>
 			</div>
