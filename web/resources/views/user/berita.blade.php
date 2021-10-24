@@ -70,11 +70,6 @@
         <div class="col-lg-4">
 
           <div class="sidebar">
-          @php
-          $count_pengumuman= \App\Models\Berita::where('jenis_berita','=','pengumuman')->count();
-          $count_loker= \App\Models\Berita::where('jenis_berita','=','loker')->count();
-          $count_intern= \App\Models\Berita::where('jenis_berita','=','intern')->count();
-          @endphp
             <h3 class="sidebar-title">Kategori</h3>
             <div class="sidebar-item categories">
               <ul>
