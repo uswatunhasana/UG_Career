@@ -188,7 +188,7 @@
 <!-- Tambah Edit Modal -->
 @foreach ($beritas as $berita)
 <div class="modal fade" id="editModal-{{ $berita->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
@@ -199,7 +199,7 @@
 
 
 			<div class="modal-body">
-				<form role="form" action="{{ route('berita.update', $berita->id) }}" method="POST">
+				<form role="form" action="{{ route('berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
 					@csrf
 					@method('PUT')
 					<div class="row">
@@ -234,8 +234,14 @@
 						<div class="col-sm-12">
 							<div class="form-group form-group-default">
 								<label><h4><b>Foto</b></h4></label>
-								<img src="{{ asset('img/'. $berita->foto )}}" height="50" width="100" alt="" srcset=""><br>
-								<input id="addberita" type="file" name="foto" class="form-control-file" value="{{ $berita->foto }}">
+								<input type="hidden" name="oldImage" value="{{ $berita->foto}}"
+								@if($berita->foto)
+								<img class="img-preview img-fluid" src="{{ asset('img/'. $berita->foto )}}" height="50" width="100" alt="" srcset="">
+								@else
+								<img height="50" width="100" alt="" srcset="">
+								@endif
+								<br>
+								<input id="addberita" type="file" name="foto" class="form-control-file @error('image') is-invalid @enderror" type="file" name="foto" id="foto" value="{{ $berita->foto }}" onchange="previewImage">
 							</div>
 						</div>
 					</div>
@@ -368,6 +374,19 @@
 		});
 	});
 
+	function previewImage() {
+		const image = document.querySelector('#image');
+		const imgPreview = document.querySelector('.image-preview');
+
+		imgPreview.style.display = 'block';
+
+		const oFReader = new FileReader();
+		oFReader.readAsDataURL(image.files[0]);
+
+		oFReader.onload = function(oFREvent) {
+			imgPreview.src = oFREvent.target.result;
+		}
+	}
 </script>
 
 @endsection

@@ -22,10 +22,12 @@ class User extends Authenticatable
         'username', //baru
         'level', //baru'
         'email',
+        'email_verified_at',
         'password',
+        'forget_password',
     ];
 
- 
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -41,15 +43,15 @@ class User extends Authenticatable
     ];
     public function perusahaan()
     {
-    	return $this->hasOne(Perusahaan::class, 'id_user');
+        return $this->hasOne(Perusahaan::class, 'id_user');
     }
 
     public function alumni()
     {
-    	return $this->hasOne(Alumni::class, 'id_user');
+        return $this->hasOne(Alumni::class, 'id_user');
     }
     public function jawabanresponden()
     {
-    	return $this->hasOne(Jawabanresponden::class, 'id_user');
+        return $this->hasOne(Jawabanresponden::class, 'id_user');
     }
 }
