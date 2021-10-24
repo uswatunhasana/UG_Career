@@ -9,6 +9,7 @@ class Jawabanrespondendetail extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'kd_jawaban',
         'kd_pertanyaan',
         // 'kelas_pertanyaan',
         'jawaban',
@@ -16,6 +17,6 @@ class Jawabanrespondendetail extends Model
     ];
     public function jawabanresponden()
     {
-    	return $this->belongsTo(Jawabanresponden::class, 'id_jawabanresponden');
+        return $this->belongsTo(Jawabanresponden::class, 'id_jawabanresponden');
     }
 }
