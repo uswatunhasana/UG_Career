@@ -72,5 +72,11 @@
 	<!-- Azzara JS -->
 	<script src=" {{ asset('admin') }}/assets/js/ready.min.js"></script>
     @yield('customjs')
+		<script type="application/javascript">
+    $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
+</script>
 </body>
 </html>
