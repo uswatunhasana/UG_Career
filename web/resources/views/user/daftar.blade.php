@@ -63,7 +63,7 @@
                <br>
                <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan NPM sebagai Username" name="name" required>
+                  <input type="text" placeholder="Masukkan NPM" name="name" required>
                </div> 
                <div class="field">
                   <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
@@ -75,7 +75,7 @@
                   <input type="text" placeholder="Masukkan NIK" name="nik" required>
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Username" name="username" required>
+                  <input type="text" placeholder="Masukkan Username dengan NPM" name="username" required>
                </div>
                <div class="field">
                   <input type="password" placeholder="Password" name="password" required>
