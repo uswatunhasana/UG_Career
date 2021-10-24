@@ -92,6 +92,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
       
 
         Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
+        Route::get('/berita/{jenis_berita}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.ajaxdetail');
         Route::resource('/berita', BeritaController::class)->names([
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
