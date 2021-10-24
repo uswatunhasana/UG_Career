@@ -228,7 +228,7 @@
 						<div class="col-sm-12">
 							<div class="form-group form-group-default">
 								<label><h4><b>Isi Berita</b></h4></label>
-								<input id="addberita" type="text" name="isi_berita" class="form-control" value="{{ $berita->isi_berita }}" >
+								<input id="isi_berita2" type="text" name="isi_berita" class="form-control" value="{{ $berita->isi_berita }}" >
 							</div>
 						</div>
 						<div class="col-sm-12">
@@ -260,7 +260,12 @@
 <script src="https://cdn.tiny.cloud/1/nrul2wsnuozwx61qffx1zd3ai7v3ckuzj28j4p82w2sx2ocb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 	tinymce.init({
-		selector: '#isi_berita'
+		selector: '#isi_berita' 
+	});
+</script>
+<script>
+	tinymce.init({ 
+		selector: '#isi_berita2'
 	});
 </script>
 <script >
