@@ -16,6 +16,7 @@ class CreatePilihanjawabansTable extends Migration
         Schema::create('pilihanjawabans', function (Blueprint $table) {
             $table->increments('id');
             $table->text('jawaban');
+            $table->string('kd_jawaban',10);
             //relasi dengan pertanyaan
             $table->unsignedInteger('id_pertanyaan')->nullable();
             $table->foreign('id_pertanyaan')

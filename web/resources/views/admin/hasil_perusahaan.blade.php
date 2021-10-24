@@ -33,9 +33,11 @@
 					<i class="fas fa-download"></i>
 						Impor Data
 					</button>
-					<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-					<i class="fas fa-upload"></i>
+					<button class="btn btn-warning btn-round ml-auto">
+					<a href="{{ route('hasil_perusahaan.export')}}" style="color:white">
+						<i class="fas fa-upload"></i>
 						Ekspor Data
+					</a>
 					</button>
 				</div>
 			</div>
@@ -61,7 +63,7 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $jawaban_responden->id }}" action="{{ route('delete_responden.alumni', $jawaban_responden->id) }}" method="POST" style="display: none;">

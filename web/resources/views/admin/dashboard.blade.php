@@ -7,16 +7,6 @@
 		<button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fa fa-ellipsis-h"></i>
 		</button>
-			@php
-            $jumlah_perusahaan = \App\Models\Perusahaan::count();
-            $jumlah_pertanyaan = \App\Models\Pertanyaan::count();
-            $jumlah_berita = \App\Models\Berita::count();
-           
-            
-            $jumlah_user_alumni = \App\Models\User::where('level','=','alumni')->count();
-            $jumlah_survey_alumni = \App\Models\Jawabanresponden::where('kategori_responden','=','alumni')->count();
-            $jumlah_survey_perusahaan= \App\Models\Jawabanresponden::where('kategori_responden','=','perusahaan')->count();
-            @endphp
 		<!-- <div class="dropdown-menu">
 			<div class="arrow"></div>
 			<a class="dropdown-item" href="#">Action</a>
