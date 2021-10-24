@@ -112,7 +112,7 @@
             </table>
             <br>
             @else
-            @if($pertanyaan->kd_pertanyaan == "F1B")
+            @if($pertanyaan->kd_pertanyaan == "F19B")
             <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}">
                 <option selected>--Pilih Bidang Kerja--</option>
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
@@ -122,8 +122,8 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="{{$pilihanjawaban->jawaban}}">
-              <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
+              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
+              <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               {{ $pilihanjawaban->jawaban }}
               </label>
             </div>
@@ -136,35 +136,44 @@
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[]" id="{{ $pertanyaan->kd_pertanyaan }}" >
-              <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan }}">
+              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[@php echo ($pertanyaan->kd_pertanyaan.str_pad($loop->index+1, strlen(count($pertanyaan->pilihanjawaban)), '0', STR_PAD_LEFT)) @endphp]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" >
+              <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               {{ $pilihanjawaban->jawaban }}
               </label>
             </div>
         @endforeach
             <br/>
         @endif
-        @endforeach
-        <b>8. Pertanyaan studi lanjut</b>
+        @if($pertanyaan->kd_pertanyaan == "F2")
+        <label><b>2. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
             <br>
-            <!-- <a>Sumber Biaya:</a>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Biaya Sendiri 
-              </label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="F3" id="F3-1" value="ya"> 
+              <label for="F3-1">Kira-kira</label>
+              <input type="text" name="F3A" id="F3A" placeholder="Bulan"> bulan sebelum lulus     
+            </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Beasiswa
+              <input class="form-check-input" type="radio" name="F3" id="F3-2" value="tidak"> 
+              <label for="F3-2">Kira-kira</label>
+              <input type="text" name="F3A" id="F3A" placeholder="Bulan"> bulan sesudah lulus     
+            </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="F3" id="F3-3" value="Saya tidak mencari kerja">
+              <label class="form-check-label" for="F3-3">
+                Saya tidak mencari kerja
               </label>
-            </div> -->
+            </div>
+            <br/>
+        @endif
+        @if($pertanyaan->kd_pertanyaan == "F17B")
+        <b>18. Pertanyaan Studi Lanjut</b>
+            <br>
         <label>Sumber Biaya:</label>
-
         <div class="form-group col-md-12">
           <select class="form-control" name ="F18A" id="inlineFormCustomSelect">
-            <option selected>--Pilih Sumber Biaya--</option>
+            <option value="">--Pilih Sumber Biaya--</option>
             <option value="Biaya Sendiri">Biaya Sendiri</option>  
             <option value="Beasiswa">Beasiswa</option>  
           </select>
@@ -182,41 +191,20 @@
               <input type="date" class="form-control" name="F18D" id="F18D" placeholder="mm/dd/yy" value="" />
             </div>
             <br>
-          
-            <label><b>2. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
-            <br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="" id="" value=""> 
-              <label for="exampleRadios1">Kira-kira</label>
-              <input type="text" name="F3" id="F3" placeholder="Bulan"> bulan sebelum lulus     
-            </label>
-            </div>
+        @endif
+        @if($pertanyaan->kd_pertanyaan == "F5D")
+        <label><b>2. Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="" id="" value=""> 
-              <label for="exampleRadios1">Kira-kira</label>
-              <input type="text" name="F3" id="F3" placeholder="Bulan"> bulan sesudah lulus     
-            </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="F3" id="F3" value="Saya tidak mencari kerja">
-              <label class="form-check-label" for="exampleRadios1">
-                Saya tidak mencari kerja
-              </label>
-            </div>
-            <br/>
-
-            <label><b>2. Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
-            <div class="form-check">
-              <input class="form-check-input F504" type="radio" name="F504" id="" value="ya">
-              <label class="form-check-label" for="exampleRadios1">
+              <input class="form-check-input F504" type="radio" name="F504" id="F504-1" value="ya">
+              <label class="form-check-label" for="F504-1">
                 Ya
               </label>
               <div id="container_504_ya">
               </div>
             </div>     
             <div class="form-check">
-              <input class="form-check-input F504" type="radio" name="F504" id="" value="tidak">
-              <label class="form-check-label" for="exampleRadios1">
+              <input class="form-check-input F504" type="radio" name="F504" id="F504-2" value="tidak">
+              <label class="form-check-label" for="F504-2">
                 Tidak
               </label>
               <div id="container_504_tidak">
@@ -226,8 +214,8 @@
             <b>3. Dimana lokasi tempat Anda bekerja?</b>
             <div class="form-group">
               <label for="largeInput">Provinsi</label>
-              <select class="form-select" name="F5A2" id="provinsi">
-                <option selected>---Pilih Provinsi---</option>
+              <select class="form-select" name="F510B" id="provinsi">
+                <option value="">---Pilih Provinsi---</option>
                 @foreach ($provinsis as $provinsi)
                     <option value="{{$provinsi->id}}">{{$provinsi->nama_provinsi}}</option>
                 @endforeach
@@ -235,11 +223,32 @@
             </div>
             <div class="form-group">
               <label for="largeInput">Kab/Kota</label>
-              <select class="form-select" name="F5A2" id="kabkota">
-              <option selected>---Pilih Kab/Kota---</option>
+              <select class="form-select" name="F510B" id="kabkota">
+              <option value="">---Pilih Kab/Kota---</option>
               </select>
             </div>
             <br>
+        @endif
+
+
+        @endforeach
+        <!-- <b>8. Pertanyaan studi lanjut</b>
+            <br> -->
+            <!-- <a>Sumber Biaya:</a>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Biaya Sendiri 
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Beasiswa
+              </label>
+            </div> -->
+
+
 
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </article><!-- End blog entry -->

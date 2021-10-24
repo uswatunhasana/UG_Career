@@ -41,11 +41,15 @@ class User extends Authenticatable
     ];
     public function perusahaan()
     {
-    	return $this->hasOne(User::class, 'id_user');
+    	return $this->hasOne(Perusahaan::class, 'id_user');
     }
 
     public function alumni()
     {
-    	return $this->hasOne(User::class, 'id_user');
+    	return $this->hasOne(Alumni::class, 'id_user');
+    }
+    public function jawabanresponden()
+    {
+    	return $this->hasOne(Jawabanresponden::class, 'id_user');
     }
 }

@@ -164,7 +164,7 @@ section {
 .header.header-scrolled {
   background: #fff;
   padding: 15px 0;
-  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 2px 20px rgba(63, 1, 92, 0.1);
 }
 .header .logo {
   line-height: 0;
@@ -327,7 +327,7 @@ section {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(1, 22, 61, 0.9);
+  background: rgba(67, 3, 80, 0.9);
   transition: 0.3s;
 }
 .navbar-mobile .mobile-nav-toggle {
@@ -420,7 +420,7 @@ section {
   transition: 0.5s;
   color: #fff;
   background: #763996;
-  box-shadow: 0px 5px 30px rgba(65, 84, 241, 0.4);
+  box-shadow: 0px 5px 30px rgba(171, 65, 241, 0.4);
 }
 .hero .btn-get-started span {
   font-family: "Nunito", sans-serif;
@@ -504,7 +504,7 @@ section {
   transition: 0.5s;
   color: #fff;
   background: #763996;
-  box-shadow: 0px 5px 25px rgba(65, 84, 241, 0.3);
+  box-shadow: 0px 5px 25px rgba(185, 65, 241, 0.3);
 }
 .about .btn-read-more span {
   font-family: "Nunito", sans-serif;
@@ -587,7 +587,7 @@ section {
 --------------------------------------------------------------*/
 .features .feature-box {
   padding: 24px 20px;
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+  box-shadow: 0px 0 30px rgba(99, 1, 112, 0.08);
   transition: 0.3s;
   height: 100%;
 }
@@ -829,7 +829,7 @@ section {
 }
 .pricing .box:hover {
   transform: scale(1.1);
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 0 30px rgba(63, 1, 92, 0.1);
 }
 .pricing h3 {
   font-weight: 700;
@@ -1149,7 +1149,7 @@ section {
   box-sizing: content-box;
   padding: 30px;
   margin: 40px 30px;
-  box-shadow: 0px 0 20px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 0 20px rgba(63, 1, 92, 0.1);
   background: #fff;
   min-height: 320px;
   display: flex;
@@ -1295,7 +1295,7 @@ section {
 }
 .team .member:hover {
   transform: scale(1.08);
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 0 30px rgba(63, 1, 92, 0.1);
 }
 .team .member:hover .social {
   right: 8px;

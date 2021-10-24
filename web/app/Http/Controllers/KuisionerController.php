@@ -41,7 +41,6 @@ class KuisionerController extends Controller
             $i++;
         }
         ksort($pertanyaans, SORT_NATURAL);
-        dd($pertanyaans);
         return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis', 'provinsis'));
     }
 
@@ -49,15 +48,18 @@ class KuisionerController extends Controller
     {
         $perusahaans = Perusahaan::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'perusahaan')->orderBy('kd_pertanyaan')->get();
+        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
         $i = 0;
-        foreach ($pertanyaans as $pertanyaan) {
-            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        $pertanyaans = [];
+        foreach ($pertanyaansquery as $pertanyaan) {
+            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
+            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
+        ksort($pertanyaans, SORT_NATURAL);
         return view('user.isikuisioner_perusahaan', compact('pertanyaans', 'perusahaans', 'provinsis'));
     }
 
@@ -75,15 +77,6 @@ class KuisionerController extends Controller
         // return response()->json($desa);
         echo json_encode($data);
     }
-    // public function getKabkota(Request $request){
-    //     $data = Kabkota::where('id_provinsi','=',$request->provinsi_id)->get();
-    //     // $kecamatan = Kecamatan::where("kec_kab",$request->kabID)->pluck('kec_kode','kec_nama');
-    //     return response()->json($data);
-    // }
-    // public function getKabkota(Request $request){
-    //     $kabkota = Kabkota::where('id_provinsi','=',$request->id)->pluck('id','nama_kabkota');
-    //     return response()->json($kabkota);
-    // }
 
     public function kuisionerperusahaanstore(Request $request)
     {
@@ -140,8 +133,8 @@ class KuisionerController extends Controller
             if (is_array($request->$key)) {
                 foreach ($request[$key] as $k => $v) {
                     $hasil_alumni = new Jawabanrespondendetail;
+                    $hasil_alumni->kd_jawaban = $k;
                     $hasil_alumni->kd_pertanyaan = $key;
-                    $hasil_alumni->kd_jawaban = $key;
                     $hasil_alumni->jawaban = $v;
                     $hasil_alumni->id_jawabanresponden =  $get_id_responden;
                     // dd($hasil_alumni);
