@@ -88,7 +88,7 @@
                 </div>
               <div class="modal-body">
                  <!-- Card body -->
-                <form role="form" action="" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('hasil_alumni.import') }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('POST')
                     <!-- Input groups with icon -->

@@ -43,8 +43,8 @@ class HasilRespondenController extends Controller
         //
     }
 
-    public function export(){
-        return Excel::download(new HasilRespondenDetail, 'users.xlsx');
+    public function exportalumni(){
+        return Excel::download(new HasilRespondenDetail, 'hasilalumni.xlsx');
     }
     public function importalumni(Request $request){
         $validator = Validator::make($request->all(), [

@@ -133,8 +133,9 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'update' => 'pert_perusahaan.update',
         ]);
         Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
-        Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@export')->name('hasil_alumni.export');
-        
+        Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@exportalumni')->name('hasil_alumni.export');
+        Route::post('/hasil_alumni/import', 'App\Http\Controllers\HasilRespondenController@importalumni')->name('hasil_alumni.import');
+
         Route::delete('/hasil_alumni/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.alumni');
         Route::delete('/hasil_perusahaan/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.perusahaan');
         Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');

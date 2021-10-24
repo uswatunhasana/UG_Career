@@ -22,15 +22,11 @@ class DataAlumniController extends Controller
 
     public function index()
     {
-        
-
         // dd($respondens->jawabanrespondendetail);
-        return Excel::download(new HasilRespondenDetail, 'users.xlsx');
-       
-        // $alumnis = Alumni::all();
-        // $prodis = Prodi::all();
-        // // dd($alumnis);
-        // return view('admin.dataalumni', compact('alumnis', 'prodis'));
+        $alumnis = Alumni::all();
+        $prodis = Prodi::all();
+        // dd($alumnis);
+        return view('admin.dataalumni', compact('alumnis', 'prodis'));
     }
 
     public function create()
