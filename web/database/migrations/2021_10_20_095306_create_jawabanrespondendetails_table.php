@@ -15,7 +15,7 @@ class CreateJawabanrespondendetailsTable extends Migration
     {
         Schema::create('jawabanrespondendetails', function (Blueprint $table) {
             $table->string('kd_pertanyaan',5);
-            $table->string('kd_jawaban',5);
+            $table->string('kd_jawaban',10);
             $table->text('jawaban');
             // relasi jawaban responden
             $table->unsignedInteger('id_jawabanresponden')->nullable();
