@@ -6,6 +6,7 @@ use App\Models\JawabanResponden;
 use App\Models\JawabanRespondendetail;
 use App\Models\User;
 use App\Models\Alumni;
+use App\Models\PilihanJawaban;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -49,12 +50,17 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
                 $get_id_responden = DB::getPdo()->lastInsertId();
                 foreach ($row as $key => $val) {
                     if ($i > 8) {
-                        JawabanRespondendetail::create([
-                            "kd_jawaban" => $key,
-                            "kd_pertanyaan" => $key,
-                            "jawaban" => $val,
-                            "id_jawabanresponden" => $get_id_responden,
-                        ]);
+                        $kd_pertanyaan = PilihanJawaban::select('kd_pertanyaan')->where('kd_jawaban', $key)->leftJoin('pertanyaans', 'pertanyaans.id', '=', 'pilihanjawabans.id_pertanyaan')->first();
+                        if ($kd_pertanyaan) {
+                            JawabanRespondendetail::create([
+                                "kd_jawaban" => $key,
+                                "kd_pertanyaan" => $kd_pertanyaan['kd_pertanyaan'],
+                                "jawaban" => $val,
+                                "id_jawabanresponden" => $get_id_responden,
+                            ]);
+                        } else {
+                            continue;
+                        }
                     }
                     $i++;
                 }
@@ -67,12 +73,17 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
                 $get_id_responden = DB::getPdo()->lastInsertId();
                 foreach ($row as $key => $val) {
                     if ($i > 8) {
-                        JawabanRespondendetail::create([
-                            "kd_jawaban" => $key,
-                            "kd_pertanyaan" => $key,
-                            "jawaban" => $val,
-                            "id_jawabanresponden" => $get_id_responden,
-                        ]);
+                        $kd_pertanyaan = PilihanJawaban::select('kd_pertanyaan')->where('kd_jawaban', $key)->leftJoin('pertanyaans', 'pertanyaans.id', '=', 'pilihanjawabans.id_pertanyaan')->first();
+                        if ($kd_pertanyaan) {
+                            JawabanRespondendetail::create([
+                                "kd_jawaban" => $key,
+                                "kd_pertanyaan" => $kd_pertanyaan['kd_pertanyaan'],
+                                "jawaban" => $val,
+                                "id_jawabanresponden" => $get_id_responden,
+                            ]);
+                        } else {
+                            continue;
+                        }
                     }
                     $i++;
                 }

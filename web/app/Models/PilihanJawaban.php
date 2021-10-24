@@ -12,10 +12,11 @@ class PilihanJawaban extends Model
     protected $fillable = [
         'pilihan_pertanyaan',
         'id_pertanyaan',
+        'kd_jawaban',
     ];
 
     public function pertanyaan()
     {
-    	return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');
+        return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');
     }
 }
