@@ -41,7 +41,7 @@
             </div>
 
             <div class="entry-content">
-              <div>{{ $berita->isi_berita }}</div>
+              <div>{!!$berita->isi_berita!!}</div>
             </div>
 
           </article><!-- End blog entry -->
