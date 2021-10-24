@@ -81,7 +81,52 @@ class DashboardController extends Controller
     }
     public function beritaall()
     {
-        $beritas= DB::table('beritas')->orderBy('created_at', 'desc')->paginate(2);
+        $beritas= DB::table('beritas')->orderBy('created_at', 'desc')->paginate(5);
+        $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
+        ->groupby('jenis_berita')
+        ->orderby('jenis_berita','asc')
+        ->get();
+        $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
+        ->orderBy('created_at', 'desc')
+        ->latest()
+        ->take(5)
+        ->get();
+       
+        return view('user.berita', compact('beritas','kategoris','listberitas'));
+    }
+    public function beritapengumuman()
+    {
+        $beritas= DB::table('beritas')->where('jenis_berita','=','Pengumuman')->select('*')->orderBy('created_at', 'desc')->paginate(5);
+        $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
+        ->groupby('jenis_berita')
+        ->orderby('jenis_berita','asc')
+        ->get();
+        $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
+        ->orderBy('created_at', 'desc')
+        ->latest()
+        ->take(5)
+        ->get();
+       
+        return view('user.berita', compact('beritas','kategoris','listberitas'));
+    }
+    public function beritaloker()
+    {
+        $beritas= DB::table('beritas')->where('jenis_berita','=','Pengumuman')->select('*')->orderBy('created_at', 'desc')->paginate(5);
+        $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
+        ->groupby('jenis_berita')
+        ->orderby('jenis_berita','asc')
+        ->get();
+        $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
+        ->orderBy('created_at', 'desc')
+        ->latest()
+        ->take(5)
+        ->get();
+       
+        return view('user.berita', compact('beritas','kategoris','listberitas'));
+    }
+    public function beritaintern()
+    {
+        $beritas= DB::table('beritas')->where('jenis_berita','=','Pengumuman')->select('*')->orderBy('created_at', 'desc')->paginate(5);
         $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
         ->groupby('jenis_berita')
         ->orderby('jenis_berita','asc')

@@ -133,7 +133,8 @@ class BeritaController extends Controller
             $berita->save();
 
             Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');
-        // } else {
+        // } 
+        // else {
         //     Alert::error('Judul Berita Sudah Ada', 'Silahkan coba lagi');
         // }
         return redirect()->back();

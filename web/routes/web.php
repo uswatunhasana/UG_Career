@@ -38,7 +38,6 @@ Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('sto
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
 Route::get('log_out', 'App\Http\Controllers\AuthUserController@log_out')->name('log_out');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
-Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
 Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
 Route::get('/getkabkota/{id}', 'App\Http\Controllers\KuisionerController@ajaxkabkota');
@@ -54,6 +53,9 @@ Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilControll
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
+Route::get('/berita/pengumuman', 'App\Http\Controllers\DashboardController@beritapengumuman')->name('beritakategori.showpengumuman');
+Route::get('/berita/lowongankerja', 'App\Http\Controllers\DashboardController@beritaloker')->name('beritakategori.showloker');
+Route::get('/berita/internship', 'App\Http\Controllers\DashboardController@beritaintern')->name('beritakategori.showintern');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
@@ -87,7 +89,8 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'update' => 'prodi.update',
         ]);
         // Route::get('/search', 'App\Http\Controllers\BeritaController@search');
-        Route::get('/berita/{kategori}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.kategori');
+      
+
         Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
         Route::resource('/berita', BeritaController::class)->names([
             'destroy' => 'berita.destroy',
