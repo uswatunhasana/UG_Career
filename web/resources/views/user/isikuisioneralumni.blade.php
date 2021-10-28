@@ -21,6 +21,7 @@
     <div class="container" data-aos="fade-up">
     @php
     $responden = \App\Models\Jawabanresponden::where('id_user', Auth::user()->id)->count();
+    $i=1;
     @endphp
     @if($responden == 0)
       <form role="form" action="{{ route('kuisioneralumni.store') }}" method="POST">
@@ -65,6 +66,10 @@
             <label for="largeInput">NIK</label>
             <input type="text" class="form-control form-control"  id="nik" value="{{ $alumni->nik }}"readonly>
           </div>
+          <div class="form-group">
+            <label for="largeInput">NPWP</label>
+            <input type="text" class="form-control form-control"  id="npwp" value="{{ $alumni->npwp }}">
+          </div>
           <br>
           @endforeach
 
@@ -77,13 +82,13 @@
         @foreach($pertanyaans as $pertanyaan)
         @if($pertanyaan->jenis_pertanyaan == 'text')
         <div class="form-group">
-            <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
+            <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
             <input type="text" class="form-control form-control" name = "{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}" value="">
             <br/>
         </div>
         @elseif($pertanyaan->jenis_pertanyaan == 'pilihan')
         <div class="form-group">
-            <label for="{{ $pertanyaan->kd_pertanyaan }}" ><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
+            <label for="{{ $pertanyaan->kd_pertanyaan }}" ><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
             @if($pertanyaan->is_cabang == 'ya')
             <table class="table">
               <thead>
@@ -133,7 +138,7 @@
             <br/>
         </div>
         @else
-            <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $loop->index+1 }}. {{ $pertanyaan->pertanyaan }}</b></label>
+            <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[@php echo ($pertanyaan->kd_pertanyaan.str_pad($loop->index+1, strlen(count($pertanyaan->pilihanjawaban)), '0', STR_PAD_LEFT)) @endphp]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" >
@@ -145,7 +150,7 @@
             <br/>
         @endif
         @if($pertanyaan->kd_pertanyaan == "F2")
-        <label><b>2. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
+        <label><b>{{ $i++}}. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
             <br>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="F3" id="F3-1" value="ya"> 
@@ -168,7 +173,7 @@
             <br/>
         @endif
         @if($pertanyaan->kd_pertanyaan == "F17B")
-        <b>18. Pertanyaan Studi Lanjut</b>
+        <b>{{ $i++}} Pertanyaan Studi Lanjut</b>
             <br>
         <label>Sumber Biaya:</label>
         <div class="form-group col-md-12">
@@ -193,7 +198,7 @@
             <br>
         @endif
         @if($pertanyaan->kd_pertanyaan == "F5D")
-        <label><b>2. Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
+        <label><b>{{ $i++}} Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
             <div class="form-check">
               <input class="form-check-input F504" type="radio" name="F504" id="F504-1" value="ya">
               <label class="form-check-label" for="F504-1">
@@ -211,7 +216,7 @@
               </div>
             </div>
             <br/>
-            <b>3. Dimana lokasi tempat Anda bekerja?</b>
+            <b>{{ $i++}} Dimana lokasi tempat Anda bekerja?</b>
             <div class="form-group">
               <label for="largeInput">Provinsi</label>
               <select class="form-select" name="F510B" id="provinsi">
