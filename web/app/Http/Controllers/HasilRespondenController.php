@@ -8,6 +8,7 @@ use App\Models\Jawabanresponden;
 use Illuminate\Support\Facades\DB;
 use App\Exports\HasilRespondenDetail;
 use App\Exports\HasilRespondenPerusahaanDetail;
+use Carbon\Carbon;
 use App\Imports\JawabanRespondenImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -67,15 +68,8 @@ class HasilRespondenController extends Controller
         $nama_file = time() . '_' . $file->getClientOriginalName();
         $file->move('public/file_responden/', $nama_file);
         Excel::import(new JawabanRespondenImport, 'public/file_responden/' . $nama_file);
-        // $user = Auth::user();
-        // $jawaban_responden = new Jawabanresponden();
-        // $jawaban_responden->kategori_responden = 'alumni';
-        // $jawaban_responden->id_user = $user->id;
-        // if ($jawaban_responden->save()) {
-        //     Excel::import(new JawabanRespondenDetailImport, 'public/file_responden/' . $nama_file);
-        // }
-        // Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
-        // return redirect()->back();
+        Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)

@@ -252,9 +252,6 @@
                 Beasiswa
               </label>
             </div> -->
-
-
-
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
       </article><!-- End blog entry -->
     </form>

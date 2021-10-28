@@ -26,7 +26,7 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
             if ($cek_npm == 0) {
                 User::create([
                     "name" => $row["nmmhsmsmh"],
-                    "username" => $row["nimhsmsmh"] . $row["nmmhsmsmh"],
+                    "username" => $row["nimhsmsmh"],
                     "email" => ($row['emailmsmh'] != '') ? $row['emailmsmh'] : '',
                     "email_verified_at" => now(),
                     "password" => Hash::make($row["nimhsmsmh"]),
