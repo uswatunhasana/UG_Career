@@ -48,7 +48,7 @@
           </div>
           <div class="form-group">
             <label for="largeInput">Program Studi/Jurusan</label>
-            <input type="text" class="form-control form-control" id="kodeprodi" value="{{ $alumni->prodi->nama_prodi }}" readonly>
+            <input type="text" class="form-control form-control" id="kodeprodi" value="{{ $alumni->prodi->jenjang }} - {{ $alumni->prodi->nama_prodi }} | {{ $alumni->prodi->kd_prodi }}" readonly>
           </div>
           <div class="form-group">
             <label for="largeInput">Nama</label>
@@ -67,8 +67,8 @@
             <input type="text" class="form-control form-control"  id="nik" value="{{ $alumni->nik }}"readonly>
           </div>
           <div class="form-group">
-            <label for="largeInput">NPWP</label>
-            <input type="text" class="form-control form-control"  id="npwp" value="{{ $alumni->npwp }}">
+            <label for="largeInput">NPWP<span><small style="color:red"><b>  *Silahkan isi/edit pada edit profile</b></small></span></label>
+            <input type="text" class="form-control form-control"  id="npwp" value="{{ $alumni->npwp }}"readonly>
           </div>
           <br>
           @endforeach
@@ -117,7 +117,7 @@
             </table>
             <br>
             @else
-            @if($pertanyaan->kd_pertanyaan == "F19B")
+            @if($pertanyaan->kd_pertanyaan == "UG1")
             <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}">
                 <option selected>--Pilih Bidang Kerja--</option>
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
