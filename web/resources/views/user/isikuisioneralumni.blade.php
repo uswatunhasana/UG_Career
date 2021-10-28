@@ -155,13 +155,13 @@
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="F3" id="F3-1" value="ya"> 
               <label for="F3-1">Kira-kira</label>
-              <input type="text" name="F3A" id="F3A" placeholder="Bulan"> bulan sebelum lulus     
+              <input type="number" name="F3A" id="F3A" placeholder="Bulan"> bulan sebelum lulus     
             </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="F3" id="F3-2" value="tidak"> 
               <label for="F3-2">Kira-kira</label>
-              <input type="text" name="F3A" id="F3A" placeholder="Bulan"> bulan sesudah lulus     
+              <input type="number" name="F3A" id="F3A" placeholder="Bulan"> bulan sesudah lulus     
             </label>
             </div>
             <div class="form-check">
@@ -295,11 +295,11 @@ $(document).ready(function() {
 					var val = $(this).val(); 
 					if(val == "ya"){
 						$("#container_504_tidak").empty();
-						var html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="text" class="form-control form-control" name = "F504A" id="F504A" value=""></div><div class="form-group"><label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label><input type="text" class="form-control form-control" name = "F504B" id="F504B" value=""></div>';
+						var html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="F504A" value=""></div><div class="form-group"><label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label><input type="text" class="form-control form-control" name = "F504B" id="F504B" value=""></div>';
             $("#container_504_ya").html(html);
 					}else{
 						$("#container_504_ya").empty();
-            html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="text" class="form-control form-control" name = "F504A" id="bulan_kerja" value=""></div>';
+            html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="bulan_kerja" value=""></div>';
             $("#container_504_tidak").html(html);
 					}
 				});
