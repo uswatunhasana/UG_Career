@@ -108,6 +108,7 @@
 				</div>
 
 				<!-- Detail Modal -->
+				@foreach($beritas as $berita)
 				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -118,19 +119,33 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								Pilihan Jawaban
-								<hr/>
-								<table id="detailtable" class="display table table-striped table-hover" >
-									<thead class="thead-light">
-										<tr>
-											<th width="10px">No</th>
-											<th>Pilihan Jawaban</th>
-										</tr>
-									</thead>
-									<tbody id="detail-table">
+								<div class="row">
 
-									</tbody>
-								</table>
+									<div class="col-sm-12">
+										<div class="form-group form-group-default">
+											<label><h4><b>Judul Berita</b></h4></label>
+											<input id="addberita" type="text" name="judul_berita" class="form-control" value="{{ $berita->judul_berita }}" disabled>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group form-group-default">
+											<label><h4><b>Preview Berita</b></h4></label>
+											<input id="addberita" type="text" name="preview_berita" class="form-control" value="{{ $berita->preview_berita }}" disabled="">
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group form-group-default">
+											<label><h4><b>Isi Berita - read only</b></h4></label>
+											<input id="isi_berita3" type="text" name="isi_berita" class="form-control" value="{{$berita->isi_berita}}" disabled="">
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group form-group-default">
+											<label><h4><b>Foto</b></h4></label>
+											<img class="img-preview img-fluid" src="{{ asset('img/'. $berita->foto )}}" height="100" width="100" alt="" srcset="">
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -139,6 +154,7 @@
 					</div>
 				</div>
 			</div>
+			@endforeach
 
 			<!-- Tabel Data -->
 			<div class="table-responsive">
@@ -268,10 +284,14 @@
 	tinymce.init({
 		selector: '#isi_berita' 
 	});
-</script>
-<script>
+
 	tinymce.init({ 
 		selector: '#isi_berita2'
+	});
+
+	tinymce.init({ 
+		selector: '#isi_berita3',
+		readonly : 1
 	});
 </script>
 <script >

@@ -64,11 +64,15 @@
 
             <h3 class="sidebar-title">Kategori</h3>
             <div class="sidebar-item categories">
-              @foreach( $kategoris as $kategori)
-              <ul>
-                <li><a href="{{ route('beritakategori.show', $kategori->jenis_berita) }}">{{ $kategori->jenis_berita }} <span> ({{ $kategori->total }})</span></a></li>
+            <ul>
+                <li><a href="{{ route('beritakategori.showpengumuman') }}">Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
               </ul>
-              @endforeach
+              <ul>
+                <li><a href="{{ route('beritakategori.showloker') }}">Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
+              </ul>
+              <ul>
+                <li><a href="{{ route('beritakategori.showintern') }}">Internship <span> ({{ $count_intern }})</span></a></li>
+              </ul>
             </div><!-- End sidebar categories-->
 
 

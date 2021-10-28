@@ -52,7 +52,7 @@ Route::get('/editprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@
 Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@updateprofilperusahaan')->name('updateprofilperusahaan');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
-Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
+// Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
 Route::get('/berita/pengumuman', 'App\Http\Controllers\DashboardController@beritapengumuman')->name('beritakategori.showpengumuman');
 Route::get('/berita/lowongankerja', 'App\Http\Controllers\DashboardController@beritaloker')->name('beritakategori.showloker');
 Route::get('/berita/internship', 'App\Http\Controllers\DashboardController@beritaintern')->name('beritakategori.showintern');
