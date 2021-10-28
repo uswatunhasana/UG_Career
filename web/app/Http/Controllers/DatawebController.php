@@ -46,7 +46,6 @@ class DatawebController extends Controller
     {
         $rules = array(
             'nama_web'      => 'string|required',
-            'no_telp'       => 'string|required',
             'email'         => 'string|required',
             'alamat'        => 'string|required',
             'jam_pelayanan' => 'string|required',
@@ -60,7 +59,7 @@ class DatawebController extends Controller
 
             $dataweb = Dataweb::find($id);
             $dataweb->nama_web      = $request['nama_web'];
-            $dataweb->no_telp       = $request['no_telp'];
+            // $dataweb->no_telp       = $request['no_telp'];
             $dataweb->email         = $request['email'];
             $dataweb->alamat        = $request['alamat'];
             $dataweb->jam_pelayanan = $request['jam_pelayanan'];
