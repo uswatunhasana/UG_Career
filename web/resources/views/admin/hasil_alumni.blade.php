@@ -28,23 +28,32 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				<div class="">
+				<!-- <div class=""> -->
 					<h4 class="card-title"></h4>
-					<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
-					<i class="fas fa-download"></i>
-						Impor Data
-					</button>
-					<button class="btn btn-warning btn-round ml-auto">
+					<div class="row g-3 text-right">
+					<!-- <button class="btn btn-warning btn-round ml-auto">
 					<a href="{{ route('hasil_alumni.export') }}" style="color:white">
 						<i class="fas fa-upload"></i>
 							Ekspor Data
 					</a>
-					</button>
-<form action="{{ route('hasil_alumni.export') }}">
-<input type="text" class="form-control" id="reservation" name="date_range"/>
-<button class="btn btn-primary">ok</button>
-</form>
-				</div>
+					</button> -->
+						<form action="{{ route('hasil_alumni.export') }}" class="row g-3 text-right">
+							<div class="col-auto">
+								<input type="text" class="form-control" id="reservation" name="date_range"/>
+							</div>
+							<div class="col-auto">
+							<button class="btn btn-warning btn-round ml-auto"><i class="fas fa-upload"></i>
+							Ekspor Data</button>
+							</div>
+						</form>
+						<div class="col-auto">
+						<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
+							<i class="fas fa-download"></i>
+							Impor Data
+						</button>
+					</div>
+						</div>
+				<!-- </div> -->
 			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
