@@ -23,6 +23,7 @@
 		</li>
 	</ul>
 </div>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
@@ -33,12 +34,13 @@
 					<i class="fas fa-download"></i>
 						Impor Data
 					</button>
-					<button class="btn btn-warning btn-round ml-auto" action="" method="get">
+					<!-- <button class="btn btn-warning btn-round ml-auto" action="" method="get">
 					<a href="{{ route('hasil_alumni.export') }}" style="color:white">
 						<i class="fas fa-upload"></i>
 							Ekspor Data
 					</a>
-					</button>
+					</button> -->
+					<button type="button" class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#eksporModal"><i class="fas fa-upload"></i> Export</button>
 				</div>
 			</div>
 			<div class="card-body">
@@ -73,10 +75,41 @@
 								</tr>
 								@endforeach
 							</tbody>
-						</table>
+							</table>
+						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+		<!-- Modal Eksport -->
+		<div class="modal fade" id="eksporModal" tabindex="-1" role="dialog" aria-labelledby="eksporModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="eksporModalLabel"><b> Export Data </b></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+				<div class="modal-body">
+					<form method="POST" action="#" target="_blank">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Pilih Tanggal</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+								</div>
+								<input type="text" class="form-control" id="reservation" name="date_range" required>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success" name="print">Eksport Data</button>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>
