@@ -250,7 +250,7 @@
 						<div class="col-sm-12">
 							<div class="form-group form-group-default">
 								<label><h4><b>Foto</b></h4></label>
-								<input type="hidden" name="oldImage" value="{{ $berita->foto}}"
+								<input type="hidden" name="oldImage" value="{{ $berita->foto}}">
 								@if($berita->foto)
 								<img class="img-preview img-fluid" src="{{ asset('img/'. $berita->foto )}}" height="50" width="100" alt="" srcset="">
 								@else
