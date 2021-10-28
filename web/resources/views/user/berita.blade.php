@@ -53,17 +53,15 @@
           </article>
           @endforeach<!-- End blog entry -->
 
-          <!-- <div class="blog-pagination">
+          <div class="blog-pagination">
             <ul class="justify-content-center">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-            </ul>
-          </div> -->
-
-          <div class="d-flex justify-content-center">
             {!! $beritas->appends(['sort' => 'science-stream'])->links() !!}
-          </div> 
+            </ul>
+          </div>
+
+          <!-- <div class="d-flex justify-content-center">
+            {!! $beritas->appends(['sort' => 'science-stream'])->links() !!}
+          </div>  -->
 
         </div><!-- End blog entries list -->
 
