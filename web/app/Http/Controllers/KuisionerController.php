@@ -13,6 +13,7 @@ use App\Models\Provinsi;
 use App\Models\Kabkota;
 use App\Models\Perusahaan;
 use App\Models\Alumni;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -132,6 +133,9 @@ class KuisionerController extends Controller
     {
 
         $user = Auth::user();
+        $user_new = new User;
+        $user_new->npwp = $request->npwp;
+        $user_new->npwp = $request->npwp;
 
         // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
         // if ($cek_perusahaan == 0) {
