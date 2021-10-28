@@ -44,15 +44,17 @@ class HasilRespondenController extends Controller
         //
     }
 
-    public function exportalumni()
+    public function exportalumni(Request $request)
     {
-        return Excel::download(new HasilRespondenDetail, 'hasilalumni.xlsx');
+        return Excel::download(new HasilRespondenDetail($request->date_range), 'hasilalumni.xlsx');
     }
 
-    public function exportperusahaan(){
+    public function exportperusahaan()
+    {
         return Excel::download(new HasilRespondenPerusahaanDetail, 'hasilperusahaan.xlsx');
     }
-    public function importalumni(Request $request){
+    public function importalumni(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:csv,xlx,xls,xlsx'
         ]);

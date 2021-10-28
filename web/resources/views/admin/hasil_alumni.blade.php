@@ -33,12 +33,16 @@
 					<i class="fas fa-download"></i>
 						Impor Data
 					</button>
-					<button class="btn btn-warning btn-round ml-auto" action="" method="get">
+					<button class="btn btn-warning btn-round ml-auto">
 					<a href="{{ route('hasil_alumni.export') }}" style="color:white">
 						<i class="fas fa-upload"></i>
 							Ekspor Data
 					</a>
 					</button>
+<form action="{{ route('hasil_alumni.export') }}">
+<input type="text" class="form-control" id="reservation" name="date_range"/>
+<button class="btn btn-primary">ok</button>
+</form>
 				</div>
 			</div>
 			<div class="card-body">
@@ -132,6 +136,26 @@
     </div>
 	@endsection
 	@section('customjs')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<script>
+$(function() {
+  // $('input[name="daterange"]').daterangepicker({
+  //   opens: 'left'
+  // }, function(start, end, label) {
+  //   console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  // });
+	$('#reservation').daterangepicker({
+		locale: {
+			format: 'DD-MM-YYYY',
+			separator: ' s/d '
+		}
+	});
+});
+</script>
 	<script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
@@ -181,8 +205,10 @@
 					result.dismiss === swal.DismissReason.cancel
 					) 
 			});
-		} 
+		}
+   
 		
 	</script>
+	
 
 	@endsection
