@@ -68,7 +68,7 @@
     @foreach($jawabanrespondens as $jawabanresponden)
         <tr>
             <td>031037</td>
-            <td></td>
+            <td>{{ $jawabanresponden->user->alumni->prodi->kd_prodi }}</td>
            <td>{{ $jawabanresponden->user->alumni->npm }}</td>
             <td>{{ $jawabanresponden->user->name }}</td>
             <td>'{{ $jawabanresponden->user->alumni->no_telp }}</td>
