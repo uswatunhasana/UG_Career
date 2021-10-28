@@ -146,7 +146,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');
         Route::get('/hasil_perusahaan/export', 'App\Http\Controllers\HasilRespondenController@exportperusahaan')->name('hasil_perusahaan.export');
         Route::post('/hasil_perusahaan/import', 'App\Http\Controllers\HasilRespondenController@importperusahaan')->name('hasil_perusahaan.import');
-        
+
         // Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
         //     'index' => 'hasil_alumni.index',
         //     'destroy' => 'hasil_alumni.destroy',
@@ -169,7 +169,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'isikuisioneralumni' => 'isikuisioner.isikuisionerrr',
         ]);
 
-        
+
 
         // Route::resource('/edit-profil', ProfilController::class)->names([
         //     'editprofil' => 'edit-profil.editprofil'

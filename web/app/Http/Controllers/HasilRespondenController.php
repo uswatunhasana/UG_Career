@@ -45,27 +45,17 @@ class HasilRespondenController extends Controller
         //
     }
 
-    public function exportalumni()
+    public function exportalumni(Request $request)
     {
-        return Excel::download(new HasilRespondenDetail, 'hasilalumni.xlsx');
+        return Excel::download(new HasilRespondenDetail($request->date_range), 'hasilalumni.xlsx');
     }
 
-    public function exportperusahaan(){
-        // $start = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
-        // $end = Carbon::now()->endOfMonth()->format('Y-m-d H:i:s');
-
-        // if (request()->date != '') {
-        //     $date = explode(' - ', request()->date);
-        //     $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
-        //     $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
-        // }
-        // $transaksis = HasilAlumni::select('kode_transaksi', 'bayar', 'kembali', 'created_at', DB::raw('sum(total_barang) as total_beli'), 'subtotal', 'user_id', 'daftar_pelanggan_id')
-        // ->groupBy('kode_transaksi', 'bayar', 'kembali', 'created_at', 'subtotal', 'user_id', 'daftar_pelanggan_id')
-        // ->whereBetween(DB::raw('DATE(created_at)'), array($start, $end))
-        // ->get();
+    public function exportperusahaan()
+    {
         return Excel::download(new HasilRespondenPerusahaanDetail, 'hasilperusahaan.xlsx');
     }
-    public function importalumni(Request $request){
+    public function importalumni(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:csv,xlx,xls,xlsx'
         ]);

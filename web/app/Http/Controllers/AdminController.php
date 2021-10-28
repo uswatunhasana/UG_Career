@@ -16,15 +16,14 @@ class AdminController extends Controller
 
     public function index()
     {
-
         $jumlah_perusahaan = Perusahaan::count();
         $jumlah_pertanyaan = Pertanyaan::count();
         $jumlah_berita = Berita::count();
-        
-        $jumlah_user_alumni = User::where('level','=','alumni')->count();
-        $jumlah_survey_alumni = Jawabanresponden::where('kategori_responden','=','alumni')->count();
-        $jumlah_survey_perusahaan= Jawabanresponden::where('kategori_responden','=','perusahaan')->count();
-        return view('admin.dashboard', compact('jumlah_perusahaan','jumlah_pertanyaan','jumlah_berita','jumlah_user_alumni','jumlah_survey_alumni','jumlah_survey_perusahaan'));
+
+        $jumlah_user_alumni = User::where('level', '=', 'alumni')->count();
+        $jumlah_survey_alumni = Jawabanresponden::where('kategori_responden', '=', 'alumni')->count();
+        $jumlah_survey_perusahaan = Jawabanresponden::where('kategori_responden', '=', 'perusahaan')->count();
+        return view('admin.dashboard', compact('jumlah_perusahaan', 'jumlah_pertanyaan', 'jumlah_berita', 'jumlah_user_alumni', 'jumlah_survey_alumni', 'jumlah_survey_perusahaan'));
     }
 
 
