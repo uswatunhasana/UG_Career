@@ -89,7 +89,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'update' => 'prodi.update',
         ]);
         // Route::get('/search', 'App\Http\Controllers\BeritaController@search');
-      
 
         Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
         Route::get('/berita/{jenis_berita}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.ajaxdetail');
@@ -138,6 +137,8 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         ]);
         Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
         Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@exportalumni')->name('hasil_alumni.export');
+
+        // Route::get('hasil_alumni/export/{daterange}', '\App\Http\Controllers\HasilRespondenController@exportalumni')->name('rekap.barang.pdf');
         Route::post('/hasil_alumni/import', 'App\Http\Controllers\HasilRespondenController@importalumni')->name('hasil_alumni.import');
 
         Route::delete('/hasil_alumni/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.alumni');
