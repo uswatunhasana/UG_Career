@@ -112,14 +112,14 @@ class BeritaController extends Controller
         if ($cek_berita > 0) {
             $berita = Berita::findOrFail($id);
             if ($request->hasFile('foto')) {
-                $image_path = public_path("public/img/" . $berita->foto);
+                $image_path = 'public/img/'.$berita->foto;
                 if (File::exists($image_path)) {
                     File::delete($image_path);
                 }
                 $bannerImage = $request->file('foto');
-                $imgName = rand() . $bannerImage->getClientOriginalName();
-                $destinationPath = public_path('public/img/');
-                $bannerImage->move($destinationPath, $imgName);
+                $imgName = rand().$bannerImage->getClientOriginalName();
+                $bannerImage->move('public/img/', $imgName);
+                $berita->foto = $imgName;
             } else {
                 $imgName = $berita->foto;
             }
@@ -130,7 +130,6 @@ class BeritaController extends Controller
             // $file = $request->file('foto');
             // $nama_file = rand().$file->getClientOriginalName();
             // $file->move('public/img/', $nama_file);
-            $berita->foto = $imgName;
             $berita->save();
 
             Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');

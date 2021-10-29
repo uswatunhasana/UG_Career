@@ -40,6 +40,24 @@
                         <input type="text" class="form-control form-control" name ="name" id="name" value="{{ $alumni->user->name }}">
                     </div>
                     <br>
+                    
+                    <div class="form-group">
+                      <label for="largeInput">Program Studi/Jurusan</label>
+                      <select class="form-control" name="id_prodi" required="required" style="">
+                      <option disabled selected>-- Daftar Prodi --</option>
+                      @foreach ($prodis as $prodi)
+                      <option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+                      @endforeach
+                      @foreach($prodis as $prodi)
+                      <option 
+                      @if($alumni->id_prodi ==  $prodi->id)
+                      selected="selected" 
+                      @endif
+                      value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
+                      @endforeach
+                      </select>
+                    </div>
+                    <br>
                     <div class="form-group">
                         <label for="largeInput">Tahun Masuk</label>
                         <input type="text" class="form-control form-control" name ="tahun_masuk" id="tahun_masuk" value="{{ $alumni->tahun_masuk }}">
@@ -64,10 +82,15 @@
                         <label for="largeInput">NIK</label>
                         <input type="text" class="form-control form-control" name ="nik" id="nik" value="{{ $alumni->nik }}">
                     </div>
+                    </br>
+                    <div class="form-group">
+                        <label for="largeInput">NPWP</label>
+                        <input type="text" class="form-control form-control" name ="npwp" id="npwp" value="{{ $alumni->npwp }}">
+                    </div>
                     <br>
                     <div class="form-group">
                         <label for="largeInput">Username</label>
-                        <input type="text" class="form-control form-control" name ="username" id="username" value="{{ $alumni->user->username }}" readonly>
+                        <input type="text" class="form-control form-control" name ="username" id="username" value="{{ $alumni->user->username }}">
                     </div>
                     <br>
                     <div class="form-group">

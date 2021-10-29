@@ -4,7 +4,6 @@ namespace App\Exports;
 
 use App\Models\Jawabanresponden;
 use App\Models\Jawabanrespondendetail;
-use App\Models\Pertanyaan;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 

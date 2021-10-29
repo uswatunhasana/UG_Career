@@ -35,10 +35,10 @@
 							<label for="largeInput">Nama Web</label>
 							<input type="text" class="form-control form-control" name = "nama_web" id="nama_web" value="{{ $dataweb->nama_web }}">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="largeInput">No. Telepon</label>
 							<input type="text" class="form-control form-control" name = "no_telp" id="defaultInput" value="{{ $dataweb->no_telp }}">
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label for="largeInput">Email</label>
 							<input type="text" class="form-control form-control" name = "email" id="defaultInput" value="{{ $dataweb->email }}">

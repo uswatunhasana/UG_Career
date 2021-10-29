@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Alumni;
 use App\Models\Perusahaan;
+use App\Models\Prodi;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
@@ -84,7 +85,8 @@ class ProfilController extends Controller
     {
         $users = User::where('id','=',$id)->select('*')->get();
         $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
-        return view('user.edit-profil', ['users' => $users, 'alumnis'=>$alumnis]);
+        $prodis = Prodi::all();
+        return view('user.edit-profil', ['users' => $users, 'alumnis'=>$alumnis,'prodis'=>$prodis ]);
     }
 
     public function updateprofil(Request $request, $id)
@@ -111,7 +113,7 @@ class ProfilController extends Controller
 
             $user = User::findOrFail($alumni->id_user);
             $user->name     = $request->name;
-            $user->username    = $user->username;
+            $user->username = $user->username;
             $user->email    = $request->email;
             // $user->password = $request[Hash::make('password')];
             // $user->forget_password = $request[Hash::make('password')];
@@ -123,14 +125,15 @@ class ProfilController extends Controller
                 $user->forget_password = $user->forget_password;
             }
             $user->save();
-
             $alumni->id_user     = $alumni->id_user;
             $alumni->npm         = $alumni->npm;
+            $alumni->id_prodi    = $request->prodi;
             $alumni->tahun_masuk = $request->tahun_masuk;
             $alumni->tahun_lulus = $request->tahun_lulus;
             $alumni->id_prodi    = $request->id_prodi;
             $alumni->no_telp     = $request->no_telp;
             $alumni->nik         = $request->nik;
+            $alumni->npwp        = $request->npwp;
             $alumni->save();
             Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
             return redirect()->back();

@@ -105,7 +105,7 @@
                </div>
                <div class="field">
                   <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required>
-                  <h6 style="color: #999;">*jika tidak memiliki URL perusahaan silahkan isi -</h6>
+                  <h6 style="color: #999;">*jika tidak memiliki URL perusahaan silahkan isi "-"</h6>
                </div>
                <br>
                <br>
