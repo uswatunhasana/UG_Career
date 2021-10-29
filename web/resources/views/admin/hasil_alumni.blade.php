@@ -31,13 +31,7 @@
 				<!-- <div class=""> -->
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
-					<!-- <button class="btn btn-warning btn-round ml-auto">
-					<a href="{{ route('hasil_alumni.export') }}" style="color:white">
-						<i class="fas fa-upload"></i>
-							Ekspor Data
-					</a>
-					</button> -->
-						<form action="{{ route('hasil_alumni.export') }}" class="row g-3 text-right">
+						<!-- <form action="{{ route('hasil_alumni.export') }}" class="row g-3 text-right">
 							<div class="col-auto">
 								<input type="text" class="form-control" id="reservation" name="date_range"/>
 							</div>
@@ -45,13 +39,17 @@
 							<button class="btn btn-warning btn-round ml-auto"><i class="fas fa-upload"></i>
 							Ekspor Data</button>
 							</div>
-						</form>
+						</form> -->
 						<div class="col-auto">
 						<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
-					</div>
+						</div>
+						<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#eksporModal">
+							<i class="fas fa-upload"></i>
+								Ekspor Data
+						</button>
 						</div>
 				<!-- </div> -->
 			</div>
@@ -106,7 +104,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="#" target="_blank">
+					<form method="GET" action="{{ route('hasil_alumni.export') }}" target="_blank">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Pilih Tanggal</label>
 							<div class="input-group mb-2">
