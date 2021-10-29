@@ -40,7 +40,7 @@
 							Ekspor Data
 					</a>
 					</button>
-<form action="{{ route('hasil_alumni.export') }}">
+					<form action="{{ route('hasil_alumni.export') }}">
 <input type="text" class="form-control" id="reservation" name="date_range"/>
 <button class="btn btn-primary">ok</button>
 </form>
