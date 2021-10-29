@@ -3,6 +3,12 @@
 @section('css')
 @endsection
 @section('content')
+<style type="text/css">
+.gambar {
+  width: 100%;
+  height: 50%;
+}
+</style>
 <main id="main">
 
   <!-- ======= Breadcrumbs ======= -->
@@ -28,7 +34,7 @@
           <article class="entry entry-single">
 
             <div class="entry-img">
-              <img src="{{ asset('img/'. $berita->foto )}}" alt="" class="img-fluid">
+              <img src="{{ asset('img/'. $berita->foto )}}" alt="" class="img-fluid gambar">
             </div>
 
             <h2 class="entry-title">

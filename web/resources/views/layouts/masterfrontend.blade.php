@@ -69,7 +69,7 @@
           <li><a class="nav-link scrollto @if (Request::segment(1) == '#contact') active @endif" href="{{ route('dashboard.user') }}/#contact">Kontak Kami</a></li>
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni")
-          <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}" style="color:#9b7ba3">Isi Kuisioner</a></li>
+          <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}" class="nav-link scrollto @if (Request::segment(1) == 'isikuisioneralumni') active @endif">Isi Kuisioner</a></li>
           <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
             <ul class="kotak">
               <br>

@@ -117,7 +117,7 @@
             </table>
             <br>
             @else
-            @if($pertanyaan->kd_pertanyaan == "UG1")
+            @if($pertanyaan->kd_pertanyaan == "UG2")
             <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan }}">
                 <option selected>--Pilih Bidang Kerja--</option>
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
@@ -127,9 +127,9 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
+              <input class="form-check-input" type="radio" name="{{ $pilihanjawaban->kd_jawaban }}" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
-              {{ $pilihanjawaban->jawaban }}
+              <?= $pilihanjawaban->jawaban; ?>
               </label>
             </div>
             @endforeach
@@ -141,7 +141,7 @@
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[@php echo ($pertanyaan->kd_pertanyaan.str_pad($loop->index+1, strlen(count($pertanyaan->pilihanjawaban)), '0', STR_PAD_LEFT)) @endphp]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" >
+              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" >
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               {{ $pilihanjawaban->jawaban }}
               </label>
@@ -149,7 +149,7 @@
         @endforeach
             <br/>
         @endif
-        @if($pertanyaan->kd_pertanyaan == "F2")
+        {{-- @if($pertanyaan->kd_pertanyaan == "F2")
         <label><b>{{ $i++}}. Kapan anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak dimasukkan</b></label>
             <br>
             <div class="form-check form-check-inline">
@@ -171,7 +171,7 @@
               </label>
             </div>
             <br/>
-        @endif
+        @endif --}}
         @if($pertanyaan->kd_pertanyaan == "F17B")
         <b>{{ $i++}} Pertanyaan Studi Lanjut</b>
             <br>
@@ -189,7 +189,7 @@
             </div>
             <div class="form-group">
               <label for="largeInput">Program Studi:</label>
-              <input type="text" class="form-control form-control" name = "F18C" id="nomormahasiswa" placeholder="Pilih Kode PT" value="">
+              <input type="text" class="form-control form-control" name = "F18C" id="nomormahasiswa" placeholder="Pilih Kode Prodi" value="">
             </div>
             <div class="form-group">
               <label for="largeInput">Tanggal Masuk:</label>
@@ -303,6 +303,8 @@ $(document).ready(function() {
             $("#container_504_tidak").html(html);
 					}
 				});
+        $('#F31').val('Ya');
+        $('#F32').val('Tidak');
 			});
 
 </script>

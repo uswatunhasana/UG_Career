@@ -30,18 +30,15 @@ class KuisionerController extends Controller
     {
         $alumnis = Alumni::where('id_user', '=', $id)->select('*')->get();
         $provinsis = Provinsi::all();
-        $pertanyaansquery = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('kd_pertanyaan')->get();
+        $pertanyaans = Pertanyaan::where('kategori_pertanyaan', '=', 'alumni')->orderBy('no_tampilan')->get();
         $i = 0;
-        $pertanyaans = [];
-        foreach ($pertanyaansquery as $pertanyaan) {
-            $pertanyaans[$pertanyaan['kd_pertanyaan']] = $pertanyaansquery[$i];
-            $pertanyaans[$pertanyaan['kd_pertanyaan']]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+        foreach ($pertanyaans as $pertanyaan) {
+            $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
-                $pertanyaans[$pertanyaan['kd_pertanyaan']]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             }
             $i++;
         }
-        ksort($pertanyaans, SORT_NATURAL);
         return view('user.isikuisioneralumni', compact('pertanyaans', 'alumnis', 'provinsis'));
     }
 
@@ -150,8 +147,8 @@ class KuisionerController extends Controller
             if (is_array($request->$key)) {
                 foreach ($request[$key] as $k => $v) {
                     $hasil_alumni = new Jawabanrespondendetail;
-                    $hasil_alumni->kd_jawaban = $k;
                     $hasil_alumni->kd_pertanyaan = $key;
+                    $hasil_alumni->kd_jawaban = $k;
                     $hasil_alumni->jawaban = $v;
                     $hasil_alumni->id_jawabanresponden =  $get_id_responden;
                     // dd($hasil_alumni);
