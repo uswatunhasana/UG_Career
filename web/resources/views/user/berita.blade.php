@@ -11,7 +11,7 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="{{ route('beritaall') }}">Berita</a></li>
+        <li><a href="#">Berita</a></li>
       </ol>
       <h2>Berita UG Career</h2>
 
@@ -71,13 +71,13 @@
             <h3 class="sidebar-title">Kategori</h3>
             <div class="sidebar-item categories">
               <ul>
-                <li><a href="{{ route('beritakategori.showpengumuman') }}">Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
+                <li><a href="#" id="select_category" value="Pengumuman" @if (Request::segment( 2 ) == "Pengumuman")selected="selected" @endif>Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="{{ route('beritakategori.showloker') }}">Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
+                <li><a href="#" id="select_category" value="Loker" @if (Request::segment( 2 ) == "Loker")selected="selected" @endif >Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="{{ route('beritakategori.showintern') }}">Internship <span> ({{ $count_intern }})</span></a></li>
+                <li><a href="#"  id="select_category" value="Internship" @if (Request::segment( 2 ) == "Internshi[")selected="selected" @endif>Internship <span> ({{ $count_intern }})</span></a></li>
               </ul>
             </div><!-- End sidebar categories-->
 
@@ -114,6 +114,15 @@
     $('.flex.justify-between.flex-1').remove();
     $('.text-sm.text-gray-700.leading-5').remove();
   });
+
+  $(document).ready(function() {
+		$('#select_category').change(function() {
+			var val = $(this).val(); 
+			window.location = "/UG_Career/berita" +"/" +val;
+
+		});
+	});
+
 </script>
 
 @endsection
