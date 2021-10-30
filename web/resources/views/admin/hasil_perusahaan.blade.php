@@ -120,7 +120,7 @@
                 </div>
               <div class="modal-body">
                  <!-- Card body -->
-                <form role="form" action="" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('hasil_perusahaan.import') }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('POST')
                     <!-- Input groups with icon -->
@@ -143,7 +143,7 @@
 	                    </div>
                   </div>
                     <div class="form-group row ">
-                      <label for="kode_barang" class="col-md-2 col-form-label form-control-label text-center">Upload file<span class="text-danger">*</span></label>
+                      <label for="hasil_perusahaan" class="col-md-2 col-form-label form-control-label text-center">Upload file<span class="text-danger">*</span></label>
                       <div class="col-md-9">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" id="file" lang="en" name="file" required="required">
