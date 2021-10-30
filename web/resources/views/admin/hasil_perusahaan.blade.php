@@ -27,19 +27,18 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				<div class="">
 					<h4 class="card-title"></h4>
-					<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
-					<i class="fas fa-download"></i>
-						Impor Data
-					</button>
-					<button class="btn btn-warning btn-round ml-auto">
-					<a href="{{ route('hasil_perusahaan.export')}}" style="color:white">
-						<i class="fas fa-upload"></i>
-						Ekspor Data
-					</a>
-					</button>
-				</div>
+					<div class="row g-3 text-right">
+						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
+							<i class="fas fa-download"></i>
+							Impor Data
+						</button>
+						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
+							<i class="fas fa-upload"></i>
+								Ekspor Data
+						</button>
+						</div>
+				
 			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
@@ -77,6 +76,37 @@
 					</div>
 				</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Eksport -->
+	<div class="modal fade" id="eksporModal" tabindex="-1" role="dialog" aria-labelledby="eksporModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="eksporModalLabel"><b> Export Data </b></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="GET" action="{{ route('hasil_perusahaan.export') }}" target="_blank">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Pilih Tanggal</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+								</div>
+								<input type="text" class="form-control" id="reservation" name="date_range" required>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success" name="print">Eksport Data</button>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -132,6 +162,21 @@
     </div>
 	@endsection
 	@section('customjs')
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	
+<script>
+$(function() {
+	$('#reservation').daterangepicker({
+		locale: {
+			format: 'DD-MM-YYYY',
+			separator: ' s/d '
+		}
+	});
+});
+</script>
 	<script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
