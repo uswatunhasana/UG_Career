@@ -13,6 +13,7 @@ class Perusahaan extends Model
         'no_telp',
         'url_web',
         'nama_cp',
+        'email_cp',
         'jabatan',
     ];
 
