@@ -17,7 +17,7 @@
 
       <ol>
         <li><a href="{{ route('dashboard.user') }}">Home</a></li>
-        <li><a href="#">Berita</a></li>
+        <li><a href="{{ route('beritaall') }}">Berita</a></li>
       </ol>
       <h2>Berita UG Career</h2>
 
@@ -74,16 +74,16 @@
         <div class="col-lg-4">
 
           <div class="sidebar">
-            <h3 class="sidebar-title">Kategori</h3>
+          <h3 class="sidebar-title">Kategori</h3>
             <div class="sidebar-item categories">
               <ul>
-                <li><a href="#" id="select_category" value="Pengumuman" @if (Request::segment( 2 ) == "Pengumuman")selected="selected" @endif>Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Pengumuman') }}">Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="#" id="select_category" value="Loker" @if (Request::segment( 2 ) == "Loker")selected="selected" @endif >Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Loker') }}">Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="#"  id="select_category" value="Internship" @if (Request::segment( 2 ) == "Internshi[")selected="selected" @endif>Internship <span> ({{ $count_intern }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Internship') }}">Internship <span> ({{ $count_intern }})</span></a></li>
               </ul>
             </div><!-- End sidebar categories-->
 
