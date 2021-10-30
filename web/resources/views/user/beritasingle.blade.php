@@ -71,13 +71,13 @@
             <h3 class="sidebar-title">Kategori</h3>
             <div class="sidebar-item categories">
             <ul>
-                <li><a href="{{ route('beritakategori.showpengumuman') }}">Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Pengumuman') }}">Pengumuman <span> ({{ $count_pengumuman }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="{{ route('beritakategori.showloker') }}">Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Loker') }}">Lowongan Kerja<span> ({{ $count_loker }})</span></a></li>
               </ul>
               <ul>
-                <li><a href="{{ route('beritakategori.showintern') }}">Internship <span> ({{ $count_intern }})</span></a></li>
+                <li><a href="{{ route('beritakategori', 'Internship') }}">Internship <span> ({{ $count_intern }})</span></a></li>
               </ul>
             </div><!-- End sidebar categories-->
 
