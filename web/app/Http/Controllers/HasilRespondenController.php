@@ -10,6 +10,7 @@ use App\Exports\HasilRespondenDetail;
 use App\Exports\HasilRespondenPerusahaanDetail;
 use Carbon\Carbon;
 use App\Imports\JawabanRespondenImport;
+use App\Imports\JawabanRespondenPerusahaanImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -68,11 +69,11 @@ class HasilRespondenController extends Controller
         $nama_file = time() . '_' . $file->getClientOriginalName();
         $file->move('public/file_responden/', $nama_file);
         Excel::import(new JawabanRespondenImport, 'public/file_responden/' . $nama_file);
-        Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
+        Alert::success('Sukses', 'Data Hasil Responden Berhasil Diimport!');
         return redirect()->back();
     }
 
-    public function importperusahan(Request $request)
+    public function importperusahaan(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:csv,xlx,xls,xlsx'
@@ -85,8 +86,8 @@ class HasilRespondenController extends Controller
         $file = $request->file('file');
         $nama_file = time() . '_' . $file->getClientOriginalName();
         $file->move('public/file_responden/', $nama_file);
-        Excel::import(new JawabanRespondenImport, 'public/file_responden/' . $nama_file);
-        Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
+        Excel::import(new JawabanRespondenPerusahaanImport, 'public/file_responden/' . $nama_file);
+        Alert::success('Sukses', 'Data Hasil Responden Berhasil Diimport!');
         return redirect()->back();
     }
 
