@@ -37,6 +37,7 @@ Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanr
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
 Route::get('log_out', 'App\Http\Controllers\AuthUserController@log_out')->name('log_out');
+// Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
 Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
@@ -53,9 +54,10 @@ Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilControll
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
 // Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
-Route::get('/berita/pengumuman', 'App\Http\Controllers\DashboardController@beritapengumuman')->name('beritakategori.showpengumuman');
-Route::get('/berita/lowongankerja', 'App\Http\Controllers\DashboardController@beritaloker')->name('beritakategori.showloker');
-Route::get('/berita/internship', 'App\Http\Controllers\DashboardController@beritaintern')->name('beritakategori.showintern');
+// Route::get('/berita/pengumuman', 'App\Http\Controllers\DashboardController@beritapengumuman')->name('beritakategori.showpengumuman');
+// Route::get('/berita/lowongankerja', 'App\Http\Controllers\DashboardController@beritaloker')->name('beritakategori.showloker');
+// Route::get('/berita/internship', 'App\Http\Controllers\DashboardController@beritaintern')->name('beritakategori.showintern');
+Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
