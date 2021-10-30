@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -27,9 +28,11 @@ class AuthController extends Controller
             } elseif ($user->level == 'prodi') {
                 return redirect()->intended('prodi');
             }
+            Alert::error('Invalid Login', 'Anda Tidak Mempunyai Akses');
             return redirect('administrator');
         }
-        return redirect('administrator')->withSuccess('Oppes! Silahkan Cek Inputanmu');
+        Alert::error('Invalid Login', 'Cek Kembali Username dan Password');
+        return redirect('administrator');
     }
     public function logout(Request $request) {
         $request->session()->flush();
