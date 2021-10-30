@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/css/app.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/assets/css/auth.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
 </head>
 
 <body>
@@ -20,6 +21,7 @@
                 <div id="auth-left">
                     <h1 class="auth-title text">Login Administrator.</h1>
                     <p class="auth-subtitle mb-5">UG Career Admin</p>
+                    @include('sweetalert::alert')	
 
                     <!-- <form action="index.html"> -->
                     <form method="POST" action="{{ route('proses_login') }}">
@@ -81,7 +83,8 @@
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>
+	    <script src="{{ asset('assets') }}/sweetalert/sweetalert2.min.js"></script>
     </div>
 </body>
 
