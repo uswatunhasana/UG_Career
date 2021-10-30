@@ -40,19 +40,18 @@
             <form action="{{ route('store') }}" class="alumni" method="POST">
                @csrf
                @method('POST')
-               <div class="field">
+               <div class="field mb-0">
                   <input type="text" placeholder="Masukkan NPM" name="npm" required>
                </div>
-               <div class="field">
+               <div class="field ">
                   <input type="text" class="form-control datepicker" name="tahun_masuk" placeholder="Masukkan Tahun Masuk" maxlength="4">
                </div>
                <div class="field">
                   <input type="text" class="form-control datepicker" name="tahun_lulus" placeholder="Masukkan Tahun Lulus" maxlength="4">
                </div>
-               <br>
                <div class="field">
-                  <label style="color : #999;"><h4><b>Program Studi/Jurusan</b></h4></label>
-                  <select class="form-control" name="id_prodi" required="required">
+                  <!-- <label style="color : #999;"><h4><b>Program Studi/Jurusan</b></h4></label> -->
+                  <select class="form-control field" name="id_prodi" required="required">
                      <option disabled selected>-- Daftar Prodi --</option>
                      @foreach ($prodis as $prodi)
                      <option value="{{ $prodi->id }}">{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</option>
@@ -60,10 +59,8 @@
                   </select>
                </div>
                <br>
-               <br>
-               <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan NPM" name="name" required>
+                  <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required>
                </div> 
                <div class="field">
                   <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
@@ -75,11 +72,18 @@
                   <input type="text" placeholder="Masukkan NIK" name="nik" required>
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Username dengan NPM" name="username" required>
+                  <small style="color:red"><b>  *NPWP Opsional untuk diisi</b></small></span>
+                  <input type="text" placeholder="Masukkan NPWP" name="npwp">
+               </div>
+               <br>
+               <div class="field">
+                  <input type="text" placeholder="Masukkan Username atau NPM" name="username" required>
                </div>
                <div class="field">
+                  <small style="color:red"><b>  *Password minimal 8 karakter</b></small></span>
                   <input type="password" placeholder="Password" name="password" required>
                </div>
+               <br>
                <div class="field btn">
                   <div class="btn-layer"></div>
                   <input type="submit" value="Submit">

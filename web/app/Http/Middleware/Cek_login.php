@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert; 
 
 class Cek_login
 {
@@ -25,7 +26,7 @@ class Cek_login
         if($user->level == $roles)
             return $next($request);
 
-
+        Alert::error('Invalid Login', 'Anda Tidak Punya Akses');
         return redirect('login')->with('error',"Anda Tidak Punya Akses");
     }
 }

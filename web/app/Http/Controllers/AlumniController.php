@@ -41,7 +41,7 @@ class AlumniController extends Controller
         //     Alert::error('Invalid Data', 'Password min 8 digit');
         //     return redirect()->back();
         // }
-        $cek_alumni = User::where('username', $request->username)->count();
+        $cek_alumni = User::where('username', $request->username)->orWhere('email', $request->email)->count();
         if ($cek_alumni == 0) {
             $user = new User;
             $user->name = $request->name;

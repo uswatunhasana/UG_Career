@@ -92,7 +92,7 @@ class AuthUserController extends Controller
             Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
             return redirect()->back();
         }
-        $daftar_perusahaan = User::where('username', $request->username)->count();
+        $daftar_perusahaan = User::where('username', $request->username)->orWhere('email', $request->email)->count();
         if ($daftar_perusahaan == 0) {
             $user           = new User;
             $user->name     = $request->name;
@@ -129,14 +129,16 @@ class AuthUserController extends Controller
     {
         $rules = array(
             'password' => 'string|min:8',
+            'nik' => 'string|max:16',
         );
         $validation = Validator::make($request->all(), $rules);
         if ($validation->fails()) {
-            Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
+            Alert::error('Invalid Data', 'Data Invalid cek kembali inputan Anda');
             return redirect()->back();
         }
-        $daftar_alumni = User::where('username', $request->username)->count();
-        if ($daftar_alumni == 0) {
+        $daftar_alumni = User::where('username', $request->username)->orWhere('email', $request->email)->count();
+        $cek_npm = Alumni::where('npm', $request->npm)->count();
+        if ($daftar_alumni == 0 and $cek_npm == 0) {
             $user           = new User;
             $user->name     = $request->name;
             $user->username = $request->username;
@@ -148,7 +150,7 @@ class AuthUserController extends Controller
             $user->save();
 
             $get_id_user = DB::getPdo()->lastInsertId();;
-
+            $cek_npm = Alumni::where('npm', $request->npm)->count();
             $alumni = new Alumni;
             $alumni->id_user     =  $get_id_user;
             $alumni->npm         = $request->npm;
@@ -157,12 +159,18 @@ class AuthUserController extends Controller
             $alumni->id_prodi    = $request->id_prodi;
             $alumni->no_telp     = $request->no_telp;
             $alumni->nik         = $request->nik;
+            if($request->filled('npwp')) {
+                $alumni->npwp        = $request->npwp;
+            } else {
+                $alumni->npwp    = " ";
+            }
             $alumni->created_at  = now();
             $alumni->updated_at  = now();
             $alumni->save();
             Alert::success(' Akun sudah berhasil didaftarkan ');
+
         } else {
-            Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+            Alert::error('Data Akun Sudah Ada ', 'Cek kembali username, email, dan NPM');
             return redirect()->back();
         }
         return view('user.login');

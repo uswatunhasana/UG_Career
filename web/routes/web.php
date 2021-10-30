@@ -12,11 +12,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PertAlumniController;
 use App\Http\Controllers\PertPerusahaanController;
-use App\Http\Controllers\HasilAlumniController;
-use App\Http\Controllers\HasilPerusahaanController;
+use App\Http\Controllers\HasilRespondenController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KuisionerController;
 
 
 
@@ -24,44 +25,43 @@ Route::resource('/', DashboardController::class)->names([
     'index' => 'dashboard.user'
 ]);
 
-Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login.index');
-Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
-Route::get('lupa_password', 'App\Http\Controllers\AuthUserController@lupa_password')->name('lupapassword.lupa_password');
-Route::post('/post_lupa_password', 'App\Http\Controllers\AuthUserController@post_lupa_password')->name('post_lupa_password');
-Route::post('password_update', 'App\Http\Controllers\AuthUserController@password_update')->name('password_update');
-Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanregistrasi')->name('simpanregistrasi');
-Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
-Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
-Route::get('log_out', 'App\Http\Controllers\AuthUserController@log_out')->name('log_out');
+Route::get('login',[AuthUserController::class, 'index'])->name('login.index');
+Route::get('registrasi', [AuthUserController::class, 'registrasi'])->name('daftar.registrasi');
+Route::get('lupa_password',[AuthUserController::class, 'lupa_password'])->name('lupapassword.lupa_password');
+Route::post('/post_lupa_password',[AuthUserController::class, 'post_lupa_password'])->name('post_lupa_password');
+Route::post('password_update', [AuthUserController::class, 'password_update'])->name('password_update');
+Route::post('simpanregistrasi',  [AuthUserController::class, 'simpanregistrasi'])->name('simpanregistrasi');
+Route::post('store', [AuthUserController::class, 'store'])->name('store');
+Route::post('postlogin', [AuthUserController::class, 'postlogin'])->name('postlogin');
+Route::get('log_out', [AuthUserController::class, 'log_out'])->name('log_out');
 
-Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
+Route::get('/berita', [DashboardController::class, 'beritaall'])->name('beritaall');
+Route::get('/berita/{id}', [DashboardController::class, 'show'])->name('beritasingle.show');
+Route::get('/berita/{jenisberita}', [DashboardController::class,'beritakategori'])->name('beritakategori');
+
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
-Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
-Route::get('/getkabkota/{id}', 'App\Http\Controllers\KuisionerController@ajaxkabkota');
-// Route::get('/getkabkota', [KuisionerController::class, 'getKabkota']);
-Route::get('/isikuisionerperusahaan/{id}', 'App\Http\Controllers\KuisionerController@isikuisionerperusahaan')->name('isikuisionerperusahaan');
-Route::post('/isikuisionerperusahaan/store', 'App\Http\Controllers\KuisionerController@kuisionerperusahaanstore')->name('kuisionerperusahaan.store');
-Route::post('/isikuisioneralumni/store', 'App\Http\Controllers\KuisionerController@kuisioneralumnistore')->name('kuisioneralumni.store');
-Route::get('/isikuisionercontoh', 'App\Http\Controllers\DashboardController@isikuisionercontoh');
-Route::get('/editprofil_front/{id}', 'App\Http\Controllers\ProfilController@editprofil_front')->name('editprofil_front');
-Route::post('/updateprofil/{id}', 'App\Http\Controllers\ProfilController@updateprofil')->name('updateprofil');
-Route::get('/editprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@editprofilperusahaan')->name('editprofilperusahaan');
-Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@updateprofilperusahaan')->name('updateprofilperusahaan');
+Route::get('/isikuisioneralumni/{id}', [KuisionerController::class, 'isikuisioneralumni'])->name('isikuisioneralumni')->middleware('cek_login:alumni');
+Route::post('/isikuisioneralumni/store', [KuisionerController::class,'kuisioneralumnistore'])->name('kuisioneralumni.store')->middleware('cek_login:alumni');
+Route::get('/getkabkota/{id}', [KuisionerController::class,'ajaxkabkota']);
+// Route::get('/getkabkota/{id}', [KuisionerController::class, 'ajaxkabkota']);
+Route::get('/isikuisionerperusahaan/{id}', [KuisionerController::class,'isikuisionerperusahaan'])->name('isikuisionerperusahaan')->middleware('cek_login:perusahaan');
+Route::post('/isikuisionerperusahaan/store', [KuisionerController::class,'kuisionerperusahaanstore'])->name('kuisionerperusahaan.store')->middleware('cek_login:perusahaan');
 
-Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
-Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori');
-Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
-Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('login');
-Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
-Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+Route::get('/editprofil_front/{id}', [ProfilController::class, 'editprofil_front'])->name('editprofil_front')->middleware('cek_login:alumni');
+Route::post('/updateprofil/{id}', [ProfilController::class, 'updateprofil'])->name('updateprofil')->middleware('cek_login:alumni');
+Route::get('/editprofilperusahaan/{id}', [ProfilController::class, 'editprofilperusahaan'])->name('editprofilperusahaan')->middleware('cek_login:perusahaan');
+Route::post('/updateprofilperusahaan/{id}', [ProfilController::class, 'updateprofilperusahaan'])->name('updateprofilperusahaan')->middleware('cek_login:perusahaan');
+
+Route::get('administrator', [AuthController::class, 'index'])->name('administrator');
+Route::get('administrator', [AuthController::class,'index'])->name('login');
+Route::post('proses_login', [AuthController::class,'proses_login'])->name('proses_login');
+Route::get('logout', [AuthController::class,'logout'])->name('logout');
 
 Route::prefix('administrator')->middleware(['auth'])->group(function () {
-    Route::group(['middleware' => ['cek_login:admin']], function () {
-
+    Route::group(['middleware' => ['cek_login:admin'],['cek_login:prodi']], function () {
         Route::resource('/dashboard', AdminController::class)->names([
             'index' => 'administrator.dashboard',
         ]);
-
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index' => 'provinsi.index',
         ]);
@@ -83,8 +83,8 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'update' => 'prodi.update',
         ]);
 
-        Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
-        Route::get('/berita/{jenis_berita}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.ajaxdetail');
+        Route::get('/berita/detail/{id}',[BeritaController::class, 'ajaxdetail'])->name('berita.ajaxdetail');
+        Route::get('/berita/{jenis_berita}', [BeritaController::class, 'jenisberita'])->name('berita.ajaxdetail');
         Route::resource('/berita', BeritaController::class)->names([
             'destroy' => 'berita.destroy',
             'show' => 'berita.show',
@@ -106,17 +106,15 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'dataalumni.destroy',
         ]);
 
-        Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan')->name('pert_alumni.kategori');
-        Route::get('/pert_alumni/detail/{id}/{is_cabang}', 'App\Http\Controllers\PertAlumniController@ajaxdetail')->name('pert_alumni.ajaxdetail');
-        // Route::get('/pert_alumni/detail/{name}', function ($name) { echo($name); });
-        // Route::get('/pert_alumni/{name}', function ($name) { echo($name); });
+        Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori');
+        Route::get('/pert_alumni/detail/{id}/{is_cabang}', [PertAlumniController::class,'ajaxdetail'])->name('pert_alumni.ajaxdetail');
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
         ]);
-        Route::get('/pert_perusahaan/{kategori}', 'App\Http\Controllers\PertPerusahaanController@jenispertanyaan')->name('pert_perusahaan.kategori');
-        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}', 'App\Http\Controllers\PertPerusahaanController@ajaxdetail')->name('pert_perusahaan.ajaxdetail');
+        Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori');
+        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
@@ -127,32 +125,33 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
         ]);
-        Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
-        Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@exportalumni')->name('hasil_alumni.export');
-        Route::post('/hasil_alumni/import', 'App\Http\Controllers\HasilRespondenController@importalumni')->name('hasil_alumni.import');
-        Route::delete('/hasil_alumni/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.alumni');
+        Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
+        Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
+        Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
+        Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
         
-        Route::delete('/hasil_perusahaan/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.perusahaan');
-        Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');
-        Route::get('/hasil_perusahaan/export', 'App\Http\Controllers\HasilRespondenController@exportperusahaan')->name('hasil_perusahaan.export');
-        Route::post('/hasil_perusahaan/import', 'App\Http\Controllers\HasilRespondenController@importperusahaan')->name('hasil_perusahaan.import');
+        Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
+        Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
+        Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
+        Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
     });
-    Route::group(['middleware' => ['cek_login:prodi']], function () {
 
-        Route::resource('editor', AdminController::class);
-    });
-    // FRONT END
-    Route::group(['middleware' => ['auth', 'ceklevel:alumni']], function () {
-
-        Route::resource('/isikuisioner', DashboardController::class)->names([
-            'isikuisioneralumni' => 'isikuisioner.isikuisionerrr',
+    // prodi
+    Route::group(['middleware' => ['cek_login:prodi'],['cek_login:prodi']], function ()  {
+        Route::resource('/prodi/dashboard', AdminController::class)->names([
+            'index' => 'administrator.dashboard',
         ]);
+        Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
+        Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
+        Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
+        Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
+        
+        Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
+        Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
+        Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
+        Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
 
 
-
-        // Route::resource('/edit-profil', ProfilController::class)->names([
-        //     'editprofil' => 'edit-profil.editprofil'
-        // ]);
     });
 });
 

@@ -22,6 +22,7 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href=" {{ asset('admin') }}/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href=" {{ asset('admin') }}/assets/css/azzara.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets') }}/sweetalert/sweetalert2.min.css">
 	@yield('css')
 

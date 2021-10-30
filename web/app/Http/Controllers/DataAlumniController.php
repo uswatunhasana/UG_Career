@@ -45,8 +45,9 @@ class DataAlumniController extends Controller
             Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
             return redirect()->back();
         }
-        $cek_alumni = User::where('username', $request->username)->count();
-        if ($cek_alumni == 0) {
+        $cek_alumni = User::where('username', $request->username)->orWhere('email', $request->email)->count();
+        $cek_npm = Alumni::where('npm', $request->npm)->count();
+        if ($cek_alumni == 0 and $cek_npm == 0) {
             $user           = new User;
             $user->name     = $request->name;
             $user->username = $request->username;
@@ -57,7 +58,7 @@ class DataAlumniController extends Controller
             $user->forget_password = Crypt::encryptString($request->password);
             $user->save();
 
-            $get_id_user = DB::getPdo()->lastInsertId();;
+            $get_id_user = DB::getPdo()->lastInsertId();
 
             $alumni = new Alumni;
             $alumni->id_user     =  $get_id_user;
@@ -67,12 +68,17 @@ class DataAlumniController extends Controller
             $alumni->id_prodi    = $request->id_prodi;
             $alumni->no_telp     = $request->no_telp;
             $alumni->nik         = $request->nik;
+            if($request->filled('npwp')) {
+                $alumni->npwp        = $request->npwp;
+            } else {
+                $alumni->npwp    = " ";
+            }
             $alumni->created_at  = now();
             $alumni->updated_at  = now();
             $alumni->save();
             Alert::success(' Akun sudah berhasil didaftarkan ');
         } else {
-            Alert::error('Data Akun Sudah Ada ', ' Silahkan coba lagi');
+            Alert::error('Data Akun Sudah Ada ', 'Cek kembali NPM, username, dan email');
             return redirect()->back();
         }
         return redirect()->back();
@@ -136,6 +142,11 @@ class DataAlumniController extends Controller
             $alumni->id_prodi    = $request->id_prodi;
             $alumni->no_telp     = $request->no_telp;
             $alumni->nik         = $request->nik;
+            if($request->filled('npwp')) {
+                $alumni->npwp        = $request->npwp;
+            } else {
+                $alumni->npwp    = " ";
+            }
             $alumni->save();
             Alert::success(' Berhasil Ubah Data ', ' Silahkan Periksa Kembali');
         // } else {

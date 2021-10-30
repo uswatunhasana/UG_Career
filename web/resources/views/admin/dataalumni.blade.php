@@ -1,8 +1,8 @@
 @extends('layouts.masterbackend')
-@section('title', 'Data alumni')
+@section('title', 'Data Alumni')
 @section('content',)               
 <div class="page-header">
-	<h4 class="page-title">Data alumni</h4>
+	<h4 class="page-title">Data Alumni</h4>
 	<ul class="breadcrumbs">
 		<li class="nav-home">
 			<a href="{{ route('administrator.dashboard') }}">
@@ -55,7 +55,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>NPM Alumni</b></h4></label>
-												<input id="addalumni" type="text" name="npm" class="form-control" placeholder="NPM alumni">
+												<input id="addalumni" type="number" name="npm" class="form-control" placeholder="NPM alumni">
 											</div>
 										</div>
 									</div>
@@ -63,7 +63,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Tahun Masuk</b></h4></label>
-												<input id="addnotelpalumni" type="text" name="tahun_masuk" class="form-control" placeholder="Tahun masuk alumni">
+												<input id="addnotelpalumni" type="number" name="tahun_masuk" class="form-control datepicker" placeholder="Tahun masuk alumni">
 											</div>
 										</div>
 									</div>
@@ -71,7 +71,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Tahun Lulus</b></h4></label>
-												<input id="addnotelpalumni" type="text" name="tahun_lulus" class="form-control" placeholder="Tahun lulus alumni ">
+												<input id="addnotelpalumni" type="number" name="tahun_lulus" class="form-control datepicker" placeholder="Tahun lulus alumni ">
 											</div>
 										</div>
 									</div>
@@ -108,7 +108,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email</b></h4></label>
-												<input id="addjabatanalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="Email alumni">
+												<input id="addjabatanalumni" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="Email alumni">
 											</div>
 										</div>
 									</div>
@@ -116,7 +116,15 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>NIK</b></h4></label>
-												<input id="addemailcpalumni" type="text" name="nik" class="form-control" placeholder="NIK alumni">
+												<input id="addemailcpalumni" type="number" name="nik" class="form-control" placeholder="NIK alumni">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
+												<label><h4><b>NPWP</b><span><small style="color:red"><b>  *tidak wajib</b></small></span></h4></label>
+												<input id="addemailcpalumni" type="number" name="npwp" class="form-control" placeholder="NPWP alumni">
 											</div>
 										</div>
 									</div>
@@ -213,7 +221,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>NPM Alumni</b></h4></label>
-									<input id="addalumni" type="text" name="npm" class="form-control" value="{{ $alumni->npm }}" disabled>
+									<input id="addalumni" type="number" name="npm" class="form-control" value="{{ $alumni->npm }}" disabled>
 								</div>
 							</div>
 						</div>
@@ -221,7 +229,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Tahun Masuk</b></h4></label>
-									<input id="addnotelpalumni" type="text" name="tahun_masuk" class="form-control" value="{{ $alumni->tahun_masuk }}">
+									<input id="addnotelpalumni" type="number" name="tahun_masuk" class="form-control datepicker" value="{{ $alumni->tahun_masuk }}">
 								</div>
 							</div>
 						</div>
@@ -229,7 +237,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Tahun Lulus</b></h4></label>
-									<input id="addnotelpalumni" type="text" name="tahun_lulus" class="form-control" value="{{ $alumni->tahun_lulus }}">
+									<input id="addnotelpalumni" type="number" name="tahun_lulus" class="form-control datepicker" value="{{ $alumni->tahun_lulus }}">
 								</div>
 							</div>
 						</div>
@@ -265,7 +273,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Nomor Telepon/HP</b></h4></label>
-									<input id="addnamacpalumni" type="text" name="no_telp" class="form-control" value="{{ $alumni->no_telp }}">
+									<input id="addnamacpalumni" type="number" name="no_telp" class="form-control" value="{{ $alumni->no_telp }}">
 								</div>
 							</div>
 						</div>
@@ -281,7 +289,15 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>NIK</b></h4></label>
-									<input id="addemailcpalumni" type="text" name="nik" class="form-control" value="{{ $alumni->nik }}">
+									<input id="addemailcpalumni" type="email" name="npwp" class="form-control" value="{{ $alumni->npwp }}">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group form-group-default">
+									<label><h4><b>NPWP</b></h4></label>
+									<input id="addemailcpalumni" type="text" name="npwp" class="form-control" value="{{ $alumni->nik }}">
 								</div>
 							</div>
 						</div>
@@ -320,6 +336,17 @@
 
 	@endsection
 	@section('customjs')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      $(document).ready(function(){
+       $(".datepicker").datepicker({
+          format: "yyyy",
+          viewMode: "years", 
+          minViewMode: "years",
+          autoclose:true
+       });   
+    })
+ </script>
 	<script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({

@@ -17,11 +17,15 @@
 							</a>
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
+								@if(isset(Auth::user()->level))
+         					 	@if(Auth::user()->level == "admin")
 									<li class="@if (Request::segment( 2 ) == 'user') active text-primary @endif">
 										<a href="{{ route('user.index') }}">
 											<span class="sub-item">Data Operator Prodi</span>
 										</a>
 									</li>
+								@endif
+								@endif
 									<li class="@if (Request::segment( 2 ) == 'dataalumni') active text-primary @endif">
 										<a href="{{ route('dataalumni.index') }}">
 											<span class="sub-item">Data Alumni</span>
@@ -32,6 +36,8 @@
 											<span class="sub-item">Data Perusahaan</span>
 										</a>
 									</li>
+								@if(isset(Auth::user()->level))
+         					 	@if(Auth::user()->level == "admin")
 									<li class="@if (Request::segment( 2 ) == 'provinsi') active text-primary @endif">
 										<a href="{{ route('provinsi.index') }}">
 											<span class="sub-item">Data Provinsi</span>
@@ -42,6 +48,8 @@
 											<span class="sub-item">Data Kabupaten/Kota</span>
 										</a>
 									</li>
+								@endif
+								@endif
 									<li class="@if (Request::segment( 2 ) == 'prodi') active text-primary @endif">
 										<a href="{{ route('prodi.index') }}">
 											<span class="sub-item">Data Prodi</span>
@@ -58,6 +66,8 @@
 							</a>
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
+								@if(isset(Auth::user()->level))
+         					 	@if(Auth::user()->level == "admin")
 									<li class="@if (Request::segment( 2 ) == 'pert_alumni') active text-primary @endif">
 										<a href="/UG_Career/administrator/pert_alumni/text">
 											<span class="sub-item">Daftar Pertanyaan Alumni</span>
@@ -68,6 +78,8 @@
 											<span class="sub-item">Daftar Pertanyaan Perusahaan</span>
 										</a>
 									</li>
+								@endif
+								@endif
 									<li class="@if (Request::segment( 2 ) == 'hasil_alumni') active text-primary @endif">
 										<a href="{{ route('hasil_alumni') }}">
 											<span class="sub-item">Hasil Survei Alumni</span>
@@ -87,12 +99,16 @@
 								<p>Berita</p>
 							</a>
 						</li>
+						@if(isset(Auth::user()->level))
+         				@if(Auth::user()->level == "admin")
 						<li class="nav-item @if (Request::segment( 2 ) == 'dataweb') active @endif">
 							<a href="{{ route('dataweb.index') }}">
 								<i class="fas fa-desktop"></i>
 								<p>Setting Data Web</p>
 							</a>
 						</li>
+						@endif
+						@endif
 					</ul>
 				</div>
 			</div>

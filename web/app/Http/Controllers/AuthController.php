@@ -25,11 +25,12 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->level == 'admin') {
                 return redirect()->intended('administrator/dashboard');
-            } elseif ($user->level == 'prodi') {
-                return redirect()->intended('prodi');
-            }
-            Alert::error('Invalid Login', 'Anda Tidak Mempunyai Akses');
-            return redirect('administrator');
+            }elseif($user->level == 'prodi') {
+                return redirect()->intended('administrator/prodi/dashboard');
+            }else{
+                Alert::error('Invalid Login', 'Anda Tidak Mempunyai Akses');
+                return redirect('administrator');
+            }  
         }
         Alert::error('Invalid Login', 'Cek Kembali Username dan Password');
         return redirect('administrator');

@@ -34,7 +34,7 @@ class UserController extends Controller
    
     public function store(Request $request)
     {   
-        $cek_sekjur = User::where('username', $request->username)->count();
+        $cek_sekjur = User::where('username', $request->username)->orWhere('email', $request->email)->count();
         if ($cek_sekjur == 0) {
             $user = new User;
             $user->name = $request->name;
