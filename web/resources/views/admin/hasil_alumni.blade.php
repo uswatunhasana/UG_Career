@@ -31,22 +31,11 @@
 				<!-- <div class=""> -->
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
-						<!-- <form action="{{ route('hasil_alumni.export') }}" class="row g-3 text-right">
-							<div class="col-auto">
-								<input type="text" class="form-control" id="reservation" name="date_range"/>
-							</div>
-							<div class="col-auto">
-							<button class="btn btn-warning btn-round ml-auto"><i class="fas fa-upload"></i>
-							Ekspor Data</button>
-							</div>
-						</form> -->
-						<div class="col-auto">
-						<button class="btn btn-success btn-round ml-9" data-toggle="modal" data-target="#addImport">
+						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
-						</div>
-						<button class="btn btn-warning btn-round ml-auto" data-toggle="modal" data-target="#eksporModal">
+						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
 							<i class="fas fa-upload"></i>
 								Ekspor Data
 						</button>
