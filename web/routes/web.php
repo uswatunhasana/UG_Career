@@ -23,11 +23,7 @@ use App\Http\Controllers\AuthUserController;
 Route::resource('/', DashboardController::class)->names([
     'index' => 'dashboard.user'
 ]);
-// Route::resource('/berita', DashboardController::class)->names([
-//     'show'=>'beritasingle.show',
-//     'beritaall' => 'beritaall'
-// ]);
-// Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard.user');
+
 Route::get('login', 'App\Http\Controllers\AuthUserController@index')->name('login.index');
 Route::get('registrasi', 'App\Http\Controllers\AuthUserController@registrasi')->name('daftar.registrasi');
 Route::get('lupa_password', 'App\Http\Controllers\AuthUserController@lupa_password')->name('lupapassword.lupa_password');
@@ -37,7 +33,7 @@ Route::post('simpanregistrasi', 'App\Http\Controllers\AuthUserController@simpanr
 Route::post('store', 'App\Http\Controllers\AuthUserController@store')->name('store');
 Route::post('postlogin', 'App\Http\Controllers\AuthUserController@postlogin')->name('postlogin');
 Route::get('log_out', 'App\Http\Controllers\AuthUserController@log_out')->name('log_out');
-// Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
+
 Route::get('/berita', 'App\Http\Controllers\DashboardController@beritaall')->name('beritaall');
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
 Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisioneralumni')->name('isikuisioneralumni');
@@ -53,10 +49,6 @@ Route::get('/editprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@
 Route::post('/updateprofilperusahaan/{id}', 'App\Http\Controllers\ProfilController@updateprofilperusahaan')->name('updateprofilperusahaan');
 
 Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
-// Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori.show');
-// Route::get('/berita/pengumuman', 'App\Http\Controllers\DashboardController@beritapengumuman')->name('beritakategori.showpengumuman');
-// Route::get('/berita/lowongankerja', 'App\Http\Controllers\DashboardController@beritaloker')->name('beritakategori.showloker');
-// Route::get('/berita/internship', 'App\Http\Controllers\DashboardController@beritaintern')->name('beritakategori.showintern');
 Route::get('/berita/{jenisberita}', 'App\Http\Controllers\DashboardController@beritakategori')->name('beritakategori');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('administrator');
 Route::get('administrator', 'App\Http\Controllers\AuthController@index')->name('login');
@@ -69,7 +61,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::resource('/dashboard', AdminController::class)->names([
             'index' => 'administrator.dashboard',
         ]);
-        // Route::get('/dataalumni','App\Http\Controllers\UserController@dataalumni')->nama('dataalumni');
+
         Route::resource('/provinsi', ProvinsiController::class)->names([
             'index' => 'provinsi.index',
         ]);
@@ -90,7 +82,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'prodi.destroy',
             'update' => 'prodi.update',
         ]);
-        // Route::get('/search', 'App\Http\Controllers\BeritaController@search');
 
         Route::get('/berita/detail/{id}', 'App\Http\Controllers\BeritaController@ajaxdetail')->name('berita.ajaxdetail');
         Route::get('/berita/{jenis_berita}', 'App\Http\Controllers\BeritaController@jenisberita')->name('berita.ajaxdetail');
@@ -115,7 +106,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'dataalumni.destroy',
         ]);
 
-        // Route::get('/berita/{id}', 'App\Http\Controllers\DashboardController@show')->name('beritasingle.show');
         Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan')->name('pert_alumni.kategori');
         Route::get('/pert_alumni/detail/{id}/{is_cabang}', 'App\Http\Controllers\PertAlumniController@ajaxdetail')->name('pert_alumni.ajaxdetail');
         // Route::get('/pert_alumni/detail/{name}', function ($name) { echo($name); });
@@ -139,26 +129,13 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         ]);
         Route::get('/hasil_alumni', 'App\Http\Controllers\HasilRespondenController@hasilalumni')->name('hasil_alumni');
         Route::get('/hasil_alumni/export', 'App\Http\Controllers\HasilRespondenController@exportalumni')->name('hasil_alumni.export');
-
-        // Route::get('hasil_alumni/export/{daterange}', '\App\Http\Controllers\HasilRespondenController@exportalumni')->name('rekap.barang.pdf');
         Route::post('/hasil_alumni/import', 'App\Http\Controllers\HasilRespondenController@importalumni')->name('hasil_alumni.import');
-
         Route::delete('/hasil_alumni/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.alumni');
+        
         Route::delete('/hasil_perusahaan/delete/{id}', 'App\Http\Controllers\HasilRespondenController@destroy')->name('delete_responden.perusahaan');
         Route::get('/hasil_perusahaan', 'App\Http\Controllers\HasilRespondenController@hasilperusahaan')->name('hasil_perusahaan');
         Route::get('/hasil_perusahaan/export', 'App\Http\Controllers\HasilRespondenController@exportperusahaan')->name('hasil_perusahaan.export');
         Route::post('/hasil_perusahaan/import', 'App\Http\Controllers\HasilRespondenController@importperusahaan')->name('hasil_perusahaan.import');
-
-        // Route::resource('/hasil_alumni', HasilAlumniController::class)->names([
-        //     'index' => 'hasil_alumni.index',
-        //     'destroy' => 'hasil_alumni.destroy',
-        // ]);
-        // Route::resource('/hasil_perusahaan', HasilPerusahaanController::class)->names([
-        //     'index' => 'hasil_perusahaan.index',
-        //     'destroy' => 'hasil_perusahaan.destroy',
-        // ]);
-
-        // Route::get('/pert_alumni/{kategori}', 'App\Http\Controllers\PertAlumniController@jenispertanyaan');
     });
     Route::group(['middleware' => ['cek_login:prodi']], function () {
 
