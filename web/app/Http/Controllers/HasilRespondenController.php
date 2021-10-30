@@ -50,9 +50,9 @@ class HasilRespondenController extends Controller
         return Excel::download(new HasilRespondenDetail($request->date_range), 'hasilalumni.xlsx');
     }
 
-    public function exportperusahaan()
+    public function exportperusahaan(Request $request)
     {
-        return Excel::download(new HasilRespondenPerusahaanDetail, 'hasilperusahaan.xlsx');
+        return Excel::download(new HasilRespondenPerusahaanDetail($request->date_range), 'hasilperusahaan.xlsx');
     }
     public function importalumni(Request $request)
     {
@@ -71,6 +71,25 @@ class HasilRespondenController extends Controller
         Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
         return redirect()->back();
     }
+
+    public function importperusahan(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimes:csv,xlx,xls,xlsx'
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Invalid Format Data', 'Pastikan Data Berbentuk (csv,xlx,xls,xlsx)');
+            return redirect()->back();
+        }
+        $file = $request->file('file');
+        $nama_file = time() . '_' . $file->getClientOriginalName();
+        $file->move('public/file_responden/', $nama_file);
+        Excel::import(new JawabanRespondenImport, 'public/file_responden/' . $nama_file);
+        Alert::success('sukses', 'Data Hasil Responden Berhasil Diimport!');
+        return redirect()->back();
+    }
+
 
     public function update(Request $request, $id)
     {
