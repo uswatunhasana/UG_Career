@@ -137,22 +137,22 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
     });
 
     // prodi
-    Route::group(['middleware' => ['cek_login:prodi'],['cek_login:prodi']], function ()  {
-        Route::resource('/prodi/dashboard', AdminController::class)->names([
-            'index' => 'administrator.dashboard',
-        ]);
-        Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
-        Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
-        Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
-        Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
+    // Route::group(['middleware' => ['cek_login:prodi'],['cek_login:prodi']], function ()  {
+    //     Route::resource('/prodi/dashboard', AdminController::class)->names([
+    //         'index' => 'administrator.dashboard',
+    //     ]);
+    //     Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
+    //     Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
+    //     Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
+    //     Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
         
-        Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
-        Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
-        Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
-        Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
+    //     Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
+    //     Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
+    //     Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
+    //     Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
 
 
-    });
+    // });
 });
 
 // Auth::routes();
