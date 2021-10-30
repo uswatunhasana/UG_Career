@@ -79,7 +79,7 @@
             </ul>
           @elseif(Auth::user()->level == "perusahaan")
           <li><a href="{{ route('isikuisionerperusahaan', Auth::user()->id) }}">Isi Kuisioner</a></li>
-          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+          <li class="dropdown"><div class=""><i class="fas fa-user-circle" style="color:#582971; font-size:30px; margin-top: 5px;" ></i></div>
             <ul class="kotak">
               <br>
               <li class="tombol"><a href="{{ route('editprofilperusahaan', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
