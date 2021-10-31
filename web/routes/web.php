@@ -58,7 +58,7 @@ Route::post('proses_login', [AuthController::class,'proses_login'])->name('prose
 Route::get('logout', [AuthController::class,'logout'])->name('logout');
 
 Route::prefix('administrator')->middleware(['auth'])->group(function () {
-    Route::group(['middleware' => ['cek_login:admin'],['cek_login:prodi']], function () {
+    Route::group(['middleware' => ['cek_login:admin,prodi']], function () {
         Route::resource('/dashboard', AdminController::class)->names([
             'index' => 'administrator.dashboard',
         ]);
@@ -92,7 +92,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         ]);
         Route::resource('/dataweb', DatawebController::class)->names([
             'index' => 'dataweb.index',
-        ]);
+        ])->middleware('cek_login:admin');
         Route::resource('/editprofil', ProfilController::class)->names([
             'update' => 'editprofil.update',
             'edit' => 'editprofil.edit'
@@ -106,25 +106,25 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'dataalumni.destroy',
         ]);
 
-        Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori');
-        Route::get('/pert_alumni/detail/{id}/{is_cabang}', [PertAlumniController::class,'ajaxdetail'])->name('pert_alumni.ajaxdetail');
+        Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori')->middleware('admin');
+        Route::get('/pert_alumni/detail/{id}/{is_cabang}', [PertAlumniController::class,'ajaxdetail'])->name('pert_alumni.ajaxdetail')->middleware('admin');
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
-        ]);
-        Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori');
-        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail');
+        ])->middleware('admin');
+        Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori')->middleware('admin');
+        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail')->middleware('admin');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
-        ]);
-        Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
-            'store' => 'pert_perusahaan.store',
-            'destroy' => 'pert_perusahaan.destroy',
-            'update' => 'pert_perusahaan.update',
-        ]);
+        ])->middleware('admin');;
+        // Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
+        //     'store' => 'pert_perusahaan.store',
+        //     'destroy' => 'pert_perusahaan.destroy',
+        //     'update' => 'pert_perusahaan.update',
+        // ]);
         Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
         Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
         Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
@@ -136,23 +136,6 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
     });
 
-    // prodi
-    // Route::group(['middleware' => ['cek_login:prodi'],['cek_login:prodi']], function ()  {
-    //     Route::resource('/prodi/dashboard', AdminController::class)->names([
-    //         'index' => 'administrator.dashboard',
-    //     ]);
-    //     Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
-    //     Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
-    //     Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
-    //     Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
-        
-    //     Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
-    //     Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
-    //     Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
-    //     Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
-
-
-    // });
 });
 
 // Auth::routes();
