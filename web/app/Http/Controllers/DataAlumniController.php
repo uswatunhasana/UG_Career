@@ -12,6 +12,7 @@ use App\Models\Alumni;
 use App\Exports\HasilRespondenDetail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Jawabanresponden;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Prodi;
 use Illuminate\Support\Facades\Crypt;
@@ -23,7 +24,14 @@ class DataAlumniController extends Controller
     public function index()
     {
         // dd($respondens->jawabanrespondendetail);
-        $alumnis = Alumni::all();
+        $user = Auth::user();
+        if( $user->level == 'prodi'){
+            $alumnis = Alumni::where('id_prodi','=',$user->id_prodi)->select('*')->get();
+
+        }else{
+            $alumnis = Alumni::all();
+        }
+
         $prodis = Prodi::all();
         // dd($alumnis);
         return view('admin.dataalumni', compact('alumnis', 'prodis'));
