@@ -9,22 +9,16 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class Cek_login
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next,...$roles)
     {
         if (!Auth::check()) {
             return redirect('login');
         }
         $user = Auth::user();
 
-        if($user->level == $roles)
-            return $next($request);
+        foreach($roles as $role) {
+        if($user->level == $role)
+            return $next($request);}
 
         Alert::error('Invalid Login', 'Anda Tidak Punya Akses');
         return redirect('login')->with('error',"Anda Tidak Punya Akses");
