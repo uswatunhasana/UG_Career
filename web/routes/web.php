@@ -106,15 +106,15 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'destroy' => 'dataalumni.destroy',
         ]);
 
-        Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori')->middleware('admin');
-        Route::get('/pert_alumni/detail/{id}/{is_cabang}', [PertAlumniController::class,'ajaxdetail'])->name('pert_alumni.ajaxdetail')->middleware('admin');
+        Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori');
+        Route::get('/pert_alumni/detail/{id}/{is_cabang}', [PertAlumniController::class,'ajaxdetail'])->name('pert_alumni.ajaxdetail');
         Route::resource('/pert_alumni', PertAlumniController::class)->names([
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
         ])->middleware('admin');
-        Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori')->middleware('admin');
-        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail')->middleware('admin');
+        Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori');
+        Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
