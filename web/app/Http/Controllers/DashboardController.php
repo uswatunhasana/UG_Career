@@ -39,20 +39,6 @@ class DashboardController extends Controller
         
     }
 
-    // public function beritafront($kategori = "pengumuman")
-    // {
-    //     $count_pengumuman= Berita::where('jenis_berita','=','Pengumuman')->count();
-    //     $count_loker= Berita::where('jenis_berita','=','Loker')->count();
-    //     $count_intern= Berita::where('jenis_berita','=','Internship')->count();
-    //     $beritas = Berita::where('jenis_berita', '=', $kategori)->select('*')->get();
-    //     $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
-    //     ->orderBy('created_at', 'desc')
-    //     ->latest()
-    //     ->take(5)
-    //     ->get();
-    //     return view('user.beritakategori', compact('beritas','kategoris','listberitas','count_pengumuman','count_loker','count_intern'));
-    // }
-
 
     public function show($id)
     {
@@ -72,36 +58,13 @@ class DashboardController extends Controller
         return view('user.beritasingle', compact('beritas','kategoris','listberitas','count_pengumuman','count_loker','count_intern'));
 
     }
-    
-    // public function beritashow(Berita $beritas)
-    // {
-    //     if($beritas->jenis_berita == 'Internship'){
-    //     $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
-    //     } elseif ($beritas->jenis_berita == 'Loker'){
-    //         $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
-    //     }else{
-    //         $beritas= DB::table('beritas')->where($beritas->jenis_berita,'=','Internship')->orderBy('created_at', 'desc')->paginate(2);
-    //     }
-        
-    //     $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
-    //     ->groupby('jenis_berita')
-    //     ->orderby('jenis_berita','asc')
-    //     ->get();
-    //     $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
-    //     ->orderBy('created_at', 'desc')
-    //     ->latest()
-    //     ->take(5)
-    //     ->get();
-       
-    //     return view('user.beritakategori', compact('beritas','kategoris','listberitas'));
 
-    // }
     public function beritaall()
     {
         $count_pengumuman= Berita::where('jenis_berita','=','Pengumuman')->count();
         $count_loker= Berita::where('jenis_berita','=','Loker')->count();
         $count_intern= Berita::where('jenis_berita','=','Internship')->count();
-        $beritas= DB::table('beritas')->orderBy('created_at', 'desc')->paginate(2);
+        $beritas= DB::table('beritas')->orderBy('created_at', 'desc')->paginate(5);
         $kategoris = Berita::select('jenis_berita',DB::raw('count(jenis_berita) as total'))
         ->groupby('jenis_berita')
         ->orderby('jenis_berita','asc')
