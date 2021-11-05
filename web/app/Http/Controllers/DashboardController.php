@@ -121,7 +121,6 @@ class DashboardController extends Controller
         $count_loker= Berita::where('jenis_berita','=','Loker')->count();
         $count_intern= Berita::where('jenis_berita','=','Internship')->count();
         $beritas= Berita::where('jenis_berita','=',$kategori)->orderBy('created_at', 'desc')->paginate(5);
-        dd($beritas);
         $listberitas = Berita::select('judul_berita', 'foto', 'created_at','id')
         ->orderBy('created_at', 'desc')
         ->latest()
