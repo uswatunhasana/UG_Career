@@ -13,6 +13,7 @@ use App\Models\Provinsi;
 use App\Models\Kabkota;
 use App\Models\Perusahaan;
 use App\Models\Alumni;
+use App\Models\PilihanJawabanCabang;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -36,6 +37,13 @@ class KuisionerController extends Controller
             $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
             if ($pertanyaan['is_cabang'] == "ya") {
                 $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+                if ($pertanyaan['jenis_pertanyaan'] == "pilihan dan text") {
+                    $j = 0;
+                    foreach ($pertanyaans[$i]["pertanyaan_cabang"] as $pertanyaan_cabang) {
+                        $pertanyaans[$i]["pertanyaan_cabang"][$j]['pilihanjawabancabang'] = PilihanJawabanCabang::where('id_pertanyaancabang', '=', $pertanyaan_cabang['id'])->select('*')->get();
+                        $j++;
+                    }
+                }
             }
             $i++;
         }
@@ -160,14 +168,15 @@ class KuisionerController extends Controller
                 if ($pertanyaan_cabang->first()) {
                     $kd_pert = Pertanyaan::where('id', '=', $pertanyaan_cabang[0]->id_pertanyaan)->select('kd_pertanyaan')->get();
                     $hasil_alumni->kd_pertanyaan = $kd_pert[0]->kd_pertanyaan;
-                } else {
-                    $hasil_alumni->kd_pertanyaan = $key;
+                    $hasil_alumni->kd_jawaban = $key;
+                    $hasil_alumni->jawaban = $val;
+                    $hasil_alumni->id_jawabanresponden =  $get_id_responden;
+                    $hasil_alumni->save();
                 }
-                $hasil_alumni->kd_jawaban = $key;
-                $hasil_alumni->jawaban = $val;
-                $hasil_alumni->id_jawabanresponden =  $get_id_responden;
-                $hasil_alumni->save();
                 $pertanyaan_cabang = [];
+                // else {
+                //     $hasil_alumni->kd_pertanyaan = $key;
+                // }
             }
         }
         // }else{

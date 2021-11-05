@@ -127,7 +127,7 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{ $pilihanjawaban->kd_jawaban }}" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
+              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               <?= $pilihanjawaban->jawaban; ?>
               </label>
@@ -137,6 +137,27 @@
             @endif
             <br/>
         </div>
+        @elseif($pertanyaan->jenis_pertanyaan == 'pilihan dan text')
+        <div class="form-group">
+          <label for="{{ $pertanyaan->kd_pertanyaan }}" ><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label><br>
+          @foreach( $pertanyaan->pertanyaan_cabang as $pertanyaan_cabang)
+            <label for="{{ $pertanyaan_cabang->kd_cabang }}" ><b>{{ $pertanyaan_cabang->pertanyaan_cabang}}</b></label>
+            @if($pertanyaan_cabang->jenis_jawaban == 'text')
+            <input type="text" class="form-control form-control" name = "{{ $pertanyaan_cabang->kd_cabang }}" id="{{ $pertanyaan_cabang->kd_cabang }}" value="">
+            @elseif($pertanyaan_cabang->jenis_jawaban == 'pilihan')
+              @foreach($pertanyaan_cabang->pilihanjawabancabang as $pilihanjawabancabang)
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="{{$pilihanjawabancabang->kd_jawaban}}" id="{{$pilihanjawabancabang->kd_jawaban}}.{{$loop->index}}" value="{{$pilihanjawabancabang->jawaban}}">
+                      <label class="form-check-label" for="{{$pertanyaan_cabang->kd_cabang}}.{{$loop->index}}">{{$pilihanjawabancabang->jawaban}}</label>
+                </div>
+              @endforeach
+            @elseif ($pertanyaan_cabang->jenis_jawaban == 'date')
+            <input type="date" class="form-control" name = "{{ $pertanyaan_cabang->kd_cabang }}" id="{{ $pertanyaan_cabang->kd_cabang }}" placeholder="mm/dd/yy" value="" />
+            @else
+            @endif
+            @endforeach
+            <br>
+          </div>
         @else
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
@@ -172,7 +193,7 @@
             </div>
             <br/>
         @endif --}}
-        @if($pertanyaan->kd_pertanyaan == "F17B")
+        {{-- @if($pertanyaan->kd_pertanyaan == "F17B")
         <b>{{ $i++}} Pertanyaan Studi Lanjut</b>
             <br>
         <label>Sumber Biaya:</label>
@@ -196,7 +217,7 @@
               <input type="date" class="form-control" name="F18D" id="F18D" placeholder="mm/dd/yy" value="" />
             </div>
             <br>
-        @endif
+        @endif --}}
         @if($pertanyaan->kd_pertanyaan == "F5D")
         <label><b>{{ $i++}} Apakah anda telah mendapatkan pekerjaan <= 6 bulan / termasuk bekerja sebelum lulus?</b></label>
             <div class="form-check">
@@ -303,8 +324,9 @@ $(document).ready(function() {
             $("#container_504_tidak").html(html);
 					}
 				});
-        $('#F31').val('Ya');
-        $('#F32').val('Tidak');
+        $('#F31').val('Sebelum');
+        $('#F32').val('Sesudah');
+        $('#F415').val('Lainnya');
 			});
 
 </script>

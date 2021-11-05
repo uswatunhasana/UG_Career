@@ -24,7 +24,7 @@ class HasilRespondenDetail implements FromView
         $jawabanrespondens = Jawabanresponden::where('kategori_responden', '=', 'alumni')->where('created_at', ">=", $this->from . ' 00:00:00')->where('created_at', "<=", $this->to . ' 23:59:59')->get();
         $kd_pertanyaans = Jawabanrespondendetail::leftJoin('jawabanrespondens', 'jawabanrespondens.id', '=', 'jawabanrespondendetails.id_jawabanresponden')->leftJoin('pertanyaans', 'pertanyaans.kd_pertanyaan', '=', 'jawabanrespondendetails.kd_pertanyaan')
             ->where('jawabanrespondens.kategori_responden', '=', 'alumni')->where('pertanyaans.no_tampilan', '!=', null)
-            ->select('jawabanrespondendetails.kd_jawaban', 'pertanyaans.no_tampilan')->orderBy('pertanyaans.no_tampilan')->orderBy('jawabanrespondendetails.kd_jawaban')
+            ->select('jawabanrespondendetails.kd_jawaban', 'pertanyaans.no_tampilan')->orderBy('pertanyaans.no_tampilan')->orderBy('jawabanrespondendetails.kd_jawaban')->groupBy('jawabanrespondendetails.kd_jawaban')->groupBy('pertanyaans.no_tampilan')
             ->get();
         // $kd_pertanyaans = [];
         // foreach ($kd_pertanyaan_querys as $query) {

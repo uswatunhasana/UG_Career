@@ -84,7 +84,7 @@
                 <td>{{ $val->jawaban  }}</td>
                 @break
             @endif
-            @if ($key == $len)
+            @if ($key == $len - 1)
                 <td></td>
                 @break
             @endif
