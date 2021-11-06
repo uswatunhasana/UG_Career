@@ -189,6 +189,7 @@
 						</div>
 					</div>
 				</div>
+				
 <!-- Detail Modal -->
 				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -200,8 +201,6 @@
 								</button>
 							</div>
 							<div class="modal-body" id="modal_body_detail">
-						
-
 								Pilihan Jawaban
 								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >

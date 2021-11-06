@@ -29,16 +29,19 @@
 			<div class="card-header">
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
+					@endif
+					@endif
 						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
 							<i class="fas fa-upload"></i>
 								Ekspor Data
 						</button>
 						</div>
-				
 			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
@@ -62,6 +65,9 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								@if(isset(Auth::user()->level))
+         						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
@@ -69,6 +75,9 @@
 										@csrf
 										@method('DELETE')
 									</form>
+								@endif
+								@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
