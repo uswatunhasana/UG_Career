@@ -372,7 +372,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>NPWP</b></h4></label>
-									<input id="addemailcpalumni" type="text" name="npwp" class="form-control" value="{{ $alumni->nik }}">
+									<input id="addemailcpalumni" type="text" name="npwp" class="form-control" value="{{ $alumni->npwp }}">
 								</div>
 							</div>
 						</div>
