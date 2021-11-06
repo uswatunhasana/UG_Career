@@ -356,7 +356,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Email</b></h4></label>
-									<input id="addjabatanalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $alumni->user->email }}">
+									<input id="addjabatanalumni" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $alumni->user->email }}">
 								</div>
 							</div>
 						</div>
@@ -364,7 +364,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>NIK</b></h4></label>
-									<input id="addemailcpalumni" type="email" name="npwp" class="form-control" value="{{ $alumni->npwp }}">
+									<input id="addemailcpalumni" type="email" name="nik" class="form-control" value="{{ $alumni->nik}}">
 								</div>
 							</div>
 						</div>
