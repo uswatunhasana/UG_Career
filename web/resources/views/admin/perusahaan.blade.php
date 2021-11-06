@@ -184,7 +184,7 @@
 									<button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $perusahaan->id }}" onclick="deleteperusahaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
-									<form id="delete-form-{{ $perusahaan->id }}" action="{{ route('perusahaan.destroy', $perusahaan->id) }}" method="POST" style="display: none;">
+									<form id="delete-form-{{ $perusahaan->id }}" action="{{ route('perusahaan.destroy', $perusahaan->id_user) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
