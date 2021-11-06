@@ -37,7 +37,7 @@ Route::get('log_out', [AuthUserController::class, 'log_out'])->name('log_out');
 
 Route::get('/berita', [DashboardController::class, 'beritaall'])->name('beritaall');
 Route::get('/berita/{id}', [DashboardController::class, 'show'])->name('beritasingle.show');
-Route::get('/berita/{jenisberita}', [DashboardController::class,'beritakategori'])->name('beritakategori');
+Route::get('/berita/kategori/{jenisberita}', [DashboardController::class,'beritakategori'])->name('beritakategori');
 
 // Route::get('/isikuisioneralumni/{id}', 'App\Http\Controllers\KuisionerController@isikuisionercontoh')->name('isikuisioneralumni');
 Route::get('/isikuisioneralumni/{id}', [KuisionerController::class, 'isikuisioneralumni'])->name('isikuisioneralumni')->middleware('cek_login:alumni');
