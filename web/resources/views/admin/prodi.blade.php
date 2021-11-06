@@ -121,7 +121,7 @@
 								@if(isset(Auth::user()->level))
          							@if(Auth::user()->level == "admin")
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $prodi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#editModal-{{ $prodi->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $prodi->id }}" onclick="deleteprodi(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $prodi->id }}" action="{{ route('prodi.destroy', $prodi->id) }}" method="POST" style="display: none;">
