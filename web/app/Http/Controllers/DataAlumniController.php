@@ -94,7 +94,7 @@ class DataAlumniController extends Controller
 
     public function show($id)
     {
-         $data = Alumni::where('id','=', $id)->select('*')->get();
+         $data = Alumni::leftJoin('prodis','prodis.id','=','alumnis.id_prodi')->leftJoin('users','users.id','=','alumnis.id_user')->where('alumnis.id','=', $id)->select('users.*','prodis.*','alumnis.*')->get();
          echo json_encode($data);
     }
 
