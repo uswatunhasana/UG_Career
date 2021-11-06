@@ -45,7 +45,7 @@
 								<td>{{$no++ }}</td>
 								<td>{{ $provinsi->nama_provinsi }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#editModal-{{ $provinsi->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 								</tr>
 								@endforeach
 							</tbody>
