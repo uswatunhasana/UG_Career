@@ -239,14 +239,6 @@
 									<td id="prodi-dd">: </td>
 								</tr>
 								<tr>
-									<td>Email</td>
-									<td id="email-dd">: </td>
-								</tr>
-								<tr>
-									<td>Username</td>
-									<td id="username-dd">: </td>
-								</tr>
-								<tr>
 									<td>Tahun Masuk</td>
 									<td id="thn_masuk-dd">: </td>
 								</tr>
@@ -261,6 +253,18 @@
 								<tr>
 									<td>NPWP</td>
 									<td id="npwp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td id="email-dd">: </td>
+								</tr>
+								<tr>
+									<td>No Telepon/HP</td>
+									<td id="no_telp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Username</td>
+									<td id="username-dd">: </td>
 								</tr>
 							</tbody>
 					</table>
@@ -352,7 +356,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Email</b></h4></label>
-									<input id="addjabatanalumni" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $alumni->user->email }}">
+									<input id="addjabatanalumni" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $alumni->user->email }}">
 								</div>
 							</div>
 						</div>
@@ -360,7 +364,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>NIK</b></h4></label>
-									<input id="addemailcpalumni" type="email" name="npwp" class="form-control" value="{{ $alumni->npwp }}">
+									<input id="addemailcpalumni" type="email" name="nik" class="form-control" value="{{ $alumni->nik}}">
 								</div>
 							</div>
 						</div>
@@ -492,6 +496,16 @@
 				dataType: 'json',
 				success: function(datas) {
 					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#prodi-dd').text(': ' + data['nama_prodi']);
+					$('#npm-dd').text(': ' + data['npm']);
+					$('#thn_masuk-dd').text(': ' + data['tahun_masuk']);
+					$('#thn_lulus-dd').text(': ' + data['tahun_lulus']);
+					$('#nik-dd').text(': ' + data['nik']);
+					$('#npwp-dd').text(': ' + data['npwp']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#email-dd').text(': ' + data['email']);
+					$('#username-dd').text(': ' + data['username']);
 				}
 			});
 		});

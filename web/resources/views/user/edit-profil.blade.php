@@ -26,7 +26,7 @@
         <div class="col-lg-12 entries">
           <article class="entry entry-single">
             @foreach ($alumnis as $alumni)
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <form role="form" action="{{ route('updateprofil', $alumni->id) }}" method="POST">
                     <div class="form-group">
                       @csrf
