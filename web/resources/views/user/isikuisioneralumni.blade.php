@@ -118,7 +118,6 @@
             <br>
             @else
             @if($pertanyaan->kd_pertanyaan == "UG2")
-            <?php dd($pertanyaan->pilihanjawaban) ?>
             <select class="form-control" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pertanyaan->kd_pertanyaan}}]" id="{{ $pertanyaan->kd_pertanyaan }}">
                 <option selected>--Pilih Bidang Kerja--</option>
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
