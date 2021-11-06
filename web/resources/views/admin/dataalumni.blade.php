@@ -29,10 +29,14 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah Data alumni
 					</button>
+					@endif
+					@endif
 				</div>
 			</div>
 			<div class="card-body">
@@ -184,14 +188,19 @@
 								<td>{{ $alumni->user->email }}</td>
 								<td>{{ $alumni->prodi->nama_prodi }}</td>
 								<td>
-									<!-- <button data-toggle="modal" data-target="#editModal-{{ $alumni->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
-									<button data-toggle="modal" data-target="#editModal-{{ $alumni->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" type="button" id="{{ $alumni->id }}" onclick="deletealumni(this.id)"> <i class="fa fa-trash"></i>
+								    <button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal"  data-id="{{ $alumni->id }}" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+									@if(isset(Auth::user()->level))
+									@if(Auth::user()->level == "admin")
+									<button data-toggle="modal" data-target="#editModal-{{ $alumni->id }}" class="btn btn-sm btn-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-sm btn-danger" type="button" id="{{ $alumni->id }}" onclick="deletealumni(this.id)" data-tooltip="tooltip" data-placement="bottom" title="Delete"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $alumni->id }}" action="{{ route('dataalumni.destroy', $alumni->id_user) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')
 									</form>
+									@endif
+									@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -199,6 +208,68 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	
+<!-- Modal Detail -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+					Data Alumni
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="detail-table">
+								<tr>
+									<td>Nama Lengkap</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>NPM</td>
+									<td id="npm-dd">: </td>
+								</tr>
+								<tr>
+									<td>Prodi</td>
+									<td id="prodi-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td id="email-dd">: </td>
+								</tr>
+								<tr>
+									<td>Username</td>
+									<td id="username-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Masuk</td>
+									<td id="thn_masuk-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Lulus</td>
+									<td id="thn_lulus-dd">: </td>
+								</tr>
+								<tr>
+									<td>NIK</td>
+									<td id="nik-dd">: </td>
+								</tr>
+								<tr>
+									<td>NPWP</td>
+									<td id="npwp-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
 		</div>
 	</div>
 
@@ -322,7 +393,6 @@
 								</div>
 							</div>
 						</div>
-						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -346,7 +416,7 @@
           autoclose:true
        });   
     })
- </script>
+ 	</script>
 	<script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
@@ -412,6 +482,20 @@
 				}
 			});
 		});
+
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/dataalumni'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+				}
+			});
+		});
+
 	</script>
 
 	@endsection

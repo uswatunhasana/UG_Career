@@ -29,10 +29,14 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah Data Prodi
 					</button>
+					@endif
+					@endif
 				</div>
 			</div>
 			<div class="card-body">
@@ -98,7 +102,11 @@
 								<th width="30px">No</th>
 								<th>Kode Prodi</th>
 								<th>Nama Prodi</th>
+								@if(isset(Auth::user()->level))
+         							@if(Auth::user()->level == "admin")
 								<th>Aksi</th>
+								@endif
+								@endif
 							</tr>
 						</thead>
 						<tbody>
@@ -110,6 +118,8 @@
 								<td>{{$no++ }}</td>
 								<td>{{ $prodi->kd_prodi }}</td>
 								<td>{{ $prodi->jenjang }} - {{ $prodi->nama_prodi }}</td>
+								@if(isset(Auth::user()->level))
+         							@if(Auth::user()->level == "admin")
 								<td>
 									<button data-toggle="modal" data-target="#editModal-{{ $prodi->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $prodi->id }}" onclick="deleteprodi(this.id)"> <i class="fa fa-trash"></i>
@@ -118,6 +128,9 @@
 										@csrf
 										@method('DELETE')
 									</form>
+								</td>
+								@endif
+								@endif
 								</tr>
 								@endforeach
 							</tbody>

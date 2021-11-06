@@ -3,7 +3,6 @@
 @section('css')
 <style>
 #frame-image img {
-
   max-height: 320px;
   position: absolute;
   left: -10px;

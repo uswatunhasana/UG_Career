@@ -24,6 +24,7 @@
 	</ul>
 </div>
 
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
@@ -31,10 +32,14 @@
 				<!-- <div class=""> -->
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
+					@endif
+					@endif
 						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
 							<i class="fas fa-upload"></i>
 								Ekspor Data
@@ -42,6 +47,7 @@
 						</div>
 				<!-- </div> -->
 			</div>
+
 			<div class="card-body">
 				<!-- Tabel Data -->
 				<div class="table-responsive">
@@ -64,6 +70,9 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								@if(isset(Auth::user()->level))
+         						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
@@ -71,6 +80,9 @@
 										@csrf
 										@method('DELETE')
 									</form>
+								@endif
+								@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -110,6 +122,37 @@
 				</div>
 				</form>
 			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+					Pilihan Jawaban
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="10px">No</th>
+								<th>Pilihan Jawaban</th>
+							</tr>
+						</thead>
+							<tbody id="detail-table">
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
 		</div>
 	</div>
 
@@ -163,11 +206,12 @@
        </div>
     </div>
 	@endsection
+
 	@section('customjs')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
 $(function() {

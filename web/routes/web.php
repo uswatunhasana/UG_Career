@@ -104,6 +104,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::resource('/dataalumni', DataAlumniController::class)->names([
             'index' => 'dataalumni.index',
             'destroy' => 'dataalumni.destroy',
+            'show' => 'dataalumni.show',
         ]);
 
         Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori');

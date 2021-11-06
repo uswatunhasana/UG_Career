@@ -29,10 +29,14 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h4 class="card-title"></h4>
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah Data Perusahaan
 					</button>
+					@endif
+					@endif
 				</div>
 			</div>
 			<div class="card-body">
@@ -173,7 +177,10 @@
 								<td>{{ $perusahaan->user->email }}</td>
 								<td>{{ $perusahaan->alamat }}</td>
 								<td>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
+									@if(isset(Auth::user()->level))
+         							@if(Auth::user()->level == "admin")
 									<button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $perusahaan->id }}" onclick="deleteperusahaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
@@ -181,6 +188,8 @@
 										@csrf
 										@method('DELETE')
 									</form>
+									@endif
+									@endif
 								</tr>
 								@endforeach
 							</tbody>
