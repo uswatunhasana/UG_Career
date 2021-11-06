@@ -167,7 +167,7 @@
 					<table id="detailtable" class="display table table-striped table-hover" >
 						<thead class="thead-light">
 							<tr>
-								<th width="10px">Pertanyaan</th>
+								<th width="10px">Kode Pertanyaan</th>
 								<th>Jawaban</th>
 							</tr>
 						</thead>
@@ -325,7 +325,7 @@ $(function() {
 					$('#email-dd').text(': ' + data['email']);
 						var htmlkom = '';
 						for (i = 0; i < datas.length; i++) {
-							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].jawaban +'</td></tr>';
+							htmlkom += '<tr><td>'+ datas[i].kd_jawaban +'</td><td>'+ datas[i].jawaban +'</td></tr>';
 						}
 						$('#detail-table').html(htmlkom);
 
