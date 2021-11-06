@@ -178,7 +178,7 @@
 	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti file berikut: <a href="Dummy UG Career.xlsx" download>Download File</a></p>
 	                    </div>
 	                    <div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>
+	                        <p class="font-weight-semibold text-gray mb-0">2. Pastikan data yang diimport sesuai dengan format yang diberikan</p>
 	                    </div>
                      	<div class="d-flex py-2 border-bottom">
 	                        <p class="font-weight-semibold text-gray mb-0">3. Jika sudah sesuai pilih file</p>
