@@ -113,14 +113,14 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
-        ])->middleware('admin');
+        ]);
         Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori');
         Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
-        ])->middleware('admin');;
+        ]);
         // Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
         //     'store' => 'pert_perusahaan.store',
         //     'destroy' => 'pert_perusahaan.destroy',
