@@ -71,7 +71,8 @@ class PerusahaanController extends Controller
 
     public function show($id)
     {
-        //
+        $data = Perusahaan::leftJoin('users','users.id','=','perusahaans.id_user')->where('perusahaans.id','=', $id)->select('users.*','perusahaans.*')->get();
+         echo json_encode($data);
     }
 
 

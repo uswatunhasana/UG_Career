@@ -67,7 +67,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email Perusahaan</b></h4></label>
-												<input id="addnotelpperusahaan" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email perusahaan">
+												<input id="addnotelpperusahaan" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email perusahaan">
 											</div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nomor Telepon</b></h4></label>
-												<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" placeholder="no telepon perusahaan">
+												<input id="addnotelpperusahaan" type="number" name="no_telp" class="form-control" placeholder="no telepon perusahaan">
 											</div>
 										</div>
 									</div>
@@ -115,7 +115,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email Contact Person</b></h4></label>
-												<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email contact person perusahaan">
+												<input id="addemailcpperusahaan" type="email" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email contact person perusahaan">
 											</div>
 										</div>
 									</div>
@@ -211,7 +211,7 @@
 					</button>
 				</div>
 				<div class="modal-body" id="modal_body_detail">
-					Data Perusahaan
+					Detail Data Perusahaan
 					<hr/>
 					<table id="detailtable" class="display table table-striped table-hover" >
 							<tbody id="detail-table">
@@ -289,7 +289,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Email Perusahaan</b></h4></label>
-									<input id="addnotelpperusahaan" type="text" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $perusahaan->user->email }}">
+									<input id="addnotelpperusahaan" type="emial" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')"value="{{ $perusahaan->user->email }}">
 								</div>
 							</div>
 						</div>
@@ -297,7 +297,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Nomor Telepon</b></h4></label>
-									<input id="addnotelpperusahaan" type="text" name="no_telp" class="form-control" value="{{ $perusahaan->no_telp }}">
+									<input id="addnotelpperusahaan" type="number" name="no_telp" class="form-control" value="{{ $perusahaan->no_telp }}">
 								</div>
 							</div>
 						</div>
@@ -337,7 +337,7 @@
 							<div class="col-sm-12">
 								<div class="form-group form-group-default">
 									<label><h4><b>Email Contact Person</b></h4></label>
-									<input id="addemailcpperusahaan" type="text" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $perusahaan->email_cp }}">
+									<input id="addemailcpperusahaan" type="email" name="email_cp" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" value="{{ $perusahaan->email_cp }}">
 								</div>
 							</div>
 						</div>
@@ -438,6 +438,28 @@
 					$('#show_hide_password input').attr('type', 'text');
 					$('#show_hide_password i').removeClass( "fa-eye-slash" );
 					$('#show_hide_password i').addClass( "fa-eye" );
+				}
+			});
+		});
+
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/perusahaan'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#email-dd').text(': ' + data['email']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#url_web-dd').text(': ' + data['url_web']);
+					$('#alamat-dd').text(': ' + data['alamat']);
+					$('#nama_cp-dd').text(': ' + data['nama_cp']);
+					$('#jabatan-dd').text(': ' + data['jabatan']);
+					$('#email_cp-dd').text(': ' + data['email_cp']);
+					$('#username-dd').text(': ' + data['username']);
 				}
 			});
 		});

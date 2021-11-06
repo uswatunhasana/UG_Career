@@ -31,9 +31,24 @@ class HasilRespondenController extends Controller
         return view('admin.hasil_perusahaan', compact('jawaban_respondens'));
     }
 
-    public function create()
+    public function detailhasilalumni($id)
     {
-        //
+        $data = Jawabanresponden::leftJoin('jawabanrespondendetails','jawabanrespondens.id','=','jawabanrespondendetails.id_jawabanresponden')
+        ->leftJoin('alumnis','alumnis.id_user','=','jawabanrespondens.id_user')
+        ->leftJoin('users','users.id','=','jawabanrespondens.id_user')
+        ->leftJoin('prodis','prodis.id','=','alumnis.id_prodi')
+        ->where('jawabanrespondens.id','=', $id)
+        ->select('users.*','alumnis.*','prodis.*','jawabanrespondendetails.*','jawabanrespondens.*')->get();
+        echo json_encode($data);
+    }
+    public function detailhasilperusahaan($id)
+    {
+        $data = Jawabanresponden::leftJoin('jawabanrespondendetails','jawabanrespondens.id','=','jawabanrespondendetails.id_jawabanresponden')
+        ->leftJoin('perusahaans','perusahaans.id_user','=','jawabanrespondens.id_user')
+        ->leftJoin('users','users.id','=','jawabanrespondens.id_user')
+        ->where('jawabanrespondens.id','=', $id)
+        ->select('users.*','perusahaans.*','jawabanrespondendetails.*','jawabanrespondens.*')->get();
+        echo json_encode($data);
     }
 
     public function store(Request $request)

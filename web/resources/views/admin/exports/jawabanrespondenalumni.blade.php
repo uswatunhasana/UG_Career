@@ -9,6 +9,7 @@
         <th>emailmsmh</th>	
         <th>tahun_lulus</th>	
         <th>nik</th>
+        <th>npwp</th>
         @foreach ($kd_pertanyaans as $kd_pertanyaan)
         <th>{{ $kd_pertanyaan->kd_jawaban }}</th>
         @endforeach
@@ -75,6 +76,7 @@
             <td>{{ $jawabanresponden->user->email }}</td>
             <td>{{ $jawabanresponden->user->alumni->tahun_lulus }}</td>
             <td>'{{ $jawabanresponden->user->alumni->nik }}</td>
+            <td>'{{ $jawabanresponden->user->alumni->npwp }}</td>
              @php
              $len = count($jawabanresponden->jawabanrespondendetail);
              @endphp

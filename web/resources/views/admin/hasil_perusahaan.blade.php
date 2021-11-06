@@ -119,6 +119,77 @@
 			</div>
 		</div>
 	</div>
+<!-- Modal Detail -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Alumni</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+				Data Perusahaan
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="">
+							<tr>
+									<td>Nama Instansi</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Perusahaan</td>
+									<td id="email-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nomor Telepon</td>
+									<td id="no_telp-dd">: </td>
+								</tr>
+								<tr>
+									<td>URL Web</td>
+									<td id="url_web-dd">: </td>
+								</tr>
+								<tr>
+									<td>Alamat Perusahaan</td>
+									<td id="alamat-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nama Contact Person</td>
+									<td id="nama_cp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Jabatan</td>
+									<td id="jabatan-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Contact Person</td>
+									<td id="email_cp-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+					<hr />
+					Detail Jawaban
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="10px">Pertanyaan</th>
+								<th>Jawaban</th>
+							</tr>
+						</thead>
+							<tbody id="detail-table">
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
+		</div>
+	</div>
+
 
 	<!-- Modal  Impor -->
 	<div class="modal fade" id="addImport" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -236,6 +307,33 @@ $(function() {
 					) 
 			});
 		} 
+
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/hasil_perusahaan/detail'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#email-dd').text(': ' + data['email']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#url_web-dd').text(': ' + data['url_web']);
+					$('#alamat-dd').text(': ' + data['alamat']);
+					$('#nama_cp-dd').text(': ' + data['nama_cp']);
+					$('#jabatan-dd').text(': ' + data['jabatan']);
+					$('#email_cp-dd').text(': ' + data['email_cp']);
+						var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<tr><td>'+ datas[i].kd_jawaban +'</td><td>'+ datas[i].jawaban +'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+
+				}
+			});
+		});
 		
 	</script>
 

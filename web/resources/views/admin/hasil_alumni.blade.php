@@ -70,7 +70,7 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
-								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $jawaban_responden->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 								@if(isset(Auth::user()->level))
          						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
@@ -124,24 +124,51 @@
 			</div>
 		</div>
 	</div>
-
+<!-- Modal Detail -->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Alumni</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body" id="modal_body_detail">
-					Pilihan Jawaban
+				Data Alumni
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="">
+								<tr>
+									<td>Nama Lengkap</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>NPM</td>
+									<td id="npm-dd">: </td>
+								</tr>
+								<tr>
+									<td>Prodi</td>
+									<td id="prodi-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Masuk</td>
+									<td id="thn_masuk-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Lulus</td>
+									<td id="thn_lulus-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+					<hr />
+					Detail Jawaban
 					<hr/>
 					<table id="detailtable" class="display table table-striped table-hover" >
 						<thead class="thead-light">
 							<tr>
-								<th width="10px">No</th>
-								<th>Pilihan Jawaban</th>
+								<th width="10px">Pertanyaan</th>
+								<th>Jawaban</th>
 							</tr>
 						</thead>
 							<tbody id="detail-table">
@@ -278,7 +305,33 @@ $(function() {
 					) 
 			});
 		}
-   
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/hasil_alumni/detail'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#prodi-dd').text(': ' + data['nama_prodi']);
+					$('#npm-dd').text(': ' + data['npm']);
+					$('#thn_masuk-dd').text(': ' + data['tahun_masuk']);
+					$('#thn_lulus-dd').text(': ' + data['tahun_lulus']);
+					$('#nik-dd').text(': ' + data['nik']);
+					$('#npwp-dd').text(': ' + data['npwp']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#email-dd').text(': ' + data['email']);
+						var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].jawaban +'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+
+				}
+			});
+		});
 		
 	</script>
 	
