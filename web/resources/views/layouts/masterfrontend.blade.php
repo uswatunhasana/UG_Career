@@ -29,6 +29,7 @@
 
   <!-- FONT AWESOME -->
   <script src=" {{ asset('admin') }}/assets/js/plugin/webfont/webfont.min.js"></script>
+  <script src=" {{ asset('admin') }}/assets/js/core/jquery.3.2.1.min.js"></script>
   <script>
 		WebFont.load({
 			google: {"families":["Open+Sans:300,400,600,700"]},
@@ -128,7 +129,6 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src=" {{ asset('admin') }}/assets/js/core/jquery.3.2.1.min.js"></script>
   <script src="{{ asset('assets') }}/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script src="{{ asset('assets') }}/vendor/sweetalert/sweetalert.all.js"></script>

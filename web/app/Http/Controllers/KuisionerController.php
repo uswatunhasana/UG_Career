@@ -35,6 +35,15 @@ class KuisionerController extends Controller
         $i = 0;
         foreach ($pertanyaans as $pertanyaan) {
             $pertanyaans[$i]["pilihanjawaban"] = PilihanJawaban::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
+            if ($pertanyaan['jenis_pertanyaan'] == "if else") {
+                $j = 0;
+                foreach ($pertanyaans[$i]["pilihanjawaban"] as $pilihanjawaban) {
+                    $pertanyaans[$i]["pilihanjawaban"][$j]['pertanyaan_cabang'] = PertanyaanCabang::leftJoin('link_ifelse', 'link_ifelse.id_pertanyaancabang', '=', 'pertanyaancabangs.id')->where('link_ifelse.id_pilihanjawaban', '=', $pilihanjawaban['id'])->select('*')->get();
+                    $j++;
+                }
+                $i++;
+                continue;
+            }
             if ($pertanyaan['is_cabang'] == "ya") {
                 $pertanyaans[$i]["pertanyaan_cabang"] = PertanyaanCabang::where('id_pertanyaan', '=', $pertanyaan['id'])->select('*')->get();
                 if ($pertanyaan['jenis_pertanyaan'] == "pilihan dan text") {
