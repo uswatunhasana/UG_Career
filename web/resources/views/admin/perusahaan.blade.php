@@ -177,11 +177,11 @@
 								<td>{{ $perusahaan->user->email }}</td>
 								<td>{{ $perusahaan->alamat }}</td>
 								<td>
-								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal"  data-id="{{ $perusahaan->id }}" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									@if(isset(Auth::user()->level))
          							@if(Auth::user()->level == "admin")
-									<button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#editModal-{{ $perusahaan->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $perusahaan->id }}" onclick="deleteperusahaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $perusahaan->id }}" action="{{ route('perusahaan.destroy', $perusahaan->id) }}" method="POST" style="display: none;">
@@ -197,6 +197,68 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<!-- Modal Detail -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+					Data Perusahaan
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="detail-table">
+								<tr>
+									<td>Nama Instansi</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Perusahaan</td>
+									<td id="email-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nomor Telepon</td>
+									<td id="no_telp-dd">: </td>
+								</tr>
+								<tr>
+									<td>URL Web</td>
+									<td id="url_web-dd">: </td>
+								</tr>
+								<tr>
+									<td>Alamat Perusahaan</td>
+									<td id="alamat-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nama Contact Person</td>
+									<td id="nama_cp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Jabatan</td>
+									<td id="jabatan-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Contact Person</td>
+									<td id="email_cp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Username</td>
+									<td id="username-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
 		</div>
 	</div>
 
