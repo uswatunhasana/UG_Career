@@ -65,7 +65,7 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
-								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $jawaban_responden->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 								@if(isset(Auth::user()->level))
          						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
@@ -124,7 +124,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Alumni</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Perusahaan</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -174,7 +174,7 @@
 					<table id="detailtable" class="display table table-striped table-hover" >
 						<thead class="thead-light">
 							<tr>
-								<th width="10px">Pertanyaan</th>
+								<th width="10px">Kode Pertanyaan</th>
 								<th>Jawaban</th>
 							</tr>
 						</thead>
