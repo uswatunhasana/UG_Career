@@ -15,6 +15,7 @@ class Perusahaan extends Model
         'nama_cp',
         'email_cp',
         'jabatan',
+        'id_user',
     ];
 
     public function user()
