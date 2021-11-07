@@ -109,7 +109,7 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $cek_berita = Berita::where('judul_berita', $request->judul_berita)->count();
-        if ($cek_berita > 0) {
+        // if ($cek_berita > 0) {
             $berita = Berita::findOrFail($id);
             if ($request->hasFile('foto')) {
                 $image_path = 'public/img/'.$berita->foto;
@@ -132,10 +132,10 @@ class BeritaController extends Controller
             // $file->move('public/img/', $nama_file);
             $berita->save();
 
-            Alert::success('Berhasil Tambah Berita', 'Silahkan Periksa Kembali');
-        } else {
-            Alert::error('Judul Berita Sudah Ada', 'Silahkan coba lagi');
-        }
+            Alert::success('Berhasil Ubah Berita', 'Silahkan Periksa Kembali');
+        // } else {
+        //     Alert::error('Judul Berita Sudah Ada', 'Silahkan coba lagi');
+        // }
         return redirect()->back();
     }
 
