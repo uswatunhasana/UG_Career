@@ -72,7 +72,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Judul Berita</b></h4></label>
-												<input id="addberita" type="text" name="judul_berita" class="form-control" placeholder="Judul Berita">
+												<input id="addberita" type="text" name="judul_berita" class="form-control" placeholder="Judul Berita" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -88,7 +88,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Isi Berita</b></h4></label>
-												<textarea id="isi_berita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita" rows="5"></textarea>
+												<textarea id="isi_berita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita" rows="5" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
 												<!-- <input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita"> -->
 											</div>
 										</div>
@@ -190,7 +190,7 @@
 								<button type="button" id="detail" class="btn btn-sm btn-primary detail"data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" data-jenis="{{ $berita->jenis_berita }}" data-judul="{{ $berita->judul_berita }}" data-isi="{{ $berita->isi_berita }}" data-foto="{{ $berita->foto }}" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 								@if(isset(Auth::user()->level))
          							@if(Auth::user()->level == "admin")
-								<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+								<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 								<button class="btn btn-sm btn-danger" type="button" id="{{ $berita->id }}" onclick="deleteberita(this.id)"> <i class="fa fa-trash"></i>
 								</button>
 								<form id="delete-form-{{ $berita->id }}" action="{{ route('berita.destroy', $berita->id) }}" method="POST" style="display: none;">
