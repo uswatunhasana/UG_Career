@@ -59,7 +59,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>NPM Alumni</b></h4></label>
-												<input id="addalumni" type="number" name="npm" class="form-control" placeholder="NPM alumni">
+												<input id="addalumni" type="number" name="npm" class="form-control" placeholder="NPM alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -67,7 +67,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Tahun Masuk</b></h4></label>
-												<input id="addnotelpalumni" type="number" name="tahun_masuk" class="form-control datepicker" placeholder="Tahun masuk alumni">
+												<input id="addnotelpalumni" type="number" name="tahun_masuk" class="form-control datepicker" placeholder="Tahun masuk alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Tahun Lulus</b></h4></label>
-												<input id="addnotelpalumni" type="number" name="tahun_lulus" class="form-control datepicker" placeholder="Tahun lulus alumni ">
+												<input id="addnotelpalumni" type="number" name="tahun_lulus" class="form-control datepicker" placeholder="Tahun lulus alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -96,7 +96,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nama lengkap alumni</b></h4></label>
-												<input id="addnotelpalumni" type="text" name="name" class="form-control" placeholder="Nama lengkap alumni">
+												<input id="addnotelpalumni" type="text" name="name" class="form-control" placeholder="Nama lengkap alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -104,7 +104,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nomor Telepon/HP</b></h4></label>
-												<input id="addnamacpalumni" type="text" name="no_telp" class="form-control" placeholder="No. telp/HP alumni">
+												<input id="addnamacpalumni" type="text" name="no_telp" class="form-control" placeholder="No. telp/HP alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -112,7 +112,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email</b></h4></label>
-												<input id="addjabatanalumni" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="Email alumni">
+												<input id="addjabatanalumni" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="Email alumni">
 											</div>
 										</div>
 									</div>
@@ -120,7 +120,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>NIK</b></h4></label>
-												<input id="addemailcpalumni" type="number" name="nik" class="form-control" placeholder="NIK alumni">
+												<input id="addemailcpalumni" type="number" name="nik" class="form-control" placeholder="NIK alumni" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -136,7 +136,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Username</b></h4></label>
-												<input id="addusernamealumni" type="text" name="username" class="form-control" placeholder="Username pengguna">
+												<input id="addusernamealumni" type="text" name="username" class="form-control" placeholder="Username pengguna" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
