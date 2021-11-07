@@ -71,7 +71,7 @@
           @if(isset(Auth::user()->level))
           @if(Auth::user()->level == "alumni")
           <li><a href="{{ route('isikuisioneralumni', Auth::user()->id) }}" class="nav-link scrollto @if (Request::segment(1) == 'isikuisioneralumni') active @endif">Isi Kuisioner</a></li>
-          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="font-size:30px; margin-top: 2px;" ></i></a>
+          <li class="dropdown"><a href="#"><i class="fas fa-user-circle" style="color:#582971; font-size:30px; margin-top: 24px;" ></i></a>
             <ul class="kotak">
               <br>
               <li class="tombol"><a href="{{ route('editprofil_front', Auth::user()->id) }}"><button type="button" class="btn btn-primary" style="width : 100%;">Lihat Profil</button></a></li>
