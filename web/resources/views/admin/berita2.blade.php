@@ -88,7 +88,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Isi Berita</b></h4></label>
-												<textarea id="isi_berita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita" rows="5" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
+												<textarea id="isi_berita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita" rows="5"></textarea>
 												<!-- <input id="addberita" type="text" name="isi_berita" class="form-control" placeholder="Isi Berita"> -->
 											</div>
 										</div>
