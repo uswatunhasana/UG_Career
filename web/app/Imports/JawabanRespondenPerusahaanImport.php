@@ -65,7 +65,7 @@ class JawabanRespondenPerusahaanImport implements ToCollection, WithHeadingRow
                     $i++;
                 }
             } else {
-                $user_id = Perusahaan::select('id_user')->where('npm', $row["nimhsmsmh"])->first();
+                $user_id = Perusahaan::select('id_user')->where('no_telp', $row["no_telp"])->first();
                 JawabanResponden::create([
                     "kategori_responden" => "perusahaan",
                     "id_user" => $user_id['id_user'],
