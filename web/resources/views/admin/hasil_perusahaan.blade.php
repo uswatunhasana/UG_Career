@@ -210,7 +210,7 @@
                       <img src="" class="img-fluid" width="600px">
                     </div>
                     	<div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti file berikut: <a href="Dummy UG Career.xlsx" download>Download File</a></p></p>
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti file berikut: <a href="{{ asset('format_import') }}/format_import_surveyperusahaan.xlsx" download>Download File</a></p></p>
 	                    </div>
 	                    <div class="d-flex py-2 border-bottom">
 	                        <p class="font-weight-semibold text-gray mb-0">2. Pastikan data yang diimport sesuai dengan format yang diberikan</p>
