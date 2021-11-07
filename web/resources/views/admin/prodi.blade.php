@@ -71,7 +71,7 @@
 										<div class="col-md-6">
 											<div class="form-group form-group-default">
 												<label><h4><b>Kode Prodi</b></h4></label>
-												<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" placeholder="kode prodi (maks: 5 angka) ">
+												<input id="addkodeprodi" type="text" name="kd_prodi" class="form-control" placeholder="kode prodi (maks: 5 angka)" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -79,7 +79,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nama Prodi</b></h4></label>
-												<input id="addprodi" type="text" name="nama_prodi" class="form-control" placeholder="nama prodi ">
+												<input id="addprodi" type="text" name="nama_prodi" class="form-control" placeholder="nama prodi" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
