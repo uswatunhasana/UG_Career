@@ -59,7 +59,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nama Instansi</b></h4></label>
-												<input id="addperusahaan" type="text" name="name" class="form-control" placeholder="nama perusahaan">
+												<input id="addperusahaan" type="text" name="name" class="form-control" placeholder="nama perusahaan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -67,7 +67,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Email Perusahaan</b></h4></label>
-												<input id="addnotelpperusahaan" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email perusahaan">
+												<input id="addnotelpperusahaan" type="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')" placeholder="email perusahaan">
 											</div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nomor Telepon</b></h4></label>
-												<input id="addnotelpperusahaan" type="number" name="no_telp" class="form-control" placeholder="no telepon perusahaan">
+												<input id="addnotelpperusahaan" type="number" name="no_telp" class="form-control" placeholder="no telepon perusahaan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -91,7 +91,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Alamat Perusahaan</b></h4></label>
-												<input id="addnotelpperusahaan" type="text" name="alamat" class="form-control" placeholder="alamat perusahaan">
+												<input id="addnotelpperusahaan" type="text" name="alamat" class="form-control" placeholder="alamat perusahaan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -99,7 +99,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nama Contact Person</b></h4></label>
-												<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" placeholder="nama contact person perusahaan">
+												<input id="addnamacpperusahaan" type="text" name="nama_cp" class="form-control" placeholder="nama contact person perusahaan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -107,7 +107,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Jabatan</b></h4></label>
-												<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" placeholder="jabatan">
+												<input id="addjabatanperusahaan" type="text" name="jabatan" class="form-control" placeholder="jabatan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -123,7 +123,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Username</b></h4></label>
-												<input id="addusernameperusahaan" type="text" name="username" class="form-control" placeholder="username pengguna">
+												<input id="addusernameperusahaan" type="text" name="username" class="form-control" placeholder="username pengguna" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
