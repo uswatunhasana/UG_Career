@@ -369,6 +369,20 @@ $(document).ready(function() {
             $(id).hide();
           }
         });
+        $("input[name='F3\\[F301\\]']").click(function(){
+          var val = $(this).val();
+          if (val == 'Sebelum'){
+            $("#F302").prop('disabled', false);
+            $("#F303").prop('disabled', true);
+          }else if (val == 'Sesudah'){
+            $("#F303").prop('disabled', false);
+            $("#F302").prop('disabled', true);
+          }else{
+            $("#F303").prop('disabled', true);
+            $("#F302").prop('disabled', true);
+
+          }
+        })
 				$('.F504').change(function() {
 					var val = $(this).val(); 
 					if(val == "Ya"){
