@@ -34,7 +34,7 @@ class HasilRespondenPerusahaanDetail implements FromView
             $kd_pertanyaans[$query->kd_pertanyaan . "-" . $query->kd_jawaban] = $query;
         }
         ksort($kd_pertanyaans, SORT_NATURAL);
-        dd($kd_pertanyaans);
+        // dd($kd_pertanyaans);
         return view('admin.exports.jawabanrespondenperusahaan', compact('jawabanrespondens', 'kd_pertanyaans'));
     }
 }

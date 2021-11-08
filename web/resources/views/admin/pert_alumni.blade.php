@@ -197,6 +197,7 @@
 						</div>
 					</div>
 				</div>
+				
 <!-- Detail Modal -->
 				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -208,8 +209,6 @@
 								</button>
 							</div>
 							<div class="modal-body" id="modal_body_detail">
-						
-
 								Pilihan Jawaban
 								<hr/>
 								<table id="detailtable" class="display table table-striped table-hover" >
@@ -257,7 +256,7 @@
 								@if(Request::segment( 3 ) != "text")
 									<button data-toggle="modal" id="detail" data-id="{{ $pertanyaan->id }}" data-is_cabang="{{ $pertanyaan->is_cabang }}" data-target="#detailModal" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
 								@endif
-									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#editModal-{{ $pertanyaan->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $pertanyaan->id }}" onclick="deletepertanyaan(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $pertanyaan->id }}" action="{{ route('pert_alumni.destroy', $pertanyaan->id) }}" method="POST" style="display: none;">

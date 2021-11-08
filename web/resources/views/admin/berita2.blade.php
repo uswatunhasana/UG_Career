@@ -31,10 +31,14 @@
 							<option value="Internship" @if (Request::segment( 3 ) == "Internship")selected="selected" @endif>Internship</option>
 						</select>
 					</div>
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 					<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
 						<i class="fa fa-plus"></i>
 						Tambah berita
 					</button>
+					@endif
+					@endif
 				</div>
 			</div>
 			<div class="card-body">
@@ -68,7 +72,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Judul Berita</b></h4></label>
-												<input id="addberita" type="text" name="judul_berita" class="form-control" placeholder="Judul Berita">
+												<input id="addberita" type="text" name="judul_berita" class="form-control" placeholder="Judul Berita" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -184,13 +188,17 @@
 							</td>
 							<td>
 								<button type="button" id="detail" class="btn btn-sm btn-primary detail"data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" data-jenis="{{ $berita->jenis_berita }}" data-judul="{{ $berita->judul_berita }}" data-isi="{{ $berita->isi_berita }}" data-foto="{{ $berita->foto }}" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
-								<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+								@if(isset(Auth::user()->level))
+         							@if(Auth::user()->level == "admin")
+								<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 								<button class="btn btn-sm btn-danger" type="button" id="{{ $berita->id }}" onclick="deleteberita(this.id)"> <i class="fa fa-trash"></i>
 								</button>
 								<form id="delete-form-{{ $berita->id }}" action="{{ route('berita.destroy', $berita->id) }}" method="POST" style="display: none;">
 									@csrf
 									@method('DELETE')
 								</form>
+								@endif
+								@endif
 							</tr>
 							@endforeach
 						</tbody>

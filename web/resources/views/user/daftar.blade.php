@@ -41,7 +41,7 @@
                @csrf
                @method('POST')
                <div class="field mb-0">
-                  <input type="text" placeholder="Masukkan NPM" name="npm" required>
+                  <input type="text" placeholder="Masukkan NPM" name="npm" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field ">
                   <input type="text" class="form-control datepicker" name="tahun_masuk" placeholder="Masukkan Tahun Masuk" maxlength="4">
@@ -60,16 +60,16 @@
                </div>
                <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required>
+                  <input type="text" placeholder="Masukkan Nama Lengkap" name="name" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div> 
                <div class="field">
-                  <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required>
+                  <input type="number" placeholder="Masukkan No.Telepon/handphone" name="no_telp" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="email" placeholder="Masukkan Email" name="email" required>
+                  <input type="email" placeholder="Masukkan Email" name="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan NIK" name="nik" required>
+                  <input type="text" placeholder="Masukkan NIK" name="nik" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
                   <small style="color:red"><b>  *NPWP Opsional untuk diisi</b></small></span>
@@ -77,11 +77,11 @@
                </div>
                <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Username atau NPM" name="username" required>
+                  <input type="text" placeholder="Masukkan Username atau NPM" name="username" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
                   <small style="color:red"><b>  *Password minimal 8 karakter</b></small></span>
-                  <input type="password" placeholder="Password" name="password" required>
+                  <input type="password" placeholder="Password" name="password" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <br>
                <div class="field btn">
@@ -99,41 +99,41 @@
                @csrf
                @method('POST')
                <div class="field">
-                  <input type="text" placeholder="Masukkan Nama Perusahaan" name="name" required>
+                  <input type="text" placeholder="Masukkan Nama Perusahaan" name="name" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="email" placeholder="Masukkan Email Perusahaan" name="email" required>
+                  <input type="email" placeholder="Masukkan Email Perusahaan" name="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="number" placeholder="Masukkan No. Telepon/Handphone" name="no_telp" required>
+                  <input type="number" placeholder="Masukkan No. Telepon/Handphone" name="no_telp" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required>
+                  <input type="text" placeholder="Masukkan URL Perusahaan" name="url_web" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                   <h6 style="color: #999;">*jika tidak memiliki URL perusahaan silahkan isi "-"</h6>
                </div>
                <br>
                <br>
                <div class="field">
                   <label style="color : #999;"><h4>Alamat Perusahaan</h4></label>
-                  <textarea class="form-control" aria-label="With textarea" name="alamat" required></textarea>
+                  <textarea class="form-control" aria-label="With textarea" name="alamat" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
                </div>
                <br>
                <br>
                <br>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required>
+                  <input type="text" placeholder="Masukkan Nama Kontak Personal" name="nama_cp" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="email" placeholder="Masukkan Email Kontak Personal" name="email_cp" required>
+                  <input type="email" placeholder="Masukkan Email Kontak Personal" name="email_cp" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required oninvalid="this.setCustomValidity('data tidak sesuai')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Jabatan" name="jabatan" required>
+                  <input type="text" placeholder="Masukkan Jabatan" name="jabatan" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="text" placeholder="Masukkan Username" name="username" required>
+                  <input type="text" placeholder="Masukkan Username" name="username" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field">
-                  <input type="password" placeholder="Password" name="password" required>
+                  <input type="password" placeholder="Password" name="password" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                </div>
                <div class="field btn">
                   <div class="btn-layer"></div>

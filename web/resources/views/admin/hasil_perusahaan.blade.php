@@ -29,16 +29,19 @@
 			<div class="card-header">
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
+					@endif
+					@endif
 						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
 							<i class="fas fa-upload"></i>
 								Ekspor Data
 						</button>
 						</div>
-				
 			</div>
 			<div class="card-body">
 				<!-- Tabel Data -->
@@ -62,6 +65,9 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $jawaban_responden->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								@if(isset(Auth::user()->level))
+         						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
@@ -69,6 +75,9 @@
 										@csrf
 										@method('DELETE')
 									</form>
+								@endif
+								@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -110,6 +119,77 @@
 			</div>
 		</div>
 	</div>
+<!-- Modal Detail -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Perusahaan</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+				Data Perusahaan
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="">
+							<tr>
+									<td>Nama Instansi</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Perusahaan</td>
+									<td id="email-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nomor Telepon</td>
+									<td id="no_telp-dd">: </td>
+								</tr>
+								<tr>
+									<td>URL Web</td>
+									<td id="url_web-dd">: </td>
+								</tr>
+								<tr>
+									<td>Alamat Perusahaan</td>
+									<td id="alamat-dd">: </td>
+								</tr>
+								<tr>
+									<td>Nama Contact Person</td>
+									<td id="nama_cp-dd">: </td>
+								</tr>
+								<tr>
+									<td>Jabatan</td>
+									<td id="jabatan-dd">: </td>
+								</tr>
+								<tr>
+									<td>Email Contact Person</td>
+									<td id="email_cp-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+					<hr />
+					Detail Jawaban
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="10px">Kode Pertanyaan</th>
+								<th>Jawaban</th>
+							</tr>
+						</thead>
+							<tbody id="detail-table">
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
+		</div>
+	</div>
+
 
 	<!-- Modal  Impor -->
 	<div class="modal fade" id="addImport" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -130,10 +210,10 @@
                       <img src="" class="img-fluid" width="600px">
                     </div>
                     	<div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada folder berikut<a href=""></a></p>
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti file berikut: <a href="{{ asset('format_import') }}/format_import_surveyperusahaan.xlsx" download>Download File</a></p></p>
 	                    </div>
 	                    <div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>
+	                        <p class="font-weight-semibold text-gray mb-0">2. Pastikan data yang diimport sesuai dengan format yang diberikan</p>
 	                    </div>
                      	<div class="d-flex py-2 border-bottom">
 	                        <p class="font-weight-semibold text-gray mb-0">3. Jika sudah sesuai pilih file</p>
@@ -227,6 +307,33 @@ $(function() {
 					) 
 			});
 		} 
+
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/hasil_perusahaan/detail'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#email-dd').text(': ' + data['email']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#url_web-dd').text(': ' + data['url_web']);
+					$('#alamat-dd').text(': ' + data['alamat']);
+					$('#nama_cp-dd').text(': ' + data['nama_cp']);
+					$('#jabatan-dd').text(': ' + data['jabatan']);
+					$('#email_cp-dd').text(': ' + data['email_cp']);
+						var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<tr><td>'+ datas[i].kd_jawaban +'</td><td>'+ datas[i].jawaban +'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+
+				}
+			});
+		});
 		
 	</script>
 

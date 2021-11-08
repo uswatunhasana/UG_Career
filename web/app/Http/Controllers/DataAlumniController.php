@@ -24,14 +24,14 @@ class DataAlumniController extends Controller
     public function index()
     {
         // dd($respondens->jawabanrespondendetail);
-        $user = Auth::user();
-        if( $user->level == 'prodi'){
-            $alumnis = Alumni::where('id_prodi','=',$user->id_prodi)->select('*')->get();
+        // $user = Auth::user();
+        // if( $user->level == 'prodi'){
+        //     $alumnis = Alumni::where('id_prodi','=',$user->id_prodi)->select('*')->get();
 
-        }else{
-            $alumnis = Alumni::all();
-        }
-
+        // }else{
+        //     $alumnis = Alumni::all();
+        // }
+        $alumnis = Alumni::all();
         $prodis = Prodi::all();
         // dd($alumnis);
         return view('admin.dataalumni', compact('alumnis', 'prodis'));
@@ -94,7 +94,8 @@ class DataAlumniController extends Controller
 
     public function show($id)
     {
-        //
+         $data = Alumni::leftJoin('prodis','prodis.id','=','alumnis.id_prodi')->leftJoin('users','users.id','=','alumnis.id_user')->where('alumnis.id','=', $id)->select('users.*','prodis.*','alumnis.*')->get();
+         echo json_encode($data);
     }
 
     public function edit($id)

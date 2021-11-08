@@ -72,6 +72,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         ]);
         Route::resource('/perusahaan', PerusahaanController::class)->names([
             'index' => 'perusahaan.index',
+            'show'=>'perusahaan.show',
             'store' => 'perusahaan.store',
             'destroy' => 'perusahaan.destroy',
             'update' => 'perusahaan.update',
@@ -104,6 +105,7 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::resource('/dataalumni', DataAlumniController::class)->names([
             'index' => 'dataalumni.index',
             'destroy' => 'dataalumni.destroy',
+            'show' => 'dataalumni.show',
         ]);
 
         Route::get('/pert_alumni/{kategori}',[PertAlumniController::class, 'jenispertanyaan'])->name('pert_alumni.kategori');
@@ -112,14 +114,14 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
             'store' => 'pert_alumni.store',
             'destroy' => 'pert_alumni.destroy',
             'update' => 'pert_alumni.update',
-        ])->middleware('admin');
+        ]);
         Route::get('/pert_perusahaan/{kategori}', [PertPerusahaanController::class, 'jenispertanyaan'])->name('pert_perusahaan.kategori');
         Route::get('/pert_perusahaan/detail/{id}/{is_cabang}',[PertPerusahaanController::class, 'ajaxdetail'])->name('pert_perusahaan.ajaxdetail');
         Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
             'store' => 'pert_perusahaan.store',
             'destroy' => 'pert_perusahaan.destroy',
             'update' => 'pert_perusahaan.update',
-        ])->middleware('admin');;
+        ]);
         // Route::resource('/pert_perusahaan', PertPerusahaanController::class)->names([
         //     'store' => 'pert_perusahaan.store',
         //     'destroy' => 'pert_perusahaan.destroy',
@@ -128,10 +130,12 @@ Route::prefix('administrator')->middleware(['auth'])->group(function () {
         Route::get('/hasil_alumni', [HasilRespondenController::class,'hasilalumni'])->name('hasil_alumni');
         Route::get('/hasil_alumni/export', [HasilRespondenController::class,'exportalumni'])->name('hasil_alumni.export');
         Route::post('/hasil_alumni/import', [HasilRespondenController::class,'importalumni'])->name('hasil_alumni.import');
+        Route::get('/hasil_alumni/detail/{id}', [HasilRespondenController::class,'detailhasilalumni'])->name('detail_responden.alumni');
         Route::delete('/hasil_alumni/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.alumni');
         
         Route::delete('/hasil_perusahaan/delete/{id}', [HasilRespondenController::class,'destroy'])->name('delete_responden.perusahaan');
         Route::get('/hasil_perusahaan', [HasilRespondenController::class, 'hasilperusahaan'])->name('hasil_perusahaan');
+        Route::get('/hasil_perusahaan/detail/{id}', [HasilRespondenController::class,'detailhasilperusahaan'])->name('detail_responden.perusahaan');
         Route::get('/hasil_perusahaan/export', [HasilRespondenController::class,'exportperusahaan'])->name('hasil_perusahaan.export');
         Route::post('/hasil_perusahaan/import', [HasilRespondenController::class,'importperusahaan'])->name('hasil_perusahaan.import');
     });

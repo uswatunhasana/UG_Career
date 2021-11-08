@@ -24,6 +24,7 @@
 	</ul>
 </div>
 
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
@@ -31,10 +32,14 @@
 				<!-- <div class=""> -->
 					<h4 class="card-title"></h4>
 					<div class="row g-3 text-right">
+					@if(isset(Auth::user()->level))
+         			@if(Auth::user()->level == "admin")
 						<button class="btn btn-success btn-round ml-4" data-toggle="modal" data-target="#addImport">
 							<i class="fas fa-download"></i>
 							Impor Data
 						</button>
+					@endif
+					@endif
 						<button class="btn btn-warning btn-round ml-2 " data-toggle="modal" data-target="#eksporModal">
 							<i class="fas fa-upload"></i>
 								Ekspor Data
@@ -42,6 +47,7 @@
 						</div>
 				<!-- </div> -->
 			</div>
+
 			<div class="card-body">
 				<!-- Tabel Data -->
 				<div class="table-responsive">
@@ -64,6 +70,9 @@
 								<td>{{ tanggal_indonesia($jawaban_responden->created_at) }}</td>
 								<td>{{ $jawaban_responden->user->name }}</td>
 								<td>
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-id="{{ $jawaban_responden->id }}" data-toggle="modal" data-target="#detailModal" data-tooltip="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								@if(isset(Auth::user()->level))
+         						@if(Auth::user()->level == "admin")
 									<!-- <button data-toggle="modal" data-target="#editModal-{{ $jawaban_responden->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> -->
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $jawaban_responden->id }}" onclick="deletejawaban_responden(this.id)"> <i class="fa fa-trash"></i>
 									</button>
@@ -71,6 +80,9 @@
 										@csrf
 										@method('DELETE')
 									</form>
+								@endif
+								@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -112,6 +124,64 @@
 			</div>
 		</div>
 	</div>
+<!-- Modal Detail -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail Jawaban Responden Alumni</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+				Data Alumni
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="">
+								<tr>
+									<td>Nama Lengkap</td>
+									<td id="nama-dd">: </td>
+								</tr>
+								<tr>
+									<td>NPM</td>
+									<td id="npm-dd">: </td>
+								</tr>
+								<tr>
+									<td>Prodi</td>
+									<td id="prodi-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Masuk</td>
+									<td id="thn_masuk-dd">: </td>
+								</tr>
+								<tr>
+									<td>Tahun Lulus</td>
+									<td id="thn_lulus-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+					<hr />
+					Detail Jawaban
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+						<thead class="thead-light">
+							<tr>
+								<th width="10px">Kode Pertanyaan</th>
+								<th>Jawaban</th>
+							</tr>
+						</thead>
+							<tbody id="detail-table">
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
+		</div>
+	</div>
 
 	<!-- Modal  Impor -->
 	<div class="modal fade" id="addImport" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -132,10 +202,10 @@
                       <img src="" class="img-fluid" width="600px">
                     </div>
                     	<div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti pada gambar</p>
+	                        <p class="font-weight-semibold text-gray mb-0">1. Siapkan data dengan format Excel (.xls atau .xlsx), atur seperti file berikut: <a href="Dummy UG Career.xlsx" download>Download File</a></p>
 	                    </div>
 	                    <div class="d-flex py-2 border-bottom">
-	                        <p class="font-weight-semibold text-gray mb-0">2. Isi kategori dengan no kategori, pastikan sudah terdaftar pada menu kategori</p>
+	                        <p class="font-weight-semibold text-gray mb-0">2. Pastikan data yang diimport sesuai dengan format yang diberikan</p>
 	                    </div>
                      	<div class="d-flex py-2 border-bottom">
 	                        <p class="font-weight-semibold text-gray mb-0">3. Jika sudah sesuai pilih file</p>
@@ -163,11 +233,12 @@
        </div>
     </div>
 	@endsection
+
 	@section('customjs')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
 $(function() {
@@ -234,7 +305,33 @@ $(function() {
 					) 
 			});
 		}
-   
+		$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var url = '/UG_Career/administrator/hasil_alumni/detail'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					var data = datas[0];
+					$('#nama-dd').text(': ' + data['name']);
+					$('#prodi-dd').text(': ' + data['nama_prodi']);
+					$('#npm-dd').text(': ' + data['npm']);
+					$('#thn_masuk-dd').text(': ' + data['tahun_masuk']);
+					$('#thn_lulus-dd').text(': ' + data['tahun_lulus']);
+					$('#nik-dd').text(': ' + data['nik']);
+					$('#npwp-dd').text(': ' + data['npwp']);
+					$('#no_telp-dd').text(': ' + data['no_telp']);
+					$('#email-dd').text(': ' + data['email']);
+						var htmlkom = '';
+						for (i = 0; i < datas.length; i++) {
+							htmlkom += '<tr><td>'+ datas[i].kd_jawaban +'</td><td>'+ datas[i].jawaban +'</td></tr>';
+						}
+						$('#detail-table').html(htmlkom);
+
+				}
+			});
+		});
 		
 	</script>
 	

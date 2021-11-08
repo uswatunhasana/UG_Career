@@ -19,7 +19,6 @@ class AdminController extends Controller
         $jumlah_perusahaan = Perusahaan::count();
         $jumlah_pertanyaan = Pertanyaan::count();
         $jumlah_berita = Berita::count();
-
         $jumlah_user_alumni = User::where('level', '=', 'alumni')->count();
         $jumlah_survey_alumni = Jawabanresponden::where('kategori_responden', '=', 'alumni')->count();
         $jumlah_survey_perusahaan = Jawabanresponden::where('kategori_responden', '=', 'perusahaan')->count();

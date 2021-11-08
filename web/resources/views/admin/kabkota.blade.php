@@ -66,7 +66,7 @@
 										<div class="col-md-6">
 											<div class="form-group form-group-default">
 												<label><h4><b>Kode Kab/Kota</b></h4></label>
-												<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota">
+												<input id="addkodekabkota" type="text" name="kd_kabkota" class="form-control" placeholder="kode kabupaten/kota" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -74,7 +74,7 @@
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
 												<label><h4><b>Nama Kab/Kota</b></h4></label>
-												<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" placeholder="nama kabupaten/kota">
+												<input id="addkabkota" type="text" name="nama_kabkota" class="form-control" placeholder="nama kabupaten/kota" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 											</div>
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 								<td>{{ $kabkota->nama_kabkota }}</td>
 								<td>{{ $kabkota->kd_kabkota }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#editModal-{{ $kabkota->id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#editModal-{{ $kabkota->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" type="button" id="{{ $kabkota->id }}" onclick="deletekabkota(this.id)"> <i class="fa fa-trash"></i>
 									</button>
 									<form id="delete-form-{{ $kabkota->id }}" action="{{ route('kabkota.destroy', $kabkota->id) }}" method="POST" style="display: none;">

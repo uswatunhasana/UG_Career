@@ -39,6 +39,7 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
                     "tahun_masuk" => "",
                     "tahun_lulus" => ($row["tahun_lulus"] != '') ? $row["tahun_lulus"] : '',
                     "nik" => $row["nik"],
+                    "npwp" => ($row["npwp"] != '') ? $row["npwp"] : '',
                     "no_telp" => $row["telpomsmh"],
                     "id_user" => $get_id_user,
                     "id_prodi" => 22,

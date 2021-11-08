@@ -29,11 +29,11 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'password' => 'string|min:8|required',
+            'password' => 'string|min:8',
         );
         $validation = Validator::make($request->all(), $rules);
         if ($validation->fails()) {
-            Alert::error('Invalid Data', 'Password min 8 digit');
+            Alert::error('Invalid Data', 'Password min 8 digit, kombinasi dari huruf dan angka');
             return redirect()->back();
         }
         $cek_perusahaan = User::where('username', $request->username)->orWhere('email', $request->email)->count();
@@ -71,7 +71,8 @@ class PerusahaanController extends Controller
 
     public function show($id)
     {
-        //
+        $data = Perusahaan::leftJoin('users','users.id','=','perusahaans.id_user')->where('perusahaans.id','=', $id)->select('users.*','perusahaans.*')->get();
+         echo json_encode($data);
     }
 
 
@@ -137,6 +138,7 @@ class PerusahaanController extends Controller
     public function destroy($id)
     {
         DB::table('perusahaans')->where('id_user', $id)->delete();
+        DB::table('users')->where('id', $id)->delete();
         return redirect()->back();
     }
 }
