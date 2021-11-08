@@ -10,8 +10,10 @@ class Pertanyaan extends Model
     use HasFactory;
     protected $fillable = [
         'jenis_pertanyaan',
+        'no_tampilan',
         'kategori_pertanyaan',
         // 'kelas_pertanyaan',
+        'is_cabang',
         'kd_pertanyaan',
         'pertanyaan',
     ];

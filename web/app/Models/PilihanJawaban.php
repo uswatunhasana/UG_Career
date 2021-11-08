@@ -10,7 +10,7 @@ class PilihanJawaban extends Model
     use HasFactory;
     protected $table = "pilihanjawabans";
     protected $fillable = [
-        'pilihan_pertanyaan',
+        'jawaban',
         'id_pertanyaan',
         'kd_jawaban',
     ];

@@ -19,7 +19,7 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
 
     public function collection(Collection $rows)
     {
-        $len = count($rows[0]) - 8;
+        $len = count($rows[0]) - 9;
         $i = 1;
         foreach ($rows as $row) {
             $cek_npm = Alumni::where('npm', $row["nimhsmsmh"])->count();
@@ -50,7 +50,7 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
                 ]);
                 $get_id_responden = DB::getPdo()->lastInsertId();
                 foreach ($row as $key => $val) {
-                    if ($i > 8) {
+                    if ($i > 9) {
                         $kd_pertanyaan = PilihanJawaban::select('kd_pertanyaan')->where('kd_jawaban', $key)->leftJoin('pertanyaans', 'pertanyaans.id', '=', 'pilihanjawabans.id_pertanyaan')->first();
                         if ($kd_pertanyaan) {
                             JawabanRespondendetail::create([
@@ -73,7 +73,7 @@ class JawabanRespondenImport implements ToCollection, WithHeadingRow
                 ]);
                 $get_id_responden = DB::getPdo()->lastInsertId();
                 foreach ($row as $key => $val) {
-                    if ($i > 8) {
+                    if ($i > 9) {
                         $kd_pertanyaan = PilihanJawaban::select('kd_pertanyaan')->where('kd_jawaban', $key)->leftJoin('pertanyaans', 'pertanyaans.id', '=', 'pilihanjawabans.id_pertanyaan')->first();
                         if ($kd_pertanyaan) {
                             JawabanRespondendetail::create([

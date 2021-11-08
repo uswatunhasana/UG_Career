@@ -13,6 +13,7 @@ class PertanyaanCabang extends Model
         'kd_cabang',
         'pertanyaan_cabang',
         'id_pertanyaan',
+        'jenis_jawaban',
     ];
 
     public function pertanyaan()

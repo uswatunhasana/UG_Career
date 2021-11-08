@@ -24,6 +24,7 @@ class CreatePertanyaancabangsTable extends Migration
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->enum('jenis_jawaban',['text','pilihan','checklist','date','combo box']);
             $table->timestamps();
         });
     }

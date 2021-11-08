@@ -10,6 +10,7 @@ class CreatePertanyaansTable extends Migration
     {
         Schema::create('pertanyaans', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('no_tampilan',5);
             $table->enum('jenis_pertanyaan',['text','pilihan','checklist']);
             $table->enum('kategori_pertanyaan',['alumni','perusahaan']);
             $table->enum('kelas_pertanyaan',['wajib','opsional']);
