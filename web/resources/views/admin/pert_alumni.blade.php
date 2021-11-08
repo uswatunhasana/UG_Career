@@ -86,6 +86,14 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group form-group-default">
+												<label><h4><b>No Tampilan</b></h4></label>
+												<input id="addnotampilan" type="number" name="no_tampilan" class="form-control" placeholder="urutan ditampilkan (maks: 5 angka) ">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group form-group-default">
 												<label><h4><b>Kode Pertanyaan</b></h4></label>
 												<input id="addkodepertalumni" type="text" name="kd_pertanyaan" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) ">
 											</div>
@@ -382,6 +390,7 @@
 									<div class="row control-group after-add-more">
 										<div class="col-sm-9 ">
 												<input id="addpilihan_jawaban" type="text" name="jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban ">
+												<input id="addkd_jawaban" type="text" name="kd_jawaban[]" class="form-control" placeholder="Masukkan Kd Jawaban ">
 										</div>
 										<div class="col-sm-3">
 											<button class="btn btn-success add-more" type="button">
@@ -434,9 +443,10 @@
 				// console.log(kategori);
 				if(val == 'ya')	{
 					var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
-					$("#container_jikacabang").html(html);
 					if(kategori == 'pilihan dan text'){
 					$("#container_jikacabang").append(html);
+					}else{
+					$("#container_jikacabang").html(html);
 					}
 				}else{
 					$("#is_cabang_form").remove();
@@ -456,8 +466,12 @@
 						$("#container_cabang").html(html);
 					}
 					if(val== "pilihan dan text"){
-						$('#is_cabang').attr('disabled', true);
+						var html='<div class="after-add-more-cabang" id="is_cabang_form"><hr/><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Kode Pertanyaan Cabang</b></h4></label><input id="addkodecabang" type="text" name="kd_cabang[]" class="form-control" placeholder="kode pertanyaan (maks: 5 angka) "></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group form-group-default"><label><h4><b>Pertanyaan Cabang</b></h4></label><input id="addpertanyaan" type="text" name="pertanyaan_cabang[]" class="form-control" placeholder="Masukkan Pertanyaan "></div></div></div><div class="row"><div class="col-12"><button class="btn btn-success add-more-cabang w-100" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div></div>';
+						$("#container_jikacabang").html(html);
+						$("#container_pilihan_jawaban").html();
+						$("#pilihan_jawaban").remove();
 						$("#is_cabang").val('ya');
+						$('#is_cabang option:not(:selected)').attr('disabled', true);
 					}	
 				});
 			});

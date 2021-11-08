@@ -149,7 +149,6 @@ class KuisionerController extends Controller
         $user = Auth::user();
         $user_new = new User;
         $user_new->npwp = $request->npwp;
-        $user_new->npwp = $request->npwp;
 
         // $cek_perusahaan = Jawabanresponden::where('user', $request->username)->count();
         // if ($cek_perusahaan == 0) {

@@ -127,10 +127,13 @@
             @else
             @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" value="{{$pilihanjawaban->jawaban}}">
+              <input class="form-check-input @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:')lainnya_radio @endif" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:') data-loop = {{$loop->index+1}} @endif data-kd = {{$pertanyaan->kd_pertanyaan}} data-kd_jawaban = {{$pilihanjawaban->kd_jawaban}} value="{{$pilihanjawaban->jawaban}}">
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               <?= $pilihanjawaban->jawaban; ?>
               </label>
+              @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:')
+              <input type="text" style="display: none" class="form-control form-control" name = "{{ $pertanyaan->kd_pertanyaan }}[{{ $pertanyaan->kd_pertanyaan."02" }}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+2 }}" value="">
+              @endif
             </div>
             @endforeach
             @endif
@@ -147,7 +150,7 @@
             @elseif($pertanyaan_cabang->jenis_jawaban == 'pilihan')
               @foreach($pertanyaan_cabang->pilihanjawabancabang as $pilihanjawabancabang)
                 <div class="form-check">
-                      <input class="form-check-input" type="radio" name="{{$pilihanjawabancabang->kd_jawaban}}" id="{{$pilihanjawabancabang->kd_jawaban}}.{{$loop->index}}" value="{{$pilihanjawabancabang->jawaban}}">
+                      <input class="form-check-input" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawabancabang->kd_jawaban}}]" id="{{$pilihanjawabancabang->kd_jawaban}}.{{$loop->index}}" value="{{$pilihanjawabancabang->jawaban}}">
                       <label class="form-check-label" for="{{$pertanyaan_cabang->kd_cabang}}.{{$loop->index}}">{{$pilihanjawabancabang->jawaban}}</label>
                 </div>
               @endforeach
@@ -172,9 +175,11 @@
                 <div class="form-check">
                       <input class="form-check-input {{$pilihanjawaban->kd_jawaban}}" type="radio" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{$pilihanjawaban->kd_jawaban}}.{{$loop->index}}" value="{{$pilihanjawaban->jawaban}}">
                       <label class="form-check-label" for="{{$pilihanjawaban->kd_jawaban}}.{{$loop->index}}">{{$pilihanjawaban->jawaban}}</label>
-                      @foreach($pilihanjawaban->pertanyaan_cabang as $pertanyaan_cabang)
+                      <div id="container_{{$pilihanjawaban->kd_jawaban}}_{{$loop->index}}" style="display: none">
+                        @foreach($pilihanjawaban->pertanyaan_cabang as $pertanyaan_cabang)
                         <div class="form-group"><label for="{{$pertanyaan_cabang->kd_cabang}}">{{$pertanyaan_cabang->pertanyaan_cabang}}</label><input type="text" class="form-control form-control" name = "{{$pertanyaan_cabang->kd_cabang}}" id="{{$pertanyaan_cabang->kd_cabang}}" value=""></div>
-                      @endforeach
+                        @endforeach
+                      </div>
                 </div>
               @endforeach
           </div>
@@ -182,10 +187,13 @@
             <label for="{{ $pertanyaan->kd_pertanyaan }}"><b>{{ $i++ }}. {{ $pertanyaan->pertanyaan }}</b></label>
         @foreach($pertanyaan->pilihanjawaban as $pilihanjawaban)
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" >
+              <input class="form-check-input @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:')lainnya_checkbox @endif" type="checkbox" value="{{$pilihanjawaban->jawaban}}" name="{{ $pertanyaan->kd_pertanyaan }}[{{$pilihanjawaban->kd_jawaban}}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}" @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:') data-loop = {{$loop->index+1}} data-kd = {{$pertanyaan->kd_pertanyaan}} @endif>
               <label class="form-check-label" for="{{ $pertanyaan->kd_pertanyaan.$loop->index+1 }}">
               {{ $pilihanjawaban->jawaban }}
               </label>
+              @if($pilihanjawaban->jawaban == 'Lainnya, tuliskan:')
+              <input type="text" class="form-control form-control" style="display: none" name = "{{ $pertanyaan->kd_pertanyaan }}[{{ $pertanyaan->kd_pertanyaan.$loop->index+2 }}]" id="{{ $pertanyaan->kd_pertanyaan.$loop->index+2 }}" value="">
+              @endif
             </div>
         @endforeach
             <br/>
@@ -332,21 +340,53 @@ $('#Provinsi').change(function(){
 });
 
 $(document).ready(function() {
-				// $('.F504').change(function() {
-				// 	var val = $(this).val(); 
-				// 	if(val == "ya"){
-				// 		$("#container_504_tidak").empty();
-				// 		var html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="F504A" value=""></div><div class="form-group"><label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label><input type="text" class="form-control form-control" name = "F504B" id="F504B" value=""></div>';
-        //     $("#container_504_ya").html(html);
-				// 	}else{
-				// 		$("#container_504_ya").empty();
-        //     html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="bulan_kerja" value=""></div>';
-        //     $("#container_504_tidak").html(html);
-				// 	}
-				// });
+        $("input[type='radio']").click(function(){
+					var val = $(this).val();
+          let kd = $(this).data('kd');
+          // console.log(name);
+          if (val == "Lainnya, tuliskan:"){
+            let loop = $(this).data('loop');
+            loop++;
+            let id = "#"+kd+loop;
+            $(id).show();
+          }else{
+            let kd_jawaban = $(this).data('kd_jawaban');
+            let name = kd+'\\['+kd_jawaban+'\\]'          
+            let loop = $("input[name="+name+"][value = 'Lainnya, tuliskan:']").data('loop');
+            loop++;
+            let id = "#"+kd+loop;
+            $(id).hide();
+          }
+        });
+        $(".lainnya_checkbox").click(function(){
+            let kd = $(this).data('kd');
+            let loop = $(this).data('loop');
+            loop++;
+            let id = "#"+kd+loop;
+          if ($(this).prop('checked') == true){
+            $(id).show();
+          }else{
+            $(id).hide();
+          }
+        });
+				$('.F504').change(function() {
+					var val = $(this).val(); 
+					if(val == "Ya"){
+            $("#container_F504_0").show();
+            $("#container_F504_1").hide();
+						// $("#container_504_tidak").empty();
+						// var html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="F504A" value=""></div><div class="form-group"><label for="largeInput">Berapa rata-rata pendapatan anda per bulan? (take home pay)?</label><input type="text" class="form-control form-control" name = "F504B" id="F504B" value=""></div>';
+            // $("#container_504_ya").html(html);
+					}else{
+            $("#container_F504_0").hide();
+            $("#container_F504_1").show();
+						// $("#container_504_ya").empty();
+            // html='<div class="form-group"><label for="largeInput">Dalam berapa bulan anda mendapatkan pekerjaan?</label><input type="number" class="form-control form-control" name = "F504A" id="bulan_kerja" value=""></div>';
+            // $("#container_504_tidak").html(html);
+					}
+				});
         $('#F31').val('Sebelum');
         $('#F32').val('Sesudah');
-        $('#F415').val('Lainnya');
 	});
 
 </script>
