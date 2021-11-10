@@ -111,54 +111,12 @@
 					</div>
 				</div>
 
-				<!-- Detail Modal -->
-				@foreach($beritas as $berita)
-				<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="row">
 
-									<div class="col-sm-12">
-										<div class="form-group form-group-default">
-											<label><h4><b>Judul Berita</b></h4></label>
-											<input id="addberita" type="text" name="judul_berita" class="form-control" value="{{ $berita->judul_berita }}" disabled>
-										</div>
-									</div>
-									<div class="col-sm-12">
-										<div class="form-group form-group-default">
-											<label><h4><b>Preview Berita</b></h4></label>
-											<input id="addberita" type="text" name="preview_berita" class="form-control" value="{{ $berita->preview_berita }}" disabled="">
-										</div>
-									</div>
-									<div class="col-sm-12">
-										<div class="form-group form-group-default">
-											<label><h4><b>Isi Berita - read only</b></h4></label>
-											<input id="isi_berita3" type="text" name="isi_berita" class="form-control" value="{{$berita->isi_berita}}" disabled="">
-										</div>
-									</div>
-									<div class="col-sm-12">
-										<div class="form-group form-group-default">
-											<label><h4><b>Foto</b></h4></label>
-											<img class="img-preview img-fluid" src="{{ asset('img/'. $berita->foto )}}" height="100" width="100" alt="" srcset="">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-							</div>
-						</form>
-					</div>
-				</div>
+				<!-- Detail Modal -->
+				
+
 			</div>
-			@endforeach
+
 
 			<!-- Tabel Data -->
 			<div class="table-responsive">
@@ -187,7 +145,8 @@
 								<img src="{{ asset('img/'. $berita->foto )}}" height="50" width="50" alt="" srcset="">
 							</td>
 							<td>
-								<button type="button" id="detail" class="btn btn-sm btn-primary detail"data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" data-jenis="{{ $berita->jenis_berita }}" data-judul="{{ $berita->judul_berita }}" data-isi="{{ $berita->isi_berita }}" data-foto="{{ $berita->foto }}" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
+								<!-- <button type="button" id="detailModal" class="btn btn-sm btn-primary detail" data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal" data-jenis="{{ $berita->jenis_berita }}" data-judul="{{ $berita->judul_berita }}" data-isi="{{ $berita->isi_berita }}" data-foto="{{ $berita->foto }}" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button> -->
+								<button type="button" id="detail" class="btn btn-sm btn-primary detail" data-target="#detailModal" data-tooltip="tooltip" data-toggle="modal"  data-id="{{ $berita->id }}" data-foto="{{ asset('img/'. $berita->foto )}}" placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>
 								@if(isset(Auth::user()->level))
          							@if(Auth::user()->level == "admin")
 								<button data-toggle="modal" data-target="#editModal-{{ $berita->id }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
@@ -208,6 +167,48 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal Detail -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal_body_detail">
+					Data Alumni
+					<hr/>
+					<table id="detailtable" class="display table table-striped table-hover" >
+							<tbody id="detail-table">
+								<tr>
+									<td>Judul Berita</td>
+									<td id="judul-dd">: </td>
+								</tr>
+								<tr>
+									<td>Preview Berita</td>
+									<td id="preview-dd">: </td>
+								</tr>
+								<tr>
+									<td>Isi Berita</td>
+									<td id="isi-dd">: </td>
+								</tr>
+								<tr>
+									<td>Foto</td>
+									<td id="foto-dd">: </td>
+								</tr>
+							</tbody>
+					</table>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+							</div>
+					</form>
+				</div>
+		</div>
+	</div>
 
 <!-- Tambah Edit Modal -->
 @foreach ($beritas as $berita)
@@ -311,39 +312,32 @@
 
 		});
 	});
-
-	$(document).ready(function() {
-		$('#kategori_berita').change(function() {
-			var val = $(this).val(); 
-			if(val == "text"){
-				$("#pilihan_jawaban").remove();
-			}else{
-				var html='<div id="pilihan_jawaban"><hr/><label><h4><b>Pilihan Jawaban</b></h4></label><div class="row control-group after-add-more"><div class="col-sm-9 "><input id="addpilihanjawaban" type="text" name="pilihan_jawaban[]" class="form-control" placeholder="Masukkan Pilihan Jawaban "></div><div class="col-sm-3"><button class="btn btn-success add-more" type="button"><i class="fas fa-plus-square"></i> Add</button></div></div>';
-				$("#container_pilihan_jawaban").html(html);
-			}	
+	$(document).on('click', '#detail', function() {
+			var id = $(this).data('id');
+			var foto = $(this).data('foto');
+			var url = '/UG_Career/administrator/berita/detail'+"/"+id;
+			$.ajax({
+				url: url,
+				method: "GET",
+				dataType: 'json',
+				success: function(datas) {
+					// var foto = datas['foto'];
+					var data = datas[0];
+					var path = data.path;
+    				console.log(path);
+					$('#judul-dd').text(': ' + data['judul_berita']);
+					$('#preview-dd').text(': ' + data['preview_berita']);
+					let htmlisi = data['isi_berita'];
+					$('#isi-dd').html(htmlisi);
+						let html = '<div class="card"><img src="'+foto+'" class="card-img-top"/></div>';
+						$('#foto-dd').html(html);
+				}
+			});
 		});
-	});
 	
 	$(document).ready(function() {
 		$('#basic-datatables').DataTable({
 		});
-			// Add Row
-			$('#add-row').DataTable({
-				"pageLength": 5,
-			});
-
-			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-			$('#addRowButton').click(function() {
-				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
-					action
-					]);
-				$('#addRowModal').modal('hide');
-
-			});
 		});
 
 	$(document).on("click", ".add-more", function() { 
@@ -385,22 +379,6 @@
 		});
 	} 
 	
-	$(document).on('click', '#detail', function() {
-		var id = $(this).data('id');
-		$.ajax({
-			url: '/UG_Career/administrator/berita/detail'+"/"+id,
-			method: "GET",
-			dataType: 'json',
-			success: function(datas) {
-				var htmlkom = '';
-				for (i = 0; i < datas.length; i++) {
-					htmlkom += '<tr><td>'+ (i+1) +'</td><td>'+ datas[i].pilihan_jawaban +'</td></tr>';
-				}
-				$('#detail-table').html(htmlkom);
-
-			}
-		});
-	});
 
 	function previewImage() {
 		const image = document.querySelector('#image');
