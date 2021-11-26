@@ -17,7 +17,7 @@ class PerusahaanController extends Controller
 
     public function index()
     {
-        $perusahaans = Perusahaan::all();
+        $perusahaans = Perusahaan::with('user')->get();
         return view('admin.perusahaan', compact('perusahaans'));
     }
 
