@@ -15,7 +15,7 @@ class KabkotaController extends Controller
 {
     public function index()
     {
-        $kabkotas = Kabkota::all();
+        $kabkotas = Kabkota::with('provinsi')->get();
         $provinsis = Provinsi::all();
         return view('admin.kabkota', compact('provinsis', 'kabkotas'));
     }
