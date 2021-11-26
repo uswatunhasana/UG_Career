@@ -53,7 +53,7 @@ class ProvinsiController extends Controller
             return redirect()->back();
         }
 
-        $update_provinsi = provinsi::findOrFail($id)
+        $update_provinsi = Provinsi::findOrFail($id)
         ->where('provinsis.id', '=', $id)
         ->select('provinsis.*')
         ->first();
