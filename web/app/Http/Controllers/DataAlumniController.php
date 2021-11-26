@@ -31,7 +31,7 @@ class DataAlumniController extends Controller
         // }else{
         //     $alumnis = Alumni::all();
         // }
-        $alumnis = Alumni::all();
+        $alumnis = Alumni::with(['prodi','user'])->get();
         $prodis = Prodi::all();
         // dd($alumnis);
         return view('admin.dataalumni', compact('alumnis', 'prodis'));
