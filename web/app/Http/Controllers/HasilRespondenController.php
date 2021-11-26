@@ -21,13 +21,13 @@ class HasilRespondenController extends Controller
 
     public function hasilalumni()
     {
-        $jawaban_respondens = Jawabanresponden::where('kategori_responden', '=', 'alumni')->select('*')->get();
+        $jawaban_respondens = Jawabanresponden::with(['user','jawabanrespondendetail'])->where('kategori_responden', '=', 'alumni')->select('*')->get();
         return view('admin.hasil_alumni', compact('jawaban_respondens'));
     }
 
     public function hasilperusahaan()
     {
-        $jawaban_respondens = Jawabanresponden::where('kategori_responden', '=', 'perusahaan')->select('*')->get();
+        $jawaban_respondens = Jawabanresponden::with(['user','jawabanrespondendetail'])->where('kategori_responden', '=', 'perusahaan')->select('*')->get();
         return view('admin.hasil_perusahaan', compact('jawaban_respondens'));
     }
 
